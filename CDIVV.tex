@@ -1,0 +1,500 @@
+\documentclass[10pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, tikz}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{babel}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+
+\title{Cálculo Diferencial e Integral en varias variables}
+\author{Santiago Sierra}
+
+\begin{document}
+\maketitle \tableofcontents \newpage
+\section{Números Complejos}
+\begin{definition}
+	Un numero complejo es un numero de forma $z=a+bi$ y $a,b\in \mathbb{R}$, donde $i^2=-1$, conocemos los números reales a y b como parte real e imaginaria respectivamente del numero $z$.
+	$$
+		Re(z)=a \ \ \ \ Im(z)=b
+	$$
+\end{definition}
+Se le llama $i$ a la unidad imaginaria.
+Esta expresión que describimos se le llama forma binómica del numero.
+\begin{definition}
+	Dos números complejos $z, w$ son iguales si y solo si
+	$$
+		Re(z)=Re(w) \ \text{y} \ Im(z)=Im(w)
+	$$
+\end{definition}
+\subsection{Suma y Producto de números complejos}
+Dados dos números complejos $z=a+bi$ y $w=c+di$ definimos la suma de $z+w$ y el producto $zw$ mediante:
+\begin{gather*}
+	\begin{array}{l}
+		z+w=(a+bi)+(c+di)=(a+c)+(b+d)i \\
+		zw=(a+bi)(c+di)=ac+adi+bci+bdi^2=(ac-bd)+(ad+bci)i
+	\end{array}
+\end{gather*}
+Ejemplo:
+$$
+	\begin{array}{l}
+		(1-i)+(4+7i)=(1+4)+(-1+7)i=5+6i \\
+		(-1+3i)(2-5i)=(-1)(2-5i)+(3i)(2-5i)=(-2+5i)+(6i-15i^2)=(-2+5i)+(15+6i)=13+11i
+	\end{array}
+$$
+\textbf{Propiedades.} Sean $z$,$w$,$v\in\mathbb{C}$
+\begin{enumerate}
+	\item Conmutativas: $z+w=w+z$ y $zw=wz$
+	\item Asociativas: $(z+w)+v=z+(w+v)$ y $(zw)v=z(wv)$
+	\item Cada numero complejo $z=a+bi$ tiene un elemento opuesto, $-z=-a-bi$, tal que $z+(-z)=0$
+	\item Distributiva (del producto respecto a la suma) $z(w+v)=zw+zv$.
+\end{enumerate}
+\subsection{Conjugado de un complejo}
+\begin{definition}
+	Sea $z=a+bi$ un numero complejo. Se define el conjugado de $z$ y se representa por $\overline{z}$, como el numero complejo $\overline{z}=a-bi$.
+\end{definition}
+Geométricamente, un complejo $z=a+bi$ se representa por el punto $P=(a,b)$, y su conjugado $\overline{z}=a-bi$ por el punto $P'=(a,-b)$\\\\
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[x=50pt,y=50,yscale=-1,xscale=1]
+		\draw[<-] (0,0) -- (0,3);
+		\draw[->] (-0.5,1.5) -- (2,1.5);
+		\draw[-] (0,1.5) -- (1,2.5);
+		\draw[-] (0,1.5) -- (1,0.5);
+		\draw[dotted] (1,2.5) -- (1,0.5);
+		\draw (1.3,0.5) node {$z$};
+		\draw (1.3,2.5) node {$\overline{z}$};
+		\foreach \Point in {(1,0.5),(1,2.5)}{
+				\node at \Point {\textbullet};
+				\draw (-0.25,0) node {Im};
+				\draw (2,1.75) node {Re};
+			}
+	\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.65\textwidth}
+	Propiedades:
+	\begin{enumerate}
+		\item $\overline{\overline{z}}=z$
+		\item $\overline{z_1+z_2}=\overline{z_1}+\overline{z_2}$
+		\item $\overline{z_1z_2}=\overline{z_1}\ \overline{z_2}$
+		\item Si $z_2\neq 0$, $\overline{(\frac{z_1}{z_2})}=\frac{\overline{z_1}}{\overline{z_2}}$
+		\item $z\overline{z}=Re(z)^2+Im(z)^2$. Por lo tanto, $z\overline{z}>0$ para todo $z\neq 0$
+	\end{enumerate}
+	Observación, para dividir dos números complejos $\frac{z}{w}$, basta con multiplicar el numerador y denominador por el conjugado del denominador.
+	$$
+		\frac{z}{w}=\frac{z\overline{w}}{w\overline{w}}=\frac{z\overline{w}}{|w|^2}
+	$$
+\end{minipage}
+\noindent \newpage
+\subsection{Módulo}
+\begin{minipage}{0.65\textwidth}
+	\begin{definition}
+		Definimos el módulo de un complejo $z=a+bi$ como el número real $|z|=\sqrt{a^2+b^2}$
+	\end{definition}
+	Propiedades del módulo. Sean $z_1$ y $z_2$ números complejos:
+	\begin{enumerate}
+		\item $|z|=0$ si, y sólo si, $z=0$
+		\item $|z|=|\overline{z}|$
+		\item $|z_1z_2|=|z_1||z_2|$
+		\item Si $z\neq 0$, $|\frac{z_1}{z_2}|=\frac{|z_1|}{|z_2|}$
+		\item \textbf{Desigualdad triangular:} $|z_1+z_2|\le |z_1|+|z_2|$
+	\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		\draw  (0,108) -- (141,108)(17,0) -- (17,125) (134,103) -- (141,108) -- (134,113) (12,7) -- (17,0) -- (22,7)  ;
+		\draw [-] (18,108) -- (90,45);
+		\draw (90,45)[fill={rgb, 255:red, 0; green, 0; blue, 0}]circle [x radius= 3.35, y radius= 3.35];
+		\draw (35.48,60.2) node [anchor=north west][inner sep=0.75pt]  [rotate=-319.32] [align=left] {$|z|$};
+		\draw (95,30) node [anchor=north west][inner sep=0.75pt] [align=left] {z};
+		\draw (0,0) node {Im};
+		\draw (130,120) node {Re};
+	\end{tikzpicture}
+\end{minipage}
+\subsection{Forma Polar}
+Sabemos que cualquier complejo $z=a+bi$ puede ser considerado un punto $(a,b)$ y que cualquier punto de este tipo puede representarse con coordenadas polares $(r,\theta)$ con $r\ge0$.
+\begin{definition}
+	Cualquier complejo $z$ se puede representar como $z=r(cos(\theta)+i \ sen(\theta))=re^{i\theta}$, lo cual llamaremos forma polar. Siendo $r=|z|$ y $\theta=arg(z)$.
+\end{definition}
+\subsubsection{Argumento}
+\begin{minipage}{0.65\textwidth}
+	\begin{definition}
+		Definimos el argumento de $z$ como la función\\\\ $\operatorname {arg}(z)={\begin{cases}\arctan \left({\frac  ba}\right)&\qquad a>0\\\arctan \left({\frac  ba}\right)+\pi &\qquad b\geq 0,a<0\\\arctan \left({\frac  ba}\right)-\pi &\qquad b<0,a<0\\+{\frac  {\pi }{2}}&\qquad b>0,a=0\\-{\frac  {\pi }{2}}&\qquad b<0,a=0\end{cases}}$
+	\end{definition}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		\draw (0,110) -- (135,110)(14,0) -- (14,123.5) (128.5,105) -- (135.5,110) -- (128.5,115) (9,7) -- (14,0) -- (19,7)  ;
+		\draw    (14,110) -- (80,50) ;
+		\draw [shift={(80,50)}][fill={rgb, 255:red, 0; green, 0; blue, 0 }](0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+		\draw   (42,84) .. controls (48,89) and (52,97) .. (52,106) .. controls (52,107) and (51,110) .. (51,111) ;
+		\draw (92,36.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$a+bi$};
+		\draw (30,70) node [anchor=north west][inner sep=0.75pt]  [rotate=-310.79] [align=left] {$|z|$};
+		\draw (56,84) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\theta$};
+		\draw (-13,0) node [anchor=north west][inner sep=0.75pt]   [align=left] {Im};
+		\draw (118,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {Re};
+	\end{tikzpicture}
+\end{minipage}
+\subsubsection{Operaciones en Forma Polar}
+\begin{definition}
+	Sean $z_1=r_1(cos(\theta_1)+i \ sen(\theta_1))$ y $z_2=r_2(cos(\theta_2)+i \ sen(\theta_2))$, definimos su multiplicación como $z_1z_2=r_1r_2(cos(\theta_1+\theta_2)+i \ sen(\theta_1+\theta_2))$
+\end{definition}
+\begin{definition}
+	Definimos la división de dos complejos como $\frac{z_1}{z_2}=\frac{r_1}{r_2}(cos(\theta_1-\theta_2)+i \ sen(\theta_1-\theta_2))$
+\end{definition}
+Observación: Si $z=r(cos(\theta)+ i \ sen(\theta))$ entonces $\frac{1}{z}=\frac{1}{r}(cos(\theta)+i \ sen(\theta))$
+\begin{theorem}{Teorema de De Movire.}
+	\\ Sea $z=r(cos(\theta)+i\ sen(\theta))$ y $n \in \mathbb{Z}^{+}$, entonces $z^n=(r(cos(\theta) + i \ sen(\theta)))^n=r^n(cos(n\theta)+i \ sen(n\theta))$
+\end{theorem}
+\subsection{Raíces de un numero complejo}
+\subsubsection{Raíz cuadrada}
+Si deseamos hallar $\sqrt{a+bi}$ una forma rápida de hacerlo es diciendo: $$\sqrt{a+bi}=c+di \rightarrow a+bi=(c+di)^2=c^2-d^2+2cdi\rightarrow \begin{cases}a=c^{2} -d^{2}\\b=2cd\end{cases}$$
+\newpage \subsubsection{Raíces complejas}
+Sea $z^n=r(cos(\theta)+i\ sen(\theta))$ y $n\in \mathbb{Z}^{+}$. Entonces, $z$ tiene $n$ raíces enésimas distintas.\\
+Las raíces se hallan como: $$z_k=r^{\frac{1}{n}}\left(cos\left(\frac{\theta +2k\pi}{n}\right)+i\ sen\left(\frac{\theta + 2k\pi}{n}\right)\right)=r^{\frac{1}{n}}e^{\frac{\theta + 2k\pi}{n}i}$$
+Donde $k=\{0,1,2,\dots,n-1\}$.
+\section{Ecuaciones Diferenciales}
+\begin{definition}
+	Una ecuación diferencial es una igualdad en la cual la incógnita es una función desconocida y sus derivadas, $y=f(x)$ definida y derivable.
+\end{definition}
+Le llamamos ecuación de orden 1 si la única derivada de la función desconocida que aparece es la derivada primera, de orden 2 si la derivada de mayor orden que aparece es 2 y así sucesivamente.
+\subsection{Ecuación diferencial de variables separables}
+\begin{definition}
+	Una ecuación diferencial se le llama de variables separables si es de la forma $y'=A(y)B(x)$
+\end{definition}
+Solución: $$\frac{y'(x)}{A(y(x))}=B(x)\rightarrow \int \frac{y'(x)}{A(y(x))} dx=\int B(x)dx+C\rightarrow \int \frac{dy}{A(y)}=\int B(x)dx+C$$
+\subsection{Solución de una ecuación diferencial con condiciones o datos iniciales}
+Por lo general existen infinitas soluciones a una misma ecuación diferencial, sin embargo si se dan datos iniciales apropiados, por lo general existe una única función solución que cumple los datos.\\\\
+En una ecuación diferencial de primer orden se le llama dato inicial a una condición del tipo: $y(x_0)=0$.\\
+Donde $x_0$ e $y_0$ son valores reales dados.\\\\
+En una ecuación diferencial de segundo orden se le llaman datos iniciales a dos condiciones del tipo: $y(x_0)=y_0$, $y'(x_1)=y_1$.\\
+Donde $x$ e $y$ son valores reales dados.\\\\
+Para determinar la solución que verifica los datos iniciales, primero tendremos que haber hallado todas las soluciones (esto no quiere decir haber despejado la función).\\
+Al conjunto de todas las soluciones se le llama solución general, la cual depende usualmente de una constante arbitraria si la ecuación es de primer orden, o de 2 si es de segundo orden.
+\subsection{Ecuación diferencial lineal de primer orden homogénea}
+\begin{definition}
+	Se llama ecuación diferencial lineal de primer orden homogénea a una ecuación del tipo: $y'+a(x)y=0$
+\end{definition}
+Solución general:
+$$y'=-a(x)y\rightarrow \frac{y'}{y}=-a(x)\rightarrow\int\frac{dy}{y}=-\int a(x)dx\rightarrow log(y)=-\int a(x)dx+C$$$$y=e^{-\int a(x)dx+C}=Ke^{-\int a(x)dx}$$
+Siendo $K$ la variable arbitraria.
+\newpage \subsection{Ecuación diferencial lineal de primer orden no homogénea}
+\begin{definition}
+	Se llama ecuación diferencial lineal de primer orden no homogénea a una ecuación del tipo: $y'+a(x)y=r(x)$, siendo $r(x)\neq 0$, si no, seria homogénea.
+\end{definition}
+Solución:
+\begin{enumerate}
+	\item Hallar la solución general, $y_h(x)$ de la ecuación diferencial lineal homogénea correspondiente, es decir la misma ecuación diferencial, pero sustituyendo $r(x)$ por la función nula.
+	\item Hallar una solución particular de la ecuación $y_p(x)$ diferencial dada usando el método de variación de constante.
+	\item Sumar $y(x)=y_h(x)+y_p(x)$
+\end{enumerate}
+\subsubsection{Método de variación de constante}
+Para hallar la solución particular $y_p(x)$ de la ecuación diferencial, probaremos  con una función de cierto tipo como se describe:
+\begin{enumerate}
+	\item Tomaremos $y_p(x)=y_h(x)$, con la diferencia de que la constante arbitraria, ahora sera una función desconocida a determinar.
+	\item Sustituimos $y_p(x)$ en la ecuación no homogénea dada, haciendo que la verifique y despejando la función. De todas las posibles funciones que se despejen (en general son infinitas), habrá que elegir solo una.
+	\item Una vez hallada la función, la sustituimos en la expresión $y_p(x)$ para obtener la solución particular buscada.
+\end{enumerate}
+\textbf{Ejemplo:}\\
+Sea $y'-cos(x)y=cos(x)$\\
+Hallamos $y'-cos(x)y=0 \rightarrow y_h=Ke^{sen(x)}$\\
+Decimos por el paso 2, que $y_p(x)=y_h(x)$ pero con la constante arbitraria como función,\\ así que
+$$\begin{array}{l}
+		y_p(x)=K(x)e^{sen(x)}                                            \\
+		(K(x)e^{sen(x)})'-cos(x)K(x)e^{sen(x)}=cos(x)                    \\
+		K'(x)e^{sen(x)}+K(x)cos(x)e^{sen(x)}-cos(x)K(x)e^{sen(x)}=cos(x) \\
+		K'(x)e^{sen(x)}=cos(x)\rightarrow K'(x)=cos(x)e^{-sen(x)}        \\
+		K(x)=\int cos(x)e^{-sen(x)}dx+C=-e^{-sen(x)}+C
+	\end{array}$$
+Ahora, elegimos la solución con $C=0$ y reemplazamos la función en $y_p(x)$
+$$y_p(x)=K(x)e^{sen(x)}=-e^{-sen(x)}e^{sen(x)}=-e^{sen(x)-sen(x)}=-e^0=-1$$
+Por lo tanto, $y(x)=y_h(x)+y_p(x)=Ke^{sen(x)}-1$
+\newpage \subsection{Ecuación diferencial lineal de segundo orden a coeficientes constantes y homogénea}
+\begin{definition}
+	Una ecuación diferencial de segundo orden se llama lineal a coeficientes constantes y homogénea si es de la forma $y''+ay'+by=0$, donde $a$ y $b$ son constantes dadas independientes.
+\end{definition}
+\begin{theorem}{Estructura vectorial de las soluciones de la ecuación lineal homogénea.}\\
+	Todas las funciones solución de la ecuación diferencial de segundo orden homogénea forman un espacio vectorial de dimensión 2.
+\end{theorem}
+Soluciones exponenciales: Buscaremos soluciones $y(x)=e^{\lambda x}$, donde $\lambda$ es una constante real a determinar, que sean solución de la ecuación diferencial $y''+ay'+by=0$. Sustituyendo en la ecuación diferencial $y=e^{\lambda x}$, $y'=\lambda e^{\lambda x}$, $y''=\lambda ^{2}e^{\lambda x}$, se obtiene: $(\lambda ^2+a\lambda+b)e^{\lambda x}=0\Leftrightarrow \lambda ^2+a\lambda+b=0$. Siendo $\lambda$ raíz de la ecuación de segundo grado, llamada \underline{ecuación caracteristica}.
+\subsubsection{Solución general de la ecuación lineal homogénea de segundo orden}
+Una vez encontradas las raíces de la ecuación característica, hay 3 casos.
+\begin{enumerate}[A)]
+	\item La ecuación característica tiene dos raíces distintas. La solución general es: $y(x)=C_1e^{\lambda_1 x}+C_2e^{\lambda_2 x}$
+	\item La ecuación característica tiene una raíz doble. La solución general es: $y(x)=e^{\lambda x}(C_1+C_2 x)$
+	\item La ecuación característica tiene dos raíces complejas conjugadas de la forma $\alpha\pm i\beta$. La solución general es: $y(x)=e^{\alpha x}(C_1 cos(\beta x)+C_2 sen(\beta x))$
+\end{enumerate}
+\subsection{Ecuación diferencial lineal de segundo orden a coeficientes constantes no homogénea}
+\begin{definition}
+	Una ecuación diferencial de segundo orden se llama lineal a coeficientes constantes y no homogénea si es del tipo: $y''+ay'+by=r(x)$.
+\end{definition}
+Solución:
+\begin{enumerate}
+	\item Hallar la solución general de $y_h(x)$ de la ecuación lineal homogénea correspondiente.
+	\item Hallar una solución particular $y_p(x)$ de la ecuación no homogénea dada usando el método de coeficientes indeterminados.
+	\item Sumar $y(x)=y_h(x)+y_p(x)$
+\end{enumerate}
+\subsubsection{Método de coeficientes indeterminados}
+\begin{enumerate}
+	\item Si $r(x)=e^{kx}P(x)$, donde $P(x)$ es un polinomio de grado $n$, probar $y_(x)=e^{kx}Q(x)$, donde $Q(x)$ es un polinomio de grado $n$ con coeficientes a determinar sustituyendo $y_p(x)$ en la ecuación diferencial.
+	\item Si $r(x)=e^{kx}P(x)cos(mx)$ o $r(x)=e^{kx}P(x)sen(mx)$, donde $P$ es un polinomio de grado $n$, probar $y_p(x)=e^{kx}Q(x)cos(mx)+e^{kx}R(x)sen(mx)$, donde $Q$ y $R$ son polinomio de grado $n$.
+\end{enumerate}
+Si algún termino de $y_p(x)$ es también termino de $y_h(x)$, hay que multiplicar $y_p$ por $x$, o $x^2$ si es termino 2 veces.
+\begin{theorem}
+	Sea una ecuación diferencial $y''+ay'+by=r(x)$ donde $r(x)$ es una función conocida que puede descomponerse como suma $r(x)=r_1(x)+r_2(x)$.
+	Se consideran las ecuaciones diferenciales auxiliares:\\
+	$y_{1p} \rightarrow y''+ay'+by=r_1(x)$\\
+	$y_{2p} \rightarrow y''+ay'+by=r_2(x)$\\
+	Siendo $y_p(x)=y_{1p}+y_{2p}$.\\Este teorema puede aplicarse tantas veces como $r(x)$ pueda descomponerse, habiendo una suma de tres o mas sumandos en vez de dos como se mostró.
+\end{theorem}
+\newpage \section{Sucesiones y Series}
+\subsection{Sucesiones}
+\begin{definition}
+	Las sucesiones son funciones $a: \mathbb{N} \rightarrow \mathbb{R}$, donde a cada natural, se le asocia un real $a_n$.
+\end{definition}
+Ejemplos:
+\begin{enumerate}
+	\item Sucesión armónica: $a_n=\frac{1}{n}$
+	\item $a_0=1$, $a_1=1$, $a_n=a_{n-1}+a_{n-2}$
+	\item Sucesión CTE: $a_n=c$ $\forall n \in \mathbb{N}$
+	\item Sucesión identidad: $a_n=n$ $\forall n \in \mathbb{N}$
+\end{enumerate}
+\subsubsection{Convergencia}
+\begin{definition}{Limite de una sucesión.}
+	\\Una sucesión $a_n$ tiene el limite $L$ y se escribe como $$\\lim_{n \to \infty} a_n = L \text{ o } a_n \to L \text{ cuando } n \to \infty$$
+	Si $\lim _{n\rightarrow \infty } a_{n} =L\begin{cases}
+			=L\ \text{ (finito)} & \text{En este caso converge }(\mathbb{C}) \\
+			=\infty              & \text{En este caso diverge }(\mathbb{D})  \\
+			                     & \text{En este caso oscila }(\mathbb{O})
+		\end{cases}$\\\\
+	Y para todo $\epsilon > 0$ hay un correspondiente entero $N$ tal que si $n>N$ entonces $|a_n-L|<\epsilon$
+\end{definition}
+Ejemplos
+\begin{enumerate}
+	\item $\lim_{n \to + \infty} \frac{1}{n}=0$.
+	\item $a_n=C$ $\forall n \rightarrow \lim_{n \to + \infty} a_n=c$
+	\item $a_n=n$ $\forall n \in \mathbb{N} \rightarrow \lim_{n \to + \infty} a_n=+\infty$
+	\item $a_n=(-1)^n$ $\forall n \in \mathbb{N}$
+\end{enumerate}
+\begin{theorem}
+	Si $\lim_{x \to \infty} f(x)=L$ y $f(n)=a_n$ cuando $n$ es un entero, entonces $\lim_{n \to \infty} a_n = L$.
+\end{theorem}
+Propiedades:
+\begin{enumerate}
+	\item Si $\lim_{n \to + \infty} a_n=L$, $\lim_{n \to + \infty} b_n=M$ $\Rightarrow (a_n+b_n)_{n \in \mathbb{N}}$ es convergente y $\lim_{n \to + \infty} a_n+b_n=\lim_{n \to + \infty}a_n+\lim_{n \to + \infty} b_n=L+M$.
+	\item $(\lambda a_n)_{n \in \mathbb{N}}$ es convergente si $\lim_{n \to +\infty} (\lambda a_n)=\lambda L$.
+	\item $(a_n b_n)_{n\in\mathbb{N}}$ es convergente si $\lim_{n \to +\infty} a_n b_n=LM$
+	\item Si $b_n=0$ $\forall n\in\mathbb{N}$, $M \ne 0$, $(\frac{a_n}{b_n})_{n\in\mathbb{N}}$ es convergente y $\lim_{n \to + \infty} \frac{a_n}{b_n}=\frac{L}{m}$
+\end{enumerate}
+\begin{theorem}
+	Si $\lim_{n \to \infty} |a_n|=0$, entonces $\lim_{n \to \infty} a_n=0$
+\end{theorem}
+\begin{theorem}
+	Si $\lim_{n \to \infty} a_n = L$ y la función $f$ es continua en $L$, entonces $$\lim_{n \to \infty} f(a_n)=f(L)$$
+\end{theorem}\newpage
+\subsubsection{Monotonía}
+\begin{definition}
+	Una sucesión $a_n$ se le llama monótona creciente si $a_n\le a_{n+1}$ para toda $n\ge 1$.\\
+	Y se le denomina monótona decreciente si $a_n\ge a_{n+1}$.
+\end{definition}
+\begin{corollary}
+	Si $a_{n+1}>a_n$ $\forall n\in\mathbb{N}$ es monótona estrictamente creciente.\\
+	Si $a_{n+1}<a_n$ $\forall n\in\mathbb{N}$ es monótona estrictamente decreciente.
+\end{corollary}
+\subsubsection{Acotación}
+\begin{definition}
+	Una sucesión $a_n$ esta acotada superiormente si existe un numero $M$ tal que $a_n \le M$ para toda $n\ge 1$.\\
+	Esta acotada inferiormente si existe un numero $m$ tal que $m\le a_n$ para toda $n\ge 1$.\\
+	Si esta acotada superior e inferiormente, entonces $a_n$ es una sucesión acotada.
+\end{definition}
+\begin{theorem}{Teorema de la sucesión monótona.}
+	\\Toda sucesión monótona y acotada es convergente.
+\end{theorem}
+Obs: Si $(a_n)_{n\in\mathbb{R}}$ es monótona decreciente y acotada, entonces $\lim a_n=\text{Inf}\{a_1,a_2,\dots\}$.
+\subsubsection{Sub-sucesión}
+\begin{definition}
+	Dada una sucesión $a_n$ y otra extricamente creciente $(x_n):\mathbb{N}\to\mathbb{N}$, llamaremos sub-sucesión de $a_n$ a la sucesión $a\circ x:\mathbb{N}\to\mathbb{R}$, y lo denotamos como $a_{x_n}$.
+\end{definition}
+\begin{theorem}
+	Si $\lim a_n=L$, entonces toda sub-sucesión de $a_n$ converge a $L$.
+\end{theorem}
+\subsubsection{Punto de acumulación}
+\begin{definition}
+	Sea una sucesión $a_n$, y su sub-sucesión $a_{n_k}$, $h$ es un punto de aglomeración si $a_{n_k}\to h$.
+\end{definition}
+\begin{theorem}{Teorema de Bolzano Weirstrass.}
+	\\Todo conjunto infinito y acotado tiene (al menos) un punto de acumulación.
+\end{theorem}
+\begin{corollary}
+	El punto de acumulación no tiene por que pertenecer al conjunto.
+\end{corollary}
+\begin{theorem}
+	Toda sub-sucesión $a_n$ acotada tiene una sub-sucesión convergente.
+\end{theorem}
+\begin{corollary}
+	Sea $\{a_n\}$ una sucesión de términos positivos ($a_n>0$ $\forall n$).\\
+	Si $\lim \ \frac{a_{n+1}}{a_{n}} =L\begin{cases}< 1 & \text{Entonces $a_n$ converge a $0$}\\ >1 & \text{Entonces $a_n$ diverge}\end{cases}$
+\end{corollary}
+Obs: Si $L=1$ no se puede decir nada.
+\begin{theorem}
+	Una función $f: \mathbb{R}\rightarrow\mathbb{R}$ es continua en $a\in\mathbb{R}$.\\
+	$\Leftrightarrow$ para toda sucesión ${a_n}$ tal que $\lim a_n=a$ se tiene que $\lim f(a_n)=f(a)$.
+	$$(\forall {a_n}, a_n\rightarrow a \Rightarrow f(a_n)=f(a))$$
+\end{theorem}
+\newpage
+\subsection{Series}
+\begin{definition}
+	En general, si se trata de sumar los términos de de una sucesión infinita $\{a_n\}_{n=1}^{\infty}$, se obtiene una expresión de la forma $$a_1+a_2+a_3+\cdots+a_n+\cdots$$
+	que se denomina serie y se denota con el símbolo $$\sum_{n=1}^{\infty} a_n \text{ o } \sum a_n$$
+\end{definition}
+\begin{definition}
+	Dada una serie $\sum_{n=1}^{\infty} a_n$, sea $s_n$ la n-enésima suma parcial: $$s_n=\sum_{i=1}^{n} a_i$$
+	$$\lim _{n \to \infty} s_{n} =\lim _{n \to \infty} (a_{1} ,a_{2} ,\dotsc ,a_{n} )=\lim _{n \to \infty} \left(\sum _{k=1}^{n} a_{k} \right)\begin{cases}=L \text{ (finito)} & \text{Decimos que la serie converge (}\mathbb{C}\text{) y}\sum _{n=1}^{\infty } a_{n} =L  \\=\infty  & \text{Decimos que la serie diverge (}\mathbb{D}\text{)}\\ & \text{La serie oscila (}\mathbb{O}\text{)}\end{cases}$$
+\end{definition}
+Obs: $\sum_{n=0}^{\infty} a_n = \sum_{n=0}^{k-1} a_n + \sum_{n=k}^{\infty} a_n$
+\subsubsection{Serie geométrica}
+La serie geométrica $$\sum_{n=0}^{\infty} aq^n = \sum_{n=1}^{\infty} aq^{n-1}$$
+es convergente si $|q|<1$ y su suma es
+$$\sum_{n=0}^{\infty} aq^n=\sum_{n=1}^{\infty} aq^{n-1}=\frac{a}{1-q}$$
+Si $|q|\ge 1$, la serie geométrica es divergente.\\
+En el caso $$\sum_{n=n_0}^{\infty} aq^n=\frac{aq^{n_0}}{1-q}$$
+\begin{theorem}
+	Si $\sum a_n$ converge, entonces $a_n \to 0$.\\\\
+	Cuidado que es una condición necesaria pero no suficiente. Concluir la convergencia de la serie a partir de que $\lim a_n=0$ es un grave error.
+\end{theorem}
+\subsubsection{Serie armónica}
+\begin{theorem}{Convergencia de serie-p.}
+	\\Sea una serie $\sum _{n=1}^{\infty }\frac{1}{n^{p}} =\begin{cases}p >1 & \mathbb{C}\\p\le 1 & \mathbb{D}\end{cases}$
+\end{theorem}
+\newpage
+\subsubsection{Serie telescópica}
+Una serie telescópica es aquella serie cuyas sumas parciales poseen un numero fijo de términos tras su cancelación.\\
+Es decir, sea $\sum a_n$ donde $a_n=b_{n+1}-b_n$ siendo $b_n$ otra sucesión.\\
+Entonces $s_n=b_{n+1}-b_0$ y $\lim s_n=\lim b_{n+1}-b_0$.\\
+Un ejemplo clásico es la serie telescópica de Mengoli, que se define por $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$, y puede calcularse según
+$$\begin{aligned}\sum _{n=1}^{\infty }{\frac {1}{n(n+1)}}                                                                                                                                                                                                   & {}=\sum _{n=1}^{\infty }\left({\frac {1}{n}}-{\frac {1}{n+1}}\right)\\{} & {}
+               =\lim _{N\to \infty }\sum _{n=1}^{N}\left({\frac {1}{n}}-{\frac {1}{n+1}}\right)\\{}                                                                                                                                 & {}
+               =\lim _{N\to \infty }\left\lbrack {\left(1-{\frac {1}{2}}\right)+\left({\frac {1}{2}}-{\frac {1}{3}}\right)+\cdots +\left({\frac {1}{N}}-{\frac {1}{N+1}}\right)}\right\rbrack \\{}                                  & {}
+               =\lim _{N\to \infty }\left\lbrack {1+\left(-{\frac {1}{2}}+{\frac {1}{2}}\right)+\left(-{\frac {1}{3}}+{\frac {1}{3}}\right)+\cdots +\left(-{\frac {1}{N}}+{\frac {1}{N}}\right)-{\frac {1}{N+1}}}\right\rbrack \\{} & {}
+               =\lim _{N\to \infty }\left\lbrack {1-{\frac {1}{N+1}}}\right\rbrack =1.\end{aligned}$$
+\subsubsection{Series de términos positivos.}
+\begin{definition}
+	Una serie $\sum a_n$ se dice de términos positivos, siempre que $a_n>0$ $\forall n \in \mathbb{N}$.
+\end{definition}
+Observar que en este caso, la sucesión de sumas parciales $s_n$ es monótona creciente, por lo tanto la serie $\sum a_n$ puede ser convergente o divergente, pero nunca oscilar.
+\begin{theorem}{Criterio de comparación.}
+	\\Sean $\sum a_n$ y $\sum b_n$ series de términos positivos, tales que $a_n\le b_n$ $\forall n>n_0$. Entonces:
+	\begin{enumerate}
+		\item Si $\sum b_n$ $\mathbb{C}$ entonces $\sum a_n$ $\mathbb{C}$.
+		\item Si $\sum a_n$ $\mathbb{D}$ entonces $\sum b_n$ $\mathbb{D}$.
+	\end{enumerate}
+	En cualquier otro caso, no puedo afirmar nada.
+\end{theorem}
+\begin{theorem}{Criterio de equivalencia.}
+	\\Sean $\sum a_n$ y $\sum b_n$ dos series de términos positivos.
+	\begin{enumerate}
+		\item Si $\lim \frac{a_n}{b_n}=L >0$ finito, entonces las dos series son de la misma clase.
+		\item Si $\lim \frac{a_n}{b_n}=0$ y $\sum b_n$ $\mathbb{C}$, entonces $\sum a_n$ $\mathbb{C}$.
+		\item Si $\lim \frac{a_n}{b_n}=\infty$ y $\sum b_n$ $\mathbb{D}$ entonces $\sum a_n$ $\mathbb{D}$.
+	\end{enumerate}
+	En cualquier otro caso, no puedo concluir.
+\end{theorem}
+\begin{theorem}{Criterio del cociente.}
+	\\Sea $\sum a_n$ una serie de términos positivos, tal que existe $\lim_{n \to \infty} \frac{a_{n+1}}{a_n}=L$. Entonces:
+	\begin{enumerate}
+		\item Si $L<1\Rightarrow \sum a_n$ $\mathbb{C}$
+		\item Si $L>1\Rightarrow \sum a_n$ $\mathbb{D}$
+	\end{enumerate}
+	En otro caso el criterio no decide.
+\end{theorem}
+\begin{theorem}{Criterio de Cauchy.}
+	\\Sea $\sum a_n$ una serie de términos positivos, tal que existe $\lim_{n \to \infty} \sqrt[n]{a_n}=L$. Entonces:
+	\begin{enumerate}
+		\item Si $L<1\Rightarrow\sum a_n$ $\mathbb{C}$
+		\item Si $L>1\Rightarrow\sum a_n$ $\mathbb{D}$
+	\end{enumerate}
+	En otro caso el criterio no decide.
+\end{theorem}\newpage
+\subsubsection{Series alternadas.}
+\begin{definition}
+	A una serie se le dice alternada si tiene sus términos alternativamente positivos y negativos. Su expresión general es de la forma $\sum_{n=1}^{\infty} \left(-1  \right)^n a_n$ y $a_n>0$.
+\end{definition}
+\begin{definition}
+	Decimos que una serie $\sum a_n$ es absolutamente convergente si y solo si $\sum |a_n|$ es convergente.
+\end{definition}
+\begin{theorem}
+	Toda serie absolutamente convergente es convergente.
+\end{theorem}
+\begin{theorem}{Convergencia dominada.}
+	\\Sea $a_n$, $b_n$ y $c_n$ tal que $a_n<b_n<c_n$ $\forall n$.\\
+	Si $\sum c_n$ $\mathbb{C}$ y $\sum a_n$ $\mathbb{C}$ entonces $\sum b_n$ $\mathbb{C}$. Ademas, vale que $\sum a_n \le \sum b_n \le \sum c_n$.
+\end{theorem}
+\begin{theorem}{Criterio de Leibnitz}
+	\\Si $a_n$ es una sucesión estrictamente decreciente que tiende a cero, entonces la serie alternada $\sum \left( -1 \right)^n a_n$ es convergente.
+\end{theorem}
+\section{Integrales impropias}
+\begin{definition}
+	Consideramos $f:[a,+\infty)\to\mathbb{R}$ continua.\\
+	Esto es que $f$ es continua en $[a,x]$ $\forall x>a$.\\
+	Queremos darle sentido $\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(t) dt$.
+\end{definition}
+\begin{itemize}
+	\item Si $\lim_{x \to \infty} \int_{a}^{x} f(t) dt$ existe y es finito, entonces decimos que $\int_{a}^{+\infty}f(x)  dx$ converge.
+	\item Si $\lim_{x \to \infty} \int_{a}^{x} f(t) dt$ es infinito, entonces decimos que $\int_{a}^{+\infty}f(x)  dx$ diverge.
+	\item Si $\lim_{x \to \infty} \int_{a}^{x}f(t)  dt$ no existe, entonces decimos que $\int_{a}^{+\infty} f(x) dx$ oscila.
+\end{itemize}
+\begin{theorem}
+	Sea $f:[a,+\infty)\to\mathbb{R}$ continua y $b>a$.\\
+	Entonces $\int_{a}^{+\infty} f(x) dx$ y $\int_{b}^{+\infty} f(x) dx$ tienen igual comportamiento, y en caso de converger se cumple: $$\int_{a}^{+\infty} f(x) dx=\int_{a}^{b} f(x) dx+\int_{b}^{+\infty} f(x) dx$$
+\end{theorem}
+\begin{theorem}{Condición necesaria de convergencia.}
+	Sea $f:[a,\infty)\to\mathbb{R}$ continua.\\
+	Si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$ y existe $\lim_{x \to \infty} f(x)$, entonces $\lim_{x \to \infty} f(x)=0$
+\end{theorem}
+\subsection{Integrales impropias de $1^{ra}$ especie.}
+Sea $f:[a,+\infty)\to\mathbb{R}$ continua.
+$$\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(x) dx
+	\begin{cases}
+		L \text{ (finito)} & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{C} \text{ y } \int_{a}^{+\infty} f(x) dx=L \\
+		\infty             & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{D}                                         \\
+		\nexists           & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{O}
+	\end{cases}$$
+\begin{theorem}{Criterio Integral.}
+	\\Sea $f:[n_0,+\infty)\to\mathbb{R}$ continua, monótona decreciente y no negativa.
+	\\Defino $\forall n\ge n_0$ $a_n=f(n)$.
+	\\\underline{Entonces}:	\begin{enumerate}
+		\item $\sum_{n=n_0}^{+\infty} a_n$ $\mathbb{C} \Leftrightarrow \int_{n_0}^{+\infty} f(x) dx$ $\mathbb{C}$.
+		\item $\sum_{n=n_0}^{+\infty} a_n$ $\mathbb{D} \Leftrightarrow \int_{n_0}^{+\infty} f(x) dx$ $\mathbb{D}$.
+	\end{enumerate}
+\end{theorem}\newpage
+\begin{corollary}{Condición necesaria de convergencia.}
+	\\$f:[a,+\infty)\to\mathbb{R}$ continua
+	$\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$ y existe $\lim_{x \to +\infty} f(x)=L$ entonces $L=0$
+\end{corollary}
+\begin{corollary}
+	Si existe $\lim_{x \to +\infty} f(x)\neq 0$ entonces $\int_{a}^{+\infty} f(x) dx$ no converge.
+\end{corollary}
+\begin{theorem}{Primer teorema de comparación.}
+	\\Sean $f,g:[a,+\infty)\to\mathbb{R}$ continua tal que $0\le f(x)\le g(x)$ $\forall x\ge a$
+	\begin{enumerate}
+		\item Si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{D}$ entonces $\int_{a}^{+\infty} g(x) dx$ $\mathbb{D}$
+		\item Si $\int_{a}^{+\infty} g(x) dx$ $\mathbb{C}$ entonces $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$
+	\end{enumerate}
+\end{theorem}
+\begin{definition}
+	Sea $f:(-\infty ,b]$ continua:
+	\\$\int_{-\infty}^{b} f(x) dx=\lim_{x \to -\infty} \int_{x}^{b} f(t) dt$
+\end{definition}
+\begin{definition}
+	Sea $f:\mathbb{R}\to\mathbb{R}$ continua:
+	$$\int_{-\infty}^{+\infty} f(x) dx=\int_{-\infty}^{0} f(x) dx+\int_{0}^{+\infty} f(x) dx$$
+	Decimos que
+	$$\int_{-\infty}^{+\infty} f(x) dx \text{ } \mathbb{C} \Leftrightarrow \begin{matrix} \int_{-\infty}^{0} f(x) dx \text{ } \mathbb{C} \\ \text{y} \\ \int_{0}^{+\infty} f(x) dx \text{ } \mathbb{C} \end{matrix} $$
+\end{definition}
+\subsection{Integrales impropias de $2^{da}$ especie}
+\end{document}
