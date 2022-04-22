@@ -1,0 +1,538 @@
+\documentclass[10pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, tikz}
+\usepackage{nicematrix}
+\usepackage[margin=1in]{geometry}
+\usetikzlibrary{babel}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{example}{Ejemplo}[section]
+
+\DeclareMathOperator{\coord}{coord}
+
+\title{Geometría y Álgebra Lineal 2}
+\author{Santiago Sierra}
+
+\begin{document}
+\maketitle \tableofcontents \newpage
+\section{Matriz asociada, cambio de base y semejanza}
+\subsection{Representación matricial de una transformación lineal}
+Se le llama matriz asociada a $T$ en bases $A$ y $B$ a la matriz que representaremos por $_B(T)_A$ y cuya i-esima columna son las coordenadas del vector $T(v_1)$ en la base $B$.\\
+Sea $T:V\rightarrow W$ una TL, $A=\{v_{1} ,v_{2} ,\dotsc ,v_{n}\}$ una base de $V$ y $B=\{w_{1} ,w_{2} ,\dotsc ,w_{n}\}$ una base de $W$.
+$$\begin{array}{l}
+		T(v_1)=a_{11}w_1+…+a_{m1}w_m \\
+		T(v_2)=a_{12}w_1+…+a_{m2}w_m \\
+		T(v_n)=a_{1m}w_1+…+a_{mn}w_m
+	\end{array}$$
+Es decir:
+$$coord_B(T(v_1))=\left(\begin{matrix}a_{11}\\a_{21}\\ \vdots \\a_{m1}\end{matrix}\right), coord_B(T(v_2))=\left(\begin{matrix}a_{12}\\a_{22}\\ \vdots \\ a_{m2}\end{matrix}\right), \dots, coord_B(T(v_n))=\left(\begin{matrix}a_{1n}\\a_{2n}\\\vdots \\ a_{mn}\end{matrix}\right)$$
+\begin{definition}
+	Se le llama representación matricial de $T$ en las bases $A$ y $B$ o matriz asociada a $T$ en las bases $A$ y $B$, a la matriz que representaremos por $_B(T)_A$ y cuya i-esima columna son las coordenadas del vector $T(v_i)$ en la base $B$.
+\end{definition}
+\begin{equation*}
+	\begin{NiceMatrix}
+		{}_{B}(T)_{A}\hspace*{-0.4em} & =                     &
+		[\coord_{B} T(v_{1})]         & [\coord_{b} T(v_{2})] & \cdots & [\coord_{B} T(v_{n})] \\[2ex]
+		                              & \Block{4-1}{=}        &
+		a_{11}                        & a_{12}                & \cdots & a_{1n}                \\
+		                              &                       &
+		a_{21}                        & a_{22}                & \cdots & a_{2n}                \\
+		                              &                       &
+		\vdots                        & \vdots                &        & \vdots                \\
+		                              &                       &
+		a_{m1}                        & a_{m2}                & \cdots & a_{mn}
+		\CodeAfter
+		\SubMatrix({1-3}{1-6})
+		\SubMatrix({2-3}{5-6})
+	\end{NiceMatrix}
+\end{equation*}
+\begin{corollary}
+	La transformación lineal coordenadas es un isomorfismo entre $V$ y $\mathbb{K}^n$
+\end{corollary}
+\begin{example}{ \ }
+	\\Consideremos la transformación lineal $T:\mathbb{R}^{2} \rightarrow \mathbb{R}^{3}$ tal que: $T(x,y)=(4x-2y,2x+y,x+y)$  $\forall (x,y)\in \mathbb{R}$.\\
+	Y las bases $A={(1,0),(0,1)}$ de $\mathbb{R}^2$ y $B={(1,0,0),(0,1,0),(0,0,1)}$ de $\mathbb{R}^3$.\\
+	Hallar la matriz asociada a $T$ en dichas bases:
+	\begin{enumerate}
+		\item Hallamos las imágenes de los vectores de la base $A$:\\
+		      $T(1,0)=(4,2,1)$\\
+		      $T(0,1)=(-2,1,1)$
+		\item Calculamos las coordenadas en la base $B$:\\
+		      $T(1,0)=(4,2,1)=\alpha (1,0,0)+\beta (0,1,0)+\gamma (0,0,1)\rightarrow \begin{matrix}\alpha =4\\\beta =2\\\gamma =1\end{matrix}$\\
+		      $coord_B(T(1,0))=\begin{pmatrix}4\\2\\1\end{pmatrix}$\\
+		      $T(0,1)=(-2,1,1)=\alpha(1,0,0)+\beta(0,1,0)+\gamma(0,0,1)\rightarrow \begin{matrix}\alpha =-2\\\beta =1\\\gamma =1\end{matrix}$\\
+		\item Tenemos que $_B(T)_A=\begin{pmatrix}4 & -2\\2 & 1\\1 & 1\end{pmatrix}$
+	\end{enumerate}
+\end{example}
+\begin{corollary}
+	Sea $T:V\to W$, $dim(V)=n$ y $dim(W)=m$, la matriz asociada tiene dimensión $m\times n$.
+\end{corollary}
+La matriz $_B(T)_A$ queda completamente determinada conocidas la transformación lineal $T$ y las bases $A$ y $B$ del dominio y codominio respectivamente.\\
+Recíprocamente, dada una matriz $M$ de tamaño $m\times n$ y dos bases $A$ y $B$ de los espacios $V$ y $W$ respectivamente, queda completamente determinada una transformación lineal $T$ tal que $_B(T)_A=M$.\\
+En efecto, conociendo la matriz $M$, sus columnas son las coordenadas en la base $B$ de las imágenes de dos vectores de la base $A$, esto nos permite conoces las imágenes de los vectores de la base $A$ y esto es suficiente para determinar $T$.
+\begin{example}{ \ }
+	\\Hallar la transformación lineal $T:\mathbb{R}^3\rightarrow\mathbb{R}^2$ sabiendo que $_B(T)_A=\begin{pmatrix}2&3&-1\\1&0&2\end{pmatrix}$, donde $A=\{(1,0,1),(2,0,0),(0,1,0)\}$ es base de $\mathbb{R}^3$ y $B=\{(2,-1),(0,2)\}$ es base de $\mathbb{R}^2$.\\
+	$coord_B(T(1,0,1))=\begin{pmatrix}2\\1\end{pmatrix}$\\
+	$coord_B(T(2,0,0))=\begin{pmatrix}3\\0\end{pmatrix}$\\
+	$coord_B(T(0,1,0))=\begin{pmatrix}-1\\2\end{pmatrix}$\\
+	$T(1,0,1)=2(2,-1)+1(0,2)=(4,0)$\\
+	$T(2,0,0)=3(2,-1)+0(0,2)=(6,-3)$\\
+	$T(0,1,0)=-1(2,-1)+2(0,2)=(-2,5)$\\
+	$(x,y,z)=\alpha(1,0,1)+\beta(2,0,0)+\gamma(0,1,0)=(\alpha+2\beta,\gamma,\alpha)\rightarrow\begin{matrix}\alpha=z\\\gamma=y\\\beta=\frac{x-z}{2}\end{matrix}$\\
+	$(x,y,z)=z(1,0,1)+\frac{x-z}{2}(2,0,0)+y(0,1,0)$\\
+	Por linealidad de $T$:\\
+	$$\begin{array}{ c l }
+			T(x,y,z) & =z T(1,0,1)+\frac{x-z}{2}  T(2,0,0)+y T(0,1,0) \\
+			         & =z(4,0)+\frac{x-z}{2} (6,-3)+y(-2,5)           \\
+			         & =(3x-2y+z,-\frac{3}{2} x+5y+\frac{3}{2} z)
+		\end{array}$$
+\end{example}
+\begin{theorem}
+	Sean $V$, $W$ espacios vectoriales sobre un mismo cuerpo $\mathbb{K}$, $A=\{v_1,v_2,\dots,v_n\}$ y $B=\{w_1,w_2,\dots,w_n\}$ bases ordenadas de $V$ y $W$ respectivamente y $T:V\rightarrow W$ una transformación lineal, entonces se cumple que:
+	$$coord_B(Tv)=\ _B(T)_A\ coord_A(v)$$
+\end{theorem}
+\begin{example}
+	Dado $T:\mathbb{R}^3\rightarrow\mathbb{R}^3$ y las bases $A=B=\{(1,0,0),(1,1,0),(1,1,1)\}$ tal que
+	$$ _B(T)_A=\begin{pmatrix} 1 & -1 & 0 \\ 2 & 0 & 0 \\ 3 & 4 & 1 \end{pmatrix}$$
+	Hallar $T(2,0,1)$
+	$$(2,0,-1)=\alpha(1,0,0)+\beta(1,1,0)+\gamma(1,1,1)=(\alpha+\beta+\gamma,\beta+\gamma,\gamma)\rightarrow\begin{matrix}\alpha=2 \\ \beta=1 \\ \gamma = -1\end{matrix}$$
+	$$
+		coord_B(T(2,0,1))=\ _B(T)_A \ coord_A(2,0,1)=\begin{pmatrix} 1&-1&0 \\2 & 0 & 0 \\ 3 & 4 & 1\end{pmatrix} \begin{pmatrix}2\\1\\-1\end{pmatrix}=\begin{pmatrix}1\\4\\9\end{pmatrix}
+	$$
+	$$
+		T(2,0,1)=1(1,0,0)+4(1,1,0)+9(1,1,1)=(14,13,9)
+	$$
+\end{example}\newpage
+\subsection{Matriz asociada y operaciones con transformaciones}
+\begin{theorem}
+	Sean dos transformaciones lineales $T:V\to W$ y $S:V\to W$.\\
+	Sea $B=\{v_1,\dots,v_n\}$ base de $V$ y $E=\{w_1,\dots,w_m\}$ base de $W$. Entonces:
+	$$_E(T+S)_B= _E(T)_B+_E(S)_B$$
+\end{theorem}
+\begin{theorem}
+	Sea $T:V\to W$ una transformación lineal y $\alpha$ un escalar de $\mathbb{K}$.\\
+	Sea $B=\{v_1,\dots,v_n\}$ base de $V$ y $E=\{w_1,\dots,w_m\}$ base de $W$. Entonces:
+	$$_E(\lambda T)_B=\lambda \ _E(T)_B$$
+\end{theorem}
+\begin{theorem}
+	Sean $U, V$ y $W$ espacios vectoriales con $dim(U)=s$, $dim(V)=n$ y $dim(W)=t$, y las transformaciones lineales $S:U\rightarrow V$ y $T:V\rightarrow W$.
+	\\Sea $A=\{u_1,u_2,\dots,u_n\}$, $B=\{v_1,v_2,\dots,v_n\}$ y $C=\{w_1,w_2,\dots,w_n\}$ bases de $U, V$ y $W$ respectivamente. Entonces la matriz asociada a la composición $T\circ S$ es el producto de las matrices asociadas.
+	$$
+		_C(T\circ S)_A=\ _C(T)_B\ _B(S)_A
+	$$
+\end{theorem}
+\underline{Observación:} Sea $T:V\rightarrow W$ un isomorfismo, $T^{-1}:W\rightarrow V$ su inversa, $B$ y $B'$ bases de $V$ y $W$ respectivamente. Como $T\circ T^{-1}=Id_W$ se cumple:
+$$
+	_{B'}(T)_B \ _B(T^{-1})_{B'}=\ _{B'}(Id_W)_{B'}=I
+$$
+También $T\circ T=Id_V$ por lo que
+$$
+	_B(T^{-1})_{B'} \ _{B'}(T)_B=\ _B(T)_B=I
+$$
+Por lo que deducimos que la matriz asociada a la transformación inversa es la inversa de la matriz asociada a la transformación:
+$$
+	_{B'}(T)_B=A\rightarrow \ _B(T^{-1})_{B'}=A^{-1}
+$$
+Observar también $dim(V)=dim(W)$
+\subsection{Cambio de bases}
+Sean $A=\{v_1,v_2,\dots,v_n\}$ y $A'=\{v_1',v_2',\dots,v_n'\}$ del espacio $V$ e $I:V\to V$ la transformación identidad.
+\begin{definition}
+	Llamaremos matriz de cambio de base de la base ("vieja") $A$ a la base ("nueva") $A'$ a la matriz:$$_{A'}(I)_A$$
+\end{definition}
+\begin{theorem}
+	Sean $A$ y $A'$ bases del espacio vectorial $V$. Entonces $$coord_{A'}(v)=\ _{A'}(I)_A coord_A(v)$$
+\end{theorem}
+\begin{theorem}
+	Sean $V$ y $W$ espacios vectoriales sobre un mismo cuerpo $\mathbb{K}$ y $A$, $A'$ bases de $V$ y $B$, $B'$ bases de $W$ y $T:V\to W$ una transformación lineal. Entonces:
+	$$_{B'}(T)_{A'}=\ _{B'}(I_W)_B \ _B(T)_A \ _A(I_V)_{A'}$$
+	Donde $I_V:V\to V$ y $I_W:W\to W$ son las transformaciones lineales identidad en $V$ y $W$ respectivamente.
+\end{theorem}
+\begin{theorem}
+	Sea $V$ un espacio vectorial sobre un mismo cuerpo $\mathbb{K}$, $A$ y $A'$ bases de $V$, $I:V\to V$ la transformación lineal identidad. Entonces:
+	\begin{enumerate}
+		\item $_{A'}(I)_A=\begin{pmatrix}1&0&\cdots&0\\0&1&\dots&0\\\vdots&\vdots&\ddots&\vdots\\0&0&\dots&1\end{pmatrix}\text{(Matriz identidad)}$
+		\item $_{A'}(I)_A$ es invertible y $[_{A'}(I)_A]^{-1}=\ _A(I)_{A'}$
+	\end{enumerate}
+\end{theorem}
+\subsection{Transformaciones y matrices semejantes}
+\begin{definition}{Operador lineal.}
+	\\Sea $V$ un espacio vectorial de dimensión finita sobre un cuerpo $\mathbb{K}$. Llamaremos operador en $V$ a toda transformación lineal $T:V\rightarrow V$; o sea, operador es una transformación lineal de un espacio vectorial en si mismo.
+\end{definition}
+\begin{definition}
+	Sean $A$ y $B\in M(\mathbb{K})_{n\times n}$. Diremos que $A$ y $B$ son semejantes cuando existe $P \in M(\mathbb{K})_{n\times n}$ invertible tal que $B=P^{-1}AP$.`
+\end{definition}
+\begin{theorem}
+	Dadas $A$ y $B\in M(\mathbb{K})_{n\times n}$. Las matrices $A$ y $B$ son semejantes si y solo si son matrices asociadas a un mismo operador $T$ en $V$.
+\end{theorem}
+\begin{theorem}
+	Sean $A$ y $B$ matrices semejantes en $M(\mathbb{K})_{n\times n}$. Entonces:
+	\begin{enumerate}
+		\item $rango(A)=rango(B)$
+		\item $traza(A)=traza(B)$
+		\item $det(A)=det(B)$
+	\end{enumerate}
+\end{theorem}
+\begin{corollary}
+	No vale el reciproco de la proposición anterior, pues para $A=\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ y $B=\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$.\\
+	Se cumple que $rango(A)=rango(B)=2$, $traza(A)=traza(B)=2$ y $det(A)=det(B)=1$.\\
+	Sin embargo, no existe $P$ invertible tal que $B=P^{-1}AP$, es decir, $A$ y $B$ no son semejantes. Esto lo podemos observar ya que $A$ es la matriz asociada al operador identidad y $B$ es la matriz asociada a operadores que no son la identidad.
+\end{corollary}
+\section{Diagonalización}
+\subsection{Valores, Vectores y Subespacios propios}
+\begin{definition}{Valor y vector propio.}
+	\\Sea $V$ un espacio vectorial sobre el conjunto de escalares $\mathbb{K}$ y $T:V\to V$ un operador lineal.\\
+	Llamamos vector propio de $T$ asociado al valor propio $\lambda\in\mathbb{K}$ a todo vector $v\neq \vec{0}$ tal que $T(v)=\lambda v$.
+\end{definition}
+\begin{corollary}
+	\hfill
+	\begin{itemize}
+		\item El vector nulo se excluye de la definición anterior, pues $T(\vec{0})=\lambda\vec{0}=\vec{0}$, $\forall\lambda\in\mathbb{K}$ y consecuentemente todo escalar resultaría valor propio.
+		\item Dada una transformación lineal, los valores propios son números del cuerpo $\mathbb{K}$, sobre el que esta definido el espacio vectorial.
+		\item Si $v$ es vector propio de $T$ asociado al valor propio $\lambda$, entonces para cualquier escalar $\alpha$ no nulo, $\alpha v$ también lo es, pues: $$T\left( \alpha v \right) = \alpha T(v)=\alpha\lambda v=\lambda(\alpha v)$$
+	\end{itemize}
+\end{corollary}
+\begin{definition}{Subespacio propio.}
+	\\El subespacio $S_{\lambda}$ es llamado subespacio propio asociado al valor propio $\lambda$.
+\end{definition}
+Sea $T$ y $\lambda$ un valor propio de $T$, definimos el subespacio propio como $$S_{\lambda}=\{v\in V : T(v)=\lambda v\}$$
+En estas condiciones, $$S_{\lambda}=N(T-\lambda Id)$$
+\newpage
+Propiedades de los valores propios:
+\begin{enumerate}
+	\item Si $T$ es invertible y $\lambda$ un valor propio de $T$, entonces $\lambda ^{-n}$ es valor propio de $T^{-n}$ $\forall n\in\mathbb{N}$.
+	\item Si $\lambda$ es valor propio de $T$, entonces $\lambda ^n$ es valor propio de $T^n$ $\forall n\in\mathbb{N}$.
+	\item $0$ es valor propio de $T$ si y solo si $T$ no es invertible.
+	\item $A$ y $A^T$ tienen igual polinomio característico, valores propios y vectores propios.
+	\item La suma de los valores propios es igual a la $traza(A)$.
+	\item El producto de los valores propios es igual al $det(A)$.
+\end{enumerate}
+\subsection{Calculo de valores y vectores propios.}
+\begin{definition}{Polinomio, ecuación y raíces característica.}
+	\\Se llama polinomio característico de una matriz cuadrada $A$ al polinomio $X_A\left( \lambda \right) $. Se le llama ecuación característica a $X_A(\lambda)=0$, y raíces características de $A$ a todas las soluciones del polinomio.
+	\\Siendo $X_A(\lambda)=det(A-\lambda Id)$
+\end{definition}
+\begin{corollary}
+	Sea $A$ una matriz $n\times n$, su polinomio característico es de grado $n$ en $\lambda$, y su termino independiente coincide con del $det(A)$.
+\end{corollary}
+Calcular los valores propios de una matriz $A={}_B(T)_B$ es hallar las raíces del polinomio característico.
+\\Una vez se obtenidos los valores propios, podemos hallar los vectores propios con el sistema de ecuaciones $\left( A-\lambda Id \right)\vec{v}=0 $.
+\begin{corollary}
+	Sean $A$, $B\in M\left( \mathbb{R} \right)_{n\times n}$ dos matrices semejantes.
+	\\Entonces $X_A(\lambda)=X_B(\lambda)$, por lo tanto, tienen iguales valores propios.\\
+	Observar que esto es una condición necesaria, pero no suficiente para asegurar la semejanza entre matrices.
+\end{corollary}
+\begin{definition}{Polinomio característico de un operador lineal.}
+	\\Sea $V$ un espacio vectorial de dimensión finita, $T:V\to V$ un operador lineal. Llamamos polinomio característico de $T$ al polinomio característico de cualquier matriz asociada a $T$.\\
+	De misma manera se define la ecuación características raíces características de un operador.\\
+	Lo denotamos por $X_T$.
+\end{definition}
+\begin{theorem}
+	Sea $A={}_B(T)_B$, la matriz asociada en la base $B$ a la transformación lineal $T:V\to V$. Entonces $v$ es vector propio de $T$ con valor propio $\lambda$ si y solo si las coordenadas de $v$ en la base $B$ son una solución no trivial del sistema: $$\left( A-\lambda Id \right) coord_B\left( v \right) =\begin{pmatrix} 0 \\ \vdots \\ 0 \end{pmatrix}  $$
+\end{theorem}
+\begin{theorem}
+	Sea $V$ un espacio vectorial sobre el cuerpo $\mathbb{K}$, $T:V\to V$ un operador lineal; $B$ una base de $V$ y $A={}_B(T)_B$. Entonces $\lambda$ es valor propio de $T$ si y solo si $\lambda\in\mathbb{K}$ y $det\left(A-\lambda Id  \right)=0$.
+	\\Es decir, los valores propios de la matriz asociada y del operador lineal se comparten.
+\end{theorem}\newpage
+\begin{example}{Practico 2 Ejercicio 3}
+	\\Se considera la matriz $A=\begin{pmatrix} 0 & 2 & 0 \\ 2 & 0 & 0 \\ 0 & 0 & 2 \end{pmatrix} $ y la transformación lineal $T:\mathbb{R} ^3 \to\mathbb{R} ^3$ tal que $_B(T)_B=A$, donde $B=\{(1,0,0),(1,1,0),(1,1,1)\}$.
+	\begin{enumerate}
+		\item Hallar los valores propios y los subespacios propios de $A$.
+		\item Hallar los valores propios y los subespacios propios de $T$.
+	\end{enumerate}
+	1. $$det\left( A-\lambda Id \right)=\begin{vmatrix}
+			-\lambda & 2        & 0         \\
+			2        & -\lambda & 0         \\
+			0        & 0        & 2-\lambda
+		\end{vmatrix} =( 2-\lambda )\begin{vmatrix}
+			-\lambda & 2        \\
+			2        & -\lambda
+		\end{vmatrix} =( 2-\lambda )\left( \lambda ^{2} -4\right)\rightarrow \lambda =\pm 2 \text{ Valores propios.}$$
+	$$S_{2} =\begin{pmatrix}
+			-2 & 2  & 0 \\
+			2  & -2 & 0 \\
+			0  & 0  & 0
+		\end{pmatrix}\begin{pmatrix}
+			x \\
+			y \\
+			z
+		\end{pmatrix} =0\rightarrow -2x+2y=0\rightarrow x=y$$
+	$$ \begin{array}{l}
+			S_{2} =\left\{( x,y,z) \in \mathbb{R}^{3}  : x=y\right\}=\{(1,1,0),(0,0,1)\} \text{ Subespacio propio.} \\
+			S_{2}\xrightarrow{b}( x,x,z) =x\underbrace{( 1,1,0)}_{\text{Vector propio}} +z\underbrace{( 0,0,1)}_{\text{Vector propio}}
+		\end{array}$$
+	$$S_{-2} =\begin{pmatrix}
+			2 & 2 & 0 \\
+			2 & 2 & 0 \\
+			0 & 0 & 4
+		\end{pmatrix}\begin{pmatrix}
+			x \\
+			y \\
+			z
+		\end{pmatrix} =0\rightarrow \begin{matrix}
+			z=0 \\
+			x=-y
+		\end{matrix}$$
+	$$ \begin{array}{l}
+			S_{-2} =\left\{( x,y,z) \in \mathbb{R}^{3}  : x=-y\land z=0\right\}=\{\left( 1,-1,0 \right) \} \text{ Subespacio propio.} \\
+			S_{-2}\xrightarrow{b}( x,-x,0) =x\underbrace{( 1,-1,0)}_{\text{Vector propio}}
+		\end{array}$$
+	2. Sabemos que se comparten los valores propios de la matriz asociada y de la transformación lineal, por lo tanto también son $\lambda =\pm 2$.\\
+	Y tenemos por el Teorema 2.1 que:\\
+	$coord_B(v_1)=\left( 1,1,0 \right) \rightarrow v_1=1\left( 1,0,0 \right) + 1(1,1,0)+0\left( 1,1,1 \right)=(2,1,0)  $\\
+	$coord_B(v_2)=(0,0,1)\rightarrow v_2=0(1,0,0)+0(1,1,0)+1(1,1,1)=(1,1,1) $\\
+	Por lo tanto, $S_2=\{(2,1,0),(1,1,1)\}$\\
+	$coord_B(v_3)=\left( 1,-1,0 \right)\rightarrow v_3=1(1,0,0)-1(1,1,0)+0(1,1,1)=(0,-1,0) $\\
+	Por lo tanto, $S_{-2}=\{(0,-1,0)\}$
+\end{example}\newpage
+\subsection{Transformaciones y Matrices diagonalizables.}
+\begin{definition}{Transformaciones lineales diagonalizables}
+	\\Sea $T:V\to V$ una transformación lineal. Se le llama diagonalizable si existe alguna base $B$ tal que la matriz $_B(T)_B$ es una matriz diagonal, es decir, una matriz en la que todos los términos fuera de su diagonal principal son nulos.
+\end{definition}
+\begin{definition}{Matrices diagonalizables}
+	Una matriz cuadrada se llama diagonalizable si es semejante a una matriz diagonal.
+\end{definition}
+\begin{example}
+	Sea $T:\mathbb{R} ^3 \to\mathbb{R} ^3$ definida por: $T(x,y,z)=\begin{pmatrix} 3 & 0 & 0 \\ 0 & 4 & 0 \\ -1 & -2 & 2 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} $.
+	Si se elige como base de $\mathbb{R} ^3$ a $B'=\{(0,1,-1),(0,0,1),(1,0,-1)\}$ resulta:
+	$$T(0,1,-1)=\begin{pmatrix} 3 & 0 & 0 \\ 0 & 4 & 0 \\ -1 & -2 & 2 \end{pmatrix} \begin{pmatrix} 0 \\ 1 \\ -1 \end{pmatrix}=\begin{pmatrix} 0 \\ 4 \\ -4 \end{pmatrix}$$
+	O sea, $T(0,1,-1)=4(0,1,-1)+0(0,0,1)+0(1,0,-1)$.\\
+	Análogamente tenemos:\\
+	$T(0,0,1)=(0,0,2)=0(0,1,-1)+2(0,0,1)+0(1,0,-1)$\\
+	$T(1,0,-1)=(3,0,-3)=0(0,1,-1)+0(0,0,1)+3(1,0,-1)$\\
+	Entonces $_B(T)_B=\begin{pmatrix} 4&0&0 \\ 0&2&0 \\ 0&0&3 \end{pmatrix} $, por lo tanto $T$ es diagonalizable.
+\end{example}
+\begin{theorem}
+	$T$ es diagonalizable si y solo si existe alguna base de $V$ constituida por vectores propios de $T$. En este caso la matriz asociada en una base de vectores propios (tomada como base de partida y llegada) es diagonal.
+\end{theorem}
+\begin{corollary}
+	Si $T$ es diagonalizable, su forma diagonal
+	$$\begin{pmatrix}
+			\lambda _{1} & 0            & \cdots & 0            \\
+			0            & \lambda _{2} & \cdots & 0            \\
+			\vdots       & \vdots       & \ddots & \vdots       \\
+			0            & 0            & \cdots & \lambda _{n}
+		\end{pmatrix}$$
+	es única a menos del orden de $\lambda _1, \lambda _2, \dots, \lambda _n$ que son los valores propios de $T$.
+\end{corollary}
+\begin{theorem}
+	Una matriz $A\in M_{n\times n}$ es diagonalizable si tiene $n$ vectores propios linealmente independientes.
+\end{theorem}
+\begin{theorem}
+	Sea $T:V\to V$ una transformación lineal; $\lambda _1, \dots \lambda _n$ valores propios dos a dos distintos; y $v_1, v_2, \dots, v_n$ vectores propios correspondientes a cada uno de los valores propios anteriores. Entonces, $\{v_1,v_2,\dots,v_n\}$ es un conjunto linealmente independiente.
+\end{theorem}
+\begin{corollary}
+	Si $dim(V)=n$, $T:V\to V$ tiene $n$ valores propios todos distintos entonces $T$ es diagonalizable.\\
+	De todas maneras, el reciproco de lo anterior es falso, puede ser diagonalizable teniendo valores propios iguales, un contra ejemplo es el siguiente.
+\end{corollary}\newpage
+\begin{example}
+	¿Es diagonalizable la matriz $A=\begin{pmatrix} 2&-5&0\\0&7&0\\0&-5&2 \end{pmatrix} $?
+	$$det(A-\lambda Id)=\begin{vmatrix}
+			2-\lambda & -5        & 0         \\
+			0         & 7-\lambda & 0         \\
+			0         & -5        & 2-\lambda
+		\end{vmatrix} =( 2-\lambda )^{2}( 7-\lambda )$$
+	Entonces $\begin{matrix}
+			\lambda =2 & \text{raíz doble} \\
+			\lambda =7 &
+		\end{matrix}$
+	\\Para $\lambda =2$, los vectores propios asociados $(x,y,z)$ cumplen la ecuación $y=0$.\\
+	Por lo tanto $S_2=\{(x,0,z)\in\mathbb{R}^3\}$\\
+	Para $\lambda=7$ los vectores propios verifican el sistema $$\begin{cases}
+			-5x-5y=0 \\
+			-5y-5z=0
+		\end{cases}\rightarrow x=-y=z$$
+	Por lo tanto $S_7=\{\left( x,-x,x \right)\in\mathbb{R}^3 \}$.
+	\\Resulta entonces que $\{(1,0,0),(0,0,1),(1,-1,1)\}$ es una base de vectores propios de $A$, y por lo tanto $A$ resulta diagonalizable. Una forma diagonal es $D=\begin{pmatrix} 2&0&0\\0&2&0\\0&0&7 \end{pmatrix} $.
+\end{example}
+\begin{definition}{Multiplicidad algébrica.}
+	\\Sea $\lambda$ un valor propio de $A={}_B(T)_B$, la multiplicidad algebraica es el numero de factores $(\lambda-t)$ en el polinomio característico tras la factorización.
+	\\Lo denotamos como $ma(\lambda)$
+\end{definition}
+\begin{example}
+	Sea $X_A(\lambda)=(\lambda -1)(\lambda -4)(\lambda -3)^2$, $ma(1)=1$, $ma(4)=1$, $ma(3)=2$
+\end{example}
+\begin{definition}{Multiplicidad geométrica.}
+	\\La multiplicidad geométrica de un valor propio es la dimensión del espacio propio asociado.\\
+	Lo denotamos como $mg(\lambda)$, y lo podemos calcular como, $mg(\lambda)=n-rango(A-\lambda Id)$.
+	\\Siendo $A\in M_{n\times n}$
+\end{definition}
+\begin{corollary}
+	Para cualquier valor propio $\lambda$ se cumple que $1\le mg(\lambda) \le ma(\lambda) \le n$
+\end{corollary}
+\begin{theorem}
+	$T$ es diagonalizable si y solo si los valores propios pertenecen al cuerpo y ademas se cumple que $ma(\lambda)=mg(\lambda)$.
+\end{theorem}
+\begin{theorem}
+	Si una matriz $A$ es diagonalizable, existe $P$ invertible (cuyas columnas son los vectores propios de $A$) tal que $P^{-1}AP=D \rightarrow A=PDP^{-1}$, donde $D$ es una matriz diagonal.
+\end{theorem}
+Volviendo al ejemplo anterior, podemos probar si $A=PDP^{-1}$, siendo $P=\begin{pmatrix} 1&0&1\\0&0&-1\\0&1&1 \end{pmatrix} $.
+\begin{theorem}
+	Para hallar $A^n$ basta calcular $A^n=PD^nP^{-1}$.\\
+	Siendo $D^n$ de la forma $\begin{pmatrix}
+			\lambda _{1}^{n} & 0                & \cdots & 0                \\
+			0                & \lambda _{2}^{n} & \cdots & 0                \\
+			\vdots           & \vdots           & \ddots & \vdots           \\
+			0                & 0                & \cdots & \lambda _{m}^{n}
+		\end{pmatrix}$
+\end{theorem}\newpage
+\subsection{Teorema de Gershgorin}
+\begin{definition}
+	Dada una matriz $A=(a_{ij})\in M(\mathbb{C})_{n\times n}$ llamaremos $r_i$ a la suma de los módulos de las entradas de la fila i-esima de $A$, exceptuando la entrada ubicada en la diagonal.
+	$$r_i=\sum_{j\neq i} |a_{ij}|$$
+	Sea $C_i$ el disco de centro $a_{ii}$ y radio $r_i$ $$C_i=\{z\in\mathbb{C} : |z-a_{ii}|\le r_i\}$$
+\end{definition}
+\begin{theorem}{Teorema de Gershgorin}
+	\\Sea $A\in M(\mathbb{C})_{n\times n}$
+	\begin{enumerate}
+		\item Si $\lambda$ es valor propio de $A$ entonces $\lambda\in\cup _{i}C_i$.\\Es decir, cada valor propio se encuentra en algún circulo $C_i$
+		\item Si $M=C_{i_1} \cup\dots\cup C_{i_m}$ es disjunta con la unión de los restantes discos, entonces en $M$ hay exactamente $m$ valores propios de $A$.
+	\end{enumerate}
+\end{theorem}
+\begin{corollary}
+	Como $A$ y $A^T$ comparten los valores propios, podemos analizar tanto las filas como las columnas para aproximar mejor los valores propios.
+\end{corollary}
+\begin{example}
+	Consideremos $A=\begin{pmatrix} 10&1&-1\\3&25&0\\2&1&32 \end{pmatrix} $.
+	\\Para esta matriz como $a_{11}=10+0i$ el circulo va a ser de centro (10,0), en un caso que sea de la forma $a_{nn}=x+yi$ el circulo va a ser de centro $(x,y)$, $r_1=|1|+|-1|=2$, $a_{22}=25$, $r_2=3$, $a_{33}=32$ y $r_3=3$, por lo tanto $$ \begin{array}{l}
+			C_{1} =\{z\in \mathbb{C} :|z-10|\leq 2\} \\
+			C_{2} =\{z\in \mathbb{C} :|z-25|\leq 3\} \\
+			C_{3} =\{z\in \mathbb{C} :|z-32|\leq 3\}
+		\end{array}$$
+	En este caso como los centros de todos los círculos están sobre el eje real, todos los valores propios van a ser reales.\\
+	Tenemos que los valores propios van a estar en los intervalos $[8,12], [22,28], [29,35]$, y como los círculos son disjuntos, tenemos que son 3 valores propios todos distintos, por lo que tenemos que $A$ es diagonalizable.
+\end{example}\newpage
+\section{Forma Canónica de Jordan}
+\subsection{Subespacios invariantes}
+\begin{definition}
+	Dado un operador $T:V\to V$ decimos que un subespacio $W$ es invariante si $T(W)\subset W$.\\
+	Es decir si hay un vector $v\in W$, entonces $T(v)\in W$
+\end{definition}
+\begin{corollary}
+	Sean $V$ un espacio de dimensión finita, $T:V\to V$ una transformación lineal y $W$ un subespacio invariante. Entonces existe una base $B$ de $V$ tal que
+	$$_B(T)_B=\left( \begin{array}{ll}
+			\multicolumn{1}{l|}{A} & \multicolumn{1}{|l}{B} \\ \cline{1-2}
+			\multicolumn{1}{l|}{0} & \multicolumn{1}{|l}{C}
+		\end{array} \right) $$
+\end{corollary}
+\begin{corollary}
+	Si $V=U\oplus W$ y ambos subespacios son invariantes, entonces existe una base donde
+	$$
+		_B(T)_B=\left( \begin{array}{ll}
+			\multicolumn{1}{l|}{A} & \multicolumn{1}{|l}{0} \\ \cline{1-2}
+			\multicolumn{1}{l|}{0} & \multicolumn{1}{|l}{C}
+		\end{array} \right)
+	$$
+	El caso mas sencillo de subespacio invariante es cuando $v\neq 0$ es vector propio, en ese caso el subespacio generado por $v$ es invariante.
+\end{corollary}
+\subsection{Forma Canónica de Jordan}
+\begin{definition}{Sub-bloque de Jordan.}
+	\\Se le llama sub-bloque de Jordan de un valor propio $\lambda$ y tamaño $k\times k$ de la forma
+	$$SJ_k\left( \lambda \right) =\begin{pmatrix}
+			\lambda & 0       & \cdots & \cdots & 0       \\
+			1       & \lambda & \cdots & \cdots & 0       \\
+			0       & 1       & \ddots & \cdots & \vdots  \\
+			\vdots  & \vdots  & \ddots & \ddots & \vdots  \\
+			0       & 0       & \cdots & 1      & \lambda
+		\end{pmatrix} $$
+\end{definition}
+\begin{example}
+	El sub-bloque de Jordan de tamaño $3$ y valor propio $2$ es:
+	$$SJ_3(2)=\begin{pmatrix}
+			2 & 0 & 0 \\
+			1 & 2 & 0 \\
+			0 & 1 & 2
+		\end{pmatrix}$$
+\end{example}
+\begin{definition}{Bloque de Jordan.}
+	\\Se llama bloque de Jordan de tamaño $m\times m$ y valor propio $\lambda$ a una matriz cuadrada $m\times m$ por
+	\begin{itemize}
+		\item Uno o mas bloques de Jordan de distintos o igual tamaño con el mismo valor propio.
+		\item Ceros en los restantes términos del ejemplo del bloque.
+	\end{itemize}
+\end{definition}
+\begin{example}
+	Un bloque de Jordan de tamaño $5$ y valor propio $2$ puede ser:
+	$$
+		J(2)=\left(\begin{array}{lllll}
+			\cline{1-1}
+			\multicolumn{1}{|l|}{2} & 0 & 0                      & 0 & 0                      \\ \cline{1-3}
+			\multicolumn{1}{l|}{0}  & 2 & \multicolumn{1}{l|}{0} & 0 & 0                      \\
+			\multicolumn{1}{l|}{0}  & 1 & \multicolumn{1}{l|}{2} & 0 & 0                      \\ \cline{2-5}
+			0                       & 0 & \multicolumn{1}{l|}{0} & 2 & \multicolumn{1}{l|}{0} \\
+			0                       & 0 & \multicolumn{1}{l|}{0} & 1 & \multicolumn{1}{l|}{2} \\ \cline{4-5}
+		\end{array}\right)
+	$$
+
+\end{example}\newpage
+\begin{theorem}{Forma Canónica de Jordan.}
+	Sean $V$ un espacio vectorial de dimensión $n$ sobre el cuerpo $\mathbb{K}$ y $T$ un operador lineal tal que su polinomio característico $$X_T(\lambda)=(\lambda - \lambda _1)^{m_1}(\lambda -\lambda _2)^{m_2}\dots (\lambda - \lambda _q)^{m_q}$$
+	Entonces existe una base $B$ de $V$ tal que
+	$$_B(T)_B=\begin{pmatrix}
+			J(\lambda _1) &               &        &               \\
+			              & J(\lambda _2) &        &               \\
+			              &               & \ddots &               \\
+			              &               &        & J(\lambda _q)
+		\end{pmatrix}$$
+	Donde cada bloque $J(\lambda _i)$ es un bloque de Jordan de valor propio $\lambda _i$, cuyo tamaño es su magnitud algebraica.
+\end{theorem}
+\begin{corollary}
+	Supongamos que $\lambda$ es un valor propio de una transformación lineal $T$. Entonces la cantidad de sub-bloques de Jordan de valor propio $\lambda$ es igual a  la multiplicidad geométrica de $\lambda$.\\
+	Un sub-bloque debe también terminar siempre con una columna correspondiente a un vector propio, y por lo tanto la cantidad de sub-bloques coincide con la cantidad de vectores propios que existan en la base $B$.
+\end{corollary}
+\begin{example}{Hallar bases de Jordan}
+	\\Sea un operador lineal de $\mathbb{R}^3$ cuya matriz asociada en la base canónica es
+	$$A=\begin{pmatrix}
+			2 & -4 & 1 \\
+			0 & 7  & 0 \\
+			0 & -5 & 2
+		\end{pmatrix}$$
+	no es diagonalizable.\\
+	Sus valores propios son $2$ y $7$, $S_2=\{(1,0,0)\}$ y $S_7=\{(1,-1,1)\}$ y $ma(2)=2$. En consecuencia, la forma de Jordan es $$J=\begin{pmatrix}
+			2 & 0 & 0 \\
+			1 & 2 & 0 \\
+			0 & 0 & 7
+		\end{pmatrix} $$
+	Para calcular una base de Jordan $\{v_1,v_2,v_3\}$ de $\mathbb{R}^3$ asociada al operador, observemos que $Av_1=2v_1+v_2$, $Av_2=2v_2$ y $Av_3=7v_3$. Por lo tanto $v_2$ y $v_3$ son vectores propios asociados a $2$ y $7$ respectivamente, por lo cual podemos elegir $v_2=(1,0,0)$ y $v_3=(1,-1,1)$. Ahora podemos decir que $v_1=(x,y,z)$. Como sabemos que $Av_1=2v_1+v_2$ por lo tanto $(A-2I)v_1=v_2$, entonces:
+	$$(A-2I)v_1=\begin{pmatrix} 0&-4&1\\0&5&0\\0&-5&0 \end{pmatrix} \begin{pmatrix} x\\y\\z \end{pmatrix} =\begin{pmatrix} 1\\0\\0 \end{pmatrix} $$
+	Resolviendo el sistema tenemos que $v_1=(x,0,1)$ con $x\in\mathbb{R}$, entonces podemos elegir $v_1=(0,0,1)$, por lo cual tenemos que la base de Jordan $B$ resulta $B=\{(0,0,1),(1,0,0),(1,-1,1)\}$.
+\end{example}\newpage
+\subsection{Teorema de Cayley-Hamilton}
+Un operador $T$ o una matriz $A$ verifican su polinomio característico, esto significa que, ya sea el operador $X_T(T)$ es el operador nulo o que $X_A(A)$ es la matriz nula.
+\begin{theorem}
+	Sea $T:V\to V$ un operador, $\lambda$ un valor propio, $v$ un vector propio asociado a $\lambda$ y $P(x)$ un polinomio. Entonces se cumple que el vector $v$ es vector propio del operador $P(T)$ con valor propio $P(\lambda)$.
+\end{theorem}
+\begin{corollary}
+	Sea $P(x)=X_T(x)$ el polinomio característico de $T$, y $\mu$ un valor propio y $v$ un vector asociado a $\mu$, entonces:
+	$$X_T(T)(v)=X_T(\mu)v=0v=0$$
+\end{corollary}
+Para transformaciones no diagonalizables hay que tener mas cuidado. Podemos observar que si $\mu$ es valor propio, el polinomio característico se factoriza como $$X_T(x)=(x-\mu)P(x)$$
+Por lo tanto, $X_T(T)=(T-\mu Id)P(T)$. Como $v$ es vector propio asociado a $\mu$, tenemos $$X_T(T)(v)=P(T)(Tv-\mu v)=0$$
+Cuando $v$ no es vector propio, debemos proceder de otra manera.
+\begin{corollary}
+	Dados un operador $T$ en $V$ y $v$ un vector no nulo en $V$. Entonces existe $k\in\mathbb{N}$ que cumple que
+	$$\begin{array}{ l l }
+			\left\{v,T( v) ,\dotsc ,T^{k}( v)\right\}              & \text{Es linealmente independiente} \\
+			\left\{v,T( v) ,\dotsc ,T^{k}( v) ,T^{k+1}( v)\right\} & \text{Es linealmente dependiente}
+		\end{array}$$
+\end{corollary}
+\begin{definition}
+	Notamos con $[v]_T$ al subespacio generador por $\{v,T(v),\dots,T^k(v)\}$.
+\end{definition}
+\begin{corollary}
+	Sea $T^{k+1}(v)=\sum_{i=0}^{k} a_iT^i(v)$. El subespacio $[v]_T$ es invariante por $T$ y la matriz asociada a $T$ en la base $\{v,Tv,\dots,T^kv\}$ del subespacio es:
+	$$\begin{pmatrix}
+			0      & 0      & \cdots & 0      & a_{0}  \\
+			1      & 0      & \cdots & 0      & a_{1}  \\
+			\vdots & \ddots & \vdots & \vdots & \vdots \\
+			0      & 0      & \cdots & 1      & a_{k}
+		\end{pmatrix}$$
+\end{corollary}
+\begin{theorem}{Cayley-Hamilton.}
+	\\Sean $T:V\to V$ un operador en un espacio de dimensión finita $V$ y $X_T(x)$ el polinomio característico de $T$. Entonces el operador $X_T(T)$ es el operador nulo.
+\end{theorem}\newpage
+\section{Producto interno y norma}
+\subsection{Producto interno}
+\end{document}
