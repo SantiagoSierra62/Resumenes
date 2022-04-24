@@ -2,6 +2,7 @@
 \usepackage[spanish]{babel}
 \usepackage{amsmath, amssymb, amsthm, tikz}
 \usepackage{nicematrix}
+\usepackage{enumitem}
 \usepackage[margin=1in]{geometry}
 \usetikzlibrary{babel}
 
@@ -535,4 +536,56 @@ Cuando $v$ no es vector propio, debemos proceder de otra manera.
 \end{theorem}\newpage
 \section{Producto interno y norma}
 \subsection{Producto interno}
+\begin{definition}
+	Sea $V$ un $\mathbb{K}$-espacio vectorial, una función de dos variables $$\langle \ ,\ \rangle :V\times V\rightarrow \mathbb{K}$$
+	es un producto interno en $V$ si verifica:
+	\begin{enumerate}
+		\item $\langle u+v, w \rangle = \langle u,w \rangle + \langle v,w \rangle$ $\forall u,v,w\in V$.
+		\item $\langle\alpha u,v \rangle = \alpha\langle u,v \rangle$ $\forall u,v\in V$, $\forall\alpha\in\mathbb{K}$
+		\item $\langle u,v\rangle = \overline{\langle v,u \rangle}$ $\forall u,v\in V$, la barra indica el complejo conjugado.
+		\item $\langle u,u \rangle$ real y $\langle u,u \rangle\ge 0$ $\forall u\in V$, y $\langle u,u \rangle =0\Leftrightarrow u=0$
+	\end{enumerate}
+\end{definition}
+\begin{corollary}
+	La propiedad 1, dice que la función $\langle \ ,\ \rangle$ es aditiva en la primera componente (se sobrentiende que la segunda componente permanece fija).
+\end{corollary}
+\begin{corollary}
+	La propiedad 2, dice que la función $\langle \ ,\ \rangle$ es homogénea en la primera componente, mientras que la segunda permanece fija.
+	\\Cuando se cumplen las propiedades 1 y 2 se dice que la función $\langle \ ,\ \rangle$ es lineal en la primera componente.
+\end{corollary}
+\begin{corollary}
+	Si $\langle \ ,\ \rangle$ es un producto interno en el $\mathbb{K}$-espacio vectorial $V$ se tiene que
+	\begin{enumerate}[label=\alph*)]
+		\item $\langle u,v+w \rangle = \langle u,v \rangle + \langle u,w \rangle$ $\forall u,v,w\in V$
+		\item $\langle u,\alpha v \rangle = \overline{\alpha}\langle u,v\rangle$ $\forall u,v\in V$, $\forall\alpha\in\mathbb{K}$
+		\item $\langle u,\vec{0}\rangle =\langle\vec{0} ,u\rangle =0$ $\forall u\in V$
+	\end{enumerate}
+\end{corollary}
+\subsection{Norma}
+\begin{definition}
+	Sea $V$ un espacio vectorial. Una norma en $V$ es una función tal que a cada vector $v$ le hace corresponder un real indicado como $||v||$, y cumple:
+	\begin{enumerate}
+		\item $||\lambda v||=|\lambda |||v||$ $\forall\lambda\in\mathbb{K}$ $\forall v\in V$.
+		\item $||v|| \ge 0$ $\forall v\in V$ $||v||=0 \Leftrightarrow v=\vec{0}$
+		\item $||v+w||\le ||v||+||w||$ Desigualdad triangular.
+	\end{enumerate}
+\end{definition}
+\begin{theorem} 
+	Todo espacio vectorial con producto interno es un espacio vectorial normado definiendo la norma de la siguiente manera: $$||v||=\sqrt{\langle v,w \rangle}$$ A esta norma la llamamos norma inducida por el producto interno.
+\end{theorem} 
+\begin{corollary}
+	El reciproco no es cierto, es decir, hay normas que no son normas inducidas por ningún producto interno en $V$.
+\end{corollary}
+\begin{corollary}
+	En el caso que se considere el espacio ordinario, la norma de un vector referida al producto escalar coincide con su módulo.
+\end{corollary}
+\begin{theorem}{Desigualdad de Cauchy-Schwarz}
+	Sea $V$ un espacio con producto interno, para todo par de vectores $v,w\in V$ se tiene $$|\langle v,u \rangle| \le ||v|| \ ||u||$$ donde la norma es la inducida por el producto interno. La igualdad vale si y solo si $\{v,u\}$ es linealmente independiente.
+\end{theorem}
+\begin{corollary}
+	Si $V$ es un espacio vectorial real con producto interno, y $v, w$ son dos vectores no nulos, la desigualdad de Cauchy-Schwarz permite asegurar que $$-1\le \frac{\langle v,w \rangle}{||v|| \ ||w||} \le 1$$ por ello se define el angulo $\alpha$ entre los vectores $v, w$ por $cos(\alpha)=\frac{\langle v,w \rangle}{||v|| \ ||w||}$
+\end{corollary}
+\begin{corollary}{Desigualdad triangular}
+	\\Si $V$ es un espacio vectorial con producto interno $v,w\in V$, se tiene $||v+w||\le ||v||+||w||$.
+\end{corollary}
 \end{document}
