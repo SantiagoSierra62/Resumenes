@@ -591,4 +591,48 @@ Cuando $v$ no es vector propio, debemos proceder de otra manera.
 \begin{corollary}{Desigualdad triangular}
 	\\Si $V$ es un espacio vectorial con producto interno $v,w\in V$, se tiene $||v+w||\le ||v||+||w||$.
 \end{corollary}
+\subsection{Ortogonalidad y ortonormalidad}
+\begin{definition}
+	Sea $V$ un espacio vectorial con producto interno. Dados $v,\ w\in V$, se dice que $v$ y $w$ son ortogonales, y se escribe como $v \bot w$, cuando $\langle v,w \rangle =0$.
+\end{definition}
+Esta definición coincide con la ortogonalidad en el espacio ordinario, trabajando con el producto interno usual.
+\begin{definition}
+	Sea $A \subset V$. Se dice que $A$ es un conjunto ortogonal si los elementos de $A$ son ortogonales dos a dos, o sea, $\forall v,\ w\in A,\ v\neq w$ se cumple $v \bot w$.\\
+	Si ademas $||v||=1\ \forall v\in A$ se dice que $A$ es un conjunto ortonormal.
+\end{definition}
+\begin{corollary}
+	\begin{itemize}
+		\item $0\bot v\ \forall v\in V$.
+		\item $v\bot v \Leftrightarrow v=0$.
+	\item Si $A$ es un conjunto ortogonal y $\vec{0}\notin A$ el conjunto: $$\left\{\frac{1}{||v||} v\ /\ v\in A\right\}$$ es ortonormal. A este proceso se le llama normalizar.
+	\end{itemize}
+\end{corollary}
+\begin{theorem}
+	Todo conjunto ortogonal que no tiene el vector nulo es linealmente independiente. Sea $V$ un $\mathbb{K}$-espacio vectorial con producto interno y $\{v_1 ,\dots , v_r\}$ un conjunto ortogonal tal que $v_i\neq\vec{0}$ con $i=1, \dots , r$. Entonces $\{v_1, \dots ,v_r\}$ es linealmente independiente.
+\end{theorem}
+\begin{theorem}{Pitágoras.}
+	\\Sea $V$ un producto interno y $\{v_1,\dots,v_r\}$ un conjunto ortogonal. Entonces $||\sum_{i=1}^{r} v_i||^2=\sum_{i=1}^{r} ||v_i||^2$
+\end{theorem}\newpage
+\begin{theorem}{Método de ortonormalización de Gram-Schmidt.}
+	\\Sean $V$ un espacio vectorial con producto interno y $\{v_1,\dots,v_k\}$ una base de $V$. Entonces existe \newline $B=\{y_1,\dots,y_n\}$ tal que $B$ es una base ortonormal de $V$ y $[v_1,\dots,v_k]=[y_1,\dots,y_k]\ \forall k=1,\dots,n$.\\
+	\underline{Método:}
+	\\Tomamos $u_1=v_1$, entonces $[v_1]=[u_1]$.
+	\\Sea $u_2=v_2-cu_1$ donde $$c=\frac{\langle v_2,u_1 \rangle}{||u_1||^2}$$
+	\\Generalizando decimos que $$u_k=v_k-c_{k-1}u_{k-1}-\dots-c_1u_1$$ donde $c_j=\frac{\langle v_k,u_j \rangle}{||u_j||^2}\ \forall k=2,\dots,n$, se obtiene un sistema $\{u_1,\dots,u_n\}$ ortogonal tal que $[u_1,\dots,u_n]=[v_1,\dots,v_n]\ \forall k=1,\dots,n$.
+	\\Finalmente tomando $y_j=\frac{1}{||u_j||}u_j$ se tiene que $B=\{y_1,\dots,y_n\}$ en condiciones adecuadas.
+\end{theorem}
+\begin{corollary}
+	Todo espacio vectorial de dimensión finita con producto interno tiene una base ortonormal.
+\end{corollary}
+\begin{corollary}
+	Este método es también aplicable a subespacios vectoriales.
+\end{corollary}
+\begin{theorem}{Propiedades de las bases ortonormales.}
+	\\Sea $V$ un espacio vectorial con producto interno y $\{v_1,\dots,v_n\}$ una base ortonormal. Entonces:
+	\begin{enumerate}
+		\item Si $v=\sum_{i=1}^{r} \alpha_iv_i$ y $w=\sum_{i=1}^{n} \beta_iv_i$ entonces $\langle v,w \rangle=\sum_{i=1}^{n} \alpha \overline{\beta_i}$.
+		\item $\forall v\in V$ se tiene que: $v=\langle v,v_1 \rangle v_1+\dots+\langle v,v_n \rangle v_n$.
+		\item $\forall v\in V$ se tiene que: $||v||^2=\sum_{i=1}^{n} |\langle v,v_i \rangle|^2$.
+	\end{enumerate}
+\end{theorem}
 \end{document}
