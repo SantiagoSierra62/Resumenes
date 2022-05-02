@@ -444,28 +444,21 @@ Observar que en este caso, la sucesión de sumas parciales $s_n$ es monótona cr
 	Consideramos $f:[a,+\infty)\to\mathbb{R}$ continua.\\
 	Esto es que $f$ es continua en $[a,x]$ $\forall x>a$.\\
 	Queremos darle sentido $\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(t) dt$.
+    $$\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(x) dx =
+	    \begin{cases}
+		    L \text{ (finito)} & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{C} \text{ y } \int_{a}^{+\infty} f(x) dx=L \\
+		    \infty             & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{D}                                         \\
+		    \nexists           & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{O}
+	    \end{cases}$$
 \end{definition}
-\begin{itemize}
-	\item Si $\lim_{x \to \infty} \int_{a}^{x} f(t) dt$ existe y es finito, entonces decimos que $\int_{a}^{+\infty}f(x)  dx$ converge.
-	\item Si $\lim_{x \to \infty} \int_{a}^{x} f(t) dt$ es infinito, entonces decimos que $\int_{a}^{+\infty}f(x)  dx$ diverge.
-	\item Si $\lim_{x \to \infty} \int_{a}^{x}f(t)  dt$ no existe, entonces decimos que $\int_{a}^{+\infty} f(x) dx$ oscila.
-\end{itemize}
 \begin{theorem}
 	Sea $f:[a,+\infty)\to\mathbb{R}$ continua y $b>a$.\\
 	Entonces $\int_{a}^{+\infty} f(x) dx$ y $\int_{b}^{+\infty} f(x) dx$ tienen igual comportamiento, y en caso de converger se cumple: $$\int_{a}^{+\infty} f(x) dx=\int_{a}^{b} f(x) dx+\int_{b}^{+\infty} f(x) dx$$
 \end{theorem}
 \begin{theorem}{Condición necesaria de convergencia.}
-	Sea $f:[a,\infty)\to\mathbb{R}$ continua.\\
-	Si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$ y existe $\lim_{x \to \infty} f(x)$, entonces $\lim_{x \to \infty} f(x)=0$
+	\\Sea $f:[a,\infty)\to\mathbb{R}$ continua, si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$ y existe $\lim_{x \to \infty} f(x)$, entonces $\lim_{x \to \infty} f(x)=0$
 \end{theorem}
 \subsection{Integrales impropias de $1^{ra}$ especie.}
-Sea $f:[a,+\infty)\to\mathbb{R}$ continua.
-$$\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(x) dx
-	\begin{cases}
-		L \text{ (finito)} & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{C} \text{ y } \int_{a}^{+\infty} f(x) dx=L \\
-		\infty             & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{D}                                         \\
-		\nexists           & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{O}
-	\end{cases}$$
 \begin{theorem}{Criterio Integral.}
 	\\Sea $f:[n_0,+\infty)\to\mathbb{R}$ continua, monótona decreciente y no negativa.
 	\\Defino $\forall n\ge n_0$ $a_n=f(n)$.
@@ -473,20 +466,29 @@ $$\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(x) dx
 		\item $\sum_{n=n_0}^{+\infty} a_n$ $\mathbb{C} \Leftrightarrow \int_{n_0}^{+\infty} f(x) dx$ $\mathbb{C}$.
 		\item $\sum_{n=n_0}^{+\infty} a_n$ $\mathbb{D} \Leftrightarrow \int_{n_0}^{+\infty} f(x) dx$ $\mathbb{D}$.
 	\end{enumerate}
-\end{theorem}\newpage
-\begin{corollary}{Condición necesaria de convergencia.}
-	\\$f:[a,+\infty)\to\mathbb{R}$ continua
-	$\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$ y existe $\lim_{x \to +\infty} f(x)=L$ entonces $L=0$
-\end{corollary}
+\end{theorem}
+\begin{corollary}
+    Si $\int_{a}^{\infty} f(t) dt$ y $\int_{a}^{\infty} g(t) dt$ convergen, entonces $\int_{a}^{\infty} \left( \alpha f(t)+\beta g(t) \right)  dt$ converge.
+\end{corollary}\newpage
 \begin{corollary}
 	Si existe $\lim_{x \to +\infty} f(x)\neq 0$ entonces $\int_{a}^{+\infty} f(x) dx$ no converge.
 \end{corollary}
-\begin{theorem}{Primer teorema de comparación.}
+\begin{theorem}{Criterio Serie-Integral.}
 	\\Sean $f,g:[a,+\infty)\to\mathbb{R}$ continua tal que $0\le f(x)\le g(x)$ $\forall x\ge a$
 	\begin{enumerate}
 		\item Si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{D}$ entonces $\int_{a}^{+\infty} g(x) dx$ $\mathbb{D}$
 		\item Si $\int_{a}^{+\infty} g(x) dx$ $\mathbb{C}$ entonces $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$
 	\end{enumerate}
+\end{theorem}
+\begin{corollary}
+    Sean $f$ y $g$ funciones con $f(t)\ge 0$, $g(t)\ge 0\ \forall t$, y $\lim_{x \to \infty} \frac{f(t)}{g(t)}=L>0$.\\
+    Entonces $\int_{a}^{\infty} f(t) dt$ y $\int_{a}^{\infty} g(t) dt$ son de la misma clase.
+\end{corollary}
+\begin{definition}
+    Decimos que la integral impropia $\int_{a}^{+\infty} f(x) dx$ es absolutamente convergente si y solo si $\int_{a}^{+\infty} |f(x)| dx$ es convergente.
+\end{definition}
+\begin{theorem}
+    Si $\int_{a}^{+\infty} f(x) dx$ es absolutamente convergente, entonces es convergente.
 \end{theorem}
 \begin{definition}
 	Sea $f:(-\infty ,b]$ continua:
@@ -499,4 +501,18 @@ $$\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(x) dx
 	$$\int_{-\infty}^{+\infty} f(x) dx \text{ } \mathbb{C} \Leftrightarrow \begin{matrix} \int_{-\infty}^{0} f(x) dx \text{ } \mathbb{C} \\ \text{y} \\ \int_{0}^{+\infty} f(x) dx \text{ } \mathbb{C} \end{matrix} $$
 \end{definition}
 \subsection{Integrales impropias de $2^{da}$ especie}
+\begin{definition}
+    Sea $f:(a,b]\to\mathbb{R}$ continua, y $F(x)=\int_{x}^{b} f(t) dt$. Entonces si el $\lim_{x \to a^{+}}F(x)=L$ finito, decimos que la integral impropia $\int_{a}^{b} f(t) dt$ es convergente, y su valor es $L$. Si por el contrario el limite es infinito o no existe, decimos que la integral impropia diverge u oscila, respectivamente.
+\end{definition}
+Importante, recordemos el comportamiento de la integral impropia $\int \frac{1}{x^{\alpha}} dx$.
+$$\int _{0}^{1}\frac{1}{x^{\alpha }} dx\ \begin{array}{ l }
+\text{Converge si} \ \alpha < 1\\
+\text{Diverge si} \ \alpha \geq 1
+\end{array} \ \int _{1}^{\infty }\frac{1}{x^{\alpha }} \ \begin{array}{ l }
+\text{Converge si} \ \alpha  >1\\
+\text{Diverge si} \ \alpha \leq 1
+\end{array}$$
+\subsection{Integrales mixtas}
+Cuando en una integral aparece mas de un punto problemático, debemos partir la integral en una suma de integrales que contengan solamente uno de esos puntos, y decimos que la integral original es convergente si y solo si cada uno de los sumandos lo es.\\
+De esta forma por ejemplo si $f$ es continua, la integral impropia $\int_{-\infty}^{+\infty} f(x) dx$ debemos escribirla como suma de $\int_{-\infty}^{a} f(x) dx$ y $\int_{a}^{+\infty} f(x) dx$, y debemos clasificar estas dos integrales. Es fácil ver que el resultado no depende de $a$.
 \end{document}
