@@ -9,6 +9,7 @@
 \newtheorem{definition}{Definición}[section]
 \newtheorem{theorem}{Teorema}[section]
 \newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{example}{Ejemplo}[section]
 
 \title{Cálculo Diferencial e Integral en varias variables}
 \author{Santiago Sierra}
@@ -160,7 +161,7 @@ Si deseamos hallar $\sqrt{a+bi}$ una forma rápida de hacerlo es diciendo: $$\sq
 Sea $z^n=r(cos(\theta)+i\ sen(\theta))$ y $n\in \mathbb{Z}^{+}$. Entonces, $z$ tiene $n$ raíces enésimas distintas.\\
 Las raíces se hallan como: $$z_k=r^{\frac{1}{n}}\left(cos\left(\frac{\theta +2k\pi}{n}\right)+i\ sen\left(\frac{\theta + 2k\pi}{n}\right)\right)=r^{\frac{1}{n}}e^{\frac{\theta + 2k\pi}{n}i}$$
 Donde $k=\{0,1,2,\dots,n-1\}$.
-\section{Ecuaciones Diferenciales}
+\newpage\section{Ecuaciones Diferenciales}
 \begin{definition}
 	Una ecuación diferencial es una igualdad en la cual la incógnita es una función desconocida y sus derivadas, $y=f(x)$ definida y derivable.
 \end{definition}
@@ -439,80 +440,232 @@ Observar que en este caso, la sucesión de sumas parciales $s_n$ es monótona cr
 \begin{theorem}{Criterio de Leibnitz}
 	\\Si $a_n$ es una sucesión estrictamente decreciente que tiende a cero, entonces la serie alternada $\sum \left( -1 \right)^n a_n$ es convergente.
 \end{theorem}
-\section{Integrales impropias}
+\newpage\section{Integrales impropias}
+\subsection{Integrales impropias de $1^{ra}$ especie}
 \begin{definition}
-	Consideramos $f:[a,+\infty)\to\mathbb{R}$ continua.\\
-	Esto es que $f$ es continua en $[a,x]$ $\forall x>a$.\\
-	Queremos darle sentido $\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(t) dt$.
-    $$\int_{a}^{+\infty} f(x) dx=\lim_{x \to \infty} \int_{a}^{x} f(x) dx =
-	    \begin{cases}
-		    L \text{ (finito)} & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{C} \text{ y } \int_{a}^{+\infty} f(x) dx=L \\
-		    \infty             & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{D}                                         \\
-		    \nexists           & \to \int_{a}^{+\infty} f(x) dx \text{ } \mathbb{O}
-	    \end{cases}$$
-\end{definition}
-\begin{theorem}
-	Sea $f:[a,+\infty)\to\mathbb{R}$ continua y $b>a$.\\
-	Entonces $\int_{a}^{+\infty} f(x) dx$ y $\int_{b}^{+\infty} f(x) dx$ tienen igual comportamiento, y en caso de converger se cumple: $$\int_{a}^{+\infty} f(x) dx=\int_{a}^{b} f(x) dx+\int_{b}^{+\infty} f(x) dx$$
-\end{theorem}
-\begin{theorem}{Condición necesaria de convergencia.}
-	\\Sea $f:[a,\infty)\to\mathbb{R}$ continua, si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$ y existe $\lim_{x \to \infty} f(x)$, entonces $\lim_{x \to \infty} f(x)=0$
-\end{theorem}
-\subsection{Integrales impropias de $1^{ra}$ especie.}
-\begin{theorem}{Criterio Integral.}
-	\\Sea $f:[n_0,+\infty)\to\mathbb{R}$ continua, monótona decreciente y no negativa.
-	\\Defino $\forall n\ge n_0$ $a_n=f(n)$.
-	\\\underline{Entonces}:	\begin{enumerate}
-		\item $\sum_{n=n_0}^{+\infty} a_n$ $\mathbb{C} \Leftrightarrow \int_{n_0}^{+\infty} f(x) dx$ $\mathbb{C}$.
-		\item $\sum_{n=n_0}^{+\infty} a_n$ $\mathbb{D} \Leftrightarrow \int_{n_0}^{+\infty} f(x) dx$ $\mathbb{D}$.
-	\end{enumerate}
-\end{theorem}
-\begin{corollary}
-    Si $\int_{a}^{\infty} f(t) dt$ y $\int_{a}^{\infty} g(t) dt$ convergen, entonces $\int_{a}^{\infty} \left( \alpha f(t)+\beta g(t) \right)  dt$ converge.
-\end{corollary}\newpage
-\begin{corollary}
-	Si existe $\lim_{x \to +\infty} f(x)\neq 0$ entonces $\int_{a}^{+\infty} f(x) dx$ no converge.
-\end{corollary}
-\begin{theorem}{Criterio Serie-Integral.}
-	\\Sean $f,g:[a,+\infty)\to\mathbb{R}$ continua tal que $0\le f(x)\le g(x)$ $\forall x\ge a$
+	Sea $f(x)$ definida en el intervalo $[a,\infty)$.
+	\\Para toda $t>a$ la función $f(x)$ es integrable en $[a,t]$, y si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx$ existe, decimos que la integral impropia esta definida y $\int_{a}^{\infty} f(x) dx=\lim_{t \to \infty} \int_{a}^{t} f(x) dx$.
 	\begin{enumerate}
-		\item Si $\int_{a}^{+\infty} f(x) dx$ $\mathbb{D}$ entonces $\int_{a}^{+\infty} g(x) dx$ $\mathbb{D}$
-		\item Si $\int_{a}^{+\infty} g(x) dx$ $\mathbb{C}$ entonces $\int_{a}^{+\infty} f(x) dx$ $\mathbb{C}$
+		\item Si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx=L$ decimos que converge.
+		\item Si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx=\pm\infty$ decimos que diverge.
+		\item Si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx\ \nexists$ decimos que oscila.
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	Sea $t>1$ $$\int _{1}^{t}\frac{1}{x^{p}} dx=\begin{cases}
+			\left[ -\frac{1}{( 1-p) x^{p-1}}\right]_{1}^{t} & \text{Si} \ p\neq 1 \\
+			[ log( x)]_{1}^{t}                              & \text{Si} \ p=1
+		\end{cases} =\begin{cases}
+			\frac{1}{p-1}-\frac{t^{1-p}}{(p-1)} & \text{Si} \ s\neq 1 \\
+			log( t)                             & \text{Si} \ s=1
+		\end{cases}$$
+	Como $\lim_{t \to \infty} log(t)=\infty$ diverge.
+	\\Por otro lado tenemos que $1-p<0$ o que $p<1$ por lo tanto $\lim_{t \to \infty} t^{1-p}=\infty$, y si $1-p<0$ o $p>1$ nos da que $\lim_{t \to \infty}t^{1-p}=0$.
+	\\En conclusión, $\int_{1}^{\infty} \frac{1}{x^p} dx$ diverge si $p\le 1$ y converge si $p>1$.
+\end{example}
+\begin{definition}
+	De manera análoga también podemos definir integrales impropias de la forma:
+	\begin{enumerate}
+		\item $\int_{-\infty}^{b} f(x) dx=\lim_{t \to -\infty}\int_{t}^{b} f(x) dx$
+		\item $\int_{-\infty}^{\infty} f(x) dx=\int_{-\infty}^{a} f(x) dx + \int_{a}^{\infty} f(x) dx$
+	\end{enumerate}
+\end{definition}
+\begin{corollary}{Álgebra de integrales impropias de primera especie.}
+	\\Sean $\int_{a}^{\infty} f(x) dx$ y $\int_{a}^{\infty} g(x) dx$ dos integrales impropias convergentes, y sea $\lambda\in\mathbb{R}$, se cumple que:
+	\begin{enumerate}
+		\item La integral $\int_{a}^{\infty} f(x)+ g(x)\ dx$ converge, y ademas $$\int_{a}^{\infty} f(x)+g(x)\ dx=\int_{a}^{\infty} f(x) dx+\int_{a}^{\infty} g(x) dx$$
+		\item La integral $\int_{a}^{\infty} \lambda f(x) dx$ converge y ademas $$\int_{a}^{\infty} \lambda f(x) dx=\lambda \int_{a}^{\infty} f(x) dx$$
+	\end{enumerate}
+\end{corollary}
+\begin{corollary}
+	Aplicando la proposición anterior, si $\int_{a}^{\infty} f(x) dx$ converge y $\int_{a}^{\infty} g(x) dx$ diverge, entonces $\int_{a}^{\infty} f(x)+g(x)\ dx$ diverge.
+\end{corollary}
+\begin{corollary}
+	Si $\int_{a}^{\infty} f(x) dx$ y $\int_{a}^{\infty} g(x) dx$ divergen, no podemos decir nada de su suma.
+\end{corollary}
+\begin{theorem}
+	Sea $f(x)$ definida en $[a,\infty)$ una función no negativa e integrable en $[a,b]$ para $b\ge a$. Consideremos la función $F(b)=\int_{a}^{b} f(x) dx$ para $b\in [a,\infty)$. Entonces las siguientes afirmaciones se cumplen:
+	\begin{enumerate}
+		\item La función $F$ en $[a,\infty)$ es monótona creciente.
+		\item $\int_{a}^{\infty} f(x) dx$ converge si y solo si, $F$ esta acotada superiormente.
 	\end{enumerate}
 \end{theorem}
-\begin{corollary}
-    Sean $f$ y $g$ funciones con $f(t)\ge 0$, $g(t)\ge 0\ \forall t$, y $\lim_{x \to \infty} \frac{f(t)}{g(t)}=L>0$.\\
-    Entonces $\int_{a}^{\infty} f(t) dt$ y $\int_{a}^{\infty} g(t) dt$ son de la misma clase.
-\end{corollary}
-\begin{definition}
-    Decimos que la integral impropia $\int_{a}^{+\infty} f(x) dx$ es absolutamente convergente si y solo si $\int_{a}^{+\infty} |f(x)| dx$ es convergente.
-\end{definition}
-\begin{theorem}
-    Si $\int_{a}^{+\infty} f(x) dx$ es absolutamente convergente, entonces es convergente.
+\newpage\begin{theorem}{Teorema de comparación}
+	\\Sea $0\le f(x)\le g(x)$ en $[a,\infty)$
+	\begin{enumerate}
+		\item Si $\int_{a}^{\infty} g(x) dx$ converge, entonces $\int_{a}^{\infty} f(x) dx$ también.
+		\item Si $\int_{a}^{\infty} f(x) dx$ diverge, entonces $\int_{a}^{\infty} g(x) dx$ también.
+	\end{enumerate}
+\end{theorem}
+\begin{theorem}{Criterio de equivalencia}
+	\\Sean $f,g$ funciones definidas en $[a,\infty)$ que cumplen:
+	\begin{itemize}
+		\item $f(x)\ge 0$ y $g(x)>0\ \forall x\ge a$. Es decir, $f$ es no negativa y $g$ positiva en $[a,\infty)$.
+		\item $f$ y $g$ son integrables en $[a,b]$ para $b\ge a$.
+	\end{itemize}
+	Consideremos $\lim_{x \to \infty} \frac{f(x)}{g(x)}=L$.
+	\\Entonces cumplen las afirmaciones:
+	\begin{enumerate}
+		\item Si $L>0$, se tiene que $\int_{a}^{\infty} f(x) dx$  y $\int_{a}^{\infty} g(x) dx$ son del mismo tipo, es decir ambos convergen o divergen.
+		      \\Si $L>0$, decimos que las funciones $f$ y $g$ son equivalentes.
+		\item Para el caso $L=0$:
+		      \begin{itemize}
+			      \item $\int_{a}^{\infty} g(x) dx$ converge $\Rightarrow \int_{a}^\infty f(x) dx$ converge.
+			      \item $\int_{a}^{\infty} f(x) dx$ diverge $\Rightarrow \int_{a}^{\infty} g(x) dx$ diverge.
+		      \end{itemize}
+		\item Para el caso $L=\infty$:
+		      \begin{itemize}
+			      \item $\int_{a}^{\infty} g(x) dx$ diverge $\Rightarrow \int_{a}^{\infty} f(x) dx$ diverge.
+			      \item $\int_{a}^{\infty} f(x) dx$ converge $\Rightarrow \int_{a}^{\infty} g(x) dx$ converge.
+		      \end{itemize}
+	\end{enumerate}
 \end{theorem}
 \begin{definition}
-	Sea $f:(-\infty ,b]$ continua:
-	\\$\int_{-\infty}^{b} f(x) dx=\lim_{x \to -\infty} \int_{x}^{b} f(t) dt$
+	Sea $f(x)$ definida en $[a,\infty)$ una función integrable en $[a,b]$ para $b\ge a$. Decimos que $\int_{a}^{\infty} f(x) dx$ es absolutamente convergente si $\int_{a}^{\infty} |f(x)| dx$ converge.
 \end{definition}
+\begin{theorem}
+	Sea $f(x)$ definida en $[a,\infty)$ una función integrable en $[a,b]$ para $b\ge a$ tal que $\int_{a}^{\infty} f(x) dx$ es absolutamente convergente. Entonces $\int_{a}^{\infty} f(x) dx$ converge.
+\end{theorem}
 \begin{definition}
-	Sea $f:\mathbb{R}\to\mathbb{R}$ continua:
-	$$\int_{-\infty}^{+\infty} f(x) dx=\int_{-\infty}^{0} f(x) dx+\int_{0}^{+\infty} f(x) dx$$
-	Decimos que
-	$$\int_{-\infty}^{+\infty} f(x) dx \text{ } \mathbb{C} \Leftrightarrow \begin{matrix} \int_{-\infty}^{0} f(x) dx \text{ } \mathbb{C} \\ \text{y} \\ \int_{0}^{+\infty} f(x) dx \text{ } \mathbb{C} \end{matrix} $$
+	Sea $f(x)$ definida en $[a,\infty)$ una función integrable en $[a,b]$ para $b\ge a$, diremos que $\int_{a}^{\infty} f(x) dx$ es condicionalmente convergente si $\int_{a}^{\infty} f(x) dx$ converge pero $\int_{a}^{\infty} |f(x)| dx$ diverge.
 \end{definition}
-\subsection{Integrales impropias de $2^{da}$ especie}
+\begin{theorem}{Criterio serie-integral.}
+	Sea $f(x)$ definido en $[a,\infty)$ una función positiva, decreciente e integrable en $[a,b]$ para $b\ge a$. Sea $n_0$ el primer entero no negativo mayor o igual que $a$. Para cada $n\ge n_0$, sean $$s_n=\sum_{k=n_0}^{n} f(k) \text{ y } t_n=\int_{n_0}^{n} f(x) dx$$
+	Entonces, ambas sucesiones son del mismo tipo.
+\end{theorem}
+\newpage\subsection{Integrales impropias de $2^{da}$ especie}
 \begin{definition}
-    Sea $f:(a,b]\to\mathbb{R}$ continua, y $F(x)=\int_{x}^{b} f(t) dt$. Entonces si el $\lim_{x \to a^{+}}F(x)=L$ finito, decimos que la integral impropia $\int_{a}^{b} f(t) dt$ es convergente, y su valor es $L$. Si por el contrario el limite es infinito o no existe, decimos que la integral impropia diverge u oscila, respectivamente.
+	Sea $f(x)$ una función definida en $[t,b]$ para $a<t<b$, pero no esta definida en $[a,b]$ (o definida en $(a,b]$), entonces $\int_{a}^{b} f(x) dx$ no esta definida.
+	\\Puede pasar que $\int_{t}^{b} f(x) dx$ este definida y existe $\lim_{t \to a^+} \int_{t}^{b} f(x) dx$, entonces  decimos que su valor es $$\int_{a^+}^{b} f(x) dx=\lim_{t \to a^+} \int_{t}^{b} f(x) dx$$
+	\\De misma manera, puede pasar que $f(x)$ es continua en el intervalo $[a,t]$ para $a<t<b$ y existe $\lim_{t \to b^-}\int_{a}^{t} f(x) dx$, entonces $$\int_{a}^{b^-} f(x) dx=\lim_{t \to b^-} \int_{a}^{t} f(x) dx$$
 \end{definition}
-Importante, recordemos el comportamiento de la integral impropia $\int \frac{1}{x^{\alpha}} dx$.
-$$\int _{0}^{1}\frac{1}{x^{\alpha }} dx\ \begin{array}{ l }
-\text{Converge si} \ \alpha < 1\\
-\text{Diverge si} \ \alpha \geq 1
-\end{array} \ \int _{1}^{\infty }\frac{1}{x^{\alpha }} \ \begin{array}{ l }
-\text{Converge si} \ \alpha  >1\\
-\text{Diverge si} \ \alpha \leq 1
-\end{array}$$
+\begin{example}
+	Veamos nuevamente la función $\frac{1}{x^p}$ con $p\in\mathbb{R}$, veamos para cuales valores de $p$, la integral impropia $\int_{0}^{1} \frac{1}{x^p} dx$ converge.
+	$$\int _{0}^{1}\frac{1}{x^{p}} dx=\lim _{t\rightarrow 0}\int _{t}^{1}\frac{1}{x^{p}} dx=\begin{cases}
+			[ log( t)]_{t}^{1}                       & \text{Si} \ p=1     \\
+			\left[\frac{x^{1-p}}{1-p}\right]_{t}^{1} & \text{Si} \ p\neq 1
+		\end{cases} =\begin{cases}
+			-log( t)              & \text{Si} \ p=1     \\
+			\frac{1-t^{1-p}}{1-p} & \text{Si} \ p\neq 1
+		\end{cases} =\begin{cases}
+			\infty        & \text{Si} \ p=1     \\
+			\frac{1}{1-p} & \text{Si} \ 0< p< 1 \\
+			\infty        & \text{Si} \  p>1
+		\end{cases}$$
+	Por lo tanto, $\int_{0}^{1} \frac{1}{x^p} dx$ converge si $p<1$, y diverge si $p\ge 1$.
+\end{example}
+\begin{corollary}
+	Sea $f(x)$ una función definida en el intervalo $(a,b)$, e integrable en $[c,d]$ para $a<c\le d<b$. Si $\int_{a^+}^{b^-} f(x) dx$ converge, entonces $$\int_{a^+}^{b^-} f(x) dx=\int_{a^+}^{d} f(x) dx + \int_{d}^{b^-} f(x) dx$$
+	para $\forall d\in (a,b)$.
+\end{corollary}
+\begin{corollary}{Álgebra de integrales impropias de segunda especie}
+	Sean $\int_{a^+}^{b} f(x) dx$ y $\int_{a^+}^{b} g(x) dx$ dos integrales impropias convergentes y $\lambda\in\mathbb{R}$. Entonces:
+	\begin{enumerate}
+		\item La integral $\int_{a^+}^{b} f(x)+g(x)\ dx$ converge y ademas $$\int_{a^+}^{b} f(x)+g(x)\ dx=\int_{a^+}^{b} f(x) dx+\int_{a^+}^{b} g(x) dx$$
+		\item La integral $\int_{a^+}^{b} \lambda f(x) dx$ converge y ademas $$\int_{a^+}^{b} \lambda f(x) dx=\lambda \int_{a^+}^{b} f(x) dx$$
+	\end{enumerate}
+\end{corollary}
+\begin{theorem}
+	Sea $f(x)$ definida en $(a,b]$ una función no negativa e integrable en $[c,b]$, para $c\in (a,b]$. Consideremos la función $F(c)=\int_{c}^{b} f(x) dx$. Entonces cumple:
+	\begin{enumerate}
+		\item La función $F$ en $(a,b]$ es monótona decreciente.
+		\item $\int_{a^+}^{b} f(x) dx$ converge si y solo si $F$ esta acotada superiormente.
+	\end{enumerate}
+\end{theorem}
+\newpage\begin{theorem}{Criterio de comparación}
+    \\Sean $f,g$ definidas en $(a,b]$ funciones que cumplen:
+    \begin{itemize}
+        \item $0\le f(x)\le g(x)\ \forall x\in (a,b]$
+        \item $f$ y $g$ son integrables en $[c,b]$ para $c\in (a,b]$.
+    \end{itemize}
+    Entonces cumplen:
+    \begin{enumerate}
+        \item Si $\int_{a^+}^{b} g(x) dx$ converge, entonces $\int_{a^+}^{b} g(x) dx$ converge.
+        \item Si $\int_{a^+}^{b} f(x) dx$ diverge, entonces $\int_{a^+}^{b} g(x) dx$ diverge.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}{Criterio de equivalentes}
+    \\Sean $f,g$ funciones definidas en $(a,b]$ que cumplen:
+    \begin{itemize}
+        \item $f(x)\ge 0$ y $g(x)>0\ \forall x\in (a,b]$.
+        \item $f$ y $g$ son integrables en $[c,b]\ \forall c\in (a,b]$.
+    \end{itemize}
+    Consideremos el limite $$\lim_{x \to a^+} \frac{f(x)}{g(x)}=L$$
+    Entonces se cumple lo siguiente:
+    \begin{enumerate}
+        \item Si $L>0$ se tiene que $\int_{a^+}^{b} f(x) dx$ y $\int_{a^+}^{b} g(x) dx$ son de la misma clase.
+        \item Si $L=0$
+            \begin{itemize}
+                \item $\int_{a^+}^{b} g(x) dx$ converge $\Rightarrow \int_{a^+}^{b} f(x) dx$ converge.
+                \item $\int_{a^+}^{b} f(x) dx$ diverge $\Rightarrow \int_{a^+}^{b} g(x) dx$ diverge.
+            \end{itemize}
+        \item Si $L=\infty$
+            \begin{itemize}
+                \item $\int_{a^+}^{b} g(x) dx$ diverge $\Rightarrow \int_{a^+}^{b} f(x) dx$ diverge.
+                \item $\int_{a^+}^{b} f(x) dx$ converge $\Rightarrow \int_{a^+}^{b} g(x) dx$ converge.
+            \end{itemize}
+    \end{enumerate}
+\end{theorem}
 \subsection{Integrales mixtas}
 Cuando en una integral aparece mas de un punto problemático, debemos partir la integral en una suma de integrales que contengan solamente uno de esos puntos, y decimos que la integral original es convergente si y solo si cada uno de los sumandos lo es.\\
 De esta forma por ejemplo si $f$ es continua, la integral impropia $\int_{-\infty}^{+\infty} f(x) dx$ debemos escribirla como suma de $\int_{-\infty}^{a} f(x) dx$ y $\int_{a}^{+\infty} f(x) dx$, y debemos clasificar estas dos integrales. Es fácil ver que el resultado no depende de $a$.
+\begin{definition}
+    Sea $f(x)$ definida en $(a,\infty)$ una función integrable en todo subintervalo $[b,c]\subseteq (a,\infty)$.
+    \\A la expresión $\int_{a^+}^{\infty} f(x) dx$ se le conoce como integral impropia mixta.
+\end{definition}
+\newpage\section{Funciones de varias variables}
+$\mathbb{R}^n=\mathbb{R}\times\mathbb{R}\times\cdots\mathbb{R}=\{\left( x_1,x_2,\cdots,x_n\ :\ x_i \in\mathbb{R} \right) \}$
+\\\underline{Función escalar}
+\\$f:A\subseteq\mathbb{R}^n\to\mathbb{R}$ (codominio $\mathbb{R}$)
+	\\Ejemplos:
+	\\$f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=xy$
+\\$T:\mathbb{R}^n\to\mathbb{R}\ /\ T(x_1,x_2,\cdots,x_n)=x_1+x_2+\cdots+x_n$
+	\\$f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=x^2+xy$
+\begin{definition}{Función escalar}
+	Una función escalar es una función cuyo dominio esta incluido en $\mathbb{R}^n$ y codominio $\mathbb{R}$.
+\end{definition}
+\begin{definition}{Función vectorial}
+	Una función vectorial es una función con dominio en $\mathbb{R}^n$ y codominio en $\mathbb{R}^m$.
+\end{definition}
+Para $f:A\subseteq\mathbb{R}^n\to\mathbb{R}^m\ /\ f(x_1,x_2,\cdots,x_n)=(f_1(x_1,x_2,\cdots,x_n),\cdots,f_m(x_1,\cdots,x_n)$
+\\Notación: $f=(f_1,f_2,\cdots,f_m)$
+\\Cada $f_i:A\subseteq\mathbb{R}^n\to\mathbb{R}$ es una función escalar $\forall i=1,\cdots,m$ y se llama en este contexto función coordenada.
+\\Sea $f:A\subset\mathbb{R}^n\to\mathbb{R}$, el grafico de $f$ es el conjunto $G(f)=\{(x_1,x_2,\cdots,x_n,x_n+1)\in\mathbb{R}^n:\ (x_1,x_2,\cdots,x_n)\in A,\ x_{n+1}=f(x_1,x_2,\cdots,x_n)\}$.
+\subsection{Topología}
+\begin{definition}{Norma}
+	Una norma en $\mathbb{R}^n$ es una función $||\ ||:\mathbb{R}^n\to\mathbb{R}$ que cumple:
+	\begin{itemize}
+		\item $||x||\ge 0\ \forall x\in\mathbb{R}^n$
+		\item $||x||=0\Leftrightarrow x=\vec{0}$
+		\item $||\lambda x||=|\lambda|||x||\ \forall x\in\mathbb{R}^n\ \forall\lambda\in\mathbb{R}$
+		\item $||x+y||\le ||x||+||y||\ \forall x,y\in\mathbb{R}^n$
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	Una distancia en $\mathbb{R}^n$ es una función $d:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}$ tal que:
+	\begin{itemize}
+		\item $d(x,y)\ge 0\ \forall x,y\in\mathbb{R}^n$
+		\item $d(x,y)=0\Leftrightarrow x=y$
+		\item $d(x,y)=d(y,x)\ \forall x,y\mathbb{R}^n$
+		\item $d(x,y)\le d(x,z)+d(z,y)\ \forall x,y,z\in\mathbb{R}^n$
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	Sea $||\ ||$ una norma en $\mathbb{R}^n$. La distancia inducida por $||\ ||$ se define como: $$d(x,y)=||x-y||$$
+\end{definition}
+Normas en $\mathbb{R}^2$
+\begin{itemize}
+	\item $||x||_2=||(x,y)||_2=\sqrt{x^2+y^2}$ (norma euclidiana)
+	\item $||x||_1=||(x,y)||=|x|+|y|$ (norma 1 o del taxista)
+	\item $||x||_{\infty}=||(x,y)||_{\infty}=max\{|x|,|y|\}$ (norma infinito)
+\end{itemize}
+\begin{definition}{ \ }
+	\\Sea $d$ una distancia en $\mathbb{R}^n$. Sea $a\in\mathbb{R}^n$ y $\gamma >0$.
+	\\La bola abierta de centro $a$ y radio $\gamma$ es el conjunto $$B(a,\gamma)=\{x\in\mathbb{R}^n :\ d(a,x)<\gamma \}$$
+	La bola cerrada de centro $a$ y radio $\gamma$ es el conjunto $$B[a,\gamma]=\{x\in\mathbb{R}^n :\ d(a,x)\le\gamma \}$$
+	La esfera de centro $a$ y radio $\gamma$ es el conjunto $$E[a,\gamma]=\{x\in\mathbb{R}^n:\ d(a,x)=\gamma \}$$
+\end{definition}
+\begin{corollary}
+	$B(a,\gamma) \cup E[a,\gamma]=B[a,\gamma]$.
+\end{corollary}
 \end{document}
