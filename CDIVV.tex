@@ -472,6 +472,9 @@ Observar que en este caso, la sucesión de sumas parciales $s_n$ es monótona cr
 		\item $\int_{-\infty}^{\infty} f(x) dx=\int_{-\infty}^{a} f(x) dx + \int_{a}^{\infty} f(x) dx$
 	\end{enumerate}
 \end{definition}
+\begin{corollary}
+    Sea $f$ tal que $\int_{a}^{\infty} f(x) dx$ converge, y existe $\lim_{x \to \infty} f(x)=L$, entonces $L=0$. Aunque no podemos deducir que converge si su limite es $0$.
+\end{corollary}
 \begin{corollary}{Álgebra de integrales impropias de primera especie.}
 	\\Sean $\int_{a}^{\infty} f(x) dx$ y $\int_{a}^{\infty} g(x) dx$ dos integrales impropias convergentes, y sea $\lambda\in\mathbb{R}$, se cumple que:
 	\begin{enumerate}
@@ -635,7 +638,7 @@ Para $f:A\subseteq\mathbb{R}^n\to\mathbb{R}^m\ /\ f(x_1,x_2,\cdots,x_n)=(f_1(x_1
 \\Sea $f:A\subset\mathbb{R}^n\to\mathbb{R}$, el grafico de $f$ es el conjunto $G(f)=\{(x_1,x_2,\cdots,x_n,x_n+1)\in\mathbb{R}^n:\ (x_1,x_2,\cdots,x_n)\in A,\ x_{n+1}=f(x_1,x_2,\cdots,x_n)\}$.
 \subsection{Topología}
 \begin{definition}{Norma}
-	Una norma en $\mathbb{R}^n$ es una función $||\ ||:\mathbb{R}^n\to\mathbb{R}$ que cumple:
+	\\Una norma en $\mathbb{R}^n$ es una función $||\ ||:\mathbb{R}^n\to\mathbb{R}$ que cumple:
 	\begin{itemize}
 		\item $||x||\ge 0\ \forall x\in\mathbb{R}^n$
 		\item $||x||=0\Leftrightarrow x=\vec{0}$
@@ -670,4 +673,36 @@ Normas en $\mathbb{R}^2$
 \begin{corollary}
 	$B(a,\gamma) \cup E[a,\gamma]=B[a,\gamma]$.
 \end{corollary}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^n$ un conjunto, $A^c$ su complemento, entonces:
+    \begin{enumerate}
+        \item Decimos que $x_0\in\mathbb{R}^n$ es un punto interior del conjunto A, si existe una bola de centro $x_0$ y radio $r>0$ tal que $B(x_0,r)\subset A$.\\
+            Al conjunto de los puntos interiores de $A$ se le \underline{llama interior de $A$} y se le nota $int(A)$
+        \item Decimos que $x_0\in\mathbb{R}^n$ es un punto exterior del conjunto $A$ si existe una bola de centro $x_0$ y radio $r>0$ tal que $B(x_0,r)\subset A^c$.
+            \\Al conjunto de los puntos exteriores de $A$ se le llama \underline{el exterior de $A$}, y se nota $Ext(A)$i.
+        \item Decimos que $x_0 \in\mathbb{R}^n$ es un \underline{punto frontera} de $A$ si para todo $r>0$, $B(x_0,r)\cap A\ne \emptyset$ y $B(x_o,r)\cap A^c \ne \emptyset$.
+            \\Al conjunto de los puntos frontera de $A$ se le llama \underline{la frontera de $A$} y se nota $Fr(A)$.
+    \end{enumerate}
+\end{definition}
+\begin{corollary}
+    Si $A$ es un conjunto de $\mathbb{R}^n$, entonces:
+    \\$int(A)\cap Ext(A)\cup Fr(A)=\mathbb{R}^n$
+    \\$$ \begin{cases}
+        int(A)\cap Ext(A)=\emptyset
+        \\ int(A)\cap Fr(A)=\emptyset
+        \\ Ext(A)\cap Fr(A)=\emptyset
+    \end{cases}$$
+\end{corollary}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^n$ un conjunto:
+    \begin{enumerate}
+        \item Decimos que $A$ es un \underline{conjunto abierto}. Si todos los puntos de $A$ son interiores a $A$, es decir $A=int(A)$.
+        \item Decimos que $A$ es un conjunto cerrado si $A^c$ es un conjunto abierto.
+        \item La clausura de $A$ es el conjunto $$\overline{A}=A\cup Fr(A)$$
+        \item $A$ es un \underline{conjunto acotado} si existe un $K>0$ tal que $A\subset B(\vec{0},K)$.
+        \item $A$ es un \underline{conjunto compacto} si $A$ es cerrado y acotado.
+        \item $x_0\in\mathbb{R}^n$ es un \underline{punto de acumulación} de $A$ si para todo $r>0$, $B^*(x_0,r)\cap A\ne\emptyset$
+            \\Al conjunto de los puntos de acumulación lo \underline{llamamos derivado de $A$}, y se nota $A'$
+    \end{enumerate}
+\end{definition}
 \end{document}
