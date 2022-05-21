@@ -705,4 +705,35 @@ Normas en $\mathbb{R}^2$
             \\Al conjunto de los puntos de acumulación lo \underline{llamamos derivado de $A$}, y se nota $A'$
     \end{enumerate}
 \end{definition}
+\subsection{Sucesiones en $\mathbb{R}^n$}
+$x_n=(x_n^{(1)},x_n^{(2)},\cdots,x_n^{(m)})\in\mathbb{R}^m$
+\begin{definition}
+    Sea $\{x_n\}$ una sucesión en $\mathbb{R}^m$, $p\in\mathbb{R}^m$. $x_n\to p \Leftrightarrow\ \forall\epsilon >0\ \exists n_o\in\mathbb{N}$ tal que $\forall n\ge 0$ $x_n\in B(p,\epsilon)$ o $\Leftrightarrow \forall\epsilon >0\ \exists n_0\in\mathbb{N}$ tal que $\forall n\ge n_0$ $d(x_n,p)<\epsilon$ o $\Leftrightarrow\forall\epsilon >0\ \exists n_0\in\mathbb{N}$ tal que $\forall n\ge n_0\ ||x_n-p||<\epsilon$.
+\end{definition}
+\begin{corollary}
+    Sea $\{x_n\}$ una sucesión en $\mathbb{R}^m$, $\{x_n^{(i)}\}$ la sucesión de coordenada i-esima $\forall i=1,\cdots,m$.\\
+    Sea $p=(p_1,p_2,\cdots,p_m)$, entonces:
+    $$x_n\to p\Leftrightarrow x_n^{(i)}\to p_i\ \forall i=1,\cdots,m$$
+\end{corollary}
+\begin{corollary}{Propiedades}
+        Si $x_n\to p_1$ e $y_n\to p_2$ entonces
+        \begin{enumerate}
+            \item $x_n+y_n=p_1+p_2$
+            \item $\lambda x_n\to\lambda p_1\ \forall\lambda\in\mathbb{R}$
+            \item $||x_n||\to ||p_1||$
+        \end{enumerate}
+        No tiene sentido decir $x_n\times y_n\to p_1\times p_2$.
+\end{corollary}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^m$ un conjunto. Decimos que $A$ es cerrado por sucesiones $\Leftrightarrow\forall\{x_n\}\subset A$ sucesión tal que $x_n\to p$ se tiene que $p\in A$.
+\end{definition}
+\begin{corollary}
+    $A$ es cerrado $\Leftrightarrow A$ es cerrado por sucesiones.
+\end{corollary}
+\begin{corollary}
+    Toda sucesión acotada en $\mathbb{R}^m$ tiene al menos una sub-sucesión convergente. 
+\end{corollary}
+\begin{theorem}
+    Sea $A\subset\mathbb{R}^m$ un conjunto compacto (cerrado + acotado) y sea $\{x_n\}$ una sucesión en $A$. Entonces $\{x_n\}$ tiene una sub-sucesión convergente a $p\in A$.
+\end{theorem}
 \end{document}
