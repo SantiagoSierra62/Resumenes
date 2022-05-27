@@ -650,10 +650,10 @@ Note que no se pide que $S$ sea un subespacio vectorial de $V$.
     Si $V$ es un espacio vectorial de dimensión finita con producto interno y $B=\{s_1,s_2,\cdots,s_r\}$ es una base de un subespacio $S$ entonces $v\in S^\bot\ \Leftrightarrow\ v\bot s_i\ \forall i=1,2,\cdots,r$.
 \end{corollary}
 \begin{theorem}
-    Sea $V$ un espacio vectorial de dimension finita, y $W$ un subespacio de $V$:$$dim(V)=dim(W)+dim(W^\bot)$$
+    Sea $V$ un espacio vectorial de dimensión finita, y $W$ un subespacio de $V$:$$dim(V)=dim(W)+dim(W^\bot)$$
 \end{theorem}
 \begin{corollary}
-    Sea $V$ un espacio vectorial con producto interno y $S$ un sub-espacio vectorial de dimensión finita. Entonces $V=S\oplus S^\bot$.
+    Sea $V$ un espacio vectorial con producto interno, $A, B$ un subconjunto y $S$ un sub-espacio vectorial de dimensión finita. Entonces $V=S\oplus S^\bot$.
 \end{corollary}
 Propiedades:
 \begin{itemize}
@@ -686,5 +686,20 @@ Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=
 \end{theorem}
 \begin{corollary}
     El vector $P_S(v)$ es el vector de $S$ que mejor se aproxima a $v$, en el sentido del teorema anterior. En el sentido de que $||v-P_S(v)||$ hace mínima a $||v-s||$. Es decir, si queremos calcular la mínima, basta calcular $||v-P_S(v)||$.
+\end{corollary}
+\begin{corollary}
+    Sea $V$ un espacio vectorial de dimensión finita con producto interno, $S\subset V$ un subespacio vectorial y $P_S(v)$ la proyección ortogonal de $v$ sobre $S$; es decir $P_S(v)$ es el único vector que verifica que $P_S(v)\in S$ y $v-P_S(v)\in S^\bot$. Se cumple:
+    \begin{enumerate}
+        \item $P_S(s)=s\ \forall s\in S$.
+        \item $P_S(v)=\vec{0}\ \forall v\in S^\bot$.
+        \item $P_S^2=P_S\circ P_S=P_S$.
+        \item La función $P_S:V\to V$ dada por $v\xrightarrow{P_{S}} P_{S}( v)$ es una transformación lineal.
+        \item Si $S\neq \vec{0}$, entonces $1$ es valor propio de $P_S$ y el subespacio propio de $1$ es $S$.
+        \item Si $S\neq\mathbb{R}^n$, entonces $0$ es valor propio de $P_S$ y su subespacio propio es $S^\bot$.
+        \item $Im(P_S)=S$ y $Ker(P_S)=S^\bot$
+        \item $||v||^2=||P_S(v)||^2+||P_{V^\bot}(v)||^2\ \forall v\in V$.
+        \item $P_S(v)||\le ||v||$.
+        \item $\langle v,P_S(v)\rangle = ||P_S(v)||^2\ \forall v\in V$.
+    \end{enumerate}
 \end{corollary}
 \end{document}
