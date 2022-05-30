@@ -18,7 +18,7 @@
 \maketitle \tableofcontents \newpage
 \section{Números Complejos}
 \begin{definition}
-	Un numero complejo es un numero de forma $z=a+bi$ y $a,b\in \mathbb{R}$, donde $i^2=-1$, conocemos los números reales a y b como parte real e imaginaria respectivamente del numero $z$.
+	Un numero complejo es un numero de forma $z=a+bi$ y $a,b\in \mathbb{R}$, donde $i^2=-1$, conocemos los números reales $a$ y $b$ como parte real e imaginaria respectivamente del numero $z$.
 	$$
 		Re(z)=a \ \ \ \ Im(z)=b
 	$$
@@ -618,24 +618,7 @@ De esta forma por ejemplo si $f$ es continua, la integral impropia $\int_{-\inft
     Sea $f(x)$ definida en $(a,\infty)$ una función integrable en todo subintervalo $[b,c]\subseteq (a,\infty)$.
     \\A la expresión $\int_{a^+}^{\infty} f(x) dx$ se le conoce como integral impropia mixta.
 \end{definition}
-\newpage\section{Funciones de varias variables}
-$\mathbb{R}^n=\mathbb{R}\times\mathbb{R}\times\cdots\mathbb{R}=\{\left( x_1,x_2,\cdots,x_n\ :\ x_i \in\mathbb{R} \right) \}$
-\\\underline{Función escalar}
-\\$f:A\subseteq\mathbb{R}^n\to\mathbb{R}$ (codominio $\mathbb{R}$)
-	\\Ejemplos:
-	\\$f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=xy$
-\\$T:\mathbb{R}^n\to\mathbb{R}\ /\ T(x_1,x_2,\cdots,x_n)=x_1+x_2+\cdots+x_n$
-	\\$f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=x^2+xy$
-\begin{definition}{Función escalar}
-	Una función escalar es una función cuyo dominio esta incluido en $\mathbb{R}^n$ y codominio $\mathbb{R}$.
-\end{definition}
-\begin{definition}{Función vectorial}
-	Una función vectorial es una función con dominio en $\mathbb{R}^n$ y codominio en $\mathbb{R}^m$.
-\end{definition}
-Para $f:A\subseteq\mathbb{R}^n\to\mathbb{R}^m\ /\ f(x_1,x_2,\cdots,x_n)=(f_1(x_1,x_2,\cdots,x_n),\cdots,f_m(x_1,\cdots,x_n)$
-\\Notación: $f=(f_1,f_2,\cdots,f_m)$
-\\Cada $f_i:A\subseteq\mathbb{R}^n\to\mathbb{R}$ es una función escalar $\forall i=1,\cdots,m$ y se llama en este contexto función coordenada.
-\\Sea $f:A\subset\mathbb{R}^n\to\mathbb{R}$, el grafico de $f$ es el conjunto $G(f)=\{(x_1,x_2,\cdots,x_n,x_n+1)\in\mathbb{R}^n:\ (x_1,x_2,\cdots,x_n)\in A,\ x_{n+1}=f(x_1,x_2,\cdots,x_n)\}$.
+\newpage\section{Topología y Sucesiones en $\mathbb{R}^n$}
 \subsection{Topología}
 \begin{definition}{Norma}
 	\\Una norma en $\mathbb{R}^n$ es una función $||\ ||:\mathbb{R}^n\to\mathbb{R}$ que cumple:
@@ -665,25 +648,40 @@ Normas en $\mathbb{R}^2$
 	\item $||x||_{\infty}=||(x,y)||_{\infty}=max\{|x|,|y|\}$ (norma infinito)
 \end{itemize}
 \begin{definition}{ \ }
-	\\Sea $d$ una distancia en $\mathbb{R}^n$. Sea $a\in\mathbb{R}^n$ y $\gamma >0$.
-	\\La bola abierta de centro $a$ y radio $\gamma$ es el conjunto $$B(a,\gamma)=\{x\in\mathbb{R}^n :\ d(a,x)<\gamma \}$$
-	La bola cerrada de centro $a$ y radio $\gamma$ es el conjunto $$B[a,\gamma]=\{x\in\mathbb{R}^n :\ d(a,x)\le\gamma \}$$
-	La esfera de centro $a$ y radio $\gamma$ es el conjunto $$E[a,\gamma]=\{x\in\mathbb{R}^n:\ d(a,x)=\gamma \}$$
+	\\Sea $d$ una distancia en $\mathbb{R}^n$. Sea $a\in\mathbb{R}^n$ y $\delta >0$.
+	\\La bola abierta de centro $a$ y radio $\delta$ es el conjunto $$B(a,\delta)=\{x\in\mathbb{R}^n :\ d(a,x)<\delta \}$$
+	La bola cerrada de centro $a$ y radio $\delta$ es el conjunto $$B[a,\delta]=\{x\in\mathbb{R}^n :\ d(a,x)\le\delta \}$$
+	La esfera de centro $a$ y radio $\delta$ es el conjunto $$E[a,\delta]=\{x\in\mathbb{R}^n:\ d(a,x)=\delta \}$$
 \end{definition}
 \begin{corollary}
-	$B(a,\gamma) \cup E[a,\gamma]=B[a,\gamma]$.
+	$B(a,\delta) \cup E[a,\delta]=B[a,\delta]$.
 \end{corollary}
 \begin{definition}
-    Sea $A\subset\mathbb{R}^n$ un conjunto, $A^c$ su complemento, entonces:
+    Llamamos bola reducida de centro $a$ y radio $\delta$ al conjunto $B^*(a,\delta)=B(a,\delta)-\{a\}$, es decir, la bola sin el centro.
+\end{definition}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^n$. Definimos al complemento de $A$ como $A^C$ a el conjunto que contiene todos los elementos que no están en $A$.
+\end{definition}
+\newpage\begin{definition}
+    Sea $A\subset\mathbb{R}^n$ un conjunto, $A^C$ su complemento, entonces:
     \begin{enumerate}
         \item Decimos que $x_0\in\mathbb{R}^n$ es un punto interior del conjunto A, si existe una bola de centro $x_0$ y radio $r>0$ tal que $B(x_0,r)\subset A$.\\
-            Al conjunto de los puntos interiores de $A$ se le \underline{llama interior de $A$} y se le nota $int(A)$
+            Llamamos ${\r A}$ al conjunto de puntos interiores de $A$.
         \item Decimos que $x_0\in\mathbb{R}^n$ es un punto exterior del conjunto $A$ si existe una bola de centro $x_0$ y radio $r>0$ tal que $B(x_0,r)\subset A^c$.
-            \\Al conjunto de los puntos exteriores de $A$ se le llama \underline{el exterior de $A$}, y se nota $Ext(A)$i.
+            \\Llamamos $Ext(A)$ al conjunto de puntos exteriores de $A$.
         \item Decimos que $x_0 \in\mathbb{R}^n$ es un \underline{punto frontera} de $A$ si para todo $r>0$, $B(x_0,r)\cap A\ne \emptyset$ y $B(x_o,r)\cap A^c \ne \emptyset$.
-            \\Al conjunto de los puntos frontera de $A$ se le llama \underline{la frontera de $A$} y se nota $Fr(A)$.
+            \\Llamamos $\partial A$ al conjunto de puntos frontera de $A$.
     \end{enumerate}
 \end{definition}
+\begin{corollary}
+    La bola abierta $B(a,\delta)$ es un conjunto abierto.
+\end{corollary}
+\begin{corollary}
+    Si $A$ y $B$ son dos conjuntos abiertos, entonces $A\cap B$ es abierto.
+\end{corollary}
+\begin{theorem}
+    Sea $A$ un conjunto abierto, entonces su unión con cualquier otro conjunto es un conjunto abierto.
+\end{theorem}
 \begin{corollary}
     Si $A$ es un conjunto de $\mathbb{R}^n$, entonces:
     \\$int(A)\cap Ext(A)\cup Fr(A)=\mathbb{R}^n$
@@ -696,13 +694,14 @@ Normas en $\mathbb{R}^2$
 \begin{definition}
     Sea $A\subset\mathbb{R}^n$ un conjunto:
     \begin{enumerate}
-        \item Decimos que $A$ es un \underline{conjunto abierto}. Si todos los puntos de $A$ son interiores a $A$, es decir $A=int(A)$.
+        \item Decimos que $A$ es un \underline{conjunto abierto} si todos sus puntos son interiores, es decir $A={\r A}$.
         \item Decimos que $A$ es un conjunto cerrado si $A^c$ es un conjunto abierto.
-        \item La clausura de $A$ es el conjunto $$\overline{A}=A\cup Fr(A)$$
-        \item $A$ es un \underline{conjunto acotado} si existe un $K>0$ tal que $A\subset B(\vec{0},K)$.
+        \item La clausura de $A$ es el conjunto $$\overline{A}=A\cup\partial(A)$$
+        \item $A$ es un \underline{conjunto acotado} si existe un $K>0$ tal que $A\subset B(\vec{0},K)$, es decir, si podemos incluir al conjunto en una bola.
         \item $A$ es un \underline{conjunto compacto} si $A$ es cerrado y acotado.
         \item $x_0\in\mathbb{R}^n$ es un \underline{punto de acumulación} de $A$ si para todo $r>0$, $B^*(x_0,r)\cap A\ne\emptyset$
-            \\Al conjunto de los puntos de acumulación lo \underline{llamamos derivado de $A$}, y se nota $A'$
+            \\Al conjunto de los puntos de acumulación lo \underline{llamamos derivado de $A$}, y se nota $A'$.
+        \item Un conjunto $A$ es cerrado si y solo si $A$ contiene todos sus puntos de acumulación.
     \end{enumerate}
 \end{definition}
 \subsection{Sucesiones en $\mathbb{R}^n$}
@@ -736,4 +735,29 @@ $x_n=(x_n^{(1)},x_n^{(2)},\cdots,x_n^{(m)})\in\mathbb{R}^m$
 \begin{theorem}
     Sea $A\subset\mathbb{R}^m$ un conjunto compacto (cerrado + acotado) y sea $\{x_n\}$ una sucesión en $A$. Entonces $\{x_n\}$ tiene una sub-sucesión convergente a $p\in A$.
 \end{theorem}
+\section{Limites y continuidad}
+\underline{Recordar:}
+\\ $f:I\subset \mathbb{R}\to\mathbb{R}$, $a$ punto de acumulación de $I$.
+\\$\lim_{x \to a} f(x)=L\Leftrightarrow\ \forall\epsilon >0\ \exists\delta >0$ tal que $\forall x$ con $0<|x-a|<\delta$ y $x\in I$ ($x\in (a-\delta, a+\delta)\cap I$) se tiene que $|f(x)-L|<\epsilon$ ($f(x)\in (L-\epsilon,L+\epsilon)$).
+\\Es importante recordar que $f$ no tiene porque estar definida en $a$, pero si tener puntos cercanos al punto $a$ en los cuales puedo aplicar $f$.
+$$\lim_{x \to 0} \frac{\sin(x)}{x}=1;\ Dom f=I=\mathbb{R}^*$$
+\begin{definition}
+    Sea $f:D\subset\mathbb{R}^n\to\mathbb{R}$, $a$ un punto de acumulación de $D$.
+    \\$\lim_{x \to a} f(x)=L\Leftrightarrow\ \forall\epsilon >0\ \exists\delta >0$ tal que $\forall x\in B^*(a,\delta)\cap D$ se tiene que $|f(x)-L|<\epsilon$.
+\end{definition}
+\underline{Conclusión:} Trabajando con restricciones de la función a graficas conocidas (rectas, parábolas, etc) intento probar que no existe el limite.
+\begin{corollary}{ \ }
+    \begin{itemize}
+        \item $f:D\subset\mathbb{R}^n\to\mathbb{R}$, $a$ punto de acumulación de $D$.
+        \item $g$ una función acotada en $B^*(a)$, es decir existe $k>0$ tal que $|g(x)|<k\ \forall x\in B^*(a)$.
+        \item $\lim_{x \to a} f(x)=0$.
+    \end{itemize}    
+Entonces $\lim_{x \to a} f(x)g(x)=0$.
+\end{corollary}
+\begin{definition}
+    $f:D\subset\mathbb{R}^n\to\mathbb{R},\ a\in D$. $f$ es continua en $a\Leftrightarrow\ \forall\epsilon >0\ \exists\delta >0$ tal que $\forall x\in B(a,\delta)\cap D$. Se tiene que $|f(x)-f(a)|<\epsilon$. ($f(x)\in (f(a)-\epsilon, f(a)+\epsilon$).
+\end{definition}
+\begin{corollary}
+    Si $a$ es un punto de acumulación de $D$, $f$ es continua en $a\Leftrightarrow\ \lim_{x \to a} f(x)=f(a)$.
+\end{corollary}
 \end{document}
