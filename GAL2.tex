@@ -618,7 +618,7 @@ Esta definición coincide con la ortogonalidad en el espacio ordinario, trabajan
 	\underline{Método:}
 	\\Tomamos $u_1=v_1$, entonces $[v_1]=[u_1]$.
 	\\Sea $u_2=v_2-cu_1$ donde $$c=\frac{\langle v_2,u_1 \rangle}{||u_1||^2}$$
-	\\Generalizando decimos que $$u_k=v_k-c_{k-1}u_{k-1}-\dots-c_1u_1$$ donde $c_j=\frac{\langle v_k,u_j \rangle}{||u_j||^2}\ \forall k=2,\dots,n$, se obtiene un sistema $\{u_1,\dots,u_n\}$ ortogonal tal que $[u_1,\dots,u_n]=[v_1,\dots,v_n]\ \forall k=1,\dots,n$.
+	\\Generalizando decimos que $$u_k=v_k-c_{k-1}u_{k-1}-\dots-c_1u_1$$ donde $c_j=\frac{\langle v_k,u_j \rangle}{||u_j||^2}\ \forall k=2,\dots,n$, se obtiene un sistema $\{u_1,\dots,u_n\}$ ortogonal tal que $[u_1,\dots,u_n]=[v_1,\dots,v_k]\ \forall k=1,\dots,n$.
 	\\Finalmente tomando $y_j=\frac{1}{||u_j||}u_j$ se tiene que $B=\{y_1,\dots,y_n\}$ en condiciones adecuadas.
 \end{theorem}
 \begin{corollary}
@@ -635,6 +635,15 @@ Esta definición coincide con la ortogonalidad en el espacio ordinario, trabajan
 		\item $\forall v\in V$ se tiene que: $||v||^2=\sum_{i=1}^{n} |\langle v,v_i \rangle|^2$.
 	\end{enumerate}
 \end{theorem}
+\begin{corollary}
+    Para hallar un producto interno para el cual $\{v_1,v_2,\cdots,v_n\}$ es una base ortonormal primero recordemos que todos sus vectores son ortogonales entre ellos y ademas $\langle v_i,v_i\rangle=1$, con esto, llamamos
+    $$\begin{matrix}
+v=( x_{1} ,x_{2} ,\cdots ,x_{n}) =\alpha _{1} v_{1} +\alpha _{2} v_{2} +\cdots +\alpha _{n} v_{n}\\
+w=( y_{1} ,y_{2} ,\cdots ,y_{n}) =\beta _{1} v_{1} +\beta _{2} v_{2} +\cdots +\beta _{n} v_{n}
+\end{matrix}$$
+Luego, se despeja $\alpha_i,\ \beta_i$ respectivamente sobre $x_i$ e $y_i$, para después hacer $$\langle v,w\rangle=\langle (x_1,\cdots,x_n),(y_1,\cdots,y_n\rangle=\langle(\alpha_1v_1+\cdots+\alpha_nv_n),(\beta_1v_1+\cdots+\beta_nv_n)\rangle=\langle\alpha_1v_1,\beta_1v_1\rangle+\cdots+\langle\alpha_nv_n,\beta_nv_n\rangle$$
+Por las propiedades que comente al principio, nos queda $\alpha_1\beta_1+\cdots+\alpha_n\beta_n$, aquí deshacemos la sustitución cambiando $\alpha$ y $\beta$ por sus valores respecto a $x_i$ e $y_i$, para así hallar el producto interno.
+\end{corollary}
 \subsection{Complemento ortogonal}
 \begin{definition}
     Sea $V$ un espacio vectorial con producto interno, si $S\subset V$. Llamamos complemento ortogonal de $S$ al conjunto $$\begin{array}{ c l }
@@ -699,5 +708,32 @@ Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=
         \item $P_S(v)||\le ||v||$.
         \item $\langle v,P_S(v)\rangle = ||P_S(v)||^2\ \forall v\in V$.
     \end{enumerate}
+\end{corollary}\newpage
+\section{Transformaciones en espacios con producto interno}
+\begin{corollary}
+    Sea $V$ un espacio con producto interno. Si $\langle v,w_1\rangle=\langle v,w_2\rangle$ para todo $v\in V$ entonces $w_1=w_2$.
+\end{corollary}
+\begin{theorem}{Teorema de Riesz}
+    \\Dada $T:V\to\mathbb{K}$ lineal y $V$ tal que si $M$ es un subespacio de $V$, se cumple que $V=M\oplus M^\bot$, entonces existe un único $w\in V$ tal que $$T(v)=\langle v,w\rangle$$
+\end{theorem}
+\subsection{Adjunta de una transformación}
+\begin{theorem}
+    Sean $V$ y $W$ espacios con producto interno y $T:V\to W$ una transformación lineal. Entonces existe una única transformación lineal $T^*:W\to V$ tal que: $$\langle T(v),w\rangle_W=\langle v,T^*(w)\rangle_V$$
+\end{theorem}
+\begin{definition}
+    La transformación $T^*$ es llamada la adjunta de $T$.
+\end{definition}
+\begin{corollary}
+    Propiedades del adjunto:
+    \begin{enumerate}
+        \item $(T+S)^*=T^*+S^*$.
+        \item $(\alpha T)^*=\overline{\alpha}T^*$.
+        \item $(TS)^*=S^*T^*$.
+        \item $T$ es invertible si y sólo si $T^*$ lo es y $(T^*)^{-1}=(T^{-1})^*$.
+        \item $(T^*)^*=T$.
+    \end{enumerate}
+\end{corollary}
+\begin{corollary}
+    Sean $V$ y $W$ espacios con producto interno, $B$ y $C$ bases ortonormales de $V$ y $W$ respectivamente. Entonces:$$_B(T^*)_C=\overline{[_C(T)_B]}^T$$
 \end{corollary}
 \end{document}
