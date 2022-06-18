@@ -736,4 +736,48 @@ Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=
 \begin{corollary}
     Sean $V$ y $W$ espacios con producto interno, $B$ y $C$ bases ortonormales de $V$ y $W$ respectivamente. Entonces:$$_B(T^*)_C=\overline{[_C(T)_B]}^T$$
 \end{corollary}
+\subsection{Transformaciones lineales auto-adjuntas}
+\begin{definition}{Transformación lineal auto-adjunta}
+   \\Sea $T:V\to V$ una transformación lineal. Diremos que $T$ es auto-adjunta si y solo si $$\langle T(v),w\rangle=\langle v,T(w)\rangle\ \forall v,w\in V$$
+   Es lo mismo que decir que $T$ coincide con $T^*$.
+\end{definition}
+\begin{theorem}
+    Sea $V$ un espacio vectorial \underline{real} con producto interno, $B$ una base ortonormal de $V$ y\\ $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $_B(T)_B$ es simétrica.
+\end{theorem}
+\begin{corollary}
+    Recordar que una matriz $A$ es simétrica cuando $A=A^t$.
+\end{corollary}
+\begin{definition}
+    Se dice que una matriz $A$ es hermética si y solo si $A=(\overline{A})^t$ (la matriz conjugada se obtiene conjugando cada una de sus entradas).
+\end{definition}
+\begin{theorem}
+    Sea $V$ un espacio vectorial \underline{complejo} con producto interno, $B$ una base \underline{ortonormal} de $V$ y $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $_B(T)_B$ es hermética.
+\end{theorem}
+\begin{theorem}
+    Sea $V$ un espacio vectorial \underline{complejo} con producto interno y $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $\langle T(v),v\rangle\in\mathbb{R}\ \forall v\in V$.
+\end{theorem}
+\begin{theorem}
+    Sea $V$ un espacio vectorial \underline{complejo} con producto interno. Si $T:V\to V$ es auto-adjunta entonces todas las raíces del polinomio característico de $T$ son reales.
+\end{theorem}
+\begin{theorem}
+    Sea $A\in M(\mathbb{C})_{n\times n}$. Si $A$ es hermética entonces todas las raíces del polinomio característico de $A$ son reales.
+\end{theorem}
+\begin{theorem}
+    Sea $A\in M(\mathbb{R})_{n\times n}$. Si $A$ es simétrica entonces todas las raíces del polinomio característico de $A$ son reales.
+\end{theorem}
+\begin{theorem}
+    Sea $V$ un espacio vectorial real con producto interno. Si $T:V\to V$ auto-adjunta entonces todas las raíces del polinomio característico $T$ son reales.
+\end{theorem}
+\begin{theorem}{Teorema espectral para transformaciones auto-adjuntas}
+    \\Sea $V$ un espacio vectorial, real o complejo, de dimensión finita. Si $T:V\to V$ es una transformación lineal auto-adjunta, entonces existe una base ortonormal de $V$ formada por vectores propios de $T$.
+\end{theorem}
+\begin{corollary}
+    Sea $V$ un espacio vectorial real o complejo, de dimensión finita. Si $T:V\to V$ es una transformación lineal auto-adjunta y $\lambda_1,\ \lambda_2$ son valores propios distintos de $T$, entonces los subespacios propios asociados a dichos valores propios son perpendiculares.
+\end{corollary}
+\begin{theorem}
+    Si existe una base ortonormal $B$ del espacio $V$ formada por vectores propios y las raíces de $X_T$ son reales entonces $T$ es auto-adjunta.
+\end{theorem}
+\begin{theorem}{Teorema espectral para matrices simétricas}
+    \\Si $A\in M(\mathbb{R})_{n\times n}$ es una matriz simétrica, entonces $\exists P\in M(\mathbb{R})_{n\times n}$ invertible con $P^{-1}=P^t$ tal que $A=PDP^t$ siendo $D\in M(\mathbb{R})_{n\times n}$ una matriz diagonal. 
+\end{theorem}
 \end{document}
