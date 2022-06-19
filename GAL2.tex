@@ -1,6 +1,6 @@
 \documentclass[10pt]{article}
 \usepackage[spanish]{babel}
-\usepackage{amsmath, amssymb, amsthm, tikz}
+\usepackage{amsmath, amssymb, amsthm, tikz, mathtools}
 \usepackage{nicematrix}
 \usepackage{enumitem}
 \usepackage[margin=1in]{geometry}
@@ -708,7 +708,78 @@ Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=
         \item $P_S(v)||\le ||v||$.
         \item $\langle v,P_S(v)\rangle = ||P_S(v)||^2\ \forall v\in V$.
     \end{enumerate}
-\end{corollary}\newpage
+\end{corollary}
+\subsection{Aproximación por mínimos cuadrados}
+Antes habíamos estudiado la resolución de sistemas de ecuaciones lineales del tipo $$A\vec{X}=\vec{b}\text{ donde }A\in M(\mathbb{R})_{m\times n}$$
+Donde decíamos que si el sistema no tenia soluciones era incompatible, pero la pregunta que queda es si podemos encontrar una solución que lo aproxime lo mejor posible en algún sentido.
+\\La respuesta es si, y esto es multiplicando ambos lados por la transpuesta de $A$, es decir $A^tA\vec{X}=A^t\vec{b}$.
+\begin{example}{Practico 7 ejercicio 3 parte 2}
+    \\En un experimento se midió según el tiempo una cierta magnitud $y$, obteniéndose los siguientes valores
+    \begin{table}[h!]\centering
+        \begin{tabular}{|c|c|}
+            \hline
+            x & y \\ \hline
+            0 & 0 \\ \hline
+            1 & 1 \\ \hline
+            \multicolumn{1}{|l|}{3} & \multicolumn{1}{l|}{2} \\ \hline
+            \multicolumn{1}{|l|}{4} & \multicolumn{1}{l|}{5} \\ \hline
+        \end{tabular}
+    \end{table}
+    Aplicando el método de mínimos cuadrados hallar la "mejor" recta que ajuste los datos anteriores ($y=\alpha t+\beta$).
+    $$\begin{drcases}
+0=0\alpha +\beta \\
+1=1\alpha +\beta \\
+2=3\alpha +\beta \\
+5=4\alpha +\beta 
+\end{drcases} \ \ \ \begin{pmatrix}
+0 & 1\\
+1 & 1\\
+3 & 1\\
+4 & 1
+\end{pmatrix}\begin{pmatrix}
+\alpha \\
+\beta 
+\end{pmatrix} =\begin{pmatrix}
+0\\
+1\\
+2\\
+5
+\end{pmatrix}$$
+Como este sistema es incompatible, podemos usar el método de mínimos cuadrados:
+$$ \begin{array}{l}
+\begin{pmatrix}
+0 & 1 & 3 & 4\\
+1 & 1 & 1 & 1
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+1 & 1\\
+3 & 1\\
+4 & 1
+\end{pmatrix}\begin{pmatrix}
+\alpha \\
+\beta 
+\end{pmatrix} =\begin{pmatrix}
+0 & 1 & 3 & 4\\
+1 & 1 & 1 & 1
+\end{pmatrix}\begin{pmatrix}
+0\\
+1\\
+2\\
+5
+\end{pmatrix}\\
+\begin{pmatrix}
+26 & 8\\
+8 & 4
+\end{pmatrix}\begin{pmatrix}
+\alpha \\
+\beta 
+\end{pmatrix} =\begin{pmatrix}
+27\\
+8
+\end{pmatrix}
+\end{array}$$
+Este sistema tiene solución, donde $\alpha=\frac{11}{10}$ y $\beta=-\frac{1}{5}$. Por lo que nos queda la función $y=\frac{11}{10}t-\frac{1}{5}$ que es la recta que mejor aproxima los datos.
+\end{example}\newpage
 \section{Transformaciones en espacios con producto interno}
 \begin{corollary}
     Sea $V$ un espacio con producto interno. Si $\langle v,w_1\rangle=\langle v,w_2\rangle$ para todo $v\in V$ entonces $w_1=w_2$.
