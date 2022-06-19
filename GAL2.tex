@@ -573,9 +573,9 @@ Cuando $v$ no es vector propio, debemos proceder de otra manera.
 		\item $||v+w||\le ||v||+||w||$ Desigualdad triangular.
 	\end{enumerate}
 \end{definition}
-\begin{theorem} 
+\begin{theorem}
 	Todo espacio vectorial con producto interno es un espacio vectorial normado definiendo la norma de la siguiente manera: $$||v||=\sqrt{\langle v,v \rangle}$$ A esta norma la llamamos norma inducida por el producto interno.
-\end{theorem} 
+\end{theorem}
 \begin{corollary}
 	El reciproco no es cierto, es decir, hay normas que no son normas inducidas por ningún producto interno en $V$.
 \end{corollary}
@@ -604,7 +604,7 @@ Esta definición coincide con la ortogonalidad en el espacio ordinario, trabajan
 	\begin{itemize}
 		\item $0\bot v\ \forall v\in V$.
 		\item $v\bot v \Leftrightarrow v=0$.
-	\item Si $A$ es un conjunto ortogonal y $\vec{0}\notin A$ el conjunto: $$\left\{\frac{1}{||v||} v\ /\ v\in A\right\}$$ es ortonormal. A este proceso se le llama normalizar.
+		\item Si $A$ es un conjunto ortogonal y $\vec{0}\notin A$ el conjunto: $$\left\{\frac{1}{||v||} v\ /\ v\in A\right\}$$ es ortonormal. A este proceso se le llama normalizar.
 	\end{itemize}
 \end{corollary}
 \begin{theorem}
@@ -636,224 +636,224 @@ Esta definición coincide con la ortogonalidad en el espacio ordinario, trabajan
 	\end{enumerate}
 \end{theorem}
 \begin{corollary}
-    Para hallar un producto interno para el cual $\{v_1,v_2,\cdots,v_n\}$ es una base ortonormal primero recordemos que todos sus vectores son ortogonales entre ellos y ademas $\langle v_i,v_i\rangle=1$, con esto, llamamos
-    $$\begin{matrix}
-v=( x_{1} ,x_{2} ,\cdots ,x_{n}) =\alpha _{1} v_{1} +\alpha _{2} v_{2} +\cdots +\alpha _{n} v_{n}\\
-w=( y_{1} ,y_{2} ,\cdots ,y_{n}) =\beta _{1} v_{1} +\beta _{2} v_{2} +\cdots +\beta _{n} v_{n}
-\end{matrix}$$
-Luego, se despeja $\alpha_i,\ \beta_i$ respectivamente sobre $x_i$ e $y_i$, para después hacer $$\langle v,w\rangle=\langle (x_1,\cdots,x_n),(y_1,\cdots,y_n\rangle=\langle(\alpha_1v_1+\cdots+\alpha_nv_n),(\beta_1v_1+\cdots+\beta_nv_n)\rangle=\langle\alpha_1v_1,\beta_1v_1\rangle+\cdots+\langle\alpha_nv_n,\beta_nv_n\rangle$$
-Por las propiedades que comente al principio, nos queda $\alpha_1\overline{\beta_1}+\cdots+\alpha_n\overline{\beta_n}$, aquí deshacemos la sustitución cambiando $\alpha$ y $\beta$ por sus valores respecto a $x_i$ e $y_i$, para así hallar el producto interno.
+	Para hallar un producto interno para el cual $\{v_1,v_2,\cdots,v_n\}$ es una base ortonormal primero recordemos que todos sus vectores son ortogonales entre ellos y ademas $\langle v_i,v_i\rangle=1$, con esto, llamamos
+	$$\begin{matrix}
+			v=( x_{1} ,x_{2} ,\cdots ,x_{n}) =\alpha _{1} v_{1} +\alpha _{2} v_{2} +\cdots +\alpha _{n} v_{n} \\
+			w=( y_{1} ,y_{2} ,\cdots ,y_{n}) =\beta _{1} v_{1} +\beta _{2} v_{2} +\cdots +\beta _{n} v_{n}
+		\end{matrix}$$
+	Luego, se despeja $\alpha_i,\ \beta_i$ respectivamente sobre $x_i$ e $y_i$, para después hacer $$\langle v,w\rangle=\langle (x_1,\cdots,x_n),(y_1,\cdots,y_n\rangle=\langle(\alpha_1v_1+\cdots+\alpha_nv_n),(\beta_1v_1+\cdots+\beta_nv_n)\rangle=\langle\alpha_1v_1,\beta_1v_1\rangle+\cdots+\langle\alpha_nv_n,\beta_nv_n\rangle$$
+	Por las propiedades que comente al principio, nos queda $\alpha_1\overline{\beta_1}+\cdots+\alpha_n\overline{\beta_n}$, aquí deshacemos la sustitución cambiando $\alpha$ y $\beta$ por sus valores respecto a $x_i$ e $y_i$, para así hallar el producto interno.
 \end{corollary}
 \subsection{Complemento ortogonal}
 \begin{definition}
-    Sea $V$ un espacio vectorial con producto interno, si $S\subset V$. Llamamos complemento ortogonal de $S$ al conjunto $$\begin{array}{ c l }
-S^{\bot } & =\{v\in V\ :\ v\bot s\ \ \forall s\in S\}\\
- & =\{v\in V\ :\ \langle v,s\rangle =0\ \ \forall s\in S\}
-\end{array}$$
-Note que no se pide que $S$ sea un subespacio vectorial de $V$.
+	Sea $V$ un espacio vectorial con producto interno, si $S\subset V$. Llamamos complemento ortogonal de $S$ al conjunto $$\begin{array}{ c l }
+			S^{\bot } & =\{v\in V\ :\ v\bot s\ \ \forall s\in S\}               \\
+			          & =\{v\in V\ :\ \langle v,s\rangle =0\ \ \forall s\in S\}
+		\end{array}$$
+	Note que no se pide que $S$ sea un subespacio vectorial de $V$.
 \end{definition}
 \begin{corollary}
-    Sea $V$ un espacio vectorial con producto interno y $S$ un sub-conjunto de $V$. Entonces $S^\bot$ es un subespacio vectorial de $V$.
+	Sea $V$ un espacio vectorial con producto interno y $S$ un sub-conjunto de $V$. Entonces $S^\bot$ es un subespacio vectorial de $V$.
 \end{corollary}
 \begin{corollary}
-    Si $V$ es un espacio vectorial de dimensión finita con producto interno y $B=\{s_1,s_2,\cdots,s_r\}$ es una base de un subespacio $S$ entonces $v\in S^\bot\ \Leftrightarrow\ v\bot s_i\ \forall i=1,2,\cdots,r$.
+	Si $V$ es un espacio vectorial de dimensión finita con producto interno y $B=\{s_1,s_2,\cdots,s_r\}$ es una base de un subespacio $S$ entonces $v\in S^\bot\ \Leftrightarrow\ v\bot s_i\ \forall i=1,2,\cdots,r$.
 \end{corollary}
 \begin{theorem}
-    Sea $V$ un espacio vectorial de dimensión finita, y $W$ un subespacio de $V$:$$dim(V)=dim(W)+dim(W^\bot)$$
+	Sea $V$ un espacio vectorial de dimensión finita, y $W$ un subespacio de $V$:$$dim(V)=dim(W)+dim(W^\bot)$$
 \end{theorem}
 \begin{corollary}
-    Sea $V$ un espacio vectorial con producto interno, y $S$ un sub-espacio vectorial de dimensión finita. Entonces $V=S\oplus S^\bot$.
+	Sea $V$ un espacio vectorial con producto interno, y $S$ un sub-espacio vectorial de dimensión finita. Entonces $V=S\oplus S^\bot$.
 \end{corollary}
 Propiedades:
 \begin{itemize}
-    \item Si $A\subset B \Leftarrow B^\bot \subset A^\bot$.
-    \item $A^\bot = [A]^\bot$.
-    \item $A\subset (A^\bot)^\bot$.
-    \item $S=(S^\bot)^\bot$.
-    \item $(S+W)^\bot =S^\bot \cap W^\bot$.
-    \item $(S\cap W)^\bot = S^\bot + W^\bot$.
+	\item Si $A\subset B \Leftarrow B^\bot \subset A^\bot$.
+	\item $A^\bot = [A]^\bot$.
+	\item $A\subset (A^\bot)^\bot$.
+	\item $S=(S^\bot)^\bot$.
+	\item $(S+W)^\bot =S^\bot \cap W^\bot$.
+	\item $(S\cap W)^\bot = S^\bot + W^\bot$.
 \end{itemize}
 \subsection{Proyección ortogonal}
 Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=S\oplus S^\bot$. Eso implica que dado $v\in V$ existen y son únicos $v_S\in S,\ v_{S^\bot}$ tales que $$v=v_S+v_{S^\bot}$$
 \begin{definition}
-    Dado $v\in V$ llamamos proyección ortogonal de $v$ sobre el subespacio $S$ al vector $P_S(v)=v_S$.
-    \\Si $V$ tiene dimensión finita y $B_S=\{s_1,\cdots,s_k\}$ es una base ortonormal de $S$, entonces $$P_S(v)=\sum_{i=1}^{k} \langle v,s_i\rangle s_i\ ;\ s_i\in S$$
+	Dado $v\in V$ llamamos proyección ortogonal de $v$ sobre el subespacio $S$ al vector $P_S(v)=v_S$.
+	\\Si $V$ tiene dimensión finita y $B_S=\{s_1,\cdots,s_k\}$ es una base ortonormal de $S$, entonces $$P_S(v)=\sum_{i=1}^{k} \langle v,s_i\rangle s_i\ ;\ s_i\in S$$
 \end{definition}
 \begin{corollary}
-    La definición de proyección ortogonal no depende de la base elegida.\\
-    Como vimos en el corolario 4.6.3; $P_S(v)$ es el único vector de $S$ tal que sumado con un vector de $S^\bot$ da $v$.
+	La definición de proyección ortogonal no depende de la base elegida.\\
+	Como vimos en el corolario 4.6.3; $P_S(v)$ es el único vector de $S$ tal que sumado con un vector de $S^\bot$ da $v$.
 \end{corollary}
 \begin{corollary}
-    Como $V=S\oplus S^\bot$ podemos hallar la proyección, usando que la diferencia $v-s$ esté en $S^\bot$. Es más si se tiene una proyección, se tiene la proyección sobre el complemento ortogonal como lo indica el siguiente corolario.
+	Como $V=S\oplus S^\bot$ podemos hallar la proyección, usando que la diferencia $v-s$ esté en $S^\bot$. Es más si se tiene una proyección, se tiene la proyección sobre el complemento ortogonal como lo indica el siguiente corolario.
 \end{corollary}
 \begin{corollary}
-    Del mismo corolario 4.6.3, observando que $(S^\bot)^\bot=S$ se desprende que: $$v=P_S(v)+P_{S^\bot}(v)$$
+	Del mismo corolario 4.6.3, observando que $(S^\bot)^\bot=S$ se desprende que: $$v=P_S(v)+P_{S^\bot}(v)$$
 \end{corollary}
 \begin{theorem}
-    Sea $V$ un espacio vectorial con producto interno y $S$ un sub-espacio de dimensión finita.\\
-    Entonces: $||v-P_S(v)||\le ||v-s||\ \forall s\in S$.
+	Sea $V$ un espacio vectorial con producto interno y $S$ un sub-espacio de dimensión finita.\\
+	Entonces: $||v-P_S(v)||\le ||v-s||\ \forall s\in S$.
 \end{theorem}
 \begin{corollary}
-    El vector $P_S(v)$ es el vector de $S$ que mejor se aproxima a $v$, en el sentido del teorema anterior. En el sentido de que $||v-P_S(v)||$ hace mínima a $||v-s||$. Es decir, si queremos calcular la mínima, basta calcular $||v-P_S(v)||$.
+	El vector $P_S(v)$ es el vector de $S$ que mejor se aproxima a $v$, en el sentido del teorema anterior. En el sentido de que $||v-P_S(v)||$ hace mínima a $||v-s||$. Es decir, si queremos calcular la mínima, basta calcular $||v-P_S(v)||$.
 \end{corollary}
 \begin{corollary}
-    Sea $V$ un espacio vectorial de dimensión finita con producto interno, $S\subset V$ un subespacio vectorial y $P_S(v)$ la proyección ortogonal de $v$ sobre $S$; es decir $P_S(v)$ es el único vector que verifica que $P_S(v)\in S$ y $v-P_S(v)\in S^\bot$. Se cumple:
-    \begin{enumerate}
-        \item $P_S(s)=s\ \forall s\in S$.
-        \item $P_S(v)=\vec{0}\ \forall v\in S^\bot$.
-        \item $P_S^2=P_S\circ P_S=P_S$.
-        \item La función $P_S:V\to V$ dada por $v\xrightarrow{P_{S}} P_{S}( v)$ es una transformación lineal.
-        \item $Im(P_S)=S$ y $Ker(P_S)=S^\bot$
-        \item $||v||^2=||P_S(v)||^2+||P_{V^\bot}(v)||^2\ \forall v\in V$.
-        \item $P_S(v)||\le ||v||$.
-        \item $\langle v,P_S(v)\rangle = ||P_S(v)||^2\ \forall v\in V$.
-    \end{enumerate}
+	Sea $V$ un espacio vectorial de dimensión finita con producto interno, $S\subset V$ un subespacio vectorial y $P_S(v)$ la proyección ortogonal de $v$ sobre $S$; es decir $P_S(v)$ es el único vector que verifica que $P_S(v)\in S$ y $v-P_S(v)\in S^\bot$. Se cumple:
+	\begin{enumerate}
+		\item $P_S(s)=s\ \forall s\in S$.
+		\item $P_S(v)=\vec{0}\ \forall v\in S^\bot$.
+		\item $P_S^2=P_S\circ P_S=P_S$.
+		\item La función $P_S:V\to V$ dada por $v\xrightarrow{P_{S}} P_{S}( v)$ es una transformación lineal.
+		\item $Im(P_S)=S$ y $Ker(P_S)=S^\bot$
+		\item $||v||^2=||P_S(v)||^2+||P_{V^\bot}(v)||^2\ \forall v\in V$.
+		\item $P_S(v)||\le ||v||$.
+		\item $\langle v,P_S(v)\rangle = ||P_S(v)||^2\ \forall v\in V$.
+	\end{enumerate}
 \end{corollary}
 \subsection{Aproximación por mínimos cuadrados}
 Antes habíamos estudiado la resolución de sistemas de ecuaciones lineales del tipo $$A\vec{X}=\vec{b}\text{ donde }A\in M(\mathbb{R})_{m\times n}$$
 Donde decíamos que si el sistema no tenia soluciones era incompatible, pero la pregunta que queda es si podemos encontrar una solución que lo aproxime lo mejor posible en algún sentido.
 \\La respuesta es si, y esto es multiplicando ambos lados por la transpuesta de $A$, es decir $A^tA\vec{X}=A^t\vec{b}$.
 \begin{example}{Practico 7 ejercicio 3 parte 2}
-    \\En un experimento se midió según el tiempo una cierta magnitud $y$, obteniéndose los siguientes valores
-    \begin{table}[h!]\centering
-        \begin{tabular}{|c|c|}
-            \hline
-            x & y \\ \hline
-            0 & 0 \\ \hline
-            1 & 1 \\ \hline
-            \multicolumn{1}{|l|}{3} & \multicolumn{1}{l|}{2} \\ \hline
-            \multicolumn{1}{|l|}{4} & \multicolumn{1}{l|}{5} \\ \hline
-        \end{tabular}
-    \end{table}
-    Aplicando el método de mínimos cuadrados hallar la "mejor" recta que ajuste los datos anteriores ($y=\alpha t+\beta$).
-    $$\begin{drcases}
-0=0\alpha +\beta \\
-1=1\alpha +\beta \\
-2=3\alpha +\beta \\
-5=4\alpha +\beta 
-\end{drcases} \ \ \ \begin{pmatrix}
-0 & 1\\
-1 & 1\\
-3 & 1\\
-4 & 1
-\end{pmatrix}\begin{pmatrix}
-\alpha \\
-\beta 
-\end{pmatrix} =\begin{pmatrix}
-0\\
-1\\
-2\\
-5
-\end{pmatrix}$$
-Como este sistema es incompatible, podemos usar el método de mínimos cuadrados:
-$$ \begin{array}{l}
-\begin{pmatrix}
-0 & 1 & 3 & 4\\
-1 & 1 & 1 & 1
-\end{pmatrix}\begin{pmatrix}
-0 & 1\\
-1 & 1\\
-3 & 1\\
-4 & 1
-\end{pmatrix}\begin{pmatrix}
-\alpha \\
-\beta 
-\end{pmatrix} =\begin{pmatrix}
-0 & 1 & 3 & 4\\
-1 & 1 & 1 & 1
-\end{pmatrix}\begin{pmatrix}
-0\\
-1\\
-2\\
-5
-\end{pmatrix}\\
-\begin{pmatrix}
-26 & 8\\
-8 & 4
-\end{pmatrix}\begin{pmatrix}
-\alpha \\
-\beta 
-\end{pmatrix} =\begin{pmatrix}
-27\\
-8
-\end{pmatrix}
-\end{array}$$
-Este sistema tiene solución, donde $\alpha=\frac{11}{10}$ y $\beta=-\frac{1}{5}$. Por lo que nos queda la función $y=\frac{11}{10}t-\frac{1}{5}$ que es la recta que mejor aproxima los datos.
+	\\En un experimento se midió según el tiempo una cierta magnitud $y$, obteniéndose los siguientes valores
+	\begin{table}[h!]\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			x                       & y                      \\ \hline
+			0                       & 0                      \\ \hline
+			1                       & 1                      \\ \hline
+			\multicolumn{1}{|l|}{3} & \multicolumn{1}{l|}{2} \\ \hline
+			\multicolumn{1}{|l|}{4} & \multicolumn{1}{l|}{5} \\ \hline
+		\end{tabular}
+	\end{table}
+	Aplicando el método de mínimos cuadrados hallar la "mejor" recta que ajuste los datos anteriores ($y=\alpha t+\beta$).
+	$$\begin{drcases}
+			0=0\alpha +\beta \\
+			1=1\alpha +\beta \\
+			2=3\alpha +\beta \\
+			5=4\alpha +\beta
+		\end{drcases} \ \ \ \begin{pmatrix}
+			0 & 1 \\
+			1 & 1 \\
+			3 & 1 \\
+			4 & 1
+		\end{pmatrix}\begin{pmatrix}
+			\alpha \\
+			\beta
+		\end{pmatrix} =\begin{pmatrix}
+			0 \\
+			1 \\
+			2 \\
+			5
+		\end{pmatrix}$$
+	Como este sistema es incompatible, podemos usar el método de mínimos cuadrados:
+	$$ \begin{array}{l}
+			\begin{pmatrix}
+				0 & 1 & 3 & 4 \\
+				1 & 1 & 1 & 1
+			\end{pmatrix}\begin{pmatrix}
+				             0 & 1 \\
+				             1 & 1 \\
+				             3 & 1 \\
+				             4 & 1
+			             \end{pmatrix}\begin{pmatrix}
+				                          \alpha \\
+				                          \beta
+			                          \end{pmatrix} =\begin{pmatrix}
+				                                         0 & 1 & 3 & 4 \\
+				                                         1 & 1 & 1 & 1
+			                                         \end{pmatrix}\begin{pmatrix}
+				                                                      0 \\
+				                                                      1 \\
+				                                                      2 \\
+				                                                      5
+			                                                      \end{pmatrix} \\
+			\begin{pmatrix}
+				26 & 8 \\
+				8  & 4
+			\end{pmatrix}\begin{pmatrix}
+				             \alpha \\
+				             \beta
+			             \end{pmatrix} =\begin{pmatrix}
+				                            27 \\
+				                            8
+			                            \end{pmatrix}
+		\end{array}$$
+	Este sistema tiene solución, donde $\alpha=\frac{11}{10}$ y $\beta=-\frac{1}{5}$. Por lo que nos queda la función $y=\frac{11}{10}t-\frac{1}{5}$ que es la recta que mejor aproxima los datos.
 \end{example}\newpage
 \section{Transformaciones en espacios con producto interno}
 \begin{corollary}
-    Sea $V$ un espacio con producto interno. Si $\langle v,w_1\rangle=\langle v,w_2\rangle$ para todo $v\in V$ entonces $w_1=w_2$.
+	Sea $V$ un espacio con producto interno. Si $\langle v,w_1\rangle=\langle v,w_2\rangle$ para todo $v\in V$ entonces $w_1=w_2$.
 \end{corollary}
 \begin{theorem}{Teorema de Riesz}
-    \\Dada $T:V\to\mathbb{K}$ lineal y $V$ tal que si $M$ es un subespacio de $V$, se cumple que $V=M\oplus M^\bot$, entonces existe un único $w\in V$ tal que $$T(v)=\langle v,w\rangle$$
+	\\Dada $T:V\to\mathbb{K}$ lineal y $V$ tal que si $M$ es un subespacio de $V$, se cumple que $V=M\oplus M^\bot$, entonces existe un único $w\in V$ tal que $$T(v)=\langle v,w\rangle$$
 \end{theorem}
 \subsection{Adjunta de una transformación}
 \begin{theorem}
-    Sean $V$ y $W$ espacios con producto interno y $T:V\to W$ una transformación lineal. Entonces existe una única transformación lineal $T^*:W\to V$ tal que: $$\langle T(v),w\rangle_W=\langle v,T^*(w)\rangle_V$$
+	Sean $V$ y $W$ espacios con producto interno y $T:V\to W$ una transformación lineal. Entonces existe una única transformación lineal $T^*:W\to V$ tal que: $$\langle T(v),w\rangle_W=\langle v,T^*(w)\rangle_V$$
 \end{theorem}
 \begin{definition}
-    La transformación $T^*$ es llamada la adjunta de $T$.
+	La transformación $T^*$ es llamada la adjunta de $T$.
 \end{definition}
 \begin{corollary}
-    Propiedades del adjunto:
-    \begin{enumerate}
-        \item $(T+S)^*=T^*+S^*$.
-        \item $(\alpha T)^*=\overline{\alpha}T^*$.
-        \item $(TS)^*=S^*T^*$.
-        \item $T$ es invertible si y sólo si $T^*$ lo es y $(T^*)^{-1}=(T^{-1})^*$.
-        \item $(T^*)^*=T$.
-        \item $\lambda$ es valor propio de $T\Leftrightarrow\overline{\lambda}$ es valor propio de $T^*$.
-        \item $Ker(T^*)=(Im(T))^\bot$.
-        \item $Im(T^*)=(Ker(T))^\bot$.
-        \item $Ker(T^*T)=Ker(T)$.
-        \item $dim(Im(T^*T))=dim(Im(T))$.
-    \end{enumerate}
+	Propiedades del adjunto:
+	\begin{enumerate}
+		\item $(T+S)^*=T^*+S^*$.
+		\item $(\alpha T)^*=\overline{\alpha}T^*$.
+		\item $(TS)^*=S^*T^*$.
+		\item $T$ es invertible si y sólo si $T^*$ lo es y $(T^*)^{-1}=(T^{-1})^*$.
+		\item $(T^*)^*=T$.
+		\item $\lambda$ es valor propio de $T\Leftrightarrow\overline{\lambda}$ es valor propio de $T^*$.
+		\item $Ker(T^*)=(Im(T))^\bot$.
+		\item $Im(T^*)=(Ker(T))^\bot$.
+		\item $Ker(T^*T)=Ker(T)$.
+		\item $dim(Im(T^*T))=dim(Im(T))$.
+	\end{enumerate}
 \end{corollary}
 \begin{corollary}
-    Sean $V$ y $W$ espacios con producto interno, $B$ y $C$ bases ortonormales de $V$ y $W$ respectivamente. Entonces:$$_B(T^*)_C=\overline{[_C(T)_B]}^T$$
+	Sean $V$ y $W$ espacios con producto interno, $B$ y $C$ bases ortonormales de $V$ y $W$ respectivamente. Entonces:$$_B(T^*)_C=\overline{[_C(T)_B]}^T$$
 \end{corollary}
 \subsection{Transformaciones lineales auto-adjuntas}
 \begin{definition}{Transformación lineal auto-adjunta}
-   \\Sea $T:V\to V$ una transformación lineal. Diremos que $T$ es auto-adjunta si y solo si $$\langle T(v),w\rangle=\langle v,T(w)\rangle\ \forall v,w\in V$$
-   Es lo mismo que decir que $T$ coincide con $T^*$.
+	\\Sea $T:V\to V$ una transformación lineal. Diremos que $T$ es auto-adjunta si y solo si $$\langle T(v),w\rangle=\langle v,T(w)\rangle\ \forall v,w\in V$$
+	Es lo mismo que decir que $T$ coincide con $T^*$.
 \end{definition}
 \begin{theorem}
-    Sea $V$ un espacio vectorial \underline{real} con producto interno, $B$ una base ortonormal de $V$ y\\ $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $_B(T)_B$ es simétrica.
+	Sea $V$ un espacio vectorial \underline{real} con producto interno, $B$ una base ortonormal de $V$ y\\ $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $_B(T)_B$ es simétrica.
 \end{theorem}
 \begin{corollary}
-    Recordar que una matriz $A$ es simétrica cuando $A=A^t$.
+	Recordar que una matriz $A$ es simétrica cuando $A=A^t$.
 \end{corollary}
 \begin{definition}
-    Se dice que una matriz $A$ es hermética si y solo si $A=(\overline{A})^t$ (la matriz conjugada se obtiene conjugando cada una de sus entradas).
+	Se dice que una matriz $A$ es hermética si y solo si $A=(\overline{A})^t$ (la matriz conjugada se obtiene conjugando cada una de sus entradas).
 \end{definition}
 \begin{theorem}
-    Sea $V$ un espacio vectorial \underline{complejo} con producto interno, $B$ una base \underline{ortonormal} de $V$ y $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $_B(T)_B$ es hermética.
+	Sea $V$ un espacio vectorial \underline{complejo} con producto interno, $B$ una base \underline{ortonormal} de $V$ y $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $_B(T)_B$ es hermética.
 \end{theorem}
 \begin{theorem}
-    Sea $V$ un espacio vectorial \underline{complejo} con producto interno y $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $\langle T(v),v\rangle\in\mathbb{R}\ \forall v\in V$.
+	Sea $V$ un espacio vectorial \underline{complejo} con producto interno y $T:V\to V$ lineal, $T$ es auto-adjunta si y solo si $\langle T(v),v\rangle\in\mathbb{R}\ \forall v\in V$.
 \end{theorem}
 \begin{theorem}
-    Sea $V$ un espacio vectorial \underline{complejo} con producto interno. Si $T:V\to V$ es auto-adjunta entonces todas las raíces del polinomio característico de $T$ son reales.
+	Sea $V$ un espacio vectorial \underline{complejo} con producto interno. Si $T:V\to V$ es auto-adjunta entonces todas las raíces del polinomio característico de $T$ son reales.
 \end{theorem}
 \begin{theorem}
-    Sea $A\in M(\mathbb{C})_{n\times n}$. Si $A$ es hermética entonces todas las raíces del polinomio característico de $A$ son reales.
+	Sea $A\in M(\mathbb{C})_{n\times n}$. Si $A$ es hermética entonces todas las raíces del polinomio característico de $A$ son reales.
 \end{theorem}
 \begin{theorem}
-    Sea $A\in M(\mathbb{R})_{n\times n}$. Si $A$ es simétrica entonces todas las raíces del polinomio característico de $A$ son reales.
+	Sea $A\in M(\mathbb{R})_{n\times n}$. Si $A$ es simétrica entonces todas las raíces del polinomio característico de $A$ son reales.
 \end{theorem}
 \begin{theorem}
-    Sea $V$ un espacio vectorial real con producto interno. Si $T:V\to V$ auto-adjunta entonces todas las raíces del polinomio característico $T$ son reales.
+	Sea $V$ un espacio vectorial real con producto interno. Si $T:V\to V$ auto-adjunta entonces todas las raíces del polinomio característico $T$ son reales.
 \end{theorem}
 \begin{theorem}{Teorema espectral para transformaciones auto-adjuntas}
-    \\Sea $V$ un espacio vectorial, real o complejo, de dimensión finita. Si $T:V\to V$ es una transformación lineal auto-adjunta, entonces existe una base ortonormal de $V$ formada por vectores propios de $T$.
+	\\Sea $V$ un espacio vectorial, real o complejo, de dimensión finita. Si $T:V\to V$ es una transformación lineal auto-adjunta, entonces existe una base ortonormal de $V$ formada por vectores propios de $T$.
 \end{theorem}
 \begin{corollary}
-    Sea $V$ un espacio vectorial real o complejo, de dimensión finita. Si $T:V\to V$ es una transformación lineal auto-adjunta y $\lambda_1,\ \lambda_2$ son valores propios distintos de $T$, entonces los subespacios propios asociados a dichos valores propios son perpendiculares.
+	Sea $V$ un espacio vectorial real o complejo, de dimensión finita. Si $T:V\to V$ es una transformación lineal auto-adjunta y $\lambda_1,\ \lambda_2$ son valores propios distintos de $T$, entonces los subespacios propios asociados a dichos valores propios son perpendiculares.
 \end{corollary}
 \begin{theorem}
-    Si existe una base ortonormal $B$ del espacio $V$ formada por vectores propios y las raíces de $X_T$ son reales entonces $T$ es auto-adjunta.
+	Si existe una base ortonormal $B$ del espacio $V$ formada por vectores propios y las raíces de $X_T$ son reales entonces $T$ es auto-adjunta.
 \end{theorem}
 \begin{theorem}{Teorema espectral para matrices simétricas}
-    \\Si $A\in M(\mathbb{R})_{n\times n}$ es una matriz simétrica, entonces $\exists P\in M(\mathbb{R})_{n\times n}$ invertible con $P^{-1}=P^t$ tal que $A=PDP^t$ siendo $D\in M(\mathbb{R})_{n\times n}$ una matriz diagonal. 
+	\\Si $A\in M(\mathbb{R})_{n\times n}$ es una matriz simétrica, entonces $\exists P\in M(\mathbb{R})_{n\times n}$ invertible con $P^{-1}=P^t$ tal que $A=PDP^t$ siendo $D\in M(\mathbb{R})_{n\times n}$ una matriz diagonal.
 \end{theorem}
 \end{document}
