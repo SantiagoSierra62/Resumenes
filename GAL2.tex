@@ -812,7 +812,7 @@ Donde decíamos que si el sistema no tenia soluciones era incompatible, pero la 
 \end{corollary}
 \begin{corollary}
 	Sean $V$ y $W$ espacios con producto interno, $B$ y $C$ bases ortonormales de $V$ y $W$ respectivamente. Entonces:$$_B(T^*)_C=\overline{[_C(T)_B]}^T$$
-\end{corollary}
+\end{corollary}\newpage
 \subsection{Transformaciones lineales auto-adjuntas}
 \begin{definition}{Transformación lineal auto-adjunta}
 	\\Sea $T:V\to V$ una transformación lineal. Diremos que $T$ es auto-adjunta si y solo si $$\langle T(v),w\rangle=\langle v,T(w)\rangle\ \forall v,w\in V$$
@@ -823,7 +823,7 @@ Donde decíamos que si el sistema no tenia soluciones era incompatible, pero la 
 \end{theorem}
 \begin{corollary}
 	Recordar que una matriz $A$ es simétrica cuando $A=A^t$.
-\end{corollary}\newpage
+\end{corollary}
 \begin{corollary}
     Sean $T_1$ y $T_2$ operadores auto-adjuntos:
     \begin{itemize}
@@ -861,10 +861,81 @@ Donde decíamos que si el sistema no tenia soluciones era incompatible, pero la 
 \begin{theorem}
 	Si existe una base ortonormal $B$ del espacio $V$ formada por vectores propios y las raíces de $X_T$ son reales entonces $T$ es auto-adjunta.
 \end{theorem}
-\begin{definition}
-    Decimos que una matriz $P$ es ortogonal si se cumple que $P^{-1}=P^t$.
-\end{definition}
 \begin{theorem}{Teorema espectral para matrices simétricas}
-	\\Si $A\in M(\mathbb{R})_{n\times n}$ es una matriz simétrica, entonces $\exists P\in M(\mathbb{R})_{n\times n}$ invertible con $P$ ortogonal tal que $A=PDP^t$ siendo $D\in M(\mathbb{R})_{n\times n}$ una matriz diagonal.
+    \\Si $A\in M(\mathbb{R})_{n\times n}$ es una matriz simétrica, entonces $\exists P\in M(\mathbb{R})_{n\times n}$ invertible con $P^{-1}=P^t$ tal que $A=PDP^t$ siendo $D\in M(\mathbb{R})_{n\times n}$ una matriz diagonal.
 \end{theorem}
+\subsection{Transformaciones ortogonales y unitarias}
+\begin{definition}
+    Una transformación $T$ es \underline{unitaria} cuando $T$ preserva el producto interno, esto es: $$\langle T(v_1),T(v_2)\rangle=\langle v_1,v_2\rangle\ \forall v_1,v_2\in V$$
+    En el caso particular que $\mathbb{K}=\mathbb{R}$ diremos que $T$ es \underline{ortogonal}.
+\end{definition}
+\begin{corollary}
+    Sea $V$ un espacio vectorial de dimensión finita con producto interno sobre un cuerpo $\mathbb{K}$ y $T:V\to V$ una transformación lineal, es equivalente:
+    \begin{enumerate}
+        \item $T$ es unitaria ($T$ conserva el producto interno).
+        \item $T$ conserva la norma ($||T(v)||=||v||\ \forall v\in V$).
+        \item $T$ lleva bases ortonormales en bases ortonormales ($\forall B=\{v_1,v_2,\cdots,v_n\}$ base ortonormal de $V$ se tiene que $T(B)=\{T(v_1),T(v_2),\cdots,T(v_n)\}$ también es base ortonormal de $V$).
+        \item $T$ lleva una base ortonormal en otra base ortonormal ($\exists B_0=\{v_1,v_2,\cdots,v_n\}$ base ortonormal de $V$ se tiene que $T(B_0)=\{T(v_1),T(v_2),\cdots,T(v_n)\}$ también es base ortonormal de $V$).
+    \end{enumerate}
+\end{corollary}
+Sea $V$ un espacio vectorial sobre $\mathbb{C}$ con producto interno.
+\begin{definition}
+    Una transformación lineal $T:V\to V$ es \underline{antihermitica} $\Leftrightarrow T=-T^*$.
+\end{definition}
+\begin{corollary}
+    Si $T$ es antihermitica y $\lambda$ es valor propio de $T$, entonces $Re(\lambda)=0$, es decir, es completamente imaginario.
+\end{corollary}
+\begin{corollary}
+    Sea $T:V\to V$ una transformación lineal, se cumple que:
+    \begin{enumerate}
+        \item $(T+T^*)$ es auto-adjunta.
+        \item $(T-T^*)$ es antihermitica.
+    \end{enumerate}
+    Sea $T:V\to V$ una transformación lineal antihermitica:
+    \begin{enumerate}
+        \item $T-I$ es invertible.
+        \item $U=(T+I)(T-I)^{-1}$ es unitaria y $U-I$ es invertible.
+    \end{enumerate}
+    Sea $U:V\to V$ una transformación lineal unitaria con $U-I$ invertible, $T=(U+I)(U-I)^{-1}$ es antihermitica.
+\end{corollary}\newpage
+\subsection{Matrices ortogonales y unitarias}
+\begin{definition}
+    Sea $A\in M(\mathbb{R})_{n\times n}$, $A$ es ortogonal cuando $A$ es invertible y $A^{-1}=A^t$.\\
+    Sea $A\in M(\mathbb{C})_{n\times n}$, $A$ es unitaria si $A$ es invertible y $A^{-1}=\overline{A}^t$.
+\end{definition}
+\begin{corollary}
+    Si $(AB)_{ij}$ s el elemento $ij$ de la matriz $AB$ se cumple que $(AB)_{ij}=\langle A_{(i)},B^{(j)}\rangle$ donde $\langle\ ,\ \rangle$ el producto interno habitual en $\mathbb{R}^n$.\\
+    De forma similar, para el caso complejo, se tiene que si $A,B\in M(\mathbb{C})_{n\times n}$, entonces $$(A\overline{B})_{ij}=\langle A_{(i)},B^{(j)}\rangle$$
+    donde $\langle\ ,\ \rangle$ es el producto interno habitual en $\mathbb{C}^n$.
+\end{corollary}
+\begin{corollary}
+    Sea $A\in M(\mathbb{R})_{n\times n}$. Entonces $A$ es ortogonal si y solo si sus columnas forman una base ortonormal de $\mathbb{R}^n$ considerado con el producto interno habitual.\\
+    De misma forma, en los complejos se tiene que si $A\in M(\mathbb{C})_{n\times n}$, $A$ es unitaria si y solo si sus columnas son una base ortonormal de $\mathbb{C}^n$ considerando el producto interno habitual.
+\end{corollary}
+\begin{corollary}
+    Sea $V$ un espacio vectorial de dimensión finita con producto interno sobre el cuerpo $\mathbb{R}$ y $B$ una base ortonormal de $V$ y $T:V\to V$ lineal. Entonces $T$ es ortogonal $\Leftrightarrow\ _B(T)_B$ es una matriz ortogonal.
+\end{corollary}
+\begin{corollary}
+    Sea $V$ un espacio vectorial de dimensión finita con producto interno sobre el cuerpo $\mathbb{C}$, $B$ una base ortonormal de $V$ y $T:V\to V$ lineal. $T$ es unitaria $\Leftrightarrow\ _B(T)_B$ es una matriz unitaria.
+\end{corollary}
+\begin{corollary}
+    Sea $V$ espacio vectorial sobre $\mathbb{C}$. Si $T:V\to V$ es unitaria entonces sus valores propios tienen módulo $1$.
+\end{corollary}
+\begin{corollary}
+    Si $A\in M(\mathbb{C})_{n\times n}$ es unitaria entonces las raíces de su polinomio característico tienen módulo $1$.
+\end{corollary}
+\begin{corollary}
+    Si $A\in M(\mathbb{R})_{n\times n}$ es ortogonal entonces las raíces de su polinomio característico son complejos de modulo $1$, es decir las raíces pueden a ser $1$ y $-1$ pues para ser valores propios tienen que ser reales.
+\end{corollary}
+\begin{corollary}
+    Si $V$ es sobre $\mathbb{R}$ se concluye que todas las raíces del polinomio característico de $T:V\to V$ unitaria son complejos de módulo 1, al igual que el corolario anterior, los valores propios pueden a ser $1$ y $-1$.
+\end{corollary}
+\subsection{Teorema espectral para transformaciones lineales unitarias}
+El teorema espectral es solo válido para el caso de espacio vectorial complejo.
+\begin{theorem}
+    Sea $V$ un espacio vectorial complejo de dimensión finita. Si $T$ es unitaria entonces existe una base ortonormal de $V$ formada por vectores propios de $T$.
+\end{theorem}
+\begin{corollary}
+    Sea $V$ un espacio vectorial complejo de dimensión finita. Si existe una base ortonormal de $V$ formada por vectores propios de $T$ y los valores propios de $T$ tienen módulo $1$ entonces $T$ es unitaria.
+\end{corollary}
 \end{document}
