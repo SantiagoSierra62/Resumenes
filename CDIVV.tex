@@ -704,15 +704,16 @@ Normas en $\mathbb{R}^2$
         \item Un conjunto $A$ es cerrado si y solo si $A$ contiene todos sus puntos de acumulación.
     \end{enumerate}
 \end{definition}
-\subsection{Sucesiones en $\mathbb{R}^n$}
-$x_n=(x_n^{(1)},x_n^{(2)},\cdots,x_n^{(m)})\in\mathbb{R}^m$
+\newpage\subsection{Sucesiones en $\mathbb{R}^n$}
 \begin{definition}
-    Sea $\{x_n\}$ una sucesión en $\mathbb{R}^m$, $p\in\mathbb{R}^m$. $x_n\to p \Leftrightarrow\ \forall\epsilon >0\ \exists n_o\in\mathbb{N}$ tal que $\forall n\ge 0$ $x_n\in B(p,\epsilon)$ o $\Leftrightarrow \forall\epsilon >0\ \exists n_0\in\mathbb{N}$ tal que $\forall n\ge n_0$ $d(x_n,p)<\epsilon$ o $\Leftrightarrow\forall\epsilon >0\ \exists n_0\in\mathbb{N}$ tal que $\forall n\ge n_0\ ||x_n-p||<\epsilon$.
+    Una sucesión es una función $a:\mathbb{N}\to\mathbb{R}^n$
+\end{definition}
+\begin{definition}{Límite}
+    \\Decimos que la sucesión $a_n$ tiene límite $L\in\mathbb{R}^n$, y lo denotamos $\lim_{n \to \infty}a_n=L\ \Leftrightarrow\ \forall\epsilon>0,\ \exists n_0\in\mathbb{N}$ tal que $\forall n\ge 0$ se tiene que $a_n\in B(L,\epsilon)$.
 \end{definition}
 \begin{corollary}
-    Sea $\{x_n\}$ una sucesión en $\mathbb{R}^m$, $\{x_n^{(i)}\}$ la sucesión de coordenada i-esima $\forall i=1,\cdots,m$.\\
-    Sea $p=(p_1,p_2,\cdots,p_m)$, entonces:
-    $$x_n\to p\Leftrightarrow x_n^{(i)}\to p_i\ \forall i=1,\cdots,m$$
+    Sea $a_k$ una sucesión en $\mathbb{R}^n$ y $L=(L_1,L_2,\dots,L_n)$. Entonces: $$\lim_{k \to \infty}a_k=L\ \Leftrightarrow\ \lim_{k \to \infty}a_{k_i}=L_i\ \forall i=1,2,\dots,n$$
+    Es decir, una sucesión en $\mathbb{R}^n$ converge a $L$ si y sólo si cada una de sus coordenadas converge a la coordenada correspondiente de $L$
 \end{corollary}
 \begin{corollary}{Propiedades}
         Si $x_n\to p_1$ e $y_n\to p_2$ entonces
@@ -735,7 +736,87 @@ $x_n=(x_n^{(1)},x_n^{(2)},\cdots,x_n^{(m)})\in\mathbb{R}^m$
 \begin{theorem}
     Sea $A\subset\mathbb{R}^m$ un conjunto compacto (cerrado + acotado) y sea $\{x_n\}$ una sucesión en $A$. Entonces $\{x_n\}$ tiene una sub-sucesión convergente a $p\in A$.
 \end{theorem}
-\section{Limites y continuidad}
+\begin{definition}
+    Sea $a_k$ una sucesión en $\mathbb{R}^n$, y $k_j$ una sucesión estrictamente creciente de números naturales. Entonces la sucesión $a_{k_j}$ es una sub-sucesión de $a_k$.
+\end{definition}
+\begin{theorem}
+    Toda sucesión acotada de $\mathbb{R}^n$ tiene una sub-sucesión convergente.
+\end{theorem}
+\begin{corollary}
+    Si $K\subset\mathbb{R}^n$ es un conjunto compacto, y $a_k$ es una sucesión de elementos de $K$, entonces $a_k$ posee una sub-sucesión convergente, y ademas su limite es un elemento de $K$.
+\end{corollary}\newpage
+\section{Continuidad}
+\subsection{Funciones en $\mathbb{R}^n$}
+\begin{definition}{Función escalar}
+	\\Una función escalar es una función cuyo dominio esta incluido en $\mathbb{R}^n$ y codominio $\mathbb{R}$.
+\end{definition}
+\begin{example}{ \ }
+    \begin{itemize}
+        \item $f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=xy$
+        \item $T:\mathbb{R}^n\to\mathbb{R}\ /\ T(x_1,x_2,\cdots,x_n)=x_1+x_2+\cdots+x_n$
+        \item $f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=x^2+xy$
+    \end{itemize}
+\end{example}
+\begin{definition}{Función vectorial}
+	\\Una función vectorial es una función con dominio en $\mathbb{R}^n$ y codominio en $\mathbb{R}^m$.\\
+    \\Para $f:A\subseteq\mathbb{R}^n\to\mathbb{R}^m\ /\ f(x_1,x_2,\cdots,x_n)=(f_1(x_1,x_2,\cdots,x_n),\cdots,f_m(x_1,\cdots,x_n))$ y se nota: $$f=(f_1,f_2,\cdots,f_m)$$
+Cada $f_i:A\subseteq\mathbb{R}^n\to\mathbb{R}$ es una función escalar $\forall i=1,\cdots,m$ y se llama en este contexto función coordenada.
+\\Sea $f:A\subset\mathbb{R}^n\to\mathbb{R}$, el grafico de $f$ es el conjunto $$G(f)=\{(x_1,x_2,\cdots,x_n,x_n+1)\in\mathbb{R}^n:\ (x_1,x_2,\cdots,x_n)\in A,\ x_{n+1}=f(x_1,x_2,\cdots,x_n)\}$$
+\end{definition}
+\begin{definition}{Conjuntos de nivel}
+    \\Los conjuntos de nivel son subconjuntos del dominio, cuyos puntos tienen la misma imagen por función.
+    \\Dado un $k\in\mathbb{R}$, el conjunto de nivel $k$ es $C_k=\{x\in\mathbb{R}^n : f(x)=k\}$.
+\end{definition}
+\subsection{Limites y continuidad}
+\begin{definition}
+    Dado un conjunto $D\subset\mathbb{R}^n$, una función $f:D\to\mathbb{R}$, y $a\in\mathbb{R}^n$ un punto de acumulación de $D$, decimos que $$\lim_{x \to a}=L\ \Leftrightarrow\ \forall\epsilon>0,\ \exists\delta>0\ \text{tal que }\forall x\in B^*(a,\delta)\cap D\ \text{se cumple }f(x)\in B(L,\epsilon)$$
+\end{definition}
+\begin{definition}
+    Dado un conjunto $D\subset\mathbb{R}^n$, una función $f:D\in\mathbb{R}$, y $a\in\mathbb{R}^n$, y un punto de $D$, decimos que $f$ es continua en $a$ si y solo si: $$\forall\epsilon>0,\ \exists\delta>0\ \text{tal que }\forall x\in B(a,\delta)\cap D\ \text{se cumple }f(x)\in B(f(a),\epsilon)$$
+\end{definition}
+\begin{corollary}
+    El punto $a$ debe estar en el dominio (en particular calculamos $f(a)$), pero no necesariamente debe ser un punto de acumulación, de esta forma podemos distinguir dos casos:
+    \begin{enumerate}
+        \item Si $a$ es un punto de acumulación de $D$, entonces la definición de continuidad coincide con la de limite, con $L=f(a)$. Es decir $$f\text{ es continua en }a\Leftrightarrow \lim_{x \to a}f(x)=f(a)$$
+        \item Si $a$ no es un punto de acumulación de $D$, entonces es un punto aislado. Es decir, existe un radio $\delta>0$ tal que no hay puntos de $D$ en $B(a,\delta)$. Entonces, una función $f$ es siempre sera continua en los puntos aislados del dominio.
+    \end{enumerate}
+\end{corollary}
+\begin{theorem}
+    Sea un conjunto $D\subset\mathbb{R}^n$, una función $f:D\in\mathbb{R}$, y $a\in\mathbb{R}^n$ un punto de acumulación de $D$, entonces: $$ \begin{array}{l}
+\begin{array}{ c l }
+\lim _{x\rightarrow a} f( x) =L\Leftrightarrow  & \text{para toda sucesión } x_{k} \ \text{de elementos de } D\backslash \{a\} \ \text{tal que }\lim _{k\rightarrow \infty } x_{k} =a\\
+ & \text{tenemos que }\lim _{k\rightarrow \infty } f( x_{k}) =L
+\end{array}\\
+\end{array}$$
+\end{theorem}
+\begin{theorem}
+    Sea un conjunto de $D\subset\mathbb{R}^n$, una función $f:D\to\mathbb{R}$, y $a\in\mathbb{R}^n$ un punto de $D$, entonces $$\begin{array}{ c l }
+f\ \text{es continua en } a\Leftrightarrow  & \text{para toda sucesión } x_{k} \ \text{de elementos de } D\ \text{tal que }\lim _{k\rightarrow \infty } x_{k} =a\\
+ & \text{tenemos que }\lim _{k\rightarrow \infty } f( x_{k}) =f( a)
+\end{array}$$
+\end{theorem}
+\begin{definition}{Limites reiterados}
+    \\Sea $f:\mathbb{R}^n\to\mathbb{R}$, dado un punto $(a_1,a_2,\cdots,a_n)\in\mathbb{R}^n$, decimos que los limites reiterados de $f$ como:$$\lim_{x_1 \to a_1}\left( \lim_{x_2 \to a_2}\left(\cdots\left( \lim_{x_n \to a_n} f(x_1,x_2,\cdots,x_n)\right)\cdots \right) \right) $$
+\end{definition}
+\begin{corollary}
+    Si $\lim_{(x_1,\cdots,x_n) \to (a_1,\cdots,a_n)}f(x_1,\cdots,x_n)=L$ entonces todos los limites reiterados de la función $f$ en el punto $(a_1,a_2,\cdots,a_n)$ existen y valen $L$.
+\end{corollary}
+\begin{definition}{Limites direccionales}
+    Sea $f:\mathbb{R}^n\to\mathbb{R}$ y sea $g:\mathbb{R}^{n-1}\to\mathbb{R}$, definimos el limite direccional de $f$ en la dirección de $g$ en el punto $(a_1,a_2,\cdots,a_n)\in\mathbb{R}^n$ como:$$\begin{array}{ l }
+\lim _{( x_{1} ,x_{2} ,\cdots ,x_{n})\rightarrow ( a_{1} ,a_{2} ,\cdots ,a_{n})} f( x_{1} ,x_{2} ,\cdots x_{n})\\
+x_{j} =g\underbrace{( x_{1} ,x_{2} ,\cdots ,x_{n})}_{\text{No aparece } x_{j}}
+\end{array}$$
+\end{definition}
+\begin{example}
+    Una generalización en $\mathbb{R}^2$ seria: $$\begin{array}{ c }
+\lim _{( x,y)\rightarrow ( x_{0} ,y_{0})} f( x,y) =\lim _{x\rightarrow x_{0}} f( x,g( x))\\
+g( x) =y
+\end{array}$$
+\end{example}
+\begin{corollary}
+    Si existe el limite de $f$ en $(a_1,\cdots,a_n)$ y vale $L$, entonces existe el limite direccional a través de cualquier dirección $g$ y también vale $L$.
+\end{corollary}
+\section{Diferenciabilidad en varias variables}
 \underline{Recordar:}
 \\ $f:I\subset \mathbb{R}\to\mathbb{R}$, $a$ punto de acumulación de $I$.
 \\$\lim_{x \to a} f(x)=L\Leftrightarrow\ \forall\epsilon >0\ \exists\delta >0$ tal que $\forall x$ con $0<|x-a|<\delta$ y $x\in I$ ($x\in (a-\delta, a+\delta)\cap I$) se tiene que $|f(x)-L|<\epsilon$ ($f(x)\in (L-\epsilon,L+\epsilon)$).
@@ -760,4 +841,133 @@ Entonces $\lim_{x \to a} f(x)g(x)=0$.
 \begin{corollary}
     Si $a$ es un punto de acumulación de $D$, $f$ es continua en $a\Leftrightarrow\ \lim_{x \to a} f(x)=f(a)$.
 \end{corollary}
+\subsection{Derivadas Parciales}
+\begin{definition}
+    Sea $f:D\subset\mathbb{R}^2\to\mathbb{R}\ (x_0,y_0)\in\mathbb{R}^2,\ v=(v_1,v_2)\in\mathbb{R}^2$ la derivada de $f$ en $(x_0,y_0)$ en la dirección de $v$ (derivada direccional) es: $$\frac{\partial f}{\partial v}(x_0,y_0)=\lim_{h \to 0}\frac{f((x_0,y_0)+h(v_1,v_2))-f(x_0,y_0)}{h}$$ 
+\end{definition}
+\begin{corollary}
+    $$\frac{\partial f}{\partial x}(x_0,y_0)=\frac{\partial f}{\partial (1,0)} (x_0,y_0)$$
+    $$\frac{\partial f}{\partial y} (x_0,y_0)=\frac{\partial f}{\partial (0,1)} (x_0,y_0)$$
+\end{corollary}
+\subsection{Diferenciabilidad}
+Recordar de CDIV.
+\\$f:I\subset\mathbb{R}\to\mathbb{R}$, $x_0$ punto interior de $I$.
+\\$f$ es derivable en $a\Leftrightarrow\ \exists$ y es finito $\lim_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}\ \Leftrightarrow\ \exists\ A\in\mathbb{R}$ tal que $f(x_0+h)=f(x_0)+Ah+r(h)$ con $\lim_{h \to 0} \frac{r(h)}{h}=0$. Esto significa que $r(h)$ tiende mas rápido a 0 que $h$ cuando $h\to 0$.
+\begin{definition}
+    Sea $f:\mathbb{R}^n\to\mathbb{R}$ y $x_0$ un punto de $\mathbb{R}^n$. Decimos que $f$ es \underline{diferenciable} en $x_0\ \Leftrightarrow$ existe una transformación lineal $T:\mathbb{R}^n\to\mathbb{R}$ tal que $$f(x_0+h)=f(x_0)+T(h)+r(h)\ \text{con } \lim_{h \to \vec{0}}\frac{r(h)}{||h||}=0$$
+    A la transformación lineal $T$ se le llama \underline{diferencial} de $f$ en $x_0$ y se nota $T=df_{x_0}$.
+    \\$T(h)=A_1h_1+A_2h_2+\cdots +A_nh_n$ con $A_i\in\mathbb{R}\ \forall i=1,\cdots,n$.
+\end{definition}
+Podemos reescribir la definición de esta amanera:
+\\$f$ es diferenciable en $x_0\ \Leftrightarrow$ existen reales $A_1,A_2,\cdots,A_n$ tales que $f(x_0+h)=f(x_0)+A_1h_1+\cdots+A_nh_n+r(h)$ con $\lim_{h \to 0} \frac{r(h)}{||h||}=0$.
+\\Como particular a $\mathbb{R}^2$: $f$ es diferenciable en $(x_0,y_0)\ \Leftrightarrow$ existen reales $A$ y $B$ tales que $$f((x_0,y_0)+(h_1,h_2))=f(x_0,y_0)+Ah_1+Bh_2+r(h_1,h_2\ \text{con }\lim_{(h_1,h_2) \to (0,0)} \frac{r(h_1,h_2)}{\sqrt{h_1^2+h_2^2}}$$ 
+\begin{corollary}
+    $\mathbb{R}^n\ f(x_0+h)=f(x_0)+df_{x_0}(h)+r(h)$, $\lim_{h \to \vec{0}}\frac{r(h)}{||h||}=0$
+    \\$\mathbb{R}^2\ f((x_0,y_0)+(h_1,h_2))=f(x_0,y_0)+df_{(x_0,y_0)}(h_1,h_2)+r(h_1,h_2)\ \lim_{(h_1,h_2) \to (0,0)}\frac{r(h_1,h_2)}{\sqrt{h_1^2,h_2^2}}=0$.
+    \\$\mathbb{R}\ f(x_0+h)=f(x_0)+f'(x_0)h+r(h)$, $\lim_{h \to 0}\frac{r(h)}{h}=0$. 
+\end{corollary}
+\begin{theorem}
+    Sea $f:\mathbb{R}^2\to\mathbb{R},\ (x_0,y_0)\in\mathbb{R}^2$.
+    \\Si $f$ es diferenciable en $(x_0,y_0)$ entonces:
+    \begin{itemize}
+        \item $f$ es continua en $(x_0,y_0)$.
+        \item Existen las derivadas parciales de $f$ en $(x_0,y_0)$. Mas aun $A=\frac{\partial f}{\partial x}(x_0,y_0),\ B=\frac{\partial f}{\partial y}(x_0,y_0)$
+        \item Existen todas las derivadas direccionales de $f$ en $(x_0,y_0)$ y si $v=(v_1,v_2)\in\mathbb{R}^2$ entonces se cumple:$$\frac{\partial f}{\partial v}(x_0,y_0)=\frac{\partial f}{\partial x}(x_0,y_0)v_1+\frac{\partial f}{\partial y_0}v_2$$
+    \end{itemize}
+\end{theorem}
+\begin{corollary}
+    Recordar que si $f$ es diferenciable en $x_0$ entonces: $$\frac{\partial f}{\partial v}=\langle \triangle f(x_0),v\rangle$$ $\forall v \in \mathbb{R}^n$.\\
+    Recordar que $|\langle v,w\rangle|\le ||v||||u||\ \forall v,w\in\mathbb{R}^n$.
+\end{corollary}
+Entonces $|\langle \triangle f(x_0),v\rangle|\le ||\triangle f(x_0)|| ||v||\ \forall v\in\mathbb{R}^n\ v\neq\vec{0}$.
+\\Y por lo tanto el valor mas grande de $df_{x_0}(v)$ va a ser cuando $v$ es colineal con $\triangle f(x_0)$ y si $||v||=1\ |df_{x_0}(v)\le ||\triangle f(x_0)||$.
+\\Se dice que la dirección del gradiente es la dirección de mayor crecimiento de la función $f$ en $x_0$.
+\begin{theorem}{Condición suficiente de diferenciabilidad}
+    \\Sea $f:\mathbb{R}^2\to\mathbb{R}$ y $(x_0,y_0)\in\mathbb{R}^n$.
+    \\Si existe $\frac{\partial f}{\partial x} (x_0,y_0)$ y existe y es continua $\frac{\partial f}{\partial y}(x_0,y_0)$ en una $B(x_0,y_0)$ entonces $f$ es diferenciable en $(x_0,y_0)$.
+\end{theorem}
+\subsection{Derivadas de orden superior}
+\begin{itemize}
+    \item $\frac{\partial}{\partial x}(\frac{\partial f}{\partial x})=\frac{\partial^2 f}{\partial x^2}=f_{xx}$
+    \item $\frac{\partial}{\partial y}(\frac{\partial f}{\partial x})=\frac{\partial^2 f}{\partial y\partial x}=f_{xy}$
+    \item $\frac{\partial}{\partial x}(\frac{\partial f}{\partial y})=\frac{\partial^2 f}{\partial x\partial y}=f_{yx}$
+    \item $\frac{\partial}{\partial y}(\frac{\partial f}{\partial y})=\frac{\partial^2 f}{\partial y^2}=f_{yy}$
+\end{itemize}
+\begin{definition}
+    Sea $f$ una función con derivadas parciales de segundo orden en $(x_0,y_0)$.
+    \\La matriz Hessiana de $f$ en $(x_0,y_0)$ es 
+\end{definition}
+\begin{definition}{Matriz Jacobiana}
+    \\$J_f(x_0)=\begin{pmatrix} \frac{\partial f}{\partial x_1} (x_0) && \cdots && \frac{\partial f}{\partial x_n}(x_0) \end{pmatrix}\in M_{1\times n} $.
+\end{definition}
+\begin{definition}
+    Sea $f:\mathbb{R}^n\to\mathbb{R}$\\
+    \\$f(x)\approx f(x_0)+J_f(x_0)(x-x_0)$
+    \\$f(x,y)\approx f(x_0,y_0)+(\frac{\partial f}{\partial x}(x_0,y_0), \frac{\partial f}{\partial y}(x_0,y_0)) \begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix} $
+    \\$f(x,y)\approx f(x_0,y_0)+\langle\triangle f(x_0),\begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix} \rangle$
+\end{definition}
+\begin{definition}
+    De segundo grado:
+    \\$f(x)\approx f(x_0)+J_f(x_0)(x-x_0)+\frac{1}{2}(x-x_0)^tH_f(x_0)(x-x_0)$ Aprox cuadrática
+    \\$f(x,y)\approx f(x_0,y_0)+(\frac{\partial f}{\partial x}(x_0,y_0)\frac{\partial f}{\partial y}(x_0,y_0)\begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix} +\frac{1}{2}(x-x_0 y-y_0) \begin{pmatrix} \frac{\partial^2 f}{\partial x^2} (x_0,y_0) && \frac{\partial^2 f}{\partial y \partial x} (x_0,y_0) \\ \frac{\partial^2 f}{\partial x \partial y}(x_0,y_0) && \frac{\partial^2 f}{\partial y^2} (x_0,y_0)\end{pmatrix} \begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix} $
+\end{definition}
+\begin{theorem}{Teorema de Schwarz}
+    \\Sea $f:\mathbb{R}^2\to\mathbb{R}$, $(x_0,y_0)\in\mathbb{R}^2$.
+    \\Si $f_{xy}$ y $f_{yx}$ existen en una bola $B((x_0,y_0),S)$ y son continuas en $(x_0,y_0)$ (cuando esto pasa decimos que $f$ es de clase $C^2$ en $(x_0,y_0)$) entonces $f_{xy}(x_0,y_0)=f_{yx}(x_0,y_0)$.
+\end{theorem}
+\begin{theorem}{Regla de la cadena 1}
+    \\Sea $f:\mathbb{R}^2\to\mathbb{R}$ diferenciable en $(x_0,y_0)$
+    \\$\alpha:I\subset\mathbb{R}\to\mathbb{R}^2$ tal que $\alpha(t)=(x(t),y(t))$, $\alpha(t_0)=(x_0,y_0)$
+    \\Con $x:I\subset\mathbb{R}\to\mathbb{R}$, $y:I\subset\mathbb{R}\to\mathbb{R}$ derivables en $t_0$.
+    \\Entonces $g=f\circ\alpha:I\subset\mathbb{R}\to\mathbb{R}$ definido por $g(t)=(f\circ\alpha)(t)=f(\alpha(t))=f(x(t),y(t))$\\
+    Es derivable en $t=t_0$ y su derivada vale: $$g'(t_0)=\langle\triangle f(x_0,y_0),\begin{pmatrix} x'(t_0)\\y'(t_0) \end{pmatrix}\rangle $$
+\end{theorem}
+\begin{theorem}{Regla de la cadena 2}
+    \\Sea $g:\mathbb{R}^2\to\mathbb{R}^2\ /\ g(x,y)=(g_1(x,y),g_2(x,y))$ y $f:\mathbb{R}^2\to\mathbb{R}$
+    \\Si $g_1$ y $g_2$ son diferenciables en $(x_0,y_0)$ y $f$ es diferenciable en $(g_1(x_0,y_0),g_2(x_0,y_0))$ entonces $f\circ g$ es diferenciable en $(x_0,y_0)$ y vale: $$J_{f\circ g}(x_0,y_0)=J_f(g(x_0,y_0))\ J_g(x_0,y_0)$$
+\end{theorem}
+\begin{corollary}
+    Si $h=f\circ g$ entonces la regla de la cadena dice:$$J_h(x_0,y_0)=J_f(g(x_0,y_0))\ J_g(x_0,y_0)$$
+    $$\begin{pmatrix} \frac{\partial h}{\partial x}(x_0,y_0) & \frac{\partial h}{\partial y}(x_0,y_0) \end{pmatrix}
+    = \begin{pmatrix} \frac{\partial f}{\partial x}(g(x_0,y_0)) & \frac{\partial f}{\partial y} (g(x_0,y_0)) \end{pmatrix} 
+    \begin{pmatrix} \frac{\partial g_1}{\partial x}(x_0,y_0) & \frac{\partial g_1}{\partial y}(x_0,y_0) \\ \frac{\partial g_2}{\partial x}(x_0,y_0) & \frac{\partial g_2}{\partial y} (x_0,y_0)\end{pmatrix} $$
+\end{corollary}
+\begin{theorem}{Regla de la cadena 3}
+    \\Sean $f:\mathbb{R}^n\to\mathbb{R}^k$ diferenciable en $a\in\mathbb{R}^n$, $y:\mathbb{R}^k\to\mathbb{R}^m$ diferenciable en $f(a)\in\mathbb{R}^k$.
+    \\Entonces $g\circ f:\mathbb{R}^n\to\mathbb{R}^m$ es diferenciable en $a$ y vale: $$d(g\circ f)(a)=dg(f(a))\circ df(a)$$
+    $$J_{g\circ f}(a)=J_g(f(a))\ J_f(a)$$
+\end{theorem}
+\subsection{Desarrollo de Taylor}
+\begin{definition}
+Sea $f:\mathbb{R}\to\mathbb{R}$ con derivadas continuas hasta el orden $k+1$ en $a\in\mathbb{R}$. Entonces:\\
+$f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2}(x-a)^2+\cdots+\frac{f^{(k)}(a)}{k!}(x-a)^k+r(x-a)$ con $\lim_{x \to a}\frac{r(x-a)}{(x-a)^k}=0$.
+\end{definition}
+\begin{theorem}{Teorema de Taylor}
+    Sea $f:\mathbb{R}^2\to\mathbb{R}$ de clase $C^{k+1}$ (derivadas parciales de orden $k+1$ continuas) y $a\in\mathbb{R}^2$.
+    \\Entonces:$$f(a+h)=f(a)+df_a(h_1,h_2)+\frac{d^2f_a}{2}(h_1,h_2)+\cdots+\frac{d^kf_a}{k!}(h_1,h_2)+r(h_1,h_2)$$
+    Con $\lim_{(h_1,h_2) \to (0,0)}\frac{r(h_1,h_2)}{(\sqrt{h_1^2+h_2^2})^k}=0$
+    \\O: $$f(x)=f(a)+df_a(x-a)+\frac{d^2f_a}{2}(x-a)+\cdots+\frac{d^{(k)}f_a}{k!}(x-a)+r(x-a)$$
+    Con $\lim_{x \to a}\frac{r(x-a)}{||x-a||^k}=0$
+\end{theorem}
+\begin{corollary}
+    Sea $a=(x_0,y_0)$, la aproximación lineal es: $f(x,y)\approx f(x_0,y_0)+J_f(x_0,y_0)\begin{pmatrix} x-x_0\\y-y_0 \end{pmatrix} $.
+    \\La aproximación cuadrática es $f(x,y)\approx f(x_0,y_0)+J_f(x_0,y_0) \begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix}+\frac{1}{2} \begin{pmatrix} x-x_0 & y-y_0 \end{pmatrix} H_f(x_0,y_0) \begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix}  $.
+\end{corollary}\newpage
+\subsection{Integrales dobles}
+\begin{corollary}{Propiedades}
+    \\Sea $D$ compacto en $\mathbb{R}^2$:
+    \begin{enumerate}
+        \item $\int\int_D\alpha f(x,y)+\beta g(x,y)dxdy=\alpha\int\int_Df(x,y)dxdy+\beta\int\int_Dg(x,y)dxdy$.
+        \item $\int\int_{D_1\cup D_2}f(x,y)dxdy=\int\int_{D_1}f(x,y)dxdy+\int\int_{D_2}f(x,y)dxdy$\\Siendo $D_1$ y $D_2$ disjuntos, es decir $D_1\cap D_2=\emptyset$.
+        \item Si $f(x,y)\ge0\ \forall(x,y)\in D$ entonces $\int\int_Df(x,y)dxdy\ge0$.
+        \item Si $f(x,y)\ge g(x,y)\ \forall(x,y)\in D$ entonces $\int\int_Df(x,y)dxdy\ge\int\int_Dg(x,y)dxdy$.
+    \end{enumerate}
+\end{corollary}
+\begin{theorem}{Teorema de Fubini 1}
+    \\Sea $D=[a,b]\times[c,d]$ un rectangulo en $\mathbb{R}^2$. Entonces:$$\int\int_Df(x,y)dxdy=\int_{c}^{d}\left( \int_{a}^{b} f(x,y) dx \right) dy=\int_{a}^{b} \left( \int_{c}^{d} f(x,y) dy \right)  dx$$
+\end{theorem}
+\begin{theorem}{Teorema de Fubini 2}
+    \\Sea $D=\{(x,y)\in\mathbb{R}^2:\ a\le x\le b,\ \alpha(x)\le y\le \beta(x)\}$. Entonces: $$\int\int_Df(x,y)dxdy=\int_{a}^{b} \left( \int_{\alpha(x)}^{\beta(x)} f(x,y) dy \right)  dx=\int_{c}^{d} \left( \int_{\gamma(y)}^{\delta(y)} f(x,y) dx \right)  dy$$
+\end{theorem}
+
 \end{document}
