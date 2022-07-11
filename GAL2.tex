@@ -293,7 +293,7 @@ Calcular los valores propios de una matriz $A={}_B(T)_B$ es hallar las raíces d
 	\\Sea $T:V\to V$ una transformación lineal. Se le llama diagonalizable si existe alguna base $B$ tal que la matriz $_B(T)_B$ es una matriz diagonal, es decir, una matriz en la que todos los términos fuera de su diagonal principal son nulos.
 \end{definition}
 \begin{definition}{Matrices diagonalizables}
-	Una matriz cuadrada se llama diagonalizable si es semejante a una matriz diagonal.
+	\\Una matriz cuadrada se llama diagonalizable si es semejante a una matriz diagonal.
 \end{definition}
 \begin{example}
 	Sea $T:\mathbb{R} ^3 \to\mathbb{R} ^3$ definida por: $T(x,y,z)=\begin{pmatrix} 3 & 0 & 0 \\ 0 & 4 & 0 \\ -1 & -2 & 2 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} $.
@@ -469,7 +469,7 @@ Volviendo al ejemplo anterior, podemos probar si $A=PDP^{-1}$, siendo $P=\begin{
 
 \end{example}\newpage
 \begin{theorem}{Forma Canónica de Jordan.}
-	Sean $V$ un espacio vectorial de dimensión $n$ sobre el cuerpo $\mathbb{K}$ y $T$ un operador lineal tal que su polinomio característico $$X_T(\lambda)=(\lambda - \lambda _1)^{m_1}(\lambda -\lambda _2)^{m_2}\dots (\lambda - \lambda _q)^{m_q}$$
+	\\Sean $V$ un espacio vectorial de dimensión $n$ sobre el cuerpo $\mathbb{K}$ y $T$ un operador lineal tal que su polinomio característico $$X_T(\lambda)=(\lambda - \lambda _1)^{m_1}(\lambda -\lambda _2)^{m_2}\dots (\lambda - \lambda _q)^{m_q}$$
 	Entonces existe una base $B$ de $V$ tal que
 	$$_B(T)_B=\begin{pmatrix}
 			J(\lambda _1) &               &        &               \\
@@ -563,7 +563,7 @@ Cuando $v$ no es vector propio, debemos proceder de otra manera.
 \end{corollary}
 \begin{definition}
 	Definimos el producto interno usual de un cuerpo $\mathbb{K}^n$ como $$\langle u,v \rangle = u_1 \overline{v_1} +u_2\overline{v_2}+\dots+u_n\overline{v_n}$$
-\end{definition}
+\end{definition}\newpage
 \subsection{Norma}
 \begin{definition}
 	Sea $V$ un espacio vectorial. Una norma en $V$ es una función tal que a cada vector $v$ le hace corresponder un real indicado como $||v||$, y cumple:
@@ -590,7 +590,7 @@ Cuando $v$ no es vector propio, debemos proceder de otra manera.
 \end{corollary}
 \begin{corollary}{Desigualdad triangular}
 	\\Si $V$ es un espacio vectorial con producto interno $v,w\in V$, se tiene $||v+w||\le ||v||+||w||$.
-\end{corollary}
+\end{corollary}\newpage
 \subsection{Ortogonalidad y ortonormalidad}
 \begin{definition}
 	Sea $V$ un espacio vectorial con producto interno. Dados $v,\ w\in V$, se dice que $v$ y $w$ son ortogonales, y se escribe como $v \bot w$, cuando $\langle v,w \rangle =0$.
@@ -612,7 +612,7 @@ Esta definición coincide con la ortogonalidad en el espacio ordinario, trabajan
 \end{theorem}
 \begin{theorem}{Pitágoras.}
 	\\Sea $V$ un producto interno y $\{v_1,\dots,v_r\}$ un conjunto ortogonal. Entonces $||\sum_{i=1}^{r} v_i||^2=\sum_{i=1}^{r} ||v_i||^2$
-\end{theorem}\newpage
+\end{theorem}
 \begin{theorem}{Método de ortonormalización de Gram-Schmidt.}
 	\\Sean $V$ un espacio vectorial con producto interno y $\{v_1,\dots,v_k\}$ una base de $V$. Entonces existe \newline $B=\{y_1,\dots,y_n\}$ tal que $B$ es una base ortonormal de $V$ y $[v_1,\dots,v_k]=[y_1,\dots,y_k]\ \forall k=1,\dots,n$.\\
 	\underline{Método:}
@@ -672,7 +672,7 @@ Propiedades:
 	\item $S=(S^\bot)^\bot$.
 	\item $(S+W)^\bot =S^\bot \cap W^\bot$.
 	\item $(S\cap W)^\bot = S^\bot + W^\bot$.
-\end{itemize}
+\end{itemize}\newpage
 \subsection{Proyección ortogonal}
 Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=S\oplus S^\bot$. Eso implica que dado $v\in V$ existen y son únicos $v_S\in S,\ v_{S^\bot}$ tales que $$v=v_S+v_{S^\bot}$$
 \begin{definition}
@@ -708,7 +708,7 @@ Sea $V$ un espacio vectorial con producto interno, $S$ un subespacio tal que $V=
 		\item $P_S(v)||\le ||v||$.
 		\item $\langle v,P_S(v)\rangle = ||P_S(v)||^2\ \forall v\in V$.
 	\end{enumerate}
-\end{corollary}
+\end{corollary}\newpage
 \subsection{Aproximación por mínimos cuadrados}
 Antes habíamos estudiado la resolución de sistemas de ecuaciones lineales del tipo $$A\vec{X}=\vec{b}\text{ donde }A\in M(\mathbb{R})_{m\times n}$$
 Donde decíamos que si el sistema no tenia soluciones era incompatible, pero la pregunta que queda es si podemos encontrar una solución que lo aproxime lo mejor posible en algún sentido.
@@ -937,5 +937,118 @@ El teorema espectral es solo válido para el caso de espacio vectorial complejo.
 \end{theorem}
 \begin{corollary}
     Sea $V$ un espacio vectorial complejo de dimensión finita. Si existe una base ortonormal de $V$ formada por vectores propios de $T$ y los valores propios de $T$ tienen módulo $1$ entonces $T$ es unitaria.
+\end{corollary}\newpage
+\section{Formas cuadráticas}
+\begin{definition}
+    Un polinomio es homogéneo si todos sus monomios son del mismo grado.
+\end{definition}
+\begin{definition}{Forma cuadrática.}
+    \\Una forma cuadrática en $\mathbb{R}^n$ es un polinomio con $n$ variables, coeficientes reales, de grado $2$ y homogéneo.
+\end{definition}
+\begin{example}
+    En el caso de una función en dos variables tenemos que $f(x,y)=a_{11}x^2+2a_{12}xy+a_{22}y^2$ es una forma cuadrática en $\mathbb{R}^2$.
+\end{example}
+\begin{example}
+    En el caso de tres variables $f(x,y,z)=a_{11}x^2+a_{22}y^2+a_{33}z^2+2a_{12}xy+2a_{13}xz+2a_{23}yz$.
+\end{example}
+\begin{example}
+    En un caso genérico de $n$ variables, la forma cuadrática adopta la forma $$Q(x_1,x_2,\cdots,x_n)=\sum_{k=1}^{n} a_{kk}x^2_k+\underset{i< j}{\sum _{i,j=1}^{n}} 2a_{ij} x_{ij}$$
+\end{example}
+\begin{corollary}
+    Notar que se ha escrito los coeficientes de los términos cruzados como $2a_{ij}$, la forma cuadrática que es una función $Q:\mathbb{R}^n\to\mathbb{R}$ puede expresarse a través de una matriz simétrica: $$Q(x_1,x_2,\cdots,x_n)=\begin{bmatrix}
+x_{1} & x_{2} & \cdots  & x_{n}
+\end{bmatrix}\begin{bmatrix}
+a_{11} & a_{12} & \cdots  & a_{1n}\\
+a_{12} & a_{22} & \cdots  & a_{2n}\\
+\vdots  & \vdots  & \ddots  & \vdots \\
+a_{1n} & a_{2n} & \cdots  & a_{nn}
+\end{bmatrix}\begin{bmatrix}
+x_{1}\\
+x_{2}\\
+\vdots \\
+x_{n}
+\end{bmatrix} =x^{T} Ax$$
+Por lo que $x^TAx$ es una forma cuadrática en $\mathbb{R}^n$.
+\end{corollary}
+\subsection{Aplicación del teorema espectral a las formas cuadráticas}
+Siendo $A$ la matriz simétrica $n\times n$ real, el teorema espectral afirma:\\
+Existe una matriz ortogonal $P$ tal que: $P^tAP=D$ donde $D$ es la matriz diagonal constituida por los valores propios de $A$ en la diagonal principal.\\Ademas las columnas de $P$ son una base ortonormal de vectores propios de $A$.
+\\\\En consecuencia: Sea $x^TAx$ una forma cuadrática en $\mathbb{R}^n$, existe un cambio de variable $x=Px'$ ortogonal tal que la forma cuadrática toma la expresión $$\lambda_1x'^2_1+\lambda_2x'^2_2+\cdots+\lambda_nx'^2_n$$ donde $\lambda_1,\cdots,\lambda_n$ son los valores propios de $A$.
+\newpage\subsection{Expresión canónica de una forma cuadrática}
+Como vimos antes, aplicando el teorema espectral una forma cuadrática la podemos escribir de la forma $\lambda_1x'^2_1+\cdots+\lambda_nx'^2_n$.\\
+Se puede efectuar un nuevo cambio de variable, lineal e invertible, de siguiente modo:
+\begin{itemize}
+    \item Si $\lambda_i>0\ x''_i=\sqrt{\lambda_i}x'_i$.
+    \item Si $\lambda_j<0\ x''_j=\sqrt{-\lambda_j}x'_j$.
+    \item Si $\lambda_h=0\ x''_h=x'_h$.
+\end{itemize}
+Lo que resulta:
+\begin{itemize}
+    \item Si $\lambda_i>0\ x''^2_i=\lambda_ix'^2_i$.
+    \item Si $\lambda_j<0\ -x''^2_j=\lambda_jx'^2_j$.
+    \item Si $\lambda_h=0\ 0x''^2_h=\lambda_hx'^2_h$.
+\end{itemize}
+La forma cuadrática queda ahora expresada como la suma de algunos $x''^2_i$ menos los $x''^2_h$.
+\\Reordenando los nombres de las incógnitas para que primero queden las sumadas y después las que restan, resulta: $$\tilde{x}_{1}^{2} +\tilde{x}_{2}^{2} +\cdots +\tilde{x}_{p}^{2} -\tilde{x}_{p-1}^{2} -\cdots -\tilde{x}_{p+q}^{2}$$
+Donde $p$ es la cantidad de valores propios positivos de $A$ y $q$ la cantidad de valores propios negativos.\\
+A esta expresión se llama canónica.
+\begin{theorem}{Teorema de Silvester o Ley de Inercia}
+    \\Sea $X^tAX$ una forma cuadrática. Al hacer cambios de variable lineales e invertibles, pueden cambiar la matriz $A$, y sus valores propios, pero no cambia la cantidad de valores propios positivos ni negativos.
+\end{theorem}
+\begin{corollary}
+    Cada forma cuadrática tiene una única expresión canónica.
+\end{corollary}\newpage
+\subsection{Estudio del signo de una forma cuadrática}
+Sea $X=\begin{bmatrix}x_{1}\\x_{2}\\\vdots \\x_{n}\end{bmatrix}$ vector de $\mathbb{R}^n$. Sea $f(X)$ una forma cuadrática, se observa que $f(0)=0$.
+\begin{definition}{Clasificación de formas cuadráticas}
+    \\Las formas cuadráticas en $\mathbb{R}^n$ se clasifican en: 
+    \begin{itemize}
+        \item Definidas positivas: Si $f(X)\ge0\ \forall X\in\mathbb{R}^n$ y $X=\vec{0}$ es el único vector tal que $f(X)=0$.
+        \item Semidefinidas positivas: Si $f(X)\ge0\ \forall X\in\mathbb{R}^n$ y $\exists X_0\neq\vec{0}\ /\ f(X_0)=0$.
+        \item Definidas negativas: Si $f(X)\le0\ \forall X\in\mathbb{R}^n$ y $X=\vec{0}$ es el único vector tal que $f(X)=0$
+        \item Semidefinidas negativas: Si $f(X)\le0\ \forall X\in\mathbb{R}^n$ y $\exists X_0\neq\vec{0}\ /\ f(X_0)=0$.
+        \item Indefinida: Si no esta incluida en ninguno de los casos anteriores.
+    \end{itemize}
+\end{definition}
+\begin{example}
+    Sea $f(x,y)=xy$, $f(x,y)$ es indefinida en $\mathbb{R}^2$ puesto que el vector $(1,1)$ toma un valor positivo y en el $(-1,1)$ un valor negativo.
+\end{example}
+\begin{example}
+    Sea $f(x,y,z)=x^2+y^2+z^2$, $f(x,y,z)$ es definida positiva en $\mathbb{R}^3$.
+\end{example}
+\begin{theorem}{Teorema de clasificación}
+    \\Sea la forma cuadrática $X^tAX$, y $\lambda$ los valores propios de A:
+    \begin{itemize}
+        \item Si $\lambda>0$ entonces es definida positiva.
+        \item Si $\lambda\ge0$ es semidefinida positiva.
+        \item Si $\lambda<0$ es definida negativa.
+        \item Si $\lambda\le0$ es semidefinida negativa.
+        \item Si algunos valores propios son negativos y otros positivos, es indefinida.
+    \end{itemize}
+\end{theorem}
+\begin{definition}
+    Se llama \underline{índice} de la forma cuadrática $X^tAX$ a la cantidad de valores propios propios positivos de la matriz $A$.\\
+    Le llamamos \underline{coíndice} a la cantidad de valores propios negativos, rango a la suma indice mas coíndice, y signatura a la diferencia del indice menos el coíndice.
+\end{definition}
+\begin{corollary}
+    El rango de la forma cuadrática es igual al rango de la matriz $A$.
+\end{corollary}
+\begin{corollary}
+    Conociendo el rango $(r)$ y la signatura $(s)$ se puede hallar el índice $(p)$ y el coíndice $(q)$: $$p=\frac{r+s}{2}\text{ y }q=\frac{r-s}{2}$$
+\end{corollary}
+\begin{corollary}
+    Conociendo $p$ y $q$ puede calificarse la forma cuadrática y escribirse la expresión canónica.
+\end{corollary}
+\subsection{Formas cuadráticas degeneradas}
+\begin{definition}
+    La forma cuadrática $X^tAX$ de $\mathbb{R}^n$, es degenerada si el rango es menor que $n$.
+\end{definition}
+\begin{corollary}
+    Para una forma cuadrática $X^tAX$, son equivalentes las siguientes afirmaciones:
+    \begin{enumerate}
+        \item Es degenerada.
+        \item $0$ es valor propio de $A$.
+        \item $\exists Y\neq\vec{0},\ Y\in\mathbb{R}^n$ tal que $X^tAY=0,\ \forall X\in\mathbb{R}^n$.
+    \end{enumerate}
 \end{corollary}
 \end{document}
