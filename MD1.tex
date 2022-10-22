@@ -1,0 +1,158 @@
+\documentclass[10pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, tikz, cancel, mathtools}
+\usepackage[margin=1in]{geometry}
+\usetikzlibrary{babel}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{example}{Ejemplo}[section]
+
+\title{Matemática Discreta 1}
+\author{Santiago Sierra}
+
+\begin{document}
+    \maketitle \tableofcontents \newpage
+    \section{Relaciones}
+    \subsection{Definición de Relaciones}
+    \begin{definition}
+        Para los conjuntos $A,\ B \subseteq U$, el producto cartesiano de $A$ y $B$ se denota por $A\times B$, y $$A\times B=\{(a,b)\ /\ a\in A \wedge b\in B\}$$
+    \end{definition}
+    \begin{corollary}
+        Notamos como $|A|$ al cardinal de un conjunto, que representa la cantidad de elementos en $A$.
+    \end{corollary}
+    \begin{corollary}
+        Si los conjuntos $A,\ B$ son finitos, se sigue de la regla del producto que $|A\times B|=|A|\cdot|B|$.\\
+        Aunque generalmente no ocurre que $A\times B=B\times A$, tenemos que $|A\times B|=|B\times A|$.
+    \end{corollary}
+    \begin{definition}
+        Para los conjuntos $A,B\subseteq U$, cualquier subconjunto de $A\times B$ es una relación de $A$ en $B$.\\
+        A los subconjuntos de $A\times A$ se les llama relaciones sobre $A$.
+    \end{definition}
+    \begin{definition}{Relación binaria}
+        \\Una relación binaria es un conjunto de pares ordenados pertenecientes al producto cartesiano de dos conjuntos que cumple una propiedad $P(a,b)$ en particular, es decir: $$R=\{(a,b)\in A\times B\ /\ P(a,b)\}$$
+        Notaremos como $aRb$ para indicar que $(a,b)\in R$ y $a\cancel{R}b$ para expresar que $(a,b)\notin R$
+    \end{definition}
+    \begin{corollary}
+        En general, para conjuntos finitos $A,\ B$, existen $2^{|A\times B|}=2^{|A||B|}$ relaciones de $A$ en $B$, incluyendo la relación vacía y la propia relación $A\times B$.
+    \end{corollary}
+    \begin{definition}{Relación inversa}
+        Si $R$ es una relación sobre $A$, entonces $R^{-1}$ es una relación sobre $A$ definida por $xRy\Leftrightarrow yR^{-1}x,\ \forall x,y\in A$.
+        \\Es decir, da vuelta el par ordenado.
+    \end{definition}
+    \begin{corollary}
+        $(R^{-1})^{-1}=R$.
+    \end{corollary}
+    \begin{corollary}
+        $R\subseteq S\Rightarrow R^{-1}\subseteq S^{-1}$.
+    \end{corollary}
+    \begin{definition}
+        $\overline{R}=R^C=A\times A-R=\{(a,b)\in A\times A: (a,b)\notin R\}$.\\
+        $$a\overline{R}b\Leftrightarrow a\cancel{R}b$$
+    \end{definition}
+   \newpage\subsection{Tipos de relaciones}
+    \begin{definition}
+        Sea $R$ una relación en un conjunto $A$:
+        \begin{itemize}
+            \item La relación $R$ es reflexiva si: $$\forall a\in A,\ aRa$$
+            \item La relación $R$ es irreflexiva si: $$\forall a\in A,\ a\cancel{R}a$$
+            \item La relación $R$ es simétrica si: $$\forall a,b\in A, aRb\Leftrightarrow bRa$$
+            \item La relación $R$ es anti-simétrica si: $$\begin{rcases}aRb\\bRa\end{rcases}\Rightarrow a=b$$
+            \item La relación $R$ es asimétrica si: $$aRb\Rightarrow b\cancel{R}a$$
+                Una relación asimétrica no puede ser reflexiva ni simétrica, e implica la anti-simétrica.
+            \item La relación $R$ es transitiva si: $$\begin{rcases}aRb\\bRc\end{rcases}\Rightarrow aRc$$
+        \end{itemize}
+    \end{definition}
+    \begin{corollary}
+        $R$ es simétrica $\Leftrightarrow R=R^{-1}$.
+    \end{corollary}
+    \begin{corollary}
+        Si $R$ es reflexiva, simétrica, etc, $R^{-1}$ es del mismo tipo.
+    \end{corollary}
+    \begin{definition}
+        Una relación $R$ sobre un conjunto $A$ es un orden parcial, o una relación de orden parcial, si $R$ es reflexiva, anti-simétrica y transitiva.
+    \end{definition}
+    \begin{definition}
+        Una relación de equivalencia $R$ sobre un conjunto $A$ es una relación que es reflexiva, simétrica y transitiva.
+    \end{definition}
+    \subsection{Producto, unión e intersección de relaciones}
+    \begin{definition}
+        Si $A,B,C$ son conjuntos y $R\subseteq A\times B$ y $S\subseteq B\times C$, entonces la relación compuesta $RS$ es una relación de $A$ en $C$ definida como $RS=\{(x,z) / x\in A \wedge z\in C \wedge \exists y\in B / (x,y)\in R \wedge (y,z)\in S \}$.
+    \end{definition}
+    \begin{theorem}
+        Sean $A,B,C,D$ conjuntos y $R_1\subseteq A\times B,\ R_2\subseteq B\times C,\ R_3\subseteq C\times D$.\\Entonces $R_1(R_2R_3)=(R_1R_2)R_3$.
+    \end{theorem}
+    \begin{definition}
+        Dado un conjunto $A$ y una relación $R$ sobre $A$, definimos las potencias de $R$ en forma recursiva como:
+        \begin{itemize}
+            \item $R^1=R$.
+            \item Para $n\in\mathbb{Z}^+,\ R^{n+1}=R\ R^n$.
+        \end{itemize}
+    \end{definition}
+    \begin{example}
+        Si $A=\{1,2,3,4\}$ y $R=\{(1,2),(1,3),(2,4),(3,2)\}$, entonces $R^2=\{(1,4),(1,2),(3,4)\}$, $R^3=\{(1,4)\}$ y para $n\ge4,\ R^n=\emptyset$.
+    \end{example}
+    \newpage\subsection{Representación matricial y dígrafos}
+    \subsubsection{Representación matricial}
+    \begin{definition}
+        Una matriz cero-uno $m\times n,\ E=(e_{ij})_{m\times n}$ es una disposición rectangular de números en $m$ filas y $n$ columnas, donde cada $e_{ij}$ para $1\le i\le m$, y $1\le j\le n$, denota la entrada de la i-esima columna de $E$ y cada una de dichas entradas es $0$ o $1$.
+    \end{definition}
+    \begin{definition}
+        Si $R$ es una relación entre $A$ y $B$, entonces $R$ puede ser representado por la matriz $M$ cuyos indices de fila y columna indexan los elementos de $a$ y $b$, respectivamente, de manera que las entradas de $M$ quedan definidas por:$$m_{ij}=\begin{cases}1 & aRb\\0 & a\cancel{R}b\end{cases}$$
+    \end{definition}
+    \begin{corollary}
+        Sea $A$ un conjunto y $R$ una relación sobre $A$, si $M(R)$ es la matriz de la relación, entonces:
+        \begin{itemize}
+            \item $M(R)=0$, la matriz con todos los elementos iguales a 0, si y sólo si $R=\emptyset$.
+            \item $M(R)=1$, la matriz con todos los elementos iguales a 1, si y sólo si $R=A\times A$.
+            \item $M(R^m)=[M(R)]^m,\ m\in\mathbb{Z}$.
+        \end{itemize}
+    \end{corollary}
+    \begin{corollary}
+        Sean $R$ y $S$ relaciones, y $M(R),\ M(S)$ sus matrices respectivamente,\\ entonces $M(R)\cdot M(S)=M(RS)$, pero ningún termino excede el $1$.
+    \end{corollary}
+    \begin{definition}
+        Sean $E$ y $F$ dos matrices cero-uno $m\times n$. Decimos que $E$ es menor que $F$ y escribimos $E\le F$, si $e_{ij}\le f_{ij}$, para todos $1\le i\le m,\ 1\le j\le n$.\\
+        En caso que exista al menos un elemento que no cumpla esto, las matrices no son comparables
+    \end{definition}
+    \begin{example}{ \ }\\
+        $$\begin{pmatrix} 0 & 1\\1 & 0 \end{pmatrix}\le \begin{pmatrix} 1 & 1\\1 & 0 \end{pmatrix}$$ 
+        $$\begin{pmatrix} 1 & 1\\1 & 0 \end{pmatrix} \cancel{\le} \begin{pmatrix} 0 & 1\\ 1 & 1 \end{pmatrix}\ \
+        \begin{pmatrix} 0&1\\1&1 \end{pmatrix} \cancel{\le} \begin{pmatrix} 1&1\\1&0 \end{pmatrix} $$
+    \end{example}\hfill\break
+    \begin{definition}{Intersección o producto coordenada a coordenada}
+        \\Si $M,\ N\in\mathcal{M}_{r\times s}\Rightarrow M\cap N\in\mathcal{M}_{r\times s} / (M\cap N)=M_{ij}\cdot N_{ij}$.
+    \end{definition}
+    \begin{theorem}
+        Dado un conjunto $A$ con y una relación $R$ sobre $A$, sea $M$ la matriz de relación para $R$, entonces:
+        \begin{itemize}
+            \item $R$ es reflexiva $\Leftrightarrow Id_{|A|}\le M$. En el caso contrario, es irreflexiva.
+            \item $R$ es simétrica $\Leftrightarrow M=M^t$.
+            \item $R$ es transitiva $\Leftrightarrow MM=M^2\le M$.
+            \item $R$ es anti-simétrica $\Leftrightarrow M\cap M^t\le Id_{|A|}$.\\
+                Recordar, esta matriz se forma operando los elementos correspondientes de $M$ y $M^t$ con las reglas $0\cap0=0\cap1=1\cap0=0$ y $1\cap1=1$ (lo mismo que multiplicación coordenada a coordenada).
+        \end{itemize}
+    \end{theorem}
+    \begin{corollary}
+        Sean las relaciones $R,\ S$, y $M(R),\ M(S)$ las matrices de las relaciones, entonces:
+        \begin{itemize}
+            \item $M(R)^t=M(R^{-1})$.
+            \item $M(R)+M(S)=M(R\cup S)$.
+            \item $M(R)\cap M(S)=M(R\cap S)$.
+        \end{itemize}
+    \end{corollary}
+    \begin{corollary}{Conteo de Relaciones}
+        \\Sea $|A|=n$:
+        \begin{itemize}
+            \item Cantidad de relaciones reflexivas: $2^{n^2-n}$\\Tenemos 2 posibilidades, $0$ o $1$, en la diagonal siempre tiene que haber 1, y la matriz va a tener un total de $n^2$ entradas, y les restamos $n$ que son las entradas que ya están ocupadas por la diagonal.
+            \item Cantidad de relaciones simétricas: $2^{\frac{n^2+n}{2}}$\\Devuelta, 2 posibilidades, la diagonal no importan las entradas si son $0$ o $1$, solo que sea simétrica, por lo que podemos elegir las entradas de la triangular superior y se determinan las del otro lado, que son $\frac{n^2-n}{2}$, pero les sumamos $n$ de la diagonal, $\frac{n^2-n}{2}+n=\frac{n^2+n}{2}$.
+            \item Cantidad de relaciones anti-simétricas: $2^n3^{\frac{n^2-n}{2}}$\\Las posibilidades de la diagonal son $2^n$, y fuera de la diagonal, los elementos $m_{ij}$ y $m_{ji}$, pueden ser ambos $0$, o uno $0$ y el otro $1$, por lo que son 3 posibilidades, y determinando la triangular superior ya se determina el otro lado, y son $\frac{n^2-n}{2}$ entradas.
+        \end{itemize}
+    \end{corollary}
+    \subsubsection{Dígrafos de relaciones}
+    \begin{definition}
+        Sea $A$ un conjunto finito no vació, un grafo dirigido o dígrafo $G$ sobre $A$ esta formado por los elementos de $A$, llamados vértices o nodo de $G$, y un subconjunto $E$ de $A\times A$, conocido como las aristas o arcos de $G$. Si $a,b\in V$ y $(a,b)\in E$, entonces existe una arista de $a$ a $b$.\\El vértice $a$ es el origen o fuente de la arista, y $b$ es el termino, o vértice terminal, y decimos que $b$ es adyacente desde $a$, y que $a$ es adyacente hacia $b$. Ademas, si $a\neq b$, entonces $(a,b)\neq(b,a)$. Una arista de la forma $(a,a)$ es una lazo en $a$.
+    \end{definition}
+\end{document}
