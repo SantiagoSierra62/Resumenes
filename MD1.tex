@@ -155,4 +155,134 @@
     \begin{definition}
         Sea $A$ un conjunto finito no vació, un grafo dirigido o dígrafo $G$ sobre $A$ esta formado por los elementos de $A$, llamados vértices o nodo de $G$, y un subconjunto $E$ de $A\times A$, conocido como las aristas o arcos de $G$. Si $a,b\in V$ y $(a,b)\in E$, entonces existe una arista de $a$ a $b$.\\El vértice $a$ es el origen o fuente de la arista, y $b$ es el termino, o vértice terminal, y decimos que $b$ es adyacente desde $a$, y que $a$ es adyacente hacia $b$. Ademas, si $a\neq b$, entonces $(a,b)\neq(b,a)$. Una arista de la forma $(a,a)$ es una lazo en $a$.
     \end{definition}
+    \subsection{Relaciones de equivalencia y particiones}
+    \begin{definition}
+        Dado un conjunto $A$ y un conjunto de indices $I$, sea $\emptyset\neq A_i \subseteq A\ \forall i\in I$. Entonces $\{A_i\}_{i\in I}$ es una partición de $A$ si $$A=\bigcup _{i\in I} A_{i} \ \ \text{y} \ \ A_{i} \cap A_{j} =\emptyset \ \forall i,j\in I\ /\ i\neq j$$
+        Cada subconjunto $A$, es una celda o bloque de la partición.
+    \end{definition}
+    \begin{definition}
+        Sea $R$ una relación de equivalencia sobre un conjunto $A$. Para cualquier $x\in A$, la clase de equivalencia de $x$, que se denota con $[x]$, se define como $[x]=\{y\in A\ /\ yRx\}$.
+    \end{definition}
+    \begin{theorem}
+        Si $R$ es una relación de equivalencia sobre un conjunto $A$, y $x,y\in A$, entonces
+        \begin{itemize}
+            \item $x\in [x]$.
+            \item $xRy \Leftrightarrow [x]=[y]$.
+            \item $[x]\neq[y]\Rightarrow [x]\cap[y]=\emptyset$ o $[a]\cap[b]\Rightarrow [a]=[b]$.
+        \end{itemize}
+    \end{theorem}
+    \begin{theorem}
+        Si $A$ es un conjunto, entonces:
+        \begin{itemize}
+            \item Cualquier relación de equivalencia $R$ sobre $A$ induce una partición de $A$.
+            \item Cualquier partición de $A$ da lugar a una relación de equivalencia $R$ sobre $A$.
+        \end{itemize}
+    \end{theorem}
+    \begin{theorem}
+        Para cualquier conjunto $A$, existe una correspondencia uno a uno entre el conjunto de relaciones de equivalencia sobre $A$ y el conjunto de particiones de $A$.
+    \end{theorem}
+    \begin{definition}
+        Dada una relación de equivalencia $R$ en un conjunto $A$, se llama conjunto cociente de $A$ determinado por $R$ al conjunto formado por todas las clases de equivalencia. Se le representa por $A/R$. Es decir:$$A/R=\{[a] \ /\ a\in A\}$$
+    \end{definition}
+    \subsection{Conjuntos parcialmente ordenados}
+    Para analizar el concepto de orden, sea $A$ un conjunto y $R$ una relación sobre $A$, el par $(A,R)$ es un conjunto parcialmente ordenado, si la relación sobre $A$ es un orden parcial.
+    \begin{definition}{Diagrama de Hasse}
+        \\En general, si $R$ es un orden parcial sobre un conjunto finito $A$, construimos un diagrama de Hasse para $R$ sobre $A$ trazando un segmento de $x$ hacia arriba, hacia $y$, si $x,y\in A$ son tales que $xRy$ y, lo que es mas importante, si no existe otro elemento $z\in A$ tal que $xRz$ y $zRy$. Si adoptamos el convenio de leer el diagrama de abajo hacia arriba, no es necesario dirigir las aristas.
+    \end{definition}
+    \begin{definition}
+        Si $(A,R)$ es un conjunto parcialmente ordenado, decimos que $A$ es totalmente ordenado si $\forall x,y\in A$ ocurre que $xRy$ o $yRx$.\\
+        En este caso, decimos que $R$ es un orden total.
+    \end{definition}
+    \begin{definition}
+        Si $(A,R)$ es un conjunto parcialmente ordenado, entonces un elemento $x\in A$ es un elemento maximal de $A$ si $\forall a\in A,\ a\neq x\Rightarrow x\cancel{R}a$. Un elemento $y\in A$ es un elemento minimal de $A$ si $\forall b\in A,\ b\neq y\Rightarrow b\cancel{R}y$.
+    \end{definition}
+    \begin{theorem}
+        Si $(A,R)$ es un conjunto parcialmente ordenado y $A$ es finito, entonces $A$ tiene un elemento maximal y uno minimal.
+    \end{theorem}
+    \begin{definition}
+        Si $(A,R)$ es un conjunto parcialmente ordenado, entonces decimos que $x\in A$ es un elemento mínimo si $xRa\ \forall a\in A$. El elemento $y\in A$ es un elemento máximo si $aRy\ \forall a\in A$.
+    \end{definition}
+    \begin{theorem}
+        Si el conjunto parcialmente ordenado $(A,R)$ tiene un elemento máximo o mínimo, entonces ese elemento es único.
+    \end{theorem}
+    \begin{definition}
+        Sea $(A,R)$ un conjunto parcialmente ordenado con $B\subseteq A$. Un elemento $x\in A$ es una cota inferior de $B$ si $xRb\ \forall b\in B$. De manera similar, un elemento $y\in A$ es una cota superior de $B$ si $bRy\ \forall b\in B$.\\
+        Un elemento $x'\in A$ es una máxima cota inferior o ínfimo de $B$ si es una cota inferior de $B$ y si para todas las demás cotas inferiores $x''$ de $B$ tenemos que $x''Rx'$. De forma análoga, $y'\in A$ es una mínima cota superior o supremo de $B$ si es una cota superior de $B$ y si $y'Ry''$ para todas las demás cotas superiores de $y''$ de $B$.
+    \end{definition}
+    \begin{theorem}
+        Si $(A,R)$ es un conjunto parcialmente ordenado y $B\subseteq A$, entonces $B$ tiene a lo sumo un ínfimo y supremo.
+    \end{theorem}
+    \begin{definition}
+        El conjunto parcialmente ordenado $(A,R)$ es un retículo si para cualesquiera $x,y\in A$, los elementos $sup\{x,y\}$ e $inf\{x,y\}$ existen en $A$.
+    \end{definition}
+    \begin{definition}{Cadena}
+        \\Sea $B\subseteq A$, $B$ es cadena si $\forall a,b\in B\ aRb$ o $bRa$.
+    \end{definition}
+    \begin{definition}{Anticadena}
+        \\Sea $B\subseteq A$, $B$ es anticadena si $\begin{cases} a\cancel{R}b\\b\cancel{R}a\end{cases}$ con $a\neq b$.
+    \end{definition}
+    \begin{theorem}
+        Sea $n$ el largo de la cadena mas larga $\Rightarrow\ A$ se puede particionar en $n$ anticadenas disjuntas.\\
+        Sea $m$ la cantidad de elementos de la anticadena mas grande $\Rightarrow\ A$ se puede particionar en $m$ cadenas disjuntas.
+    \end{theorem}
+    \newpage\section{Teoría de Grafos}
+    \begin{definition}
+        Sea $V$ un conjunto finito no vació, y sea $A\subseteq V\times V$. El par $(V,A)$ es un grafo sobre $V$, donde $V$ es el conjunto de vértices o nodos, y $A$ es su conjunto de aristas. Escribimos $G=(V,A)$ para denotar tal grafo.
+    \end{definition}
+    \begin{corollary}
+        Para cualquier arista $(a,b)\in A$ se dice que:
+        \begin{itemize}
+            \item La arista $(a,b)$ es incidente con los vértices $a$ y $b$.
+            \item $a,b$ son los extremos de $(a,b)$.
+            \item $a$ es el origen de $(a,b)$.
+            \item $b$ es el termino de $(a,b)$.
+        \end{itemize}
+    \end{corollary}
+    \begin{definition}
+        Dados dos vértices $u,v\in V$ con $G=(V,A)$, decimos que son vértices adyacentes si $(u,v)\in A$, ademas se dice que $u$ y $v$ son adyacentes, y que $u$ es adyacente hacia $v$.
+    \end{definition}
+    \begin{definition}
+        Dados $v\in V,\ a\in A$ con $G=(V,A)$, decimos que la arista $a$ es incidente al vértice $v$ si $\exists u\in V$ tal que $a=(u,v)$.
+    \end{definition}
+    \begin{definition}
+        Una arista de la forma $(a,a)$ es un lazo.
+    \end{definition}
+    \begin{definition}
+        Un vértice $a\in V$ esta aislado cuando no hay ningún vértice adyacente con $a$.
+    \end{definition}
+    \begin{corollary}
+        Un vértice con un lazo no está aislado.
+    \end{corollary}
+    \begin{definition}
+        Dado $G=(V,A)$ grafo, llamamos:
+        \begin{itemize}
+            \item Orden de $G$ al número de vértices, $m=|V|$.
+            \item Tamaño de $G$ al número de aristas, $n=|A|$.
+        \end{itemize}
+    \end{definition}
+    \begin{definition}{Camino}
+        Sea $G=(V,A)$ un grafo, un camino (en $G$) es una sucesión finita y alternada de vértices y aristas, de la forma: $$c=v_0,a_1,v_1,a_2,v_2,\dots,v_{n-1},a_n,v_n$$donde $a_i=(v_{i-1},v_i)$ y $1\le i\le n$.\\Siendo $n$ el número de aristas.
+    \end{definition}
+    \begin{corollary}
+        Un camino puede repetir vértices y/o aristas.
+    \end{corollary}
+    \begin{definition}
+        Un camino $c=v_0,\dots,v_n$ esta cerrado cuando $v_0=v_n$. De otra forma, esta abierto.
+    \end{definition}
+    \begin{definition}
+        Un recorrido es un camino sin repetición de aristas.
+    \end{definition}
+    \begin{definition}
+        Un camino simple es un camino sin repetición de vértices (con la excepción posible de los extremos).
+    \end{definition}
+    \begin{definition}
+        Un ciclo es un camino simple cerrado.
+    \end{definition}
+    \begin{corollary}
+        Un ciclo de longitud 1 es un lazo.
+        \begin{itemize}
+            \item En un grafo dirigido, pueden existir ciclos de longitud 2.
+            \item En un grafo no dirigido todos los ciclos tienen longitud $\ge 3$.
+        \end{itemize}
+    \end{corollary}
 \end{document}
