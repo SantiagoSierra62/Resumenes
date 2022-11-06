@@ -226,6 +226,7 @@
         Sea $m$ la cantidad de elementos de la anticadena mas grande $\Rightarrow\ A$ se puede particionar en $m$ cadenas disjuntas.
     \end{theorem}
     \newpage\section{Teoría de Grafos}
+    \subsection{Introducción}
     \begin{definition}
         Sea $V$ un conjunto finito no vació, y sea $A\subseteq V\times V$. El par $(V,A)$ es un grafo sobre $V$, donde $V$ es el conjunto de vértices o nodos, y $A$ es su conjunto de aristas. Escribimos $G=(V,A)$ para denotar tal grafo.
     \end{definition}
@@ -260,8 +261,9 @@
             \item Tamaño de $G$ al número de aristas, $n=|A|$.
         \end{itemize}
     \end{definition}
+    \subsection{Tipos de caminos}
     \begin{definition}{Camino}
-        \\Sea $G=(V,A)$ un grafo, un camino (en $G$) es una sucesión finita y alternada de vértices y aristas, de la forma: $$c=v_0,a_1,v_1,a_2,v_2,\dots,v_{n-1},a_n,v_n$$donde $a_i=(v_{i-1},v_i)$ y $1\le i\le n$.\\Siendo $n$ el número de aristas.
+        \\Sea $G=(V,A)$ un grafo, un camino (en $G$) es una sucesión finita y alternada de vértices y aristas, de la forma: $$c=v_0,a_1,v_1,a_2,v_2,\dots,v_{n-1},a_n,v_n$$donde $a_i=(v_{i-1},v_i)$ y $1\le i\le n$.\\Siendo $n$ el número de aristas, y la longitud del camino.
     \end{definition}
     \begin{corollary}
         Un camino puede repetir vértices y/o aristas.
@@ -277,12 +279,82 @@
     \end{definition}
     \begin{definition}
         Un ciclo es un camino simple cerrado.
-    \end{definition}
+    \end{definition}\newpage
     \begin{corollary}
         Un ciclo de longitud 1 es un lazo.
         \begin{itemize}
             \item En un grafo dirigido, pueden existir ciclos de longitud 2.
             \item En un grafo no dirigido todos los ciclos tienen longitud $\ge 3$.
         \end{itemize}
+        \begin{table}[htb]\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Nombre          & Origen = Termino? & Vértices Repetidos? & Aristas Repetidas? \\ \hline
+Camino          &                   &                     &                    \\ \hline
+Camino Cerrado  & Si                &                     &                    \\ \hline
+Camino Simple   &                   & No                  & No                 \\ \hline
+Recorrido       &                   &                     & No                 \\ \hline
+Circuito        & Si                &                     & No                 \\ \hline
+Circuito Simple & Si                & No                  & No                 \\ \hline
+\end{tabular}
+\end{table}
+    \end{corollary}
+    \begin{corollary}
+        Se suele considerar como iguales los circuitos simples que pasan por las mismas aristas.
+    \end{corollary}
+    \begin{theorem}
+        Sean $a$ y $b$ dos vértices distintos de un grafo $G$, si existe un camino desde $a$ hasta $b$, entonces existe (otro) camino simple desde $a$ hasta $b$.
+    \end{theorem}
+    \subsection{Grafos conexos y disconexos}
+    \begin{definition}
+        Un grafo $G=(V,A)$ es conexo cuando $\forall a,b\in V,\ a\neq b$, existe un camino (simple) desde $a$ hasta $b$.\\
+        Un grafo dirigido es conexo, cuando el grafo subyacente (olvidando la orientación de las aristas) es conexo.
+    \end{definition}
+    \begin{definition}
+        Un grafo (dirigido o no) es disconexo cuando no es conexo.
+    \end{definition}
+    \begin{definition}{Componentes Conexas}
+        \\Dado $G=(V,A)$ se considera la relación $(\sim)\subset V^2$ definida por $v\sim v'\Leftrightarrow$ existe un camino desde $v$ hasta $v'$.\\Es una relación de equivalencia. Las clases de equivalencia correspondiente son las componentes conexas del grafo $G$.
+    \end{definition}
+    \begin{definition}
+        Cuando $G$ es finito, se escribe $K(G)$ al numero de componentes conexas de $G$.
+    \end{definition}
+    \begin{corollary}
+        Las componentes conexas de un grafo dirigido se definen a partir del grafo no dirigido subyacente.
+    \end{corollary}
+    \begin{definition}{Multigrafo}
+        \\Un multigrafo es una terna $(V,A,ext)$ donde:
+        \begin{itemize}
+            \item $V$ es el conjunto de vértices.
+            \item $A$ es el conjunto de aristas.
+            \item $ext$: $E\to V^2$, $ext(e)=(a,b)$ quiere decir $a\xrightarrow{e} b$.
+        \end{itemize}
+        Es decir, de un vértice pueden salir múltiples aristas.
+    \end{definition}
+    \subsection{Subgrafos, grafos complementarios}
+    \begin{definition}
+        Sea $G=(V,A)$ un grafo, un subgrafo de $G$ es un grafo $G'=(V',A')$ tal que $\begin{cases}V'\subset V\\E'\subset E\end{cases}$.
+    \end{definition}
+    \begin{corollary}
+        $G'=(V',A')$ tiene que ser un grafo: $E'\subset V'^2$.
+    \end{corollary}
+    \begin{definition}
+        Sea $G=(V,A)$ un grafo, un subgrafo recubridor de $G$ es un subgrafo $G'=(V',A')\subset G$ tal que $V'=V$.
+    \end{definition}
+    \begin{definition}{Grafo completo}
+        \\Un grafo $G=(V,A)$ es completo si es:
+        \begin{itemize}
+            \item No dirigido.
+            \item No tiene lazos.
+            \item $\forall a,b\in V,\ a\neq b,\ \{a,b\}\in A$.
+        \end{itemize}
+        De modo equivalente $\forall a,b\in V,\ \{a,b\}\in A\Leftrightarrow a\neq b$.\\
+        Se escribe $K_n$ el grafo completo con $n$ vértices.
+    \end{definition}
+    \begin{corollary}
+        $K_n$ tiene $n$ vértices y $\frac{n(n-1)}{2}$ aristas.
+    \end{corollary}
+    \begin{corollary}
+        Todo grafo $G=(V,A)$ sin lazos es un subgrafo del grafo completo $\hat{G}=(V,\hat{A})$ donde $\hat{A}=\{\{a,b\}\in V^2\ /\ a\neq b\}$.
     \end{corollary}
 \end{document}
