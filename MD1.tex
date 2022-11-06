@@ -391,10 +391,10 @@ Circuito Simple & Si                & No                  & No                 \
         En un grafo $G$ sin lazos, un ciclo de orden $n\ (\ge 3)$ es un subgrafo de $G$ isomorfo a $C_n$.
     \end{definition}
     \begin{definition}{Árboles}
-       Un árbol es un grafo finito sin lazos, conexo, y sin ciclos. 
+       \\Un árbol es un grafo finito sin lazos, conexo, y sin ciclos. 
     \end{definition}
     \begin{definition}{Bosque}
-        Un bosque es un grafo cuyos componentes conexos son arboles.
+        \\Un bosque es un grafo cuyos componentes conexos son arboles.
     \end{definition}
     \begin{definition}
         Sea $G$ un grafo, un árbol recubridor de $G$ es un subgrafo recubridor de $G$ que es un árbol.
@@ -402,4 +402,36 @@ Circuito Simple & Si                & No                  & No                 \
     \begin{definition}
         Un bosque recubridor de $G$ es un bosque $B\subset G$ tal que $B$ es un subgrafo recubridor de $G$, cada árbol de $B$ es un árbol recubridor de una componente conexa de $G$.
     \end{definition}
+    \begin{theorem}
+        Un grafo es conexo si y sólo si tiene un árbol recubridor.
+    \end{theorem}
+    \begin{theorem}
+        Un grafo $G=(V,A)$ es un árbol si y solo si $\forall v,w\in V,\ v\neq w$, existe un único camino simple de $v$ a $w$.
+    \end{theorem}
+    \begin{definition}
+        En un grafo $G$ el grado de un vértice $v$ es el numero de aristas incidentes a $v$, y lo notamos como $gr_G(v)$.
+    \end{definition}
+    \begin{corollary}
+        En un árbol con al menos $2$ vértices, existe (al menos) un vértice de grado 1.
+    \end{corollary}
+    \begin{theorem}
+        Si $G=(V,A)$ es un árbol no vació, entonces: $|V|=|A|+1$. 
+    \end{theorem}
+    \begin{theorem}
+        Sea $G=(V,A)$ un grafo finito sin lazos, las siguientes propiedades son equivalentes:
+        \begin{itemize}
+            \item $G$ es un árbol.
+            \item $G$ es conexo, y si se elimina cualquier arista de $G$ se obtiene un bosque de $2$ árboles.
+            \item $G$ no contiene ciclos, y $|V|=|E|+1$.
+            \item $G$ es conexo, y $|V|=|E|+1$.
+            \item $G$ no contiene ciclos, y cualquier arista suplementaria entre $2$ vértices de $V$ introduce un ciclo.
+        \end{itemize}
+    \end{theorem}
+    \newpage\section{Caminos eulerianos y hamiltonianos}
+    \begin{definition}
+        Sea $G$ un grafo o multigrafo, para cualquier vértice $v$ de $G$, se llama grado de $v$ y se escribe $gr_G(v)$ (o $gr(v)$) el número de aristas incidentes con $v$, contando cada lazo (en $v$) $2$ veces.
+    \end{definition}
+    \begin{corollary}
+        Cualquier grafo o multigrafo $G$ finito $G=(V,A)$, tenemos que $\sum_{v\in V} gr(v)=2|E|$.
+    \end{corollary}
 \end{document}
