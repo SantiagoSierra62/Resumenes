@@ -261,7 +261,7 @@
             \item Tamaño de $G$ al número de aristas, $n=|A|$.
         \end{itemize}
     \end{definition}
-    \subsection{Tipos de caminos}
+    \newpage\subsection{Tipos de caminos}
     \begin{definition}{Camino}
         \\Sea $G=(V,A)$ un grafo, un camino (en $G$) es una sucesión finita y alternada de vértices y aristas, de la forma: $$c=v_0,a_1,v_1,a_2,v_2,\dots,v_{n-1},a_n,v_n$$donde $a_i=(v_{i-1},v_i)$ y $1\le i\le n$.\\Siendo $n$ el número de aristas, y la longitud del camino.
     \end{definition}
@@ -279,7 +279,7 @@
     \end{definition}
     \begin{definition}
         Un ciclo es un camino simple cerrado.
-    \end{definition}\newpage
+    \end{definition}
     \begin{corollary}
         Un ciclo de longitud 1 es un lazo.
         \begin{itemize}
@@ -305,7 +305,7 @@ Circuito Simple & Si                & No                  & No                 \
     \begin{theorem}
         Sean $a$ y $b$ dos vértices distintos de un grafo $G$, si existe un camino desde $a$ hasta $b$, entonces existe (otro) camino simple desde $a$ hasta $b$.
     \end{theorem}
-    \subsection{Grafos conexos y disconexos}
+    \newpage\subsection{Grafos conexos y disconexos}
     \begin{definition}
         Un grafo $G=(V,A)$ es conexo cuando $\forall a,b\in V,\ a\neq b$, existe un camino (simple) desde $a$ hasta $b$.\\
         Un grafo dirigido es conexo, cuando el grafo subyacente (olvidando la orientación de las aristas) es conexo.
@@ -355,6 +355,51 @@ Circuito Simple & Si                & No                  & No                 \
         $K_n$ tiene $n$ vértices y $\frac{n(n-1)}{2}$ aristas.
     \end{corollary}
     \begin{corollary}
-        Todo grafo $G=(V,A)$ sin lazos es un subgrafo del grafo completo $\hat{G}=(V,\hat{A})$ donde $\hat{A}=\{\{a,b\}\in V^2\ /\ a\neq b\}$.
+        Todo grafo $G=(V,A)$ sin lazos es un subgrafo recubridor de algún grafo completo $\hat{G}=(V,\hat{A})$ donde $\hat{A}=\{\{a,b\}\in V^2\ /\ a\neq b\}$.
     \end{corollary}
+    \begin{definition}
+        Si $G=(V,A)$ es un grafo sin lazos, el grafo complementario de $G$ esta definido por $\overline{G}=(V,\overline{A})$ con $\overline{A}=\{\{a,b\}\in V^2\ /\ a\neq b\wedge \{a,b\}\notin A\}$.
+    \end{definition}
+    \begin{corollary}
+        El complementario no tiene lazos.
+    \end{corollary}
+    \begin{corollary}
+        El complementario del complementario es el grafo inicial: $\overline{\overline{G}}=G$.
+    \end{corollary}
+    \newpage\subsection{Isomorfismos de grafos}
+    \begin{definition}
+        Un isomorfismo entre dos grafos $G_1=(V_1,A_1)$ y $G_2=(V_2,A_2)$ es una función $f:V_1\to V_2$ tal que:
+        \begin{itemize}
+            \item $f$ es biyectiva.
+            \item $\forall a,b\in V_1,\ \{a,b\}\in A_1\Leftrightarrow\{f(a),f(b)\}\in A_2$.
+        \end{itemize}
+        Dos grafos $G_1$ y $G_2$ son isomorfos cuando existe un isomorfismo $f:G_1\xrightarrow{\sim} G_2$.
+    \end{definition}
+    \begin{corollary}
+        Si $G_1$ es isomorfo con $G_2$, entonces $G_2$ es isomorfo con $G_1$.
+    \end{corollary}
+    \begin{corollary}
+        Si el grafo $G_1$ es isomorfo con el grafo $G_2$, y el grafo $G_2$ es isomorfo con el grafo $G_3$, entonces el grafo $G_1$ es isomorfo con $G_3$.
+    \end{corollary}
+    \begin{corollary}
+        De modo análogo se define la noción de isomorfismo para los grafos dirigidos y los multigrafos.
+    \end{corollary}
+    \begin{corollary}
+        Para cada $n\ge 3$, se define el grafo $C_n=(V_n,A_n)$ que es el ciclo de orden $n$, con $V_n=\{1,\dots,n\}$ y $A_n=\{\{1,2\},\{2,3\},\dots,\{n-1,n\},\{n,1\}\}$.
+    \end{corollary}
+    \begin{definition}
+        En un grafo $G$ sin lazos, un ciclo de orden $n\ (\ge 3)$ es un subgrafo de $G$ isomorfo a $C_n$.
+    \end{definition}
+    \begin{definition}{Árboles}
+       Un árbol es un grafo finito sin lazos, conexo, y sin ciclos. 
+    \end{definition}
+    \begin{definition}{Bosque}
+        Un bosque es un grafo cuyos componentes conexos son arboles.
+    \end{definition}
+    \begin{definition}
+        Sea $G$ un grafo, un árbol recubridor de $G$ es un subgrafo recubridor de $G$ que es un árbol.
+    \end{definition}
+    \begin{definition}
+        Un bosque recubridor de $G$ es un bosque $B\subset G$ tal que $B$ es un subgrafo recubridor de $G$, cada árbol de $B$ es un árbol recubridor de una componente conexa de $G$.
+    \end{definition}
 \end{document}
