@@ -963,7 +963,7 @@ $\displaystyle f$ diferenciable
     \\Sea $g:\mathbb{R}^2\to\mathbb{R}^2$, de forma $g(x,y)=(g_1(x,y),g_2(x,y))$, y $f:\mathbb{R}^2\to\mathbb{R}$, que escribiremos como $f(u,v)$. Supongamos que $g(x_0,y_0)=(u_0,v_0)$, que $f$ es diferenciable en $(u_0,v_0)$, y que tanto $g_1$ como $g_2$ son diferenciable en $(x_0,y_0)$, entonces la función $h=(f\circ g)$ tiene derivadas parciales que verifican:$$\frac{\partial h}{\partial x}(x_0,y_0)=\frac{\partial f}{\partial u}(u_0,v_0)\frac{\partial g_1}{\partial x}(x_0,y_0)+\frac{\partial f}{\partial v}(u_0,v_0)\frac{\partial g_2}{\partial x}(x_0,y_0)$$
     $$\frac{\partial h}{\partial y}(x_0,y_0)=\frac{\partial f}{\partial u}(u_0,v_0)\frac{\partial g_1}{\partial y}(x_0,y_0)+\frac{\partial f}{\partial v}(u_0,v_0)\frac{\partial g_2}{\partial y}(x_0,y_0)$$
 \end{theorem}
-\subsection{Derivadas de orden superior}
+\newpage\subsection{Derivadas de orden superior}
 \begin{definition}{Derivadas de segundo orden}
 \begin{itemize}
     \item $\frac{\partial}{\partial x}(\frac{\partial f}{\partial x})=\frac{\partial^2 f}{\partial x^2}=f_{xx}$
@@ -986,7 +986,7 @@ $\displaystyle f$ diferenciable
     Si $f\in C^1\Rightarrow\ f$ es diferenciable.\\
     Si $f\in C^2\Rightarrow\ f_{xy}=f_{yx}$.
 \end{corollary}
-\newpage\subsection{Funciones de $\mathbb{R}^n$ a $\mathbb{R}^m$}
+\subsection{Funciones de $\mathbb{R}^n$ a $\mathbb{R}^m$}
 \begin{definition}
     Una función $f:\mathbb{R}^n\to\mathbb{R}^m$ es de la forma $$f(x_1,x_2,\cdots,x_n)=(f_1(x_1,x_2,\cdots,x_n),f_2(x_1,x_2,\cdots,x_n),\cdots,f_m(x_1,x_2,\cdots,x_n))$$
 \end{definition}
@@ -1015,23 +1015,23 @@ $\displaystyle f$ diferenciable
 \begin{corollary}
     Observar que la diferencial de la composición es la composición de los diferenciales, por lo tanto, la matriz jacobiana de $f\circ g$ es el producto de las matrices Jacobianas de $f$ y $g$: $J_{f\circ g}(a)=J_f(g(a))\cdot J_g(a)$.
 \end{corollary}
-\subsection{Desarrollo de Taylor}
+\newpage\subsection{Desarrollo de Taylor}
+Recordemos que si $f$ es diferenciable en $a$, el diferencial de la transformación lineal que mejor aproxima localmente: $df_a(\triangle x,\triangle y)=f_x(a)\triangle x+f_y(a)\triangle y$.\\
+\\Consideremos una función $f\in C^2$, definimos el diferencial segundo en $a$ como la función $d^2f_a:\mathbb{R}^2\to\mathbb{R}$ definida por:$$d^2f_a(\triangle x,\triangle y)=f_{xx}(a)\triangle x^2+2f_{xy}(a)\triangle x\triangle y+f_{yy}(a)\triangle y^2$$
+De manera similar se definen los diferenciales de orden superior, por ejemplo si todas ls derivadas conmutan tenemos:$$d^3f_a(\triangle x,\triangle y)=f_{xxx}(a)\triangle x^3+3f_{xxy}(a)\triangle x^2\triangle y+3f_{xyy}(a)\triangle x\triangle y^2+f_{yyy}(a)\triangle y^3$$
 \begin{definition}
-Sea $f:\mathbb{R}\to\mathbb{R}$ con derivadas continuas hasta el orden $k+1$ en $a\in\mathbb{R}$. Entonces:\\
-$f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2}(x-a)^2+\cdots+\frac{f^{(k)}(a)}{k!}(x-a)^k+r(x-a)$ con $\lim_{x \to a}\frac{r(x-a)}{(x-a)^k}=0$.
+    Definimos la matriz Hessiana como $H=\begin{pmatrix} f_{xx}(a) & f_{xy}(a) \\ f_{yx}(a) & f_{yy}(a) \end{pmatrix} $
 \end{definition}
-\begin{theorem}{Teorema de Taylor}
-    Sea $f:\mathbb{R}^2\to\mathbb{R}$ de clase $C^{k+1}$ (derivadas parciales de orden $k+1$ continuas) y $a\in\mathbb{R}^2$.
-    \\Entonces:$$f(a+h)=f(a)+df_a(h_1,h_2)+\frac{d^2f_a}{2}(h_1,h_2)+\cdots+\frac{d^kf_a}{k!}(h_1,h_2)+r(h_1,h_2)$$
-    Con $\lim_{(h_1,h_2) \to (0,0)}\frac{r(h_1,h_2)}{(\sqrt{h_1^2+h_2^2})^k}=0$
-    \\O: $$f(x)=f(a)+df_a(x-a)+\frac{d^2f_a}{2}(x-a)+\cdots+\frac{d^{(k)}f_a}{k!}(x-a)+r(x-a)$$
-    Con $\lim_{x \to a}\frac{r(x-a)}{||x-a||^k}=0$
-\end{theorem}
 \begin{corollary}
-    Sea $a=(x_0,y_0)$, la aproximación lineal es: $f(x,y)\approx f(x_0,y_0)+J_f(x_0,y_0)\begin{pmatrix} x-x_0\\y-y_0 \end{pmatrix} $.
-    \\La aproximación cuadrática es $f(x,y)\approx f(x_0,y_0)+J_f(x_0,y_0) \begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix}+\frac{1}{2} \begin{pmatrix} x-x_0 & y-y_0 \end{pmatrix} H_f(x_0,y_0) \begin{pmatrix} x-x_0 \\ y-y_0 \end{pmatrix}  $.
-\end{corollary}\newpage
-\subsection{Integrales dobles}
+    Si notamos al vector de incrementos $v=(\triangle x,\triangle y)$, resulta $d^2f_a(v)=vHv^T$.
+\end{corollary}
+\begin{theorem}{Teorema de Taylor}
+    \\Sea $f:\mathbb{R}^m\to\mathbb{R}$ una función de clase $C^{k+1}$ (derivadas parciales de orden $k+1$ continuas) y $a\in\mathbb{R}^2$.
+    \\Entonces:$$f(a+h)=f(a)+df_a(h)+\frac{d^2f_a}{2}(h)+\cdots+\frac{d^kf_a}{k!}(h)+r(h)$$
+    donde el resto $r_k$ es una función que cumple $\lim_{(h) \to (0,\cdots,0)}\frac{r_k(h)}{||h||^k}=0$
+    \\Por ejemplo, en el caso de una función de dos variables, el desarrollo de Taylor de orden $2$ resulta: $$f(x_0+\triangle x,y_0+\triangle y)=f(x_0,y_0)+f_x(x_0,y_0)\triangle x+f_y(x_0,y_0)\triangle y+\frac{1}{2}[f_{xx}(x_0,y_0)\triangle x^2+2f_{xy}(x_0,y_0)\triangle x\triangle y+f_{yy}(x_0,y_0)\triangle y^2]$$$$+r(\triangle x,\triangle y)$$
+\end{theorem}
+\newpage\section{Integrales múltiples}
 \begin{corollary}{Propiedades}
     \\Sea $D$ compacto en $\mathbb{R}^2$:
     \begin{enumerate}
@@ -1042,10 +1042,20 @@ $f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2}(x-a)^2+\cdots+\frac{f^{(k)}(a)}{k!}(x-a)^
     \end{enumerate}
 \end{corollary}
 \begin{theorem}{Teorema de Fubini 1}
-    \\Sea $D=[a,b]\times[c,d]$ un rectangulo en $\mathbb{R}^2$. Entonces:$$\int\int_Df(x,y)dxdy=\int_{c}^{d}\left( \int_{a}^{b} f(x,y) dx \right) dy=\int_{a}^{b} \left( \int_{c}^{d} f(x,y) dy \right)  dx$$
+    \\Sea $D=[a,b]\times[c,d]$ un rectángulo en $\mathbb{R}^2$. Entonces:$$\int\int_Df(x,y)dxdy=\int_{c}^{d}\left( \int_{a}^{b} f(x,y) dx \right) dy=\int_{a}^{b} \left( \int_{c}^{d} f(x,y) dy \right)  dx$$
 \end{theorem}
 \begin{theorem}{Teorema de Fubini 2}
     \\Sea $D=\{(x,y)\in\mathbb{R}^2:\ a\le x\le b,\ \alpha(x)\le y\le \beta(x)\}$. Entonces: $$\int\int_Df(x,y)dxdy=\int_{a}^{b} \left( \int_{\alpha(x)}^{\beta(x)} f(x,y) dy \right)  dx=\int_{c}^{d} \left( \int_{\gamma(y)}^{\delta(y)} f(x,y) dx \right)  dy$$
 \end{theorem}
-
+\subsection{Cambios de variable}
+\begin{definition}
+    Sean $U$ y $V$ dos abiertos de $\mathbb{R}^2$, decimos que $g:U\to V$ es un cambio de variable si y solo si $g$ es biyectiva, diferenciable, y $det(J_g)\neq 0$ en todo el dominio $U$.
+\end{definition}
+\begin{theorem}{Cambio de variable}
+    \\Sea $f:D\to\mathbb{R}$ continua, y $g:U\to V$ un cambio de variable, donde $U$ y $V$ son abiertos, y $D\subset V$, entonces:$$\iint_Df(x,y)dxdy=\iint_{g^{-1}(D)}f(g(u,v))|det(J_g(u,v))|dudv$$
+\end{theorem}
+\subsection{Coordenadas polares}
+Recordemos que podemos representar cada punto del plano mediante su distancia al origen $p$ y el ángulo $\theta$ que forma con el eje horizontal, analíticamente tenemos $x=p\cos(\theta)$ e $y=p\sen(\theta)$
+    \\En términos de la notación que estamos usando cambio de variable, tenemos $g:[0,\infty)\times[0,2\pi)\to\mathbb{R}^2$, con $g(p,\theta)=(p\cos(\theta),p\sen(\theta))$, entonces el determinante de la matriz Jacobiana: $$J_g(p,\theta)=\begin{pmatrix} \cos(\theta) & -p\sen(\theta) \\ \sin(\theta) & p\cos(\theta) \end{pmatrix} $$
+    de donde tenemos $|det(J_g(p,\theta))|=|p\cos^2(\theta)+p\sin^2(\theta)|=p$.
 \end{document}
