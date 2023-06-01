@@ -1,0 +1,611 @@
+\documentclass[10pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, tikz, cancel, mathtools}
+\usepackage[margin=1in]{geometry}
+\usetikzlibrary{babel,positioning,chains,fit,shapes,calc}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{example}{Ejemplo}[section]
+
+\title{Matemática Discreta 1}
+\author{Santiago Sierra}
+
+\begin{document}
+\definecolor{myblue}{RGB}{80,80,160}
+\definecolor{mygreen}{RGB}{80,160,80}
+\maketitle \tableofcontents \newpage
+\section{Relaciones}
+\subsection{Definición de Relaciones}
+\begin{definition}
+	Para los conjuntos $A,\ B \subseteq U$, el producto cartesiano de $A$ y $B$ se denota por $A\times B$, y $$A\times B=\{(a,b)\ /\ a\in A \wedge b\in B\}$$
+\end{definition}
+\begin{corollary}
+	Notamos como $|A|$ al cardinal de un conjunto, que representa la cantidad de elementos en $A$.
+\end{corollary}
+\begin{corollary}
+	Si los conjuntos $A,\ B$ son finitos, se sigue de la regla del producto que $|A\times B|=|A|\cdot|B|$.\\
+	Aunque generalmente no ocurre que $A\times B=B\times A$, tenemos que $|A\times B|=|B\times A|$.
+\end{corollary}
+\begin{definition}
+	Para los conjuntos $A,B\subseteq U$, cualquier subconjunto de $A\times B$ es una relación de $A$ en $B$.\\
+	A los subconjuntos de $A\times A$ se les llama relaciones sobre $A$.
+\end{definition}
+\begin{definition}{Relación binaria}
+	\\Una relación binaria es un conjunto de pares ordenados pertenecientes al producto cartesiano de dos conjuntos que cumple una propiedad $P(a,b)$ en particular, es decir: $$R=\{(a,b)\in A\times B\ /\ P(a,b)\}$$
+	Notaremos como $aRb$ para indicar que $(a,b)\in R$ y $a\cancel{R}b$ para expresar que $(a,b)\notin R$
+\end{definition}
+\begin{corollary}
+	En general, para conjuntos finitos $A,\ B$, existen $2^{|A\times B|}=2^{|A||B|}$ relaciones de $A$ en $B$, incluyendo la relación vacía y la propia relación $A\times B$.
+\end{corollary}
+\begin{definition}{Relación inversa}
+	Si $R$ es una relación sobre $A$, entonces $R^{-1}$ es una relación sobre $A$ definida por $xRy\Leftrightarrow yR^{-1}x,\ \forall x,y\in A$.
+	\\Es decir, da vuelta el par ordenado.
+\end{definition}
+\begin{corollary}
+	$(R^{-1})^{-1}=R$.
+\end{corollary}
+\begin{corollary}
+	$R\subseteq S\Rightarrow R^{-1}\subseteq S^{-1}$.
+\end{corollary}
+\begin{definition}
+	$\overline{R}=R^C=A\times A-R=\{(a,b)\in A\times A: (a,b)\notin R\}$.\\
+	$$a\overline{R}b\Leftrightarrow a\cancel{R}b$$
+\end{definition}
+\newpage\subsection{Tipos de relaciones}
+\begin{definition}
+	Sea $R$ una relación en un conjunto $A$:
+	\begin{itemize}
+		\item La relación $R$ es reflexiva si: $$\forall a\in A,\ aRa$$
+		\item La relación $R$ es irreflexiva si: $$\forall a\in A,\ a\cancel{R}a$$
+		\item La relación $R$ es simétrica si: $$\forall a,b\in A, aRb\Leftrightarrow bRa$$
+		\item La relación $R$ es anti-simétrica si: $$\begin{rcases}aRb\\bRa\end{rcases}\Rightarrow a=b$$
+		\item La relación $R$ es asimétrica si: $$aRb\Rightarrow b\cancel{R}a$$
+		      Una relación asimétrica no puede ser reflexiva ni simétrica, e implica la anti-simétrica.
+		\item La relación $R$ es transitiva si: $$\begin{rcases}aRb\\bRc\end{rcases}\Rightarrow aRc$$
+	\end{itemize}
+\end{definition}
+\begin{corollary}
+	$R$ es simétrica $\Leftrightarrow R=R^{-1}$.
+\end{corollary}
+\begin{corollary}
+	Si $R$ es reflexiva, simétrica, etc, $R^{-1}$ es del mismo tipo.
+\end{corollary}
+\begin{definition}
+	Una relación $R$ sobre un conjunto $A$ es un orden parcial, o una relación de orden parcial, si $R$ es reflexiva, anti-simétrica y transitiva.
+\end{definition}
+\begin{definition}
+	Una relación de equivalencia $R$ sobre un conjunto $A$ es una relación que es reflexiva, simétrica y transitiva.
+\end{definition}
+\subsection{Producto, unión e intersección de relaciones}
+\begin{definition}
+	Si $A,B,C$ son conjuntos y $R\subseteq A\times B$ y $S\subseteq B\times C$, entonces la relación compuesta $RS$ es una relación de $A$ en $C$ definida como $RS=\{(x,z) / x\in A \wedge z\in C \wedge \exists y\in B / (x,y)\in R \wedge (y,z)\in S \}$.
+\end{definition}
+\begin{theorem}
+	Sean $A,B,C,D$ conjuntos y $R_1\subseteq A\times B,\ R_2\subseteq B\times C,\ R_3\subseteq C\times D$.\\Entonces $R_1(R_2R_3)=(R_1R_2)R_3$.
+\end{theorem}
+\begin{definition}
+	Dado un conjunto $A$ y una relación $R$ sobre $A$, definimos las potencias de $R$ en forma recursiva como:
+	\begin{itemize}
+		\item $R^1=R$.
+		\item Para $n\in\mathbb{Z}^+,\ R^{n+1}=R\ R^n$.
+	\end{itemize}
+\end{definition}
+\begin{example}
+	Si $A=\{1,2,3,4\}$ y $R=\{(1,2),(1,3),(2,4),(3,2)\}$, entonces $R^2=\{(1,4),(1,2),(3,4)\}$, $R^3=\{(1,4)\}$ y para $n\ge4,\ R^n=\emptyset$.
+\end{example}
+\newpage\subsection{Representación matricial y dígrafos}
+\subsubsection{Representación matricial}
+\begin{definition}
+	Una matriz cero-uno $m\times n,\ E=(e_{ij})_{m\times n}$ es una disposición rectangular de números en $m$ filas y $n$ columnas, donde cada $e_{ij}$ para $1\le i\le m$, y $1\le j\le n$, denota la entrada de la i-esima columna de $E$ y cada una de dichas entradas es $0$ o $1$.
+\end{definition}
+\begin{definition}
+	Si $R$ es una relación entre $A$ y $B$, entonces $R$ puede ser representado por la matriz $M$ cuyos indices de fila y columna indexan los elementos de $a$ y $b$, respectivamente, de manera que las entradas de $M$ quedan definidas por:$$m_{ij}=\begin{cases}1 & aRb\\0 & a\cancel{R}b\end{cases}$$
+\end{definition}
+\begin{corollary}
+	Sea $A$ un conjunto y $R$ una relación sobre $A$, si $M(R)$ es la matriz de la relación, entonces:
+	\begin{itemize}
+		\item $M(R)=0$, la matriz con todos los elementos iguales a 0, si y sólo si $R=\emptyset$.
+		\item $M(R)=1$, la matriz con todos los elementos iguales a 1, si y sólo si $R=A\times A$.
+		\item $M(R^m)=[M(R)]^m,\ m\in\mathbb{Z}$.
+	\end{itemize}
+\end{corollary}
+\begin{corollary}
+	Sean $R$ y $S$ relaciones, y $M(R),\ M(S)$ sus matrices respectivamente,\\ entonces $M(R)\cdot M(S)=M(RS)$, pero ningún termino excede el $1$.
+\end{corollary}
+\begin{definition}
+	Sean $E$ y $F$ dos matrices cero-uno $m\times n$. Decimos que $E$ es menor que $F$ y escribimos $E\le F$, si $e_{ij}\le f_{ij}$, para todos $1\le i\le m,\ 1\le j\le n$.\\
+	En caso que exista al menos un elemento que no cumpla esto, las matrices no son comparables
+\end{definition}
+\begin{example}{ \ }\\
+	$$\begin{pmatrix} 0 & 1\\1 & 0 \end{pmatrix}\le \begin{pmatrix} 1 & 1\\1 & 0 \end{pmatrix}$$
+	$$\begin{pmatrix} 1 & 1\\1 & 0 \end{pmatrix} \cancel{\le} \begin{pmatrix} 0 & 1\\ 1 & 1 \end{pmatrix}\ \
+		\begin{pmatrix} 0&1\\1&1 \end{pmatrix} \cancel{\le} \begin{pmatrix} 1&1\\1&0 \end{pmatrix} $$
+\end{example}\hfill\break
+\begin{definition}{Intersección o producto coordenada a coordenada}
+	\\Si $M,\ N\in\mathcal{M}_{r\times s}\Rightarrow M\cap N\in\mathcal{M}_{r\times s} / (M\cap N)=M_{ij}\cdot N_{ij}$.
+\end{definition}
+\begin{theorem}
+	Dado un conjunto $A$ con y una relación $R$ sobre $A$, sea $M$ la matriz de relación para $R$, entonces:
+	\begin{itemize}
+		\item $R$ es reflexiva $\Leftrightarrow Id_{|A|}\le M$. En el caso contrario, es irreflexiva.
+		\item $R$ es simétrica $\Leftrightarrow M=M^t$.
+		\item $R$ es transitiva $\Leftrightarrow MM=M^2\le M$.
+		\item $R$ es anti-simétrica $\Leftrightarrow M\cap M^t\le Id_{|A|}$.\\
+		      Recordar, esta matriz se forma operando los elementos correspondientes de $M$ y $M^t$ con las reglas $0\cap0=0\cap1=1\cap0=0$ y $1\cap1=1$ (lo mismo que multiplicación coordenada a coordenada).
+	\end{itemize}
+\end{theorem}
+\begin{corollary}
+	Sean las relaciones $R,\ S$, y $M(R),\ M(S)$ las matrices de las relaciones, entonces:
+	\begin{itemize}
+		\item $M(R)^t=M(R^{-1})$.
+		\item $M(R)+M(S)=M(R\cup S)$.
+		\item $M(R)\cap M(S)=M(R\cap S)$.
+	\end{itemize}
+\end{corollary}
+\begin{corollary}{Conteo de Relaciones}
+	\\Sea $|A|=n$:
+	\begin{itemize}
+		\item Cantidad de relaciones reflexivas: $2^{n^2-n}$\\Tenemos 2 posibilidades, $0$ o $1$, en la diagonal siempre tiene que haber 1, y la matriz va a tener un total de $n^2$ entradas, y les restamos $n$ que son las entradas que ya están ocupadas por la diagonal.
+		\item Cantidad de relaciones simétricas: $2^{\frac{n^2+n}{2}}$\\Devuelta, 2 posibilidades, la diagonal no importan las entradas si son $0$ o $1$, solo que sea simétrica, por lo que podemos elegir las entradas de la triangular superior y se determinan las del otro lado, que son $\frac{n^2-n}{2}$, pero les sumamos $n$ de la diagonal, $\frac{n^2-n}{2}+n=\frac{n^2+n}{2}$.
+		\item Cantidad de relaciones anti-simétricas: $2^n3^{\frac{n^2-n}{2}}$\\Las posibilidades de la diagonal son $2^n$, y fuera de la diagonal, los elementos $m_{ij}$ y $m_{ji}$, pueden ser ambos $0$, o uno $0$ y el otro $1$, por lo que son 3 posibilidades, y determinando la triangular superior ya se determina el otro lado, y son $\frac{n^2-n}{2}$ entradas.
+	\end{itemize}
+\end{corollary}
+\subsubsection{Dígrafos de relaciones}
+\begin{definition}
+	Sea $A$ un conjunto finito no vació, un grafo dirigido o dígrafo $G$ sobre $A$ esta formado por los elementos de $A$, llamados vértices o nodo de $G$, y un subconjunto $E$ de $A\times A$, conocido como las aristas o arcos de $G$. Si $a,b\in V$ y $(a,b)\in E$, entonces existe una arista de $a$ a $b$.\\El vértice $a$ es el origen o fuente de la arista, y $b$ es el termino, o vértice terminal, y decimos que $b$ es adyacente desde $a$, y que $a$ es adyacente hacia $b$. Ademas, si $a\neq b$, entonces $(a,b)\neq(b,a)$. Una arista de la forma $(a,a)$ es una lazo en $a$.
+\end{definition}
+\subsection{Relaciones de equivalencia y particiones}
+\begin{definition}
+	Dado un conjunto $A$ y un conjunto de indices $I$, sea $\emptyset\neq A_i \subseteq A\ \forall i\in I$. Entonces $\{A_i\}_{i\in I}$ es una partición de $A$ si $$A=\bigcup _{i\in I} A_{i} \ \ \text{y} \ \ A_{i} \cap A_{j} =\emptyset \ \forall i,j\in I\ /\ i\neq j$$
+	Cada subconjunto $A$, es una celda o bloque de la partición.
+\end{definition}
+\begin{definition}
+	Sea $R$ una relación de equivalencia sobre un conjunto $A$. Para cualquier $x\in A$, la clase de equivalencia de $x$, que se denota con $[x]$, se define como $[x]=\{y\in A\ /\ yRx\}$.
+\end{definition}
+\begin{theorem}
+	Si $R$ es una relación de equivalencia sobre un conjunto $A$, y $x,y\in A$, entonces
+	\begin{itemize}
+		\item $x\in [x]$.
+		\item $xRy \Leftrightarrow [x]=[y]$.
+		\item $[x]\neq[y]\Rightarrow [x]\cap[y]=\emptyset$ o $[a]\cap[b]\Rightarrow [a]=[b]$.
+	\end{itemize}
+\end{theorem}
+\begin{theorem}
+	Si $A$ es un conjunto, entonces:
+	\begin{itemize}
+		\item Cualquier relación de equivalencia $R$ sobre $A$ induce una partición de $A$.
+		\item Cualquier partición de $A$ da lugar a una relación de equivalencia $R$ sobre $A$.
+	\end{itemize}
+\end{theorem}
+\begin{theorem}
+	Para cualquier conjunto $A$, existe una correspondencia uno a uno entre el conjunto de relaciones de equivalencia sobre $A$ y el conjunto de particiones de $A$.
+\end{theorem}
+\begin{definition}
+	Dada una relación de equivalencia $R$ en un conjunto $A$, se llama conjunto cociente de $A$ determinado por $R$ al conjunto formado por todas las clases de equivalencia. Se le representa por $A/R$. Es decir:$$A/R=\{[a] \ /\ a\in A\}$$
+\end{definition}
+\subsection{Conjuntos parcialmente ordenados}
+Para analizar el concepto de orden, sea $A$ un conjunto y $R$ una relación sobre $A$, el par $(A,R)$ es un conjunto parcialmente ordenado, si la relación sobre $A$ es un orden parcial.
+\begin{definition}{Diagrama de Hasse}
+	\\En general, si $R$ es un orden parcial sobre un conjunto finito $A$, construimos un diagrama de Hasse para $R$ sobre $A$ trazando un segmento de $x$ hacia arriba, hacia $y$, si $x,y\in A$ son tales que $xRy$ y, lo que es mas importante, si no existe otro elemento $z\in A$ tal que $xRz$ y $zRy$. Si adoptamos el convenio de leer el diagrama de abajo hacia arriba, no es necesario dirigir las aristas.
+\end{definition}
+\begin{definition}
+	Si $(A,R)$ es un conjunto parcialmente ordenado, decimos que $A$ es totalmente ordenado si $\forall x,y\in A$ ocurre que $xRy$ o $yRx$.\\
+	En este caso, decimos que $R$ es un orden total.
+\end{definition}
+\begin{definition}
+	Si $(A,R)$ es un conjunto parcialmente ordenado, entonces un elemento $x\in A$ es un elemento maximal de $A$ si $\forall a\in A,\ a\neq x\Rightarrow x\cancel{R}a$. Un elemento $y\in A$ es un elemento minimal de $A$ si $\forall b\in A,\ b\neq y\Rightarrow b\cancel{R}y$.
+\end{definition}
+\begin{theorem}
+	Si $(A,R)$ es un conjunto parcialmente ordenado y $A$ es finito, entonces $A$ tiene un elemento maximal y uno minimal.
+\end{theorem}
+\begin{definition}
+	Si $(A,R)$ es un conjunto parcialmente ordenado, entonces decimos que $x\in A$ es un elemento mínimo si $xRa\ \forall a\in A$. El elemento $y\in A$ es un elemento máximo si $aRy\ \forall a\in A$.
+\end{definition}
+\begin{theorem}
+	Si el conjunto parcialmente ordenado $(A,R)$ tiene un elemento máximo o mínimo, entonces ese elemento es único.
+\end{theorem}
+\begin{definition}
+	Sea $(A,R)$ un conjunto parcialmente ordenado con $B\subseteq A$. Un elemento $x\in A$ es una cota inferior de $B$ si $xRb\ \forall b\in B$. De manera similar, un elemento $y\in A$ es una cota superior de $B$ si $bRy\ \forall b\in B$.\\
+	Un elemento $x'\in A$ es una máxima cota inferior o ínfimo de $B$ si es una cota inferior de $B$ y si para todas las demás cotas inferiores $x''$ de $B$ tenemos que $x''Rx'$. De forma análoga, $y'\in A$ es una mínima cota superior o supremo de $B$ si es una cota superior de $B$ y si $y'Ry''$ para todas las demás cotas superiores de $y''$ de $B$.
+\end{definition}
+\begin{theorem}
+	Si $(A,R)$ es un conjunto parcialmente ordenado y $B\subseteq A$, entonces $B$ tiene a lo sumo un ínfimo y supremo.
+\end{theorem}
+\begin{definition}
+	El conjunto parcialmente ordenado $(A,R)$ es un retículo si para cualesquiera $x,y\in A$, los elementos $sup\{x,y\}$ e $inf\{x,y\}$ existen en $A$.
+\end{definition}
+\begin{definition}{Cadena}
+	\\Sea $B\subseteq A$, $B$ es cadena si $\forall a,b\in B\ aRb$ o $bRa$.
+\end{definition}
+\begin{definition}{Anticadena}
+	\\Sea $B\subseteq A$, $B$ es anticadena si $\begin{cases} a\cancel{R}b\\b\cancel{R}a\end{cases}$ con $a\neq b$.
+\end{definition}
+\begin{theorem}
+	Sea $n$ el largo de la cadena mas larga $\Rightarrow\ A$ se puede particionar en $n$ anticadenas disjuntas.\\
+	Sea $m$ la cantidad de elementos de la anticadena mas grande $\Rightarrow\ A$ se puede particionar en $m$ cadenas disjuntas.
+\end{theorem}
+\newpage\section{Teoría de Grafos}
+\subsection{Introducción}
+\begin{definition}
+	Sea $V$ un conjunto finito no vació, y sea $A\subseteq V\times V$. El par $(V,A)$ es un grafo sobre $V$, donde $V$ es el conjunto de vértices o nodos, y $A$ es su conjunto de aristas. Escribimos $G=(V,A)$ para denotar tal grafo.
+\end{definition}
+\begin{corollary}
+	Para cualquier arista $(a,b)\in A$ se dice que:
+	\begin{itemize}
+		\item La arista $(a,b)$ es incidente con los vértices $a$ y $b$.
+		\item $a,b$ son los extremos de $(a,b)$.
+		\item $a$ es el origen de $(a,b)$.
+		\item $b$ es el termino de $(a,b)$.
+	\end{itemize}
+\end{corollary}
+\begin{definition}
+	Dados dos vértices $u,v\in V$ con $G=(V,A)$, decimos que son vértices adyacentes si $(u,v)\in A$, ademas se dice que $u$ y $v$ son adyacentes, y que $u$ es adyacente hacia $v$.
+\end{definition}
+\begin{definition}
+	Dados $v\in V,\ a\in A$ con $G=(V,A)$, decimos que la arista $a$ es incidente al vértice $v$ si $\exists u\in V$ tal que $a=(u,v)$.
+\end{definition}
+\begin{definition}
+	Una arista de la forma $(a,a)$ es un lazo.
+\end{definition}
+\begin{definition}
+	Un vértice $a\in V$ esta aislado cuando no hay ningún vértice adyacente con $a$.
+\end{definition}
+\begin{corollary}
+	Un vértice con un lazo no está aislado.
+\end{corollary}
+\begin{definition}
+	Dado $G=(V,A)$ grafo, llamamos:
+	\begin{itemize}
+		\item Orden de $G$ al número de vértices, $m=|V|$.
+		\item Tamaño de $G$ al número de aristas, $n=|A|$.
+	\end{itemize}
+\end{definition}
+\newpage\subsection{Tipos de caminos}
+\begin{definition}{Camino}
+	\\Sea $G=(V,A)$ un grafo, un camino (en $G$) es una sucesión finita y alternada de vértices y aristas, de la forma: $$c=v_0,a_1,v_1,a_2,v_2,\dots,v_{n-1},a_n,v_n$$donde $a_i=(v_{i-1},v_i)$ y $1\le i\le n$.\\Siendo $n$ el número de aristas, y la longitud del camino.
+\end{definition}
+\begin{corollary}
+	Un camino puede repetir vértices y/o aristas.
+\end{corollary}
+\begin{definition}
+	Un camino $c=v_0,\dots,v_n$ esta cerrado cuando $v_0=v_n$. De otra forma, esta abierto.
+\end{definition}
+\begin{definition}
+	Un recorrido es un camino sin repetición de aristas.
+\end{definition}
+\begin{definition}
+	Un camino simple es un camino sin repetición de vértices (con la excepción posible de los extremos).
+\end{definition}
+\begin{definition}
+	Un ciclo es un camino simple cerrado.
+\end{definition}
+\begin{corollary}
+	Un ciclo de longitud 1 es un lazo.
+	\begin{itemize}
+		\item En un grafo dirigido, pueden existir ciclos de longitud 2.
+		\item En un grafo no dirigido todos los ciclos tienen longitud $\ge 3$.
+	\end{itemize}
+	\begin{table}[htb]\centering
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			Nombre          & Origen = Termino? & Vértices Repetidos? & Aristas Repetidas? \\ \hline
+			Camino          &                   &                     &                    \\ \hline
+			Camino Cerrado  & Si                &                     &                    \\ \hline
+			Camino Simple   &                   & No                  & No                 \\ \hline
+			Recorrido       &                   &                     & No                 \\ \hline
+			Circuito        & Si                &                     & No                 \\ \hline
+			Circuito Simple & Si                & No                  & No                 \\ \hline
+		\end{tabular}
+	\end{table}
+\end{corollary}
+\begin{corollary}
+	Se suele considerar como iguales los circuitos simples que pasan por las mismas aristas.
+\end{corollary}
+\begin{theorem}
+	Sean $a$ y $b$ dos vértices distintos de un grafo $G$, si existe un camino desde $a$ hasta $b$, entonces existe (otro) camino simple desde $a$ hasta $b$.
+\end{theorem}
+\newpage\subsection{Grafos conexos y disconexos}
+\begin{definition}
+	Un grafo $G=(V,A)$ es conexo cuando $\forall a,b\in V,\ a\neq b$, existe un camino desde $a$ hasta $b$.\\
+	Un grafo dirigido es conexo, cuando el grafo subyacente (olvidando la orientación de las aristas) es conexo.
+\end{definition}
+\begin{definition}
+	Un grafo (dirigido o no) es disconexo cuando no es conexo.
+\end{definition}
+\begin{definition}{Componentes Conexas}
+	\\Dado $G=(V,A)$ se considera la relación $(\sim)\subset V^2$ definida por $v\sim v'\Leftrightarrow$ existe un camino desde $v$ hasta $v'$.\\Es una relación de equivalencia. Las clases de equivalencia correspondiente son las componentes conexas del grafo $G$.
+\end{definition}
+\begin{definition}
+	Cuando $G$ es finito, se escribe $K(G)$ al numero de componentes conexas de $G$.
+\end{definition}
+\begin{corollary}
+	$G$ es conexo $\Leftrightarrow K(G)=1$.
+\end{corollary}
+\begin{corollary}
+	Las componentes conexas de un grafo dirigido se definen a partir del grafo no dirigido subyacente.
+\end{corollary}
+\begin{definition}{Multigrafo}
+	\\Un multigrafo es una terna $(V,A,ext)$ donde:
+	\begin{itemize}
+		\item $V$ es el conjunto de vértices.
+		\item $A$ es el conjunto de aristas.
+		\item $ext$: $A\to V^2$, $ext(a)=(x,y)$ quiere decir $x\xrightarrow{a} y$.
+	\end{itemize}
+	Es decir, de un vértice pueden salir múltiples aristas.
+\end{definition}
+\subsection{Subgrafos, grafos complementarios}
+\begin{definition}
+	Sea $G=(V,A)$ un grafo, un subgrafo de $G$ es un grafo $G'=(V',A')$ tal que $\begin{cases}V'\subset V\\A'\subset A\end{cases}$.
+\end{definition}
+\begin{corollary}
+	$G'=(V',A')$ tiene que ser un grafo: $A'\subset V'^2$.
+\end{corollary}
+\begin{definition}
+	Sea $G=(V,A)$ un grafo, un subgrafo recubridor de $G$ es un subgrafo $G'=(V',A')\subset G$ tal que $V'=V$.
+\end{definition}
+\begin{definition}{Grafo completo}
+	\\Un grafo $G=(V,A)$ es completo si es:
+	\begin{itemize}
+		\item No dirigido.
+		\item No tiene lazos.
+		\item $\forall a,b\in V,\ a\neq b,\ \{a,b\}\in A$.
+	\end{itemize}
+	De modo equivalente $\forall a,b\in V,\ \{a,b\}\in A\Leftrightarrow a\neq b$.\\
+	Se escribe $K_n$ el grafo completo con $n$ vértices.
+\end{definition}
+\begin{corollary}
+	$K_n$ tiene $n$ vértices y $\frac{n(n-1)}{2}$ aristas.
+\end{corollary}
+\begin{corollary}
+	Todo grafo $G=(V,A)$ sin lazos es un subgrafo recubridor de algún grafo completo $\hat{G}=(V,\hat{A})$ donde $\hat{A}=\{\{a,b\}\in V^2\ /\ a\neq b\}$.
+\end{corollary}
+\begin{definition}
+	Si $G=(V,A)$ es un grafo sin lazos, el grafo complementario de $G$ esta definido por $\overline{G}=(V,\overline{A})$ con $\overline{A}=\{\{a,b\}\in V^2\ /\ a\neq b\wedge \{a,b\}\notin A\}$.
+\end{definition}
+\begin{corollary}
+	El complementario no tiene lazos.
+\end{corollary}
+\begin{corollary}
+	El complementario del complementario es el grafo inicial: $\overline{\overline{G}}=G$.
+\end{corollary}
+\newpage\subsection{Isomorfismos de grafos}
+\begin{definition}
+	Un isomorfismo entre dos grafos $G_1=(V_1,A_1)$ y $G_2=(V_2,A_2)$ es una función $f:V_1\to V_2$ tal que:
+	\begin{itemize}
+		\item $f$ es biyectiva.
+		\item $\forall a,b\in V_1,\ \{a,b\}\in A_1\Leftrightarrow\{f(a),f(b)\}\in A_2$.
+	\end{itemize}
+	Dos grafos $G_1$ y $G_2$ son isomorfos cuando existe un isomorfismo $f:G_1\xrightarrow{\sim} G_2$.
+\end{definition}
+\begin{corollary}
+	Si $G_1$ es isomorfo con $G_2$, entonces $G_2$ es isomorfo con $G_1$.
+\end{corollary}
+\begin{corollary}
+	Si el grafo $G_1$ es isomorfo con el grafo $G_2$, y el grafo $G_2$ es isomorfo con el grafo $G_3$, entonces el grafo $G_1$ es isomorfo con $G_3$.
+\end{corollary}
+\begin{corollary}
+	De modo análogo se define la noción de isomorfismo para los grafos dirigidos y los multigrafos.
+\end{corollary}
+\begin{corollary}
+	Para cada $n\ge 3$, se define el grafo $C_n=(V_n,A_n)$ que es el ciclo de orden $n$, con $V_n=\{1,\dots,n\}$ y $A_n=\{\{1,2\},\{2,3\},\dots,\{n-1,n\},\{n,1\}\}$.
+\end{corollary}
+\begin{definition}
+	En un grafo $G$ sin lazos, un ciclo de orden $n\ (\ge 3)$ es un subgrafo de $G$ isomorfo a $C_n$.
+\end{definition}
+\begin{definition}{Árboles}
+	\\Un árbol es un grafo finito sin lazos, conexo, y sin ciclos.
+\end{definition}
+\begin{definition}{Bosque}
+	\\Un bosque es un grafo cuyos componentes conexos son arboles.
+\end{definition}
+\begin{definition}
+	Sea $G$ un grafo, un árbol recubridor de $G$ es un subgrafo recubridor de $G$ que es un árbol.
+\end{definition}
+\begin{definition}
+	Un bosque recubridor de $G$ es un bosque $B\subset G$ tal que $B$ es un subgrafo recubridor de $G$, cada árbol de $B$ es un árbol recubridor de una componente conexa de $G$.
+\end{definition}
+\begin{theorem}
+	Un grafo es conexo si y sólo si tiene un árbol recubridor.
+\end{theorem}
+\begin{theorem}
+	Un grafo $G=(V,A)$ es un árbol si y solo si $\forall v,w\in V,\ v\neq w$, existe un único camino simple de $v$ a $w$.
+\end{theorem}
+\begin{definition}
+	En un grafo $G$ el grado de un vértice $v$ es el numero de aristas incidentes a $v$, y lo notamos como $gr_G(v)$.
+\end{definition}
+\begin{corollary}
+	Si un vértice tiene un lazo, se cuenta 2 veces.
+\end{corollary}
+\begin{corollary}
+	En un árbol con al menos $2$ vértices, existe (al menos) un vértice de grado 1.
+\end{corollary}
+\begin{theorem}
+	Si $G=(V,A)$ es un árbol no vació, entonces: $|V|=|A|+1$.
+\end{theorem}
+\begin{theorem}
+	Sea $G=(V,A)$ un grafo finito sin lazos, las siguientes propiedades son equivalentes:
+	\begin{itemize}
+		\item $G$ es un árbol.
+		\item $G$ es conexo, y si se elimina cualquier arista de $G$ se obtiene un bosque de $2$ árboles.
+		\item $G$ no contiene ciclos, y $|V|=|E|+1$.
+		\item $G$ es conexo, y $|V|=|E|+1$.
+		\item $G$ no contiene ciclos, y cualquier arista suplementaria entre $2$ vértices de $V$ introduce un ciclo.
+	\end{itemize}
+\end{theorem}
+\newpage\subsection{Caminos eulerianos y hamiltonianos}
+\begin{definition}
+	Sea $G$ un grafo o multigrafo, para cualquier vértice $v$ de $G$, se llama grado de $v$ y se escribe $gr_G(v)$ (o $gr(v)$) el número de aristas incidentes con $v$, contando cada lazo (en $v$) $2$ veces.
+\end{definition}
+\begin{corollary}
+	Cualquier grafo o multigrafo $G$ finito $G=(V,A)$, tenemos que $\sum_{v\in V} gr(v)=2|E|$.
+\end{corollary}
+\begin{corollary}
+	En cualquier grafo finito, la cantidad de vértices de grado impar es par.
+\end{corollary}
+\begin{definition}
+	Un grafo o multigrafo es regular cuando todos sus vértices tienen el mismo grado.\\
+	Es $k$-regular cuando todos sus vértices tienen grado $k$.
+\end{definition}
+\begin{corollary}
+	Si $G=(V,A)$ es $k$-regular, entonces $k|V|=2|A|$.
+\end{corollary}
+\begin{definition}{Caminos y circuitos eulerianos}
+	\\En un grafo o multigrafo $G$ finito no orientado, un recorrido euleriano es un recorrido que pasa por cada arista del grafo ($1$ vez cada una).
+	\\De misma manera definimos los circuitos eulerianos, con la diferencia de que tiene que ser un circuito.
+\end{definition}
+\begin{theorem}
+	Sea $G$ un grafo o multigrafo no dirigido $G=(V,A)$ no vació y sin vértices aislados.\\
+	Entonces, $G$ tiene un circuito euleriano si y solo si $G$ es conexo y todos los vértices son de grado par.
+\end{theorem}
+\begin{corollary}
+	Sea $G$ un grafo o multigrafo no dirigido, sin vértices aislados, $G$ tiene un recorrido euleriano si y solo si $G$ es conexo y todos los vértices de $G$ tienen grado par, excepto por $2$.
+\end{corollary}
+\begin{definition}{Caminos y ciclos hamiltonianos}
+	\\Sea $G$ un grafo o multigrafo dirigido o no, un camino hamiltoniano un camino simple de $G$ que pasa por todos los vértices de $G$.\\
+	Un ciclo hamiltoniano de $G$ es un ciclo de $G$ que pasa por todos los vértices de $G$.
+\end{definition}
+\begin{corollary}
+	No hay relación entre los caminos y ciclos hamiltonianos con los recorridos y circuitos eulerianos.
+\end{corollary}
+\begin{corollary}
+	Cada grafo que tiene un ciclo hamiltoniano tiene un camino hamiltoniano (sacando cualquier arista).
+\end{corollary}
+\begin{definition}
+	Un grafo es hamiltoniano si tiene un ciclo hamiltoniano.\\
+	Un grafo es semi-hamiltoniano si tiene un camino hamiltoniano pero ningún ciclo hamiltoniano.
+\end{definition}
+\begin{corollary}
+	$K_n$ es hamiltoniano.
+\end{corollary}
+\begin{definition}
+	Un torneo es un grafo dirigido $G=(V,A)$ tal que para todos los vértices $x\neq y\in V$, tenemos que $(x\to y)\in A$ o (exclusivo) $(y\to x)\in A$.
+\end{definition}
+\begin{definition}{Inclusión}
+	\\Un torneo es un grafo obtenido a partir de $K_n\ (n\ge1)$ orientando cada arista.
+\end{definition}
+\begin{theorem}
+	Todo torneo tiene un camino hamiltoniano.
+\end{theorem}
+\begin{theorem}
+	Sea $G=(V,A)$ un grafo no dirigido sin lazos, si para todos $x\neq y\in V,$ tenemos que $gr(x)+gr(y)\ge n-1$ (con $n=|V|$), entonces existe un camino hamiltoniano.
+\end{theorem}
+\begin{corollary}
+	Sea $G$ un grafo no dirigido sin lazos con $|V|=n$, si $gr(x)\ge \frac{n-1}{2}$ para todo $x\in V$, entonces $G$ tiene un camino hamiltoniano.
+\end{corollary}
+\begin{theorem}
+	Sea $G$ un grafo no dirigido sin lazos, con $|V|=n$, si para todos $x\neq y\in V$, tenemos que $gr(x)+gr(y)\ge n$ entonces existe un ciclo hamiltoniano.
+\end{theorem}
+\begin{corollary}
+	Si $gr(x)\ge \frac{n}{2}$ para todo $x\in V$, entonces $G$ tiene un ciclo hamiltoniano.
+\end{corollary}
+\subsection{Grafos planos}
+\begin{definition}
+	Un grafo o multigrafo $G$ es plano si se puede dibujar $G$ en el plano $(\mathbb{R}^2)$ que sus aristas se intersequen solo en los extremos que comparten.
+\end{definition}
+\begin{corollary}
+	La definición se basa en la noción de representación de un grafo $G$ en el plano. Formalmente, una representación de $G$ en el plano es una función que:
+	\begin{itemize}
+		\item Asocia a cada vértice $v\in V$ a un punto $f(v)\in\mathbb{R}^2$.
+		\item Asocia a cada arista $a\in A$ de extremos $v_1,v_2\in V$, una linea continua $f(a)\in\mathbb{R}^2$ que junta $f(v_1)$ y $f(v_2)$.
+	\end{itemize}
+	Dicha representación es una inmersión (encaje) cuando:
+	\begin{itemize}
+		\item $f$ es inyectiva sobre $V$.
+		\item $f(a)$ es una linea inyectiva.
+		\item $f(a)$ intersecta $f(a')$ (con $a\neq a')$ en los extremos.
+	\end{itemize}
+	Cuando tal inmersión existe se dice que $G$ es plano.
+\end{corollary}
+\begin{definition}
+	Un grafo $G=(V,A)$ es bipartito si existe una partición $V=V_1\cup V_2$ ($V_1\cap V_2=\emptyset,\ V_1\neq\emptyset,\ V_2\neq\emptyset$) tal que toda arista de la forma $\{v_1,v_2\}$ con $v_1\in V_1$, $v_2\in V_2$.
+\end{definition}
+\begin{example}{ \ }\\
+	\begin{center}
+		\begin{tikzpicture}[thick,
+				every node/.style={draw,circle},
+				fsnode/.style={fill=myblue},
+				ssnode/.style={fill=mygreen},
+				every fit/.style={ellipse,draw,inner sep=-2pt,text width=2cm},
+				->,shorten >= 3pt,shorten <= 3pt
+			]
+
+			% Vertices de V_1
+			\begin{scope}[start chain=going below,node distance=7mm]
+				\foreach \i in {1,2,...,5}
+				\node[fsnode,on chain] (f\i) [label=left: \i] {};
+			\end{scope}
+
+			% Vertices de V_2
+			\begin{scope}[xshift=4cm,yshift=-0.5cm,start chain=going below,node distance=7mm]
+				\foreach \i in {6,7,...,9}
+				\node[ssnode,on chain] (s\i) [label=right: \i] {};
+			\end{scope}
+
+			\node [myblue,fit=(f1) (f5),label=above:$V_1$] {};
+			\node [mygreen,fit=(s6) (s9),label=above:$V_2$] {};
+
+			% Aristas
+			\draw (f1) -- (s6);
+			\draw (s6) -- (f2);
+			\draw (f2) -- (s7);
+			\draw (s7) -- (f3);
+			\draw (s8) -- (f3);
+			\draw (f3) -- (s9);
+			\draw (s9) -- (f5);
+			\draw (f5) -- (s6);
+		\end{tikzpicture}
+	\end{center}
+\end{example}
+\begin{corollary}
+	Un grafo bipartito es completo cuando $\{v_1,v_2\}\in A$ para todos $v_1\in V_1,\ v_2\in V_2$.
+\end{corollary}
+\begin{corollary}
+    En un grafo bipartito, todos los ciclos tienen longitud par.
+\end{corollary}
+\begin{definition}
+    $K_{m,n}$ es un grafo bipartito completo con $|V_1|=m,\ |V_2|=n$, con $m+n$ vértices y $m\times n$ aristas.
+\end{definition}
+\begin{definition}
+    Sea $G=(V,A)$ un grafo o multigrafo:
+    \begin{itemize}
+        \item Una subdivisión elemental de $G$ es un grafo $G'=(V',A')$ obtenido a partir de $G$, remplazando una arista $\{u,v\}\in A$ por $2$ aristas $\{u,w\},\{w,v\}\in E'$ ($w$ un nuevo vértice).
+        \item Una subdivisión de $G$ es un grafo $G'$ obtenido mediante finitas subdivisiones elementales de $G$:$$G\to G_1\to G_2\to\dots\to G_n=G'$$
+    \end{itemize}
+\end{definition}
+\begin{corollary}
+    Si $G'$ es una subdivisión de $G$:
+    \begin{enumerate}
+        \item $K(G)=K(G')$. En particular: $G$ conexo $\Leftrightarrow\ G'$ conexo.
+        \item $G$ plano $\Leftrightarrow\ G'$ plano.
+    \end{enumerate}    
+\end{corollary}
+\begin{corollary}
+    Si un grafo $G$ es plano, entonces todos sus subgrafos son planos también.\\
+    Al contrario, si $G$ contiene un subgrafo no plano (por ejemplo: un subgrafo isomorfo a una subdivisión de $K_{3,3}$ o $K_5$) entonces $G$ no puede ser plano.
+\end{corollary}
+\begin{theorem}{Teorema de Kuratowski}
+    \\Un grafo no es plano si y solo si contiene un subgrafo $G'\subset G$ isomorfo a una subdivisión de $K_{3,3}$ o $K_5$.
+\end{theorem}
+\begin{corollary}
+    Cada inmersión de un grafo plano en el plano define finitas regiones (todas finitas, salvo una)
+\end{corollary}
+\begin{theorem}
+    Sea $G=(V,A)$ un grafo o multigrafo plano conexo con $|V|=v$ y $|A|=a$. Sea $r$ el numero de regiones en el plano determinadas por una inmersión (o representación) plana de $G$, una de estas regiones tiene un área infinita y se conoce como región infinita, entonces $v-a+r=2$.
+\end{theorem}
+\begin{corollary}
+    Mas generalmente, si $G$ es plano (conexo o no), $v-e+r=1+K(G)$.
+\end{corollary}
+\begin{definition}
+    Sea $G=(V,A)$ un grafo plano con $r\ge1$ regiones $R_1,\cdots,R_r$ a través de una inmersión dada en el plano.\\
+    Dado $i\in[1,\cdots,r]$ el grado de $R_i$ es el numero de aristas que forman la frontera de $R_i$.
+\end{definition}
+\begin{corollary}
+    $\sum_{i=1}^{r} gr(R_i)=2a\ (=2|A|)$.
+\end{corollary}
+\begin{corollary}
+    Si $G=(V,A)$ es un grafo simple, sin lazos, conexo, plano y no vació, entonces $3r\le 2e$ y $e\le 3v-6$.
+\end{corollary}
+\end{document}
