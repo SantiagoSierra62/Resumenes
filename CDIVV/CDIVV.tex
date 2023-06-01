@@ -1,0 +1,1061 @@
+\documentclass[10pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, tikz}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{babel}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{example}{Ejemplo}[section]
+
+\title{Cálculo Diferencial e Integral en varias variables}
+\author{Santiago Sierra}
+
+\begin{document}
+\maketitle \tableofcontents \newpage
+\section{Números Complejos}
+\begin{definition}
+	Un numero complejo es un numero de forma $z=a+bi$ y $a,b\in \mathbb{R}$, donde $i^2=-1$, conocemos los números reales $a$ y $b$ como parte real e imaginaria respectivamente del numero $z$.
+	$$
+		Re(z)=a \ \ \ \ Im(z)=b
+	$$
+\end{definition}
+Se le llama $i$ a la unidad imaginaria.
+Esta expresión que describimos se le llama forma binómica del numero.
+\begin{definition}
+	Dos números complejos $z, w$ son iguales si y solo si
+	$$
+		Re(z)=Re(w) \ \text{y} \ Im(z)=Im(w)
+	$$
+\end{definition}
+\subsection{Suma y Producto de números complejos}
+\begin{definition}
+Dados dos números complejos $z=a+bi$ y $w=c+di$ definimos la suma de $z+w$ y el producto $zw$ mediante:
+\begin{gather*}
+	\begin{array}{l}
+		z+w=(a+bi)+(c+di)=(a+c)+(b+d)i \\
+		zw=(a+bi)(c+di)=ac+adi+bci+bdi^2=(ac-bd)+(ad+bci)i
+	\end{array}
+\end{gather*}
+\end{definition}
+Ejemplo:
+$$
+	\begin{array}{l}
+		(1-i)+(4+7i)=(1+4)+(-1+7)i=5+6i \\
+		(-1+3i)(2-5i)=(-1)(2-5i)+(3i)(2-5i)=(-2+5i)+(6i-15i^2)=(-2+5i)+(15+6i)=13+11i
+	\end{array}
+$$
+\textbf{Propiedades.} Sean $z$,$w$,$v\in\mathbb{C}$
+\begin{enumerate}
+	\item Conmutativas: $z+w=w+z$ y $zw=wz$
+	\item Asociativas: $(z+w)+v=z+(w+v)$ y $(zw)v=z(wv)$
+	\item Cada numero complejo $z=a+bi$ tiene un elemento opuesto, $-z=-a-bi$, tal que $z+(-z)=0$
+	\item Distributiva (del producto respecto a la suma) $z(w+v)=zw+zv$.
+\end{enumerate}
+\subsection{Conjugado de un complejo}
+\begin{definition}
+	Sea $z=a+bi$ un numero complejo. Se define el conjugado de $z$ y se representa por $\overline{z}$, como el numero complejo $\overline{z}=a-bi$.
+\end{definition}
+Geométricamente, un complejo $z=a+bi$ se representa por el punto $P=(a,b)$, y su conjugado $\overline{z}=a-bi$ por el punto $P'=(a,-b)$\\\\
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[x=50pt,y=50,yscale=-1,xscale=1]
+		\draw[<-] (0,0) -- (0,3);
+		\draw[->] (-0.5,1.5) -- (2,1.5);
+		\draw[-] (0,1.5) -- (1,2.5);
+		\draw[-] (0,1.5) -- (1,0.5);
+		\draw[dotted] (1,2.5) -- (1,0.5);
+		\draw (1.3,0.5) node {$z$};
+		\draw (1.3,2.5) node {$\overline{z}$};
+		\foreach \Point in {(1,0.5),(1,2.5)}{
+				\node at \Point {\textbullet};
+				\draw (-0.25,0) node {Im};
+				\draw (2,1.75) node {Re};
+			}
+	\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.65\textwidth}
+	Propiedades:
+	\begin{enumerate}
+		\item $\overline{\overline{z}}=z$
+		\item $\overline{z_1+z_2}=\overline{z_1}+\overline{z_2}$
+		\item $\overline{z_1z_2}=\overline{z_1}\ \overline{z_2}$
+		\item Si $z_2\neq 0$, $\overline{(\frac{z_1}{z_2})}=\frac{\overline{z_1}}{\overline{z_2}}$
+		\item $|z|^2=z\overline{z}=Re(z)^2+Im(z)^2$. Por lo tanto, $|z|^2 \ge 0\ \forall z\neq 0$
+		\item $z+\overline{z}=2 Re(z)$
+		\item $z-\overline{z}=2i\ Im(z)$
+	\end{enumerate}
+	Observación, para dividir dos números complejos $\frac{z}{w}$, basta con multiplicar el numerador y denominador por el conjugado del denominador.
+	$$
+		\frac{z}{w}=\frac{z\overline{w}}{w\overline{w}}=\frac{z\overline{w}}{|w|^2}
+	$$
+\end{minipage}
+\noindent \newpage
+\subsection{Módulo}
+\begin{minipage}{0.65\textwidth}
+	\begin{definition}
+		Definimos el módulo de un complejo $z=a+bi$ como el número real $|z|=\sqrt{a^2+b^2}$
+	\end{definition}
+	Propiedades del módulo. Sean $z_1$ y $z_2$ números complejos:
+	\begin{enumerate}
+		\item $|z|=0$ si, y sólo si, $z=0$
+		\item $|z|=|\overline{z}|$
+		\item $|z_1z_2|=|z_1||z_2|$
+		\item Si $z\neq 0$, $|\frac{z_1}{z_2}|=\frac{|z_1|}{|z_2|}$
+		\item \textbf{Desigualdad triangular:} $|z_1+z_2|\le |z_1|+|z_2|$
+	\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		\draw  (0,108) -- (141,108)(17,0) -- (17,125) (134,103) -- (141,108) -- (134,113) (12,7) -- (17,0) -- (22,7)  ;
+		\draw [-] (18,108) -- (90,45);
+		\draw (90,45)[fill={rgb, 255:red, 0; green, 0; blue, 0}]circle [x radius= 3.35, y radius= 3.35];
+		\draw (35.48,60.2) node [anchor=north west][inner sep=0.75pt]  [rotate=-319.32] [align=left] {$|z|$};
+		\draw (95,30) node [anchor=north west][inner sep=0.75pt] [align=left] {z};
+		\draw (0,0) node {Im};
+		\draw (130,120) node {Re};
+	\end{tikzpicture}
+\end{minipage}
+\subsection{Forma Polar}
+Sabemos que cualquier complejo $z=a+bi$ puede ser considerado un punto $(a,b)$ y que cualquier punto de este tipo puede representarse con coordenadas polares $(r,\theta)$ con $r\ge0$.
+\begin{definition}
+	Cualquier complejo $z$ se puede representar como $z=r(cos(\theta)+i \ sen(\theta))=re^{i\theta}$, lo cual llamaremos forma polar. Siendo $r=|z|$ y $\theta=arg(z)$.
+\end{definition}
+\subsubsection{Argumento}
+\begin{minipage}{0.65\textwidth}
+	\begin{definition}
+		Definimos el argumento de $z$ como la función\\\\ $\operatorname {arg}(z)={\begin{cases}\arctan \left({\frac  ba}\right)&\qquad a>0\\\arctan \left({\frac  ba}\right)+\pi &\qquad b\geq 0,a<0\\\arctan \left({\frac  ba}\right)-\pi &\qquad b<0,a<0\\+{\frac  {\pi }{2}}&\qquad b>0,a=0\\-{\frac  {\pi }{2}}&\qquad b<0,a=0\end{cases}}$
+	\end{definition}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\textwidth}
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		\draw (0,110) -- (135,110)(14,0) -- (14,123.5) (128.5,105) -- (135.5,110) -- (128.5,115) (9,7) -- (14,0) -- (19,7)  ;
+		\draw    (14,110) -- (80,50) ;
+		\draw [shift={(80,50)}][fill={rgb, 255:red, 0; green, 0; blue, 0 }](0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+		\draw   (42,84) .. controls (48,89) and (52,97) .. (52,106) .. controls (52,107) and (51,110) .. (51,111) ;
+		\draw (92,36.25) node [anchor=north west][inner sep=0.75pt]   [align=left] {$a+bi$};
+		\draw (30,70) node [anchor=north west][inner sep=0.75pt]  [rotate=-310.79] [align=left] {$|z|$};
+		\draw (56,84) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\theta$};
+		\draw (-13,0) node [anchor=north west][inner sep=0.75pt]   [align=left] {Im};
+		\draw (118,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {Re};
+	\end{tikzpicture}
+\end{minipage}
+\subsubsection{Operaciones en Forma Polar}
+\begin{definition}
+	Sean $z_1=r_1(cos(\theta_1)+i \ sen(\theta_1))$ y $z_2=r_2(cos(\theta_2)+i \ sen(\theta_2))$, definimos su multiplicación como $z_1z_2=r_1r_2(cos(\theta_1+\theta_2)+i \ sen(\theta_1+\theta_2))$
+\end{definition}
+\begin{definition}
+	Definimos la división de dos complejos como $\frac{z_1}{z_2}=\frac{r_1}{r_2}(cos(\theta_1-\theta_2)+i \ sen(\theta_1-\theta_2))$
+\end{definition}
+Observación: Si $z=r(cos(\theta)+ i \ sen(\theta))$ entonces $\frac{1}{z}=\frac{1}{r}(cos(\theta)+i \ sen(\theta))$
+\begin{theorem}{Teorema de De Movire.}
+	\\ Sea $z=r(cos(\theta)+i\ sen(\theta))$ y $n \in \mathbb{Z}^{+}$, entonces $z^n=(r(cos(\theta) + i \ sen(\theta)))^n=r^n(cos(n\theta)+i \ sen(n\theta))$
+\end{theorem}
+\subsection{Raíces de un numero complejo}
+\subsubsection{Raíz cuadrada}
+Si deseamos hallar $\sqrt{a+bi}$ una forma rápida de hacerlo es diciendo: $$\sqrt{a+bi}=c+di \rightarrow a+bi=(c+di)^2=c^2-d^2+2cdi\rightarrow \begin{cases}a=c^{2} -d^{2}\\b=2cd\end{cases}$$
+\newpage \subsubsection{Raíces complejas}
+Sea $z^n=r(cos(\theta)+i\ sen(\theta))$ y $n\in \mathbb{Z}^{+}$. Entonces, $z$ tiene $n$ raíces enésimas distintas.\\
+Las raíces se hallan como: $$z_k=r^{\frac{1}{n}}\left(cos\left(\frac{\theta +2k\pi}{n}\right)+i\ sen\left(\frac{\theta + 2k\pi}{n}\right)\right)=r^{\frac{1}{n}}e^{\frac{\theta + 2k\pi}{n}i}$$
+Donde $k=\{0,1,2,\dots,n-1\}$.
+\newpage\section{Ecuaciones Diferenciales}
+\begin{definition}
+	Una ecuación diferencial es una igualdad en la cual la incógnita es una función desconocida y sus derivadas, $y=f(x)$ definida y derivable.
+\end{definition}
+Le llamamos ecuación de orden 1 si la única derivada de la función desconocida que aparece es la derivada primera, de orden 2 si la derivada de mayor orden que aparece es 2 y así sucesivamente.
+\subsection{Ecuación diferencial de variables separables}
+\begin{definition}
+	Una ecuación diferencial se le llama de variables separables si es de la forma $y'=A(y)B(x)$
+\end{definition}
+Solución: $$\frac{y'(x)}{A(y(x))}=B(x)\rightarrow \int \frac{y'(x)}{A(y(x))} dx=\int B(x)dx+C\rightarrow \int \frac{dy}{A(y)}=\int B(x)dx+C$$
+\subsection{Solución de una ecuación diferencial con condiciones o datos iniciales}
+Por lo general existen infinitas soluciones a una misma ecuación diferencial, sin embargo si se dan datos iniciales apropiados, por lo general existe una única función solución que cumple los datos.\\\\
+En una ecuación diferencial de primer orden se le llama dato inicial a una condición del tipo: $y(x_0)=0$.\\
+Donde $x_0$ e $y_0$ son valores reales dados.\\\\
+En una ecuación diferencial de segundo orden se le llaman datos iniciales a dos condiciones del tipo: $y(x_0)=y_0$, $y'(x_1)=y_1$.\\
+Donde $x$ e $y$ son valores reales dados.\\\\
+Para determinar la solución que verifica los datos iniciales, primero tendremos que haber hallado todas las soluciones (esto no quiere decir haber despejado la función).\\
+Al conjunto de todas las soluciones se le llama solución general, la cual depende usualmente de una constante arbitraria si la ecuación es de primer orden, o de 2 si es de segundo orden.
+\subsection{Ecuación diferencial lineal de primer orden homogénea}
+\begin{definition}
+	Se llama ecuación diferencial lineal de primer orden homogénea a una ecuación del tipo: $y'+a(x)y=0$
+\end{definition}
+Solución general:
+$$y'=-a(x)y\rightarrow \frac{y'}{y}=-a(x)\rightarrow\int\frac{dy}{y}=-\int a(x)dx\rightarrow log(y)=-\int a(x)dx+C$$$$y=e^{-\int a(x)dx+C}=Ke^{-\int a(x)dx}$$
+Siendo $K$ la variable arbitraria.
+\newpage \subsection{Ecuación diferencial lineal de primer orden no homogénea}
+\begin{definition}
+	Se llama ecuación diferencial lineal de primer orden no homogénea a una ecuación del tipo: $y'+a(x)y=r(x)$, siendo $r(x)\neq 0$, si no, seria homogénea.
+\end{definition}
+Solución:
+\begin{enumerate}
+	\item Hallar la solución general, $y_h(x)$ de la ecuación diferencial lineal homogénea correspondiente, es decir la misma ecuación diferencial, pero sustituyendo $r(x)$ por la función nula.
+	\item Hallar una solución particular de la ecuación $y_p(x)$ diferencial dada usando el método de variación de constante.
+	\item Sumar $y(x)=y_h(x)+y_p(x)$
+\end{enumerate}
+\subsubsection{Método de variación de constante}
+Para hallar la solución particular $y_p(x)$ de la ecuación diferencial, probaremos  con una función de cierto tipo como se describe:
+\begin{enumerate}
+	\item Tomaremos $y_p(x)=y_h(x)$, con la diferencia de que la constante arbitraria, ahora sera una función desconocida a determinar.
+	\item Sustituimos $y_p(x)$ en la ecuación no homogénea dada, haciendo que la verifique y despejando la función. De todas las posibles funciones que se despejen (en general son infinitas), habrá que elegir solo una.
+	\item Una vez hallada la función, la sustituimos en la expresión $y_p(x)$ para obtener la solución particular buscada.
+\end{enumerate}
+\textbf{Ejemplo:}\\
+Sea $y'-cos(x)y=cos(x)$\\
+Hallamos $y'-cos(x)y=0 \rightarrow y_h=Ke^{sen(x)}$\\
+Decimos por el paso 2, que $y_p(x)=y_h(x)$ pero con la constante arbitraria como función,\\ así que
+$$\begin{array}{l}
+		y_p(x)=K(x)e^{sen(x)}                                            \\
+		(K(x)e^{sen(x)})'-cos(x)K(x)e^{sen(x)}=cos(x)                    \\
+		K'(x)e^{sen(x)}+K(x)cos(x)e^{sen(x)}-cos(x)K(x)e^{sen(x)}=cos(x) \\
+		K'(x)e^{sen(x)}=cos(x)\rightarrow K'(x)=cos(x)e^{-sen(x)}        \\
+		K(x)=\int cos(x)e^{-sen(x)}dx+C=-e^{-sen(x)}+C
+	\end{array}$$
+Ahora, elegimos la solución con $C=0$ y reemplazamos la función en $y_p(x)$
+$$y_p(x)=K(x)e^{sen(x)}=-e^{-sen(x)}e^{sen(x)}=-e^{sen(x)-sen(x)}=-e^0=-1$$
+Por lo tanto, $y(x)=y_h(x)+y_p(x)=Ke^{sen(x)}-1$
+\newpage \subsection{Ecuación diferencial lineal de segundo orden a coeficientes constantes y homogénea}
+\begin{definition}
+	Una ecuación diferencial de segundo orden se llama lineal a coeficientes constantes y homogénea si es de la forma $y''+ay'+by=0$, donde $a$ y $b$ son constantes dadas independientes.
+\end{definition}
+\begin{theorem}{Estructura vectorial de las soluciones de la ecuación lineal homogénea.}\\
+	Todas las funciones solución de la ecuación diferencial de segundo orden homogénea forman un espacio vectorial de dimensión 2.
+\end{theorem}
+Soluciones exponenciales: Buscaremos soluciones $y(x)=e^{\lambda x}$, donde $\lambda$ es una constante real a determinar, que sean solución de la ecuación diferencial $y''+ay'+by=0$. Sustituyendo en la ecuación diferencial $y=e^{\lambda x}$, $y'=\lambda e^{\lambda x}$, $y''=\lambda ^{2}e^{\lambda x}$, se obtiene: $(\lambda ^2+a\lambda+b)e^{\lambda x}=0\Leftrightarrow \lambda ^2+a\lambda+b=0$. Siendo $\lambda$ raíz de la ecuación de segundo grado, llamada \underline{ecuación caracteristica}.
+\subsubsection{Solución general de la ecuación lineal homogénea de segundo orden}
+Una vez encontradas las raíces de la ecuación característica, hay 3 casos.
+\begin{enumerate}[A)]
+	\item La ecuación característica tiene dos raíces distintas. La solución general es: $y(x)=C_1e^{\lambda_1 x}+C_2e^{\lambda_2 x}$
+	\item La ecuación característica tiene una raíz doble. La solución general es: $y(x)=e^{\lambda x}(C_1+C_2 x)$
+	\item La ecuación característica tiene dos raíces complejas conjugadas de la forma $\alpha\pm i\beta$. La solución general es: $y(x)=e^{\alpha x}(C_1 cos(\beta x)+C_2 sen(\beta x))$
+\end{enumerate}
+\subsection{Ecuación diferencial lineal de segundo orden a coeficientes constantes no homogénea}
+\begin{definition}
+	Una ecuación diferencial de segundo orden se llama lineal a coeficientes constantes y no homogénea si es del tipo: $y''+ay'+by=r(x)$.
+\end{definition}
+Solución:
+\begin{enumerate}
+	\item Hallar la solución general de $y_h(x)$ de la ecuación lineal homogénea correspondiente.
+	\item Hallar una solución particular $y_p(x)$ de la ecuación no homogénea dada usando el método de coeficientes indeterminados.
+	\item Sumar $y(x)=y_h(x)+y_p(x)$
+\end{enumerate}
+\subsubsection{Método de coeficientes indeterminados}
+\begin{enumerate}
+	\item Si $r(x)=e^{kx}P(x)$, donde $P(x)$ es un polinomio de grado $n$, probar $y_(x)=e^{kx}Q(x)$, donde $Q(x)$ es un polinomio de grado $n$ con coeficientes a determinar sustituyendo $y_p(x)$ en la ecuación diferencial.
+	\item Si $r(x)=e^{kx}P(x)cos(mx)$ o $r(x)=e^{kx}P(x)sen(mx)$, donde $P$ es un polinomio de grado $n$, probar $y_p(x)=e^{kx}Q(x)cos(mx)+e^{kx}R(x)sen(mx)$, donde $Q$ y $R$ son polinomio de grado $n$.
+\end{enumerate}
+Si algún termino de $y_p(x)$ es también termino de $y_h(x)$, hay que multiplicar $y_p$ por $x$, o $x^2$ si es termino 2 veces.
+\begin{theorem}
+	Sea una ecuación diferencial $y''+ay'+by=r(x)$ donde $r(x)$ es una función conocida que puede descomponerse como suma $r(x)=r_1(x)+r_2(x)$.
+	Se consideran las ecuaciones diferenciales auxiliares:\\
+	$y_{1p} \rightarrow y''+ay'+by=r_1(x)$\\
+	$y_{2p} \rightarrow y''+ay'+by=r_2(x)$\\
+	Siendo $y_p(x)=y_{1p}+y_{2p}$.\\Este teorema puede aplicarse tantas veces como $r(x)$ pueda descomponerse, habiendo una suma de tres o mas sumandos en vez de dos como se mostró.
+\end{theorem}
+\newpage \section{Sucesiones y Series}
+\subsection{Sucesiones}
+\begin{definition}
+	Las sucesiones son funciones $a: \mathbb{N} \rightarrow \mathbb{R}$, donde a cada natural, se le asocia un real $a_n$.
+\end{definition}
+Ejemplos:
+\begin{enumerate}
+	\item Sucesión armónica: $a_n=\frac{1}{n}$
+	\item $a_0=1$, $a_1=1$, $a_n=a_{n-1}+a_{n-2}$
+	\item Sucesión CTE: $a_n=c$ $\forall n \in \mathbb{N}$
+	\item Sucesión identidad: $a_n=n$ $\forall n \in \mathbb{N}$
+\end{enumerate}
+\subsubsection{Convergencia}
+\begin{definition}{Limite de una sucesión.}
+	\\Una sucesión $a_n$ tiene el limite $L$ y se escribe como $$\\lim_{n \to \infty} a_n = L \text{ o } a_n \to L \text{ cuando } n \to \infty$$
+	Si $\lim _{n\rightarrow \infty } a_{n} =L\begin{cases}
+			=L\ \text{ (finito)} & \text{En este caso converge }(\mathbb{C}) \\
+			=\infty              & \text{En este caso diverge }(\mathbb{D})  \\
+			                     & \text{En este caso oscila }(\mathbb{O})
+		\end{cases}$\\\\
+	Y para todo $\epsilon > 0$ hay un correspondiente entero $N$ tal que si $n>N$ entonces $|a_n-L|<\epsilon$
+\end{definition}
+Ejemplos
+\begin{enumerate}
+	\item $\lim_{n \to + \infty} \frac{1}{n}=0$.
+	\item $a_n=C$ $\forall n \rightarrow \lim_{n \to + \infty} a_n=c$
+	\item $a_n=n$ $\forall n \in \mathbb{N} \rightarrow \lim_{n \to + \infty} a_n=+\infty$
+	\item $a_n=(-1)^n$ $\forall n \in \mathbb{N}$
+\end{enumerate}
+\begin{theorem}
+	Si $\lim_{x \to \infty} f(x)=L$ y $f(n)=a_n$ cuando $n$ es un entero, entonces $\lim_{n \to \infty} a_n = L$.
+\end{theorem}
+Propiedades:
+\begin{enumerate}
+	\item Si $\lim_{n \to + \infty} a_n=L$, $\lim_{n \to + \infty} b_n=M$ $\Rightarrow (a_n+b_n)_{n \in \mathbb{N}}$ es convergente y $\lim_{n \to + \infty} a_n+b_n=\lim_{n \to + \infty}a_n+\lim_{n \to + \infty} b_n=L+M$.
+	\item $(\lambda a_n)_{n \in \mathbb{N}}$ es convergente si $\lim_{n \to +\infty} (\lambda a_n)=\lambda L$.
+	\item $(a_n b_n)_{n\in\mathbb{N}}$ es convergente si $\lim_{n \to +\infty} a_n b_n=LM$
+	\item Si $b_n=0$ $\forall n\in\mathbb{N}$, $M \ne 0$, $(\frac{a_n}{b_n})_{n\in\mathbb{N}}$ es convergente y $\lim_{n \to + \infty} \frac{a_n}{b_n}=\frac{L}{m}$
+\end{enumerate}
+\begin{theorem}
+	Si $\lim_{n \to \infty} |a_n|=0$, entonces $\lim_{n \to \infty} a_n=0$
+\end{theorem}
+\begin{theorem}
+	Si $\lim_{n \to \infty} a_n = L$ y la función $f$ es continua en $L$, entonces $$\lim_{n \to \infty} f(a_n)=f(L)$$
+\end{theorem}\newpage
+\subsubsection{Monotonía}
+\begin{definition}
+	Una sucesión $a_n$ se le llama monótona creciente si $a_n\le a_{n+1}$ para toda $n\ge 1$.\\
+	Y se le denomina monótona decreciente si $a_n\ge a_{n+1}$.
+\end{definition}
+\begin{corollary}
+	Si $a_{n+1}>a_n$ $\forall n\in\mathbb{N}$ es monótona estrictamente creciente.\\
+	Si $a_{n+1}<a_n$ $\forall n\in\mathbb{N}$ es monótona estrictamente decreciente.
+\end{corollary}
+\subsubsection{Acotación}
+\begin{definition}
+	Una sucesión $a_n$ esta acotada superiormente si existe un numero $M$ tal que $a_n \le M$ para toda $n\ge 1$.\\
+	Esta acotada inferiormente si existe un numero $m$ tal que $m\le a_n$ para toda $n\ge 1$.\\
+	Si esta acotada superior e inferiormente, entonces $a_n$ es una sucesión acotada.
+\end{definition}
+\begin{theorem}{Teorema de la sucesión monótona.}
+	\\Toda sucesión monótona y acotada es convergente.
+\end{theorem}
+Obs: Si $(a_n)_{n\in\mathbb{R}}$ es monótona decreciente y acotada, entonces $\lim a_n=\text{Inf}\{a_1,a_2,\dots\}$.
+\subsubsection{Sub-sucesión}
+\begin{definition}
+	Dada una sucesión $a_n$ y otra extricamente creciente $(x_n):\mathbb{N}\to\mathbb{N}$, llamaremos sub-sucesión de $a_n$ a la sucesión $a\circ x:\mathbb{N}\to\mathbb{R}$, y lo denotamos como $a_{x_n}$.
+\end{definition}
+\begin{theorem}
+	Si $\lim a_n=L$, entonces toda sub-sucesión de $a_n$ converge a $L$.
+\end{theorem}
+\subsubsection{Punto de acumulación}
+\begin{definition}
+	Sea una sucesión $a_n$, y su sub-sucesión $a_{n_k}$, $h$ es un punto de aglomeración si $a_{n_k}\to h$.
+\end{definition}
+\begin{theorem}{Teorema de Bolzano Weirstrass.}
+	\\Todo conjunto infinito y acotado tiene (al menos) un punto de acumulación.
+\end{theorem}
+\begin{corollary}
+	El punto de acumulación no tiene por que pertenecer al conjunto.
+\end{corollary}
+\begin{theorem}
+	Toda sub-sucesión $a_n$ acotada tiene una sub-sucesión convergente.
+\end{theorem}
+\begin{corollary}
+	Sea $\{a_n\}$ una sucesión de términos positivos ($a_n>0$ $\forall n$).\\
+	Si $\lim \ \frac{a_{n+1}}{a_{n}} =L\begin{cases}< 1 & \text{Entonces $a_n$ converge a $0$}\\ >1 & \text{Entonces $a_n$ diverge}\end{cases}$
+\end{corollary}
+Obs: Si $L=1$ no se puede decir nada.
+\begin{theorem}
+	Una función $f: \mathbb{R}\rightarrow\mathbb{R}$ es continua en $a\in\mathbb{R}$.\\
+	$\Leftrightarrow$ para toda sucesión ${a_n}$ tal que $\lim a_n=a$ se tiene que $\lim f(a_n)=f(a)$.
+	$$(\forall {a_n}, a_n\rightarrow a \Rightarrow f(a_n)=f(a))$$
+\end{theorem}
+\newpage
+\subsection{Series}
+\begin{definition}
+	En general, si se trata de sumar los términos de de una sucesión infinita $\{a_n\}_{n=1}^{\infty}$, se obtiene una expresión de la forma $$a_1+a_2+a_3+\cdots+a_n+\cdots$$
+	que se denomina serie y se denota con el símbolo $$\sum_{n=1}^{\infty} a_n \text{ o } \sum a_n$$
+\end{definition}
+\begin{definition}
+	Dada una serie $\sum_{n=1}^{\infty} a_n$, sea $s_n$ la n-enésima suma parcial: $$s_n=\sum_{i=1}^{n} a_i$$
+	$$\lim _{n \to \infty} s_{n} =\lim _{n \to \infty} (a_{1} ,a_{2} ,\dotsc ,a_{n} )=\lim _{n \to \infty} \left(\sum _{k=1}^{n} a_{k} \right)\begin{cases}=L \text{ (finito)} & \text{Decimos que la serie converge (}\mathbb{C}\text{) y}\sum _{n=1}^{\infty } a_{n} =L  \\=\infty  & \text{Decimos que la serie diverge (}\mathbb{D}\text{)}\\ & \text{La serie oscila (}\mathbb{O}\text{)}\end{cases}$$
+\end{definition}
+Obs: $\sum_{n=0}^{\infty} a_n = \sum_{n=0}^{k-1} a_n + \sum_{n=k}^{\infty} a_n$
+\subsubsection{Serie geométrica}
+La serie geométrica $$\sum_{n=0}^{\infty} aq^n = \sum_{n=1}^{\infty} aq^{n-1}$$
+es convergente si $|q|<1$ y su suma es
+$$\sum_{n=0}^{\infty} aq^n=\sum_{n=1}^{\infty} aq^{n-1}=\frac{a}{1-q}$$
+Si $|q|\ge 1$, la serie geométrica es divergente.\\
+En el caso $$\sum_{n=n_0}^{\infty} aq^n=\frac{aq^{n_0}}{1-q}$$
+\begin{theorem}
+	Si $\sum a_n$ converge, entonces $a_n \to 0$.\\\\
+	Cuidado que es una condición necesaria pero no suficiente. Concluir la convergencia de la serie a partir de que $\lim a_n=0$ es un grave error.
+\end{theorem}
+\subsubsection{Serie armónica}
+\begin{theorem}{Convergencia de serie-p.}
+	\\Sea una serie $\sum _{n=1}^{\infty }\frac{1}{n^{p}} =\begin{cases}p >1 & \mathbb{C}\\p\le 1 & \mathbb{D}\end{cases}$
+\end{theorem}
+\newpage
+\subsubsection{Serie telescópica}
+Una serie telescópica es aquella serie cuyas sumas parciales poseen un numero fijo de términos tras su cancelación.\\
+Es decir, sea $\sum a_n$ donde $a_n=b_{n+1}-b_n$ siendo $b_n$ otra sucesión.\\
+Entonces $s_n=b_{n+1}-b_0$ y $\lim s_n=\lim b_{n+1}-b_0$.\\
+Un ejemplo clásico es la serie telescópica de Mengoli, que se define por $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$, y puede calcularse según
+$$\begin{aligned}\sum _{n=1}^{\infty }{\frac {1}{n(n+1)}}                                                                                                                                                                                                   & {}=\sum _{n=1}^{\infty }\left({\frac {1}{n}}-{\frac {1}{n+1}}\right)\\{} & {}
+               =\lim _{N\to \infty }\sum _{n=1}^{N}\left({\frac {1}{n}}-{\frac {1}{n+1}}\right)\\{}                                                                                                                                 & {}
+               =\lim _{N\to \infty }\left\lbrack {\left(1-{\frac {1}{2}}\right)+\left({\frac {1}{2}}-{\frac {1}{3}}\right)+\cdots +\left({\frac {1}{N}}-{\frac {1}{N+1}}\right)}\right\rbrack \\{}                                  & {}
+               =\lim _{N\to \infty }\left\lbrack {1+\left(-{\frac {1}{2}}+{\frac {1}{2}}\right)+\left(-{\frac {1}{3}}+{\frac {1}{3}}\right)+\cdots +\left(-{\frac {1}{N}}+{\frac {1}{N}}\right)-{\frac {1}{N+1}}}\right\rbrack \\{} & {}
+               =\lim _{N\to \infty }\left\lbrack {1-{\frac {1}{N+1}}}\right\rbrack =1.\end{aligned}$$
+\subsubsection{Series de términos positivos.}
+\begin{definition}
+	Una serie $\sum a_n$ se dice de términos positivos, siempre que $a_n>0$ $\forall n \in \mathbb{N}$.
+\end{definition}
+Observar que en este caso, la sucesión de sumas parciales $s_n$ es monótona creciente, por lo tanto la serie $\sum a_n$ puede ser convergente o divergente, pero nunca oscilar.
+\begin{theorem}{Criterio de comparación.}
+	\\Sean $\sum a_n$ y $\sum b_n$ series de términos positivos, tales que $a_n\le b_n$ $\forall n>n_0$. Entonces:
+	\begin{enumerate}
+		\item Si $\sum b_n$ $\mathbb{C}$ entonces $\sum a_n$ $\mathbb{C}$.
+		\item Si $\sum a_n$ $\mathbb{D}$ entonces $\sum b_n$ $\mathbb{D}$.
+	\end{enumerate}
+	En cualquier otro caso, no puedo afirmar nada.
+\end{theorem}
+\begin{theorem}{Criterio de equivalencia.}
+	\\Sean $\sum a_n$ y $\sum b_n$ dos series de términos positivos.
+	\begin{enumerate}
+		\item Si $\lim \frac{a_n}{b_n}=L >0$ finito, entonces las dos series son de la misma clase.
+		\item Si $\lim \frac{a_n}{b_n}=0$ y $\sum b_n$ $\mathbb{C}$, entonces $\sum a_n$ $\mathbb{C}$.
+		\item Si $\lim \frac{a_n}{b_n}=\infty$ y $\sum b_n$ $\mathbb{D}$ entonces $\sum a_n$ $\mathbb{D}$.
+	\end{enumerate}
+	En cualquier otro caso, no puedo concluir.
+\end{theorem}
+\begin{theorem}{Criterio del cociente.}
+	\\Sea $\sum a_n$ una serie de términos positivos, tal que existe $\lim_{n \to \infty} \frac{a_{n+1}}{a_n}=L$. Entonces:
+	\begin{enumerate}
+		\item Si $L<1\Rightarrow \sum a_n$ $\mathbb{C}$
+		\item Si $L>1\Rightarrow \sum a_n$ $\mathbb{D}$
+	\end{enumerate}
+	En otro caso el criterio no decide.
+\end{theorem}
+\begin{theorem}{Criterio de Cauchy.}
+	\\Sea $\sum a_n$ una serie de términos positivos, tal que existe $\lim_{n \to \infty} \sqrt[n]{a_n}=L$. Entonces:
+	\begin{enumerate}
+		\item Si $L<1\Rightarrow\sum a_n$ $\mathbb{C}$
+		\item Si $L>1\Rightarrow\sum a_n$ $\mathbb{D}$
+	\end{enumerate}
+	En otro caso el criterio no decide.
+\end{theorem}\newpage
+\subsubsection{Series alternadas.}
+\begin{definition}
+	A una serie se le dice alternada si tiene sus términos alternativamente positivos y negativos. Su expresión general es de la forma $\sum_{n=1}^{\infty} \left(-1  \right)^n a_n$ y $a_n>0$.
+\end{definition}
+\begin{definition}
+	Decimos que una serie $\sum a_n$ es absolutamente convergente si y solo si $\sum |a_n|$ es convergente.
+\end{definition}
+\begin{theorem}
+	Toda serie absolutamente convergente es convergente.
+\end{theorem}
+\begin{theorem}{Convergencia dominada.}
+	\\Sea $a_n$, $b_n$ y $c_n$ tal que $a_n<b_n<c_n$ $\forall n$.\\
+	Si $\sum c_n$ $\mathbb{C}$ y $\sum a_n$ $\mathbb{C}$ entonces $\sum b_n$ $\mathbb{C}$. Ademas, vale que $\sum a_n \le \sum b_n \le \sum c_n$.
+\end{theorem}
+\begin{theorem}{Criterio de Leibnitz}
+	\\Si $a_n$ es una sucesión estrictamente decreciente que tiende a cero, entonces la serie alternada $\sum \left( -1 \right)^n a_n$ es convergente.
+\end{theorem}
+\newpage\section{Integrales impropias}
+\subsection{Integrales impropias de $1^{ra}$ especie}
+\begin{definition}
+	Sea $f(x)$ definida en el intervalo $[a,\infty)$.
+	\\Para toda $t>a$ la función $f(x)$ es integrable en $[a,t]$, y si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx$ existe, decimos que la integral impropia esta definida y $\int_{a}^{\infty} f(x) dx=\lim_{t \to \infty} \int_{a}^{t} f(x) dx$.
+	\begin{enumerate}
+		\item Si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx=L$ decimos que converge.
+		\item Si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx=\pm\infty$ decimos que diverge.
+		\item Si $\lim_{t \to \infty} \int_{a}^{t} f(x) dx\ \nexists$ decimos que oscila.
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	Sea $t>1$ $$\int _{1}^{t}\frac{1}{x^{p}} dx=\begin{cases}
+			\left[ -\frac{1}{( 1-p) x^{p-1}}\right]_{1}^{t} & \text{Si} \ p\neq 1 \\
+			[ log( x)]_{1}^{t}                              & \text{Si} \ p=1
+		\end{cases} =\begin{cases}
+			\frac{1}{p-1}-\frac{t^{1-p}}{(p-1)} & \text{Si} \ s\neq 1 \\
+			log( t)                             & \text{Si} \ s=1
+		\end{cases}$$
+	Como $\lim_{t \to \infty} log(t)=\infty$ diverge.
+	\\Por otro lado tenemos que $1-p<0$ o que $p<1$ por lo tanto $\lim_{t \to \infty} t^{1-p}=\infty$, y si $1-p<0$ o $p>1$ nos da que $\lim_{t \to \infty}t^{1-p}=0$.
+	\\En conclusión, $\int_{1}^{\infty} \frac{1}{x^p} dx$ diverge si $p\le 1$ y converge si $p>1$.
+\end{example}
+\begin{definition}
+	De manera análoga también podemos definir integrales impropias de la forma:
+	\begin{enumerate}
+		\item $\int_{-\infty}^{b} f(x) dx=\lim_{t \to -\infty}\int_{t}^{b} f(x) dx$
+		\item $\int_{-\infty}^{\infty} f(x) dx=\int_{-\infty}^{a} f(x) dx + \int_{a}^{\infty} f(x) dx$
+	\end{enumerate}
+\end{definition}
+\begin{corollary}
+    Sea $f$ tal que $\int_{a}^{\infty} f(x) dx$ converge, y existe $\lim_{x \to \infty} f(x)=L$, entonces $L=0$. Aunque no podemos deducir que converge si su limite es $0$.
+\end{corollary}
+\begin{corollary}{Álgebra de integrales impropias de primera especie.}
+	\\Sean $\int_{a}^{\infty} f(x) dx$ y $\int_{a}^{\infty} g(x) dx$ dos integrales impropias convergentes, y sea $\lambda\in\mathbb{R}$, se cumple que:
+	\begin{enumerate}
+		\item La integral $\int_{a}^{\infty} f(x)+ g(x)\ dx$ converge, y ademas $$\int_{a}^{\infty} f(x)+g(x)\ dx=\int_{a}^{\infty} f(x) dx+\int_{a}^{\infty} g(x) dx$$
+		\item La integral $\int_{a}^{\infty} \lambda f(x) dx$ converge y ademas $$\int_{a}^{\infty} \lambda f(x) dx=\lambda \int_{a}^{\infty} f(x) dx$$
+	\end{enumerate}
+\end{corollary}
+\begin{corollary}
+	Aplicando la proposición anterior, si $\int_{a}^{\infty} f(x) dx$ converge y $\int_{a}^{\infty} g(x) dx$ diverge, entonces $\int_{a}^{\infty} f(x)+g(x)\ dx$ diverge.
+\end{corollary}
+\begin{corollary}
+	Si $\int_{a}^{\infty} f(x) dx$ y $\int_{a}^{\infty} g(x) dx$ divergen, no podemos decir nada de su suma.
+\end{corollary}
+\begin{theorem}
+	Sea $f(x)$ definida en $[a,\infty)$ una función no negativa e integrable en $[a,b]$ para $b\ge a$. Consideremos la función $F(b)=\int_{a}^{b} f(x) dx$ para $b\in [a,\infty)$. Entonces las siguientes afirmaciones se cumplen:
+	\begin{enumerate}
+		\item La función $F$ en $[a,\infty)$ es monótona creciente.
+		\item $\int_{a}^{\infty} f(x) dx$ converge si y solo si, $F$ esta acotada superiormente.
+	\end{enumerate}
+\end{theorem}
+\newpage\begin{theorem}{Teorema de comparación}
+	\\Sea $0\le f(x)\le g(x)$ en $[a,\infty)$
+	\begin{enumerate}
+		\item Si $\int_{a}^{\infty} g(x) dx$ converge, entonces $\int_{a}^{\infty} f(x) dx$ también.
+		\item Si $\int_{a}^{\infty} f(x) dx$ diverge, entonces $\int_{a}^{\infty} g(x) dx$ también.
+	\end{enumerate}
+\end{theorem}
+\begin{theorem}{Criterio de equivalencia}
+	\\Sean $f,g$ funciones definidas en $[a,\infty)$ que cumplen:
+	\begin{itemize}
+		\item $f(x)\ge 0$ y $g(x)>0\ \forall x\ge a$. Es decir, $f$ es no negativa y $g$ positiva en $[a,\infty)$.
+		\item $f$ y $g$ son integrables en $[a,b]$ para $b\ge a$.
+	\end{itemize}
+	Consideremos $\lim_{x \to \infty} \frac{f(x)}{g(x)}=L$.
+	\\Entonces cumplen las afirmaciones:
+	\begin{enumerate}
+		\item Si $L>0$, se tiene que $\int_{a}^{\infty} f(x) dx$  y $\int_{a}^{\infty} g(x) dx$ son del mismo tipo, es decir ambos convergen o divergen.
+		      \\Si $L>0$, decimos que las funciones $f$ y $g$ son equivalentes.
+		\item Para el caso $L=0$:
+		      \begin{itemize}
+			      \item $\int_{a}^{\infty} g(x) dx$ converge $\Rightarrow \int_{a}^\infty f(x) dx$ converge.
+			      \item $\int_{a}^{\infty} f(x) dx$ diverge $\Rightarrow \int_{a}^{\infty} g(x) dx$ diverge.
+		      \end{itemize}
+		\item Para el caso $L=\infty$:
+		      \begin{itemize}
+			      \item $\int_{a}^{\infty} g(x) dx$ diverge $\Rightarrow \int_{a}^{\infty} f(x) dx$ diverge.
+			      \item $\int_{a}^{\infty} f(x) dx$ converge $\Rightarrow \int_{a}^{\infty} g(x) dx$ converge.
+		      \end{itemize}
+	\end{enumerate}
+\end{theorem}
+\begin{definition}
+	Sea $f(x)$ definida en $[a,\infty)$ una función integrable en $[a,b]$ para $b\ge a$. Decimos que $\int_{a}^{\infty} f(x) dx$ es absolutamente convergente si $\int_{a}^{\infty} |f(x)| dx$ converge.
+\end{definition}
+\begin{theorem}
+	Sea $f(x)$ definida en $[a,\infty)$ una función integrable en $[a,b]$ para $b\ge a$ tal que $\int_{a}^{\infty} f(x) dx$ es absolutamente convergente. Entonces $\int_{a}^{\infty} f(x) dx$ converge.
+\end{theorem}
+\begin{definition}
+	Sea $f(x)$ definida en $[a,\infty)$ una función integrable en $[a,b]$ para $b\ge a$, diremos que $\int_{a}^{\infty} f(x) dx$ es condicionalmente convergente si $\int_{a}^{\infty} f(x) dx$ converge pero $\int_{a}^{\infty} |f(x)| dx$ diverge.
+\end{definition}
+\begin{theorem}{Criterio serie-integral.}
+	Sea $f(x)$ definido en $[a,\infty)$ una función positiva, decreciente e integrable en $[a,b]$ para $b\ge a$. Sea $n_0$ el primer entero no negativo mayor o igual que $a$. Para cada $n\ge n_0$, sean $$s_n=\sum_{k=n_0}^{n} f(k) \text{ y } t_n=\int_{n_0}^{n} f(x) dx$$
+	Entonces, ambas sucesiones son del mismo tipo.
+\end{theorem}
+\newpage\subsection{Integrales impropias de $2^{da}$ especie}
+\begin{definition}
+	Sea $f(x)$ una función definida en $[t,b]$ para $a<t<b$, pero no esta definida en $[a,b]$ (o definida en $(a,b]$), entonces $\int_{a}^{b} f(x) dx$ no esta definida.
+	\\Puede pasar que $\int_{t}^{b} f(x) dx$ este definida y existe $\lim_{t \to a^+} \int_{t}^{b} f(x) dx$, entonces  decimos que su valor es $$\int_{a^+}^{b} f(x) dx=\lim_{t \to a^+} \int_{t}^{b} f(x) dx$$
+	\\De misma manera, puede pasar que $f(x)$ es continua en el intervalo $[a,t]$ para $a<t<b$ y existe $\lim_{t \to b^-}\int_{a}^{t} f(x) dx$, entonces $$\int_{a}^{b^-} f(x) dx=\lim_{t \to b^-} \int_{a}^{t} f(x) dx$$
+\end{definition}
+\begin{example}
+	Veamos nuevamente la función $\frac{1}{x^p}$ con $p\in\mathbb{R}$, veamos para cuales valores de $p$, la integral impropia $\int_{0}^{1} \frac{1}{x^p} dx$ converge.
+	$$\int _{0}^{1}\frac{1}{x^{p}} dx=\lim _{t\rightarrow 0}\int _{t}^{1}\frac{1}{x^{p}} dx=\begin{cases}
+			[ log( t)]_{t}^{1}                       & \text{Si} \ p=1     \\
+			\left[\frac{x^{1-p}}{1-p}\right]_{t}^{1} & \text{Si} \ p\neq 1
+		\end{cases} =\begin{cases}
+			-log( t)              & \text{Si} \ p=1     \\
+			\frac{1-t^{1-p}}{1-p} & \text{Si} \ p\neq 1
+		\end{cases} =\begin{cases}
+			\infty        & \text{Si} \ p=1     \\
+			\frac{1}{1-p} & \text{Si} \ 0< p< 1 \\
+			\infty        & \text{Si} \  p>1
+		\end{cases}$$
+	Por lo tanto, $\int_{0}^{1} \frac{1}{x^p} dx$ converge si $p<1$, y diverge si $p\ge 1$.
+\end{example}
+\begin{corollary}
+	Sea $f(x)$ una función definida en el intervalo $(a,b)$, e integrable en $[c,d]$ para $a<c\le d<b$. Si $\int_{a^+}^{b^-} f(x) dx$ converge, entonces $$\int_{a^+}^{b^-} f(x) dx=\int_{a^+}^{d} f(x) dx + \int_{d}^{b^-} f(x) dx$$
+	para $\forall d\in (a,b)$.
+\end{corollary}
+\begin{corollary}{Álgebra de integrales impropias de segunda especie}
+	Sean $\int_{a^+}^{b} f(x) dx$ y $\int_{a^+}^{b} g(x) dx$ dos integrales impropias convergentes y $\lambda\in\mathbb{R}$. Entonces:
+	\begin{enumerate}
+		\item La integral $\int_{a^+}^{b} f(x)+g(x)\ dx$ converge y ademas $$\int_{a^+}^{b} f(x)+g(x)\ dx=\int_{a^+}^{b} f(x) dx+\int_{a^+}^{b} g(x) dx$$
+		\item La integral $\int_{a^+}^{b} \lambda f(x) dx$ converge y ademas $$\int_{a^+}^{b} \lambda f(x) dx=\lambda \int_{a^+}^{b} f(x) dx$$
+	\end{enumerate}
+\end{corollary}
+\begin{theorem}
+	Sea $f(x)$ definida en $(a,b]$ una función no negativa e integrable en $[c,b]$, para $c\in (a,b]$. Consideremos la función $F(c)=\int_{c}^{b} f(x) dx$. Entonces cumple:
+	\begin{enumerate}
+		\item La función $F$ en $(a,b]$ es monótona decreciente.
+		\item $\int_{a^+}^{b} f(x) dx$ converge si y solo si $F$ esta acotada superiormente.
+	\end{enumerate}
+\end{theorem}
+\newpage\begin{theorem}{Criterio de comparación}
+    \\Sean $f,g$ definidas en $(a,b]$ funciones que cumplen:
+    \begin{itemize}
+        \item $0\le f(x)\le g(x)\ \forall x\in (a,b]$
+        \item $f$ y $g$ son integrables en $[c,b]$ para $c\in (a,b]$.
+    \end{itemize}
+    Entonces cumplen:
+    \begin{enumerate}
+        \item Si $\int_{a^+}^{b} g(x) dx$ converge, entonces $\int_{a^+}^{b} g(x) dx$ converge.
+        \item Si $\int_{a^+}^{b} f(x) dx$ diverge, entonces $\int_{a^+}^{b} g(x) dx$ diverge.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}{Criterio de equivalentes}
+    \\Sean $f,g$ funciones definidas en $(a,b]$ que cumplen:
+    \begin{itemize}
+        \item $f(x)\ge 0$ y $g(x)>0\ \forall x\in (a,b]$.
+        \item $f$ y $g$ son integrables en $[c,b]\ \forall c\in (a,b]$.
+    \end{itemize}
+    Consideremos el limite $$\lim_{x \to a^+} \frac{f(x)}{g(x)}=L$$
+    Entonces se cumple lo siguiente:
+    \begin{enumerate}
+        \item Si $L>0$ se tiene que $\int_{a^+}^{b} f(x) dx$ y $\int_{a^+}^{b} g(x) dx$ son de la misma clase.
+        \item Si $L=0$
+            \begin{itemize}
+                \item $\int_{a^+}^{b} g(x) dx$ converge $\Rightarrow \int_{a^+}^{b} f(x) dx$ converge.
+                \item $\int_{a^+}^{b} f(x) dx$ diverge $\Rightarrow \int_{a^+}^{b} g(x) dx$ diverge.
+            \end{itemize}
+        \item Si $L=\infty$
+            \begin{itemize}
+                \item $\int_{a^+}^{b} g(x) dx$ diverge $\Rightarrow \int_{a^+}^{b} f(x) dx$ diverge.
+                \item $\int_{a^+}^{b} f(x) dx$ converge $\Rightarrow \int_{a^+}^{b} g(x) dx$ converge.
+            \end{itemize}
+    \end{enumerate}
+\end{theorem}
+\subsection{Integrales mixtas}
+Cuando en una integral aparece mas de un punto problemático, debemos partir la integral en una suma de integrales que contengan solamente uno de esos puntos, y decimos que la integral original es convergente si y solo si cada uno de los sumandos lo es.\\
+De esta forma por ejemplo si $f$ es continua, la integral impropia $\int_{-\infty}^{+\infty} f(x) dx$ debemos escribirla como suma de $\int_{-\infty}^{a} f(x) dx$ y $\int_{a}^{+\infty} f(x) dx$, y debemos clasificar estas dos integrales. Es fácil ver que el resultado no depende de $a$.
+\begin{definition}
+    Sea $f(x)$ definida en $(a,\infty)$ una función integrable en todo subintervalo $[b,c]\subseteq (a,\infty)$.
+    \\A la expresión $\int_{a^+}^{\infty} f(x) dx$ se le conoce como integral impropia mixta.
+\end{definition}
+\newpage\section{Topología y Sucesiones en $\mathbb{R}^n$}
+\subsection{Topología}
+\begin{definition}{Norma}
+	\\Una norma en $\mathbb{R}^n$ es una función $||\ ||:\mathbb{R}^n\to\mathbb{R}$ que cumple:
+	\begin{itemize}
+		\item $||x||\ge 0\ \forall x\in\mathbb{R}^n$
+		\item $||x||=0\Leftrightarrow x=\vec{0}$
+		\item $||\lambda x||=|\lambda|||x||\ \forall x\in\mathbb{R}^n\ \forall\lambda\in\mathbb{R}$
+		\item $||x+y||\le ||x||+||y||\ \forall x,y\in\mathbb{R}^n$
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	Una distancia en $\mathbb{R}^n$ es una función $d:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R}$ tal que:
+	\begin{itemize}
+		\item $d(x,y)\ge 0\ \forall x,y\in\mathbb{R}^n$
+		\item $d(x,y)=0\Leftrightarrow x=y$
+		\item $d(x,y)=d(y,x)\ \forall x,y\mathbb{R}^n$
+		\item $d(x,y)\le d(x,z)+d(z,y)\ \forall x,y,z\in\mathbb{R}^n$
+	\end{itemize}
+\end{definition}
+\begin{definition}
+	Sea $||\ ||$ una norma en $\mathbb{R}^n$. La distancia inducida por $||\ ||$ se define como: $$d(x,y)=||x-y||$$
+\end{definition}
+Normas en $\mathbb{R}^2$
+\begin{itemize}
+	\item $||x||_2=||(x,y)||_2=\sqrt{x^2+y^2}$ (norma euclidiana)
+	\item $||x||_1=||(x,y)||=|x|+|y|$ (norma 1 o del taxista)
+	\item $||x||_{\infty}=||(x,y)||_{\infty}=max\{|x|,|y|\}$ (norma infinito)
+\end{itemize}
+\begin{definition}{ \ }
+	\\Sea $d$ una distancia en $\mathbb{R}^n$. Sea $a\in\mathbb{R}^n$ y $\delta >0$.
+	\\La bola abierta de centro $a$ y radio $\delta$ es el conjunto $$B(a,\delta)=\{x\in\mathbb{R}^n :\ d(a,x)<\delta \}$$
+	La bola cerrada de centro $a$ y radio $\delta$ es el conjunto $$B[a,\delta]=\{x\in\mathbb{R}^n :\ d(a,x)\le\delta \}$$
+	La esfera de centro $a$ y radio $\delta$ es el conjunto $$E[a,\delta]=\{x\in\mathbb{R}^n:\ d(a,x)=\delta \}$$
+\end{definition}
+\begin{corollary}
+	$B(a,\delta) \cup E[a,\delta]=B[a,\delta]$.
+\end{corollary}
+\begin{definition}
+    Llamamos bola reducida de centro $a$ y radio $\delta$ al conjunto $B^*(a,\delta)=B(a,\delta)-\{a\}$, es decir, la bola sin el centro.
+\end{definition}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^n$. Definimos al complemento de $A$ como $A^C$ a el conjunto que contiene todos los elementos que no están en $A$.
+\end{definition}
+\newpage\begin{definition}
+    Sea $A\subset\mathbb{R}^n$ un conjunto, $A^C$ su complemento, entonces:
+    \begin{enumerate}
+        \item Decimos que $x_0\in\mathbb{R}^n$ es un punto interior del conjunto A, si existe una bola de centro $x_0$ y radio $r>0$ tal que $B(x_0,r)\subset A$.\\
+            Llamamos ${\r A}$ al conjunto de puntos interiores de $A$.
+        \item Decimos que $x_0\in\mathbb{R}^n$ es un punto exterior del conjunto $A$ si existe una bola de centro $x_0$ y radio $r>0$ tal que $B(x_0,r)\subset A^c$.
+            \\Llamamos $Ext(A)$ al conjunto de puntos exteriores de $A$.
+        \item Decimos que $x_0 \in\mathbb{R}^n$ es un \underline{punto frontera} de $A$ si para todo $r>0$, $B(x_0,r)\cap A\ne \emptyset$ y $B(x_o,r)\cap A^c \ne \emptyset$.
+            \\Llamamos $\partial A$ al conjunto de puntos frontera de $A$.
+    \end{enumerate}
+\end{definition}
+\begin{corollary}
+    La bola abierta $B(a,\delta)$ es un conjunto abierto.
+\end{corollary}
+\begin{corollary}
+    Si $A$ y $B$ son dos conjuntos abiertos, entonces $A\cap B$ es abierto.
+\end{corollary}
+\begin{theorem}
+    Sea $A$ un conjunto abierto, entonces su unión con cualquier otro conjunto es un conjunto abierto.
+\end{theorem}
+\begin{corollary}
+    Si $A$ es un conjunto de $\mathbb{R}^n$, entonces:
+    \\$int(A)\cap Ext(A)\cup Fr(A)=\mathbb{R}^n$
+    \\$$ \begin{cases}
+        int(A)\cap Ext(A)=\emptyset
+        \\ int(A)\cap Fr(A)=\emptyset
+        \\ Ext(A)\cap Fr(A)=\emptyset
+    \end{cases}$$
+\end{corollary}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^n$ un conjunto:
+    \begin{enumerate}
+        \item Decimos que $A$ es un \underline{conjunto abierto} si todos sus puntos son interiores, es decir $A={\r A}$.
+        \item Decimos que $A$ es un conjunto cerrado si $A^c$ es un conjunto abierto.
+        \item La clausura de $A$ es el conjunto $$\overline{A}=A\cup\partial(A)$$
+        \item $A$ es un \underline{conjunto acotado} si existe un $K>0$ tal que $A\subset B(\vec{0},K)$, es decir, si podemos incluir al conjunto en una bola.
+        \item $A$ es un \underline{conjunto compacto} si $A$ es cerrado y acotado.
+        \item $x_0\in\mathbb{R}^n$ es un \underline{punto de acumulación} de $A$ si para todo $r>0$, $B^*(x_0,r)\cap A\ne\emptyset$
+            \\Al conjunto de los puntos de acumulación lo \underline{llamamos derivado de $A$}, y se nota $A'$.
+        \item Un conjunto $A$ es cerrado si y solo si $A$ contiene todos sus puntos de acumulación.
+    \end{enumerate}
+\end{definition}
+\newpage\subsection{Sucesiones en $\mathbb{R}^n$}
+\begin{definition}
+    Una sucesión es una función $a:\mathbb{N}\to\mathbb{R}^n$
+\end{definition}
+\begin{definition}{Límite}
+    \\Decimos que la sucesión $a_n$ tiene límite $L\in\mathbb{R}^n$, y lo denotamos $\lim_{n \to \infty}a_n=L\ \Leftrightarrow\ \forall\epsilon>0,\ \exists n_0\in\mathbb{N}$ tal que $\forall n\ge 0$ se tiene que $a_n\in B(L,\epsilon)$.
+\end{definition}
+\begin{corollary}
+    Sea $a_k$ una sucesión en $\mathbb{R}^n$ y $L=(L_1,L_2,\dots,L_n)$. Entonces: $$\lim_{k \to \infty}a_k=L\ \Leftrightarrow\ \lim_{k \to \infty}a_{k_i}=L_i\ \forall i=1,2,\dots,n$$
+    Es decir, una sucesión en $\mathbb{R}^n$ converge a $L$ si y sólo si cada una de sus coordenadas converge a la coordenada correspondiente de $L$
+\end{corollary}
+\begin{corollary}{Propiedades}
+        Si $x_n\to p_1$ e $y_n\to p_2$ entonces
+        \begin{enumerate}
+            \item $x_n+y_n=p_1+p_2$
+            \item $\lambda x_n\to\lambda p_1\ \forall\lambda\in\mathbb{R}$
+            \item $||x_n||\to ||p_1||$
+        \end{enumerate}
+        No tiene sentido decir $x_n\times y_n\to p_1\times p_2$.
+\end{corollary}
+\begin{definition}
+    Sea $A\subset\mathbb{R}^m$ un conjunto. Decimos que $A$ es cerrado por sucesiones $\Leftrightarrow\forall\{x_n\}\subset A$ sucesión tal que $x_n\to p$ se tiene que $p\in A$.
+\end{definition}
+\begin{corollary}
+    $A$ es cerrado $\Leftrightarrow A$ es cerrado por sucesiones.
+\end{corollary}
+\begin{corollary}
+    Toda sucesión acotada en $\mathbb{R}^m$ tiene al menos una sub-sucesión convergente. 
+\end{corollary}
+\begin{theorem}
+    Sea $A\subset\mathbb{R}^m$ un conjunto compacto (cerrado + acotado) y sea $\{x_n\}$ una sucesión en $A$. Entonces $\{x_n\}$ tiene una sub-sucesión convergente a $p\in A$.
+\end{theorem}
+\begin{definition}
+    Sea $a_k$ una sucesión en $\mathbb{R}^n$, y $k_j$ una sucesión estrictamente creciente de números naturales. Entonces la sucesión $a_{k_j}$ es una sub-sucesión de $a_k$.
+\end{definition}
+\begin{theorem}
+    Toda sucesión acotada de $\mathbb{R}^n$ tiene una sub-sucesión convergente.
+\end{theorem}
+\begin{corollary}
+    Si $K\subset\mathbb{R}^n$ es un conjunto compacto, y $a_k$ es una sucesión de elementos de $K$, entonces $a_k$ posee una sub-sucesión convergente, y ademas su limite es un elemento de $K$.
+\end{corollary}\newpage
+\section{Continuidad}
+\subsection{Funciones en $\mathbb{R}^n$}
+\begin{definition}{Función escalar}
+	\\Una función escalar es una función cuyo dominio esta incluido en $\mathbb{R}^n$ y codominio $\mathbb{R}$.
+\end{definition}
+\begin{example}{ \ }
+    \begin{itemize}
+        \item $f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=xy$
+        \item $T:\mathbb{R}^n\to\mathbb{R}\ /\ T(x_1,x_2,\cdots,x_n)=x_1+x_2+\cdots+x_n$
+        \item $f:\mathbb{R}^2\to\mathbb{R}\ /\ f(x,y)=x^2+xy$
+    \end{itemize}
+\end{example}
+\begin{definition}{Función vectorial}
+	\\Una función vectorial es una función con dominio en $\mathbb{R}^n$ y codominio en $\mathbb{R}^m$.\\
+    \\Para $f:A\subseteq\mathbb{R}^n\to\mathbb{R}^m\ /\ f(x_1,x_2,\cdots,x_n)=(f_1(x_1,x_2,\cdots,x_n),\cdots,f_m(x_1,\cdots,x_n))$ y se nota: $$f=(f_1,f_2,\cdots,f_m)$$
+Cada $f_i:A\subseteq\mathbb{R}^n\to\mathbb{R}$ es una función escalar $\forall i=1,\cdots,m$ y se llama en este contexto función coordenada.
+\\Sea $f:A\subset\mathbb{R}^n\to\mathbb{R}$, el grafico de $f$ es el conjunto $$G(f)=\{(x_1,x_2,\cdots,x_n,x_n+1)\in\mathbb{R}^n:\ (x_1,x_2,\cdots,x_n)\in A,\ x_{n+1}=f(x_1,x_2,\cdots,x_n)\}$$
+\end{definition}
+\begin{definition}{Conjuntos de nivel}
+    \\Los conjuntos de nivel son subconjuntos del dominio, cuyos puntos tienen la misma imagen por función.
+    \\Dado un $k\in\mathbb{R}$, el conjunto de nivel $k$ es $C_k=\{x\in\mathbb{R}^n : f(x)=k\}$.
+\end{definition}
+\newpage\subsection{Limites y continuidad}
+\begin{definition}
+    Dado un conjunto $D\subset\mathbb{R}^n$, una función $f:D\to\mathbb{R}$, y $a\in\mathbb{R}^n$ un punto de acumulación de $D$, decimos que $$\lim_{x \to a}f(x)=L\ \Leftrightarrow\ \forall\epsilon>0,\ \exists\delta>0\ \text{tal que }\forall x\in B^*(a,\delta)\cap D\ \text{se cumple }f(x)\in B(L,\epsilon)$$
+\end{definition}
+\begin{definition}
+    Dado un conjunto $D\subset\mathbb{R}^n$, una función $f:D\in\mathbb{R}$, y $a\in\mathbb{R}^n$, y un punto de $D$, decimos que $f$ es continua en $a$ si y solo si: $$\forall\epsilon>0,\ \exists\delta>0\ \text{tal que }\forall x\in B(a,\delta)\cap D\ \text{se cumple }f(x)\in B(f(a),\epsilon)$$
+\end{definition}
+\begin{corollary}
+    El punto $a$ debe estar en el dominio (en particular calculamos $f(a)$), pero no necesariamente debe ser un punto de acumulación, de esta forma podemos distinguir dos casos:
+    \begin{enumerate}
+        \item Si $a$ es un punto de acumulación de $D$, entonces la definición de continuidad coincide con la de limite, con $L=f(a)$. Es decir $$f\text{ es continua en }a\Leftrightarrow \lim_{x \to a}f(x)=f(a)$$
+        \item Si $a$ no es un punto de acumulación de $D$, entonces es un punto aislado. Es decir, existe un radio $\delta>0$ tal que no hay puntos de $D$ en $B(a,\delta)$. Entonces, una función $f$ es siempre sera continua en los puntos aislados del dominio.
+    \end{enumerate}
+\end{corollary}
+\begin{theorem}
+    Sea un conjunto $D\subset\mathbb{R}^n$, una función $f:D\in\mathbb{R}$, y $a\in\mathbb{R}^n$ un punto de acumulación de $D$, entonces: $$ \begin{array}{l}
+\begin{array}{ c l }
+\lim _{x\rightarrow a} f( x) =L\Leftrightarrow  & \text{para toda sucesión } x_{k} \ \text{de elementos de } D\backslash \{a\} \ \text{tal que }\lim _{k\rightarrow \infty } x_{k} =a\\
+ & \text{tenemos que }\lim _{k\rightarrow \infty } f( x_{k}) =L
+\end{array}\\
+\end{array}$$
+\end{theorem}
+\begin{theorem}
+    Sea un conjunto de $D\subset\mathbb{R}^n$, una función $f:D\to\mathbb{R}$, y $a\in\mathbb{R}^n$ un punto de $D$, entonces $$\begin{array}{ c l }
+f\ \text{es continua en } a\Leftrightarrow  & \text{para toda sucesión } x_{k} \ \text{de elementos de } D\ \text{tal que }\lim _{k\rightarrow \infty } x_{k} =a\\
+ & \text{tenemos que }\lim _{k\rightarrow \infty } f( x_{k}) =f( a)
+\end{array}$$
+\end{theorem}
+\begin{definition}{Limites reiterados}
+    \\Sea $f:\mathbb{R}^n\to\mathbb{R}$, dado un punto $(a_1,a_2,\cdots,a_n)\in\mathbb{R}^n$, decimos que los limites reiterados de $f$ como:$$\lim_{x_1 \to a_1}\left( \lim_{x_2 \to a_2}\left(\cdots\left( \lim_{x_n \to a_n} f(x_1,x_2,\cdots,x_n)\right)\cdots \right) \right) $$
+\end{definition}
+\begin{corollary}
+    Si $\lim_{(x_1,\cdots,x_n) \to (a_1,\cdots,a_n)}f(x_1,\cdots,x_n)=L$ entonces todos los limites reiterados de la función $f$ en el punto $(a_1,a_2,\cdots,a_n)$ existen y valen $L$.
+\end{corollary}
+\begin{definition}{Limites direccionales}
+    \\Sea $f:\mathbb{R}^n\to\mathbb{R}$ y sea $g:\mathbb{R}^{n-1}\to\mathbb{R}$, definimos el limite direccional de $f$ en la dirección de $g$ en el punto $(a_1,a_2,\cdots,a_n)\in\mathbb{R}^n$ como:$$\begin{array}{ l }
+\lim _{( x_{1} ,x_{2} ,\cdots ,x_{n})\rightarrow ( a_{1} ,a_{2} ,\cdots ,a_{n})} f( x_{1} ,x_{2} ,\cdots x_{n})\\
+x_{j} =g\underbrace{( x_{1} ,x_{2} ,\cdots ,x_{n})}_{\text{No aparece } x_{j}}
+\end{array}$$
+\end{definition}
+\begin{example}
+    Una generalización en $\mathbb{R}^2$ seria: $$\begin{array}{ c }
+\lim _{( x,y)\rightarrow ( x_{0} ,y_{0})} f( x,y) =\lim _{x\rightarrow x_{0}} f( x,g( x))\\
+g( x) =y
+\end{array}$$
+\end{example}
+\begin{corollary}
+    Si existe el limite de $f$ en $(a_1,\cdots,a_n)$ y vale $L$, entonces existe el limite direccional a través de cualquier dirección $g$ y también vale $L$.
+\end{corollary}
+\begin{corollary}
+    Es importante saber que los limites direccionales no permiten garantizar la existencia del limite. Son útiles para hallar un candidato a limite, o para demostrar que el limite no existe.
+\end{corollary}
+\begin{definition}{Limites por coordenadas polares}
+    \\El calculo de limites con coordenadas polares consiste en aplicar a las variables $x$ e $y$ las ecuaciones de equivalencia entre la representación mediante coordenadas cartesianas y polares, según la grafica, con $x=r\cos(\theta)$ e $y=r\sen(\theta)$, y definimos el acercamiento al punto $(0,0)$ mediante la resolución del limite en la variable $r$:$$\lim_{(x,y) \to x_0,y_)}f(x,y)=\lim_{r \to 0}f(r,\theta)$$
+    Al dejar la variable angular $\theta$ sin tratamiento en el calculo, se contemplan todas las trayectorias posibles de acercamiento.
+\end{definition}
+\begin{corollary}
+    Si el limite en coordenadas polares queda dependiendo de $\theta$, es decir de la dirección, podemos concluir que no existe el limite, y en caso que $\theta$ no quede acotada, no podemos concluir nada.
+\end{corollary}
+\begin{example}
+    Sea $f(x,y)=\frac{x^2y}{x^2+y^2}$ calcular su limite en $(0,0)$.
+    $$\lim_{(x,y) \to (0,0)}\frac{x^2y}{x^2+y^2}=\lim_{r \to 0}\frac{(r\cos(\theta))^2r\sin(\theta)}{r^2\cos^2(\theta)+r^2\sen^2(\theta)}=\lim_{r \to 0}r\cos^2(\theta)\sin(\theta)=0$$Pues $G(\theta)=cos^2(\theta)\sin(\theta)$ esta acotado.
+\end{example}
+\begin{corollary}
+    Sean $f$ y $g$ dos funciones continuas en $a$, entonces:
+    \begin{itemize}
+        \item $f+g$ es continua en $a$.
+        \item $f g$ es continua en $a$.
+        \item Si $g(a)\neq 0$ entonces $\frac{f}{g}$ es continua en $a$.
+    \end{itemize}
+\end{corollary}
+\begin{corollary}
+    Sea $f:\mathbb{R}^n\to\mathbb{R}^n$ una función continua en $a\in\mathbb{R}^n$, y $g:\mathbb{R}\to\mathbb{R}$ una función continua en $f(a)\in\mathbb{R}$, entonces la composición $g\circ f$ es continua en $a$.
+\end{corollary}
+\begin{theorem}{Weierstrass}
+    \\Sea $f:C\to\mathbb{R}$, $C\subset\mathbb{R}^n$ compacto, y $f$ continua, entonces $f$ alcanza mínimo y máximo en $C$.
+    \\Es decir, $\exists x_m,x_n\in C$ tal que $f(x_m)\le f(x)$ y $f(x_n)\ge f(x)\ \forall x\in C$.
+\end{theorem}
+\newpage\section{Diferenciabilidad en varias variables}
+\subsection{Derivadas parciales y direccionales}
+\begin{definition}
+    Sea $f:\mathbb{R}^2\to\mathbb{R}$ y $(x_0,y_0)$ un punto de $\mathbb{R}^2$, definimos la derivada parcial de $f$ respecto a la variable $x$ en el punto $(x_0,y_0)$ como el siguiente limite (si existe):$$\frac{\partial f}{\partial x}(x_0,y_0)=\lim_{h \to 0}\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}$$
+    De manera análoga se define para la variable $y$.
+\end{definition}
+\begin{corollary}
+    Esta definición, nos permite derivar como en una función de una variable, tomando la otra como una variable, es decir, si queremos derivar una función respecto $x$, solo tenemos que derivar normalmente tomando $y$ como una constante.
+\end{corollary}
+\begin{example}
+    Si queremos hallar $\frac{\partial f}{\partial x}(1,1)$ para la función $f(x,y)=x^2y+5y$, primero derivamos respecto a $x$, donde nos queda la función $\frac{\partial f}{\partial x}(x,y)=2x$, por lo que $\frac{\partial f}{\partial x}(1,1)=2\times 1=2$.
+\end{example}
+\begin{definition}
+    Sea $f:\mathbb{R}^2\to\mathbb{R}$ una función, $(x_0,y_0)$ un punto en $\mathbb{R}^2$, y un vector dirección $v=(v_1,v_2)$. Entonces definimos la derivada direccional de $f$ respecto a la dirección de $v$ en el punto $(x_0,y_0)$ como el siguiente límite, si existe:$$\frac{\partial f}{\partial v}(x_0,y_0)=\lim_{h \to 0}\frac{f(x_0+hv_1,y_0+hv_2)-f(x_0,y_0)}{h}$$
+\end{definition}
+\begin{corollary}
+    $$\frac{\partial f}{\partial x}(x_0,y_0)=\frac{\partial f}{\partial (1,0)} (x_0,y_0)$$
+    $$\frac{\partial f}{\partial y} (x_0,y_0)=\frac{\partial f}{\partial (0,1)} (x_0,y_0)$$
+\end{corollary}
+\begin{example}
+    Calculemos la derivada direccional respecto a la dirección $v=(1,1)$ de la función $f(x,y)=x^2+y^2$, entonces:$$\frac{\partial f}{\partial v}(x_0,y_0)=\lim_{h \to 0}\frac{f(x_0+hv_1,y_0+hv_2)-f(x_0,y_0)}{h}=\lim_{h \to 0}\frac{(x_0+h)^2+(y_0+h)^2-x_0^2-y_0^2}{h}$$
+    $$=\lim_{h \to 0}\frac{x_0^2+2x_0h+h^2+y_0^2+2y_0h+h^2-x_0^2-y_0^2}{h}=\lim_{h \to 0}\frac{2x_0h+h^2+2y_0h+h^2}{h}=2x_0+2y_0$$
+\end{example}
+\newpage\subsection{Diferenciabilidad}
+\begin{definition}
+    Sea $f:\mathbb{R}^n\to\mathbb{R}$, y $a\in\mathbb{R}^n$, decimos que la función $f$ es diferenciable en $a$ si y solo si existe una transformación lineal $df_a:\mathbb{R}^n\to\mathbb{R}$ tal que $$f(a+h)=f(a)+df_a(h)+r(h)$$
+    Con $r:\mathbb{R}^n\to\mathbb{R}$ una función que cumple $\lim_{h \to 0} \frac{r(h)}{||h||}=0$.
+\end{definition}
+\begin{definition}
+    Sea $f:\mathbb{R}^2\to\mathbb{R}$ y $a=(x_0,y_0)\in\mathbb{R}^2$, decimos que la función $f$ es diferenciable en $(x_0,y_0)$ si y solo si existen dos reales $A$ y $B$ tal que $$f(x_0+\triangle x,y_0+\triangle y)=f(x_0,y_0)+A\triangle x+B\triangle y+r(\triangle x,\triangle y)$$
+    Con $r:\mathbb{R}^2\to\mathbb{R}$ una función que cumple $\lim_{(\triangle x,\triangle y) \to (0,0)}\frac{r(\triangle x,\triangle y)}{||(\triangle x,\triangle y)||}=0$.
+\end{definition}
+\begin{theorem}
+    Sea $f:\mathbb{R}^2\to\mathbb{R}$ una función diferenciable en un punto $(x_0,y_0)$, entonces:
+    \begin{itemize}
+        \item $f$ es continua en $(x_0,y_0)$.
+        \item Existen todas las derivadas parciales en $(x_0,y_0)$ y valen $\frac{\partial f}{\partial x}(x_0,y_0)=A$ y $\frac{\partial f}{\partial y}(x_0,y_0)=B$.
+        \item Existen todas las derivadas direccionales de $f$ en $(x_0,y_0)$ y si $v=(v_1,v_2)\in\mathbb{R}^2$ entonces se cumple:$$\frac{\partial f}{\partial v}(x_0,y_0)=\frac{\partial f}{\partial x}(x_0,y_0)v_1+\frac{\partial f}{\partial y_0}v_2$$
+    \end{itemize}
+\end{theorem}
+\begin{definition}
+    Dada $f:\mathbb{R}^2\to\mathbb{R}$ diferenciable en $(x_0,y_0)$, definimos el vector gradiente de $f$ en $(x_0,y_0)$ como $\triangledown f( x_{0} ,y_{0}) =\begin{pmatrix}
+\frac{\partial f}{\partial x}( x_{0} ,y_{0}) & \frac{\partial f}{\partial y}( x_{0} ,y_{0})
+\end{pmatrix}$
+\end{definition}
+\begin{corollary}
+    Con esta notación, podemos expresar la derivada direccional como el producto interno del gradiente con la dirección: $$\frac{\partial f}{\partial v}(x_0,y_0)=\langle \triangledown f(x_0,y_0),v\rangle$$
+\end{corollary}
+\begin{corollary}
+    Consideremos un vector $v$ de norma uno, y las derivadas direccionales de $f$ respecto a $v$. Como tenemos que $\frac{\partial f}{\partial v}(x_0,y_0)=\langle\triangledown f(x_0,y_0),v\rangle$, entonces la derivada direccional se maximiza cuando los vectores $v$ y $\triangledown f(x_0,y_0)$ son colineales, es decir, la dirección del gradiente es la dirección de máximo crecimiento de $f$. Ademas, el gradiente es siempre perpendicular a las curvas de nivel.
+\end{corollary}
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+\begin{center}
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Curve Lines [id:da7458171219907485]
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (191,97.5) .. controls (236.54,48) and (230.13,55.35) .. (279.49,42.88) ;
+\draw [shift={(281,42.5)}, rotate = 165.7] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da15762690638125232]
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (282,29.5) .. controls (229.53,30.49) and (199.6,57.94) .. (174.75,95.36) ;
+\draw [shift={(174,96.5)}, rotate = 303.34] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da38294230817063457]
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (375,42.5) .. controls (427.21,46.44) and (444.48,56.2) .. (465.06,92.81) ;
+\draw [shift={(466,94.5)}, rotate = 241.07] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da7803289982688932]
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (492,95.5) .. controls (476.08,62.66) and (452.24,29.83) .. (378.12,26.55) ;
+\draw [shift={(377,26.5)}, rotate = 2.29] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da8217702805694439]
+\draw [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ]   (232,134.5) .. controls (311.2,142.42) and (377.66,151.32) .. (417.79,122.39) ;
+\draw [shift={(419,121.5)}, rotate = 143.13] [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da46790486851183033]
+\draw [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ]   (419,105.5) .. controls (340.39,91.57) and (311.29,93.48) .. (232.2,107.29) ;
+\draw [shift={(231,107.5)}, rotate = 350.07] [color={rgb, 255:red, 126; green, 211; blue, 33 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw    (282,19.25) -- (375,19.25) -- (375,53.25) -- (282,53.25) -- cycle  ;
+\draw (328.5,36.25) node   [align=left] {\begin{minipage}[lt]{60.52pt}\setlength\topsep{0pt}
+\begin{center}
+$\displaystyle f$ continua
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw    (137,98.25) -- (230,98.25) -- (230,156.25) -- (137,156.25) -- cycle  ;
+\draw (183.5,127.25) node   [align=left] {\begin{minipage}[lt]{60.52pt}\setlength\topsep{0pt}
+\begin{center}
+Existen $\displaystyle \frac{\partial \ f}{\partial \ v}$
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw    (420,98.25) -- (529,98.25) -- (529,132.25) -- (420,132.25) -- cycle  ;
+\draw (474.5,115.25) node   [align=left] {\begin{minipage}[lt]{71.4pt}\setlength\topsep{0pt}
+\begin{center}
+$\displaystyle f$ diferenciable
+\end{center}
+\end{minipage}};
+\end{tikzpicture}
+\end{center}
+\begin{definition}{Plano tangente}
+    \\Sea entonces una función $f$ diferenciable en el punto $(x_0,y_0)$, entonces la ecuación del plano tangente por $(x_0,y_0)$ es $$z=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)$$
+\end{definition}
+\begin{theorem}{Condición suficiente de diferenciabilidad}
+    \\Sea $f:\mathbb{R}^2\to\mathbb{R}$ y $(x_0,y_0)\in\mathbb{R}^2$, existen las derivadas parciales en una bola de centro $(x_0,y_0)$, y son continuas en $(x_0,y_0)$. Entonces $f$ es diferenciable en $(x_0,y_0)$.
+\end{theorem}
+\begin{corollary}
+    Notare como $f_x=\frac{\partial f}{\partial x}$ e $f_y=\frac{\partial f}{\partial y}$.
+\end{corollary}
+\begin{theorem}{Regla de la cadena I}
+    \\Sea $f:\mathbb{R}^2\to\mathbb{R}$ una función diferenciable en $(x_0,y_0)$, $I\subset\mathbb{R}$ y $\alpha:I\to\mathbb{R}^2$, $\alpha=(x(t),y(t))$, tal que $\alpha(t_0)=(x_0,y_0)$ y las dos funciones coordenadas $x(t)$ e $y(t)$ son derivables en $t_0$.\\
+    Entonces la composición $g(t)=(f\circ\alpha)(t)=f(\alpha(t))$ es derivable en $t_0$, y su derivada vale $$g'(t_0)=f_x(x_0,y_0)x'(t_0)+f_y(x_0,y_0)y'(t_0)=\langle\triangledown f(x_0,y_0),\alpha'(t_0)\rangle$$
+\end{theorem}
+\begin{theorem}{Regla de la cadena II}
+    \\Sea $g:\mathbb{R}^2\to\mathbb{R}^2$, de forma $g(x,y)=(g_1(x,y),g_2(x,y))$, y $f:\mathbb{R}^2\to\mathbb{R}$, que escribiremos como $f(u,v)$. Supongamos que $g(x_0,y_0)=(u_0,v_0)$, que $f$ es diferenciable en $(u_0,v_0)$, y que tanto $g_1$ como $g_2$ son diferenciable en $(x_0,y_0)$, entonces la función $h=(f\circ g)$ tiene derivadas parciales que verifican:$$\frac{\partial h}{\partial x}(x_0,y_0)=\frac{\partial f}{\partial u}(u_0,v_0)\frac{\partial g_1}{\partial x}(x_0,y_0)+\frac{\partial f}{\partial v}(u_0,v_0)\frac{\partial g_2}{\partial x}(x_0,y_0)$$
+    $$\frac{\partial h}{\partial y}(x_0,y_0)=\frac{\partial f}{\partial u}(u_0,v_0)\frac{\partial g_1}{\partial y}(x_0,y_0)+\frac{\partial f}{\partial v}(u_0,v_0)\frac{\partial g_2}{\partial y}(x_0,y_0)$$
+\end{theorem}
+\newpage\subsection{Derivadas de orden superior}
+\begin{definition}{Derivadas de segundo orden}
+\begin{itemize}
+    \item $\frac{\partial}{\partial x}(\frac{\partial f}{\partial x})=\frac{\partial^2 f}{\partial x^2}=f_{xx}$
+    \item $\frac{\partial}{\partial y}(\frac{\partial f}{\partial x})=\frac{\partial^2 f}{\partial y\partial x}=f_{yx}$
+    \item $\frac{\partial}{\partial x}(\frac{\partial f}{\partial y})=\frac{\partial^2 f}{\partial x\partial y}=f_{xy}$
+    \item $\frac{\partial}{\partial y}(\frac{\partial f}{\partial y})=\frac{\partial^2 f}{\partial y^2}=f_{yy}$
+\end{itemize}
+\end{definition}
+\begin{definition}
+    Sea $f$ una función con derivadas parciales de segundo orden en $(x_0,y_0)$.
+    \\La matriz Hessiana de $f$ en $(x_0,y_0)$ es 
+\end{definition}
+\begin{theorem}{Teorema de Schwarz}
+    \\Si $f_{xy}$ y $f_{yx}$ existen en una bola $B((x_0,y_0),\delta)$ y son continuas en $(x_0,y_0)$ entonces $f_{xy}(x_0,y_0)=f_{yx}(x_0,y_0)$.
+\end{theorem}
+\begin{definition}
+    Decimos que $f:\mathbb{R}^2\to\mathbb{R}$ es de clase $C^k$ si existen y son continuas sus derivadas de orden $k$.
+\end{definition}
+\begin{corollary}
+    Si $f\in C^1\Rightarrow\ f$ es diferenciable.\\
+    Si $f\in C^2\Rightarrow\ f_{xy}=f_{yx}$.
+\end{corollary}
+\subsection{Funciones de $\mathbb{R}^n$ a $\mathbb{R}^m$}
+\begin{definition}
+    Una función $f:\mathbb{R}^n\to\mathbb{R}^m$ es de la forma $$f(x_1,x_2,\cdots,x_n)=(f_1(x_1,x_2,\cdots,x_n),f_2(x_1,x_2,\cdots,x_n),\cdots,f_m(x_1,x_2,\cdots,x_n))$$
+\end{definition}
+\begin{definition}
+    Decimos que $f:\mathbb{R}^n\to\mathbb{R}^m$ es diferenciable en $a=(a_1,a_2,\cdots,a_n)\in\mathbb{R}^n$ si y solo si existe una transformación lineal $df_a:\mathbb{R}^n\to\mathbb{R}^m$ tal que $f(a+h)=f(a)+df_a(h)+r(h)$ con $\lim_{h \to 0}\frac{r(h)}{||h||}=0$.
+\end{definition}
+\begin{corollary}
+    La matriz asociada de $df_a$ tiene como entradas las derivadas parciales (matriz Jacobiana).
+\end{corollary}
+\begin{definition}
+    Definimos la matriz Jacobiana como $$J_f(a)=\begin{pmatrix}
+\frac{\partial f_{1}}{\partial x_{1}}( a) & \frac{\partial f_{1}}{\partial x_{2}}( a) & \dotsc  & \frac{\partial f_{1}}{\partial x_{n}}( a)\\
+\frac{\partial f_{2}}{\partial x_{1}}( a) & \frac{\partial f_{2}}{\partial x_{2}}( a) & \dotsc  & \frac{\partial f_{1}}{\partial x_{n}}( a)\\
+\vdots  & \vdots  & \ddots  & \vdots \\
+\frac{\partial f_{m}}{\partial x_{1}}( a) & \frac{\partial f_{m}}{\partial x_{2}}( a) & \dotsc  & \frac{\partial f_{m}}{\partial x_{n}}( a)
+\end{pmatrix}=\begin{pmatrix}
+\triangledown f_{1}( a)\\
+\triangledown f_{2}( a)\\
+\vdots \\
+\triangledown f_{m}( a)
+\end{pmatrix}$$
+\end{definition}
+\begin{theorem}{Regla de la cadena III}
+    \\Sea $g:\mathbb{R}^k\to\mathbb{R}^n$, diferenciable en $a\in\mathbb{R}^k$, y $f:\mathbb{R}^n\to\mathbb{R}^m$, diferenciable en $g(a)$. Entonces $f\circ g:\mathbb{R}^k\to\mathbb{R}^m$ es diferenciable en $a$ y ademas su diferencial es $d(f\circ g)_a=df_{g(a)}\circ dg_a$.
+\end{theorem}
+\begin{corollary}
+    Observar que la diferencial de la composición es la composición de los diferenciales, por lo tanto, la matriz jacobiana de $f\circ g$ es el producto de las matrices Jacobianas de $f$ y $g$: $J_{f\circ g}(a)=J_f(g(a))\cdot J_g(a)$.
+\end{corollary}
+\newpage\subsection{Desarrollo de Taylor}
+Recordemos que si $f$ es diferenciable en $a$, el diferencial de la transformación lineal que mejor aproxima localmente: $df_a(\triangle x,\triangle y)=f_x(a)\triangle x+f_y(a)\triangle y$.\\
+\\Consideremos una función $f\in C^2$, definimos el diferencial segundo en $a$ como la función $d^2f_a:\mathbb{R}^2\to\mathbb{R}$ definida por:$$d^2f_a(\triangle x,\triangle y)=f_{xx}(a)\triangle x^2+2f_{xy}(a)\triangle x\triangle y+f_{yy}(a)\triangle y^2$$
+De manera similar se definen los diferenciales de orden superior, por ejemplo si todas ls derivadas conmutan tenemos:$$d^3f_a(\triangle x,\triangle y)=f_{xxx}(a)\triangle x^3+3f_{xxy}(a)\triangle x^2\triangle y+3f_{xyy}(a)\triangle x\triangle y^2+f_{yyy}(a)\triangle y^3$$
+\begin{definition}
+    Definimos la matriz Hessiana como $H=\begin{pmatrix} f_{xx}(a) & f_{xy}(a) \\ f_{yx}(a) & f_{yy}(a) \end{pmatrix} $
+\end{definition}
+\begin{corollary}
+    Si notamos al vector de incrementos $v=(\triangle x,\triangle y)$, resulta $d^2f_a(v)=vHv^T$.
+\end{corollary}
+\begin{theorem}{Teorema de Taylor}
+    \\Sea $f:\mathbb{R}^m\to\mathbb{R}$ una función de clase $C^{k+1}$ (derivadas parciales de orden $k+1$ continuas) y $a\in\mathbb{R}^2$.
+    \\Entonces:$$f(a+h)=f(a)+df_a(h)+\frac{d^2f_a}{2}(h)+\cdots+\frac{d^kf_a}{k!}(h)+r(h)$$
+    donde el resto $r_k$ es una función que cumple $\lim_{(h) \to (0,\cdots,0)}\frac{r_k(h)}{||h||^k}=0$
+    \\Por ejemplo, en el caso de una función de dos variables, el desarrollo de Taylor de orden $2$ resulta: $$f(x_0+\triangle x,y_0+\triangle y)=f(x_0,y_0)+f_x(x_0,y_0)\triangle x+f_y(x_0,y_0)\triangle y+\frac{1}{2}[f_{xx}(x_0,y_0)\triangle x^2+2f_{xy}(x_0,y_0)\triangle x\triangle y+f_{yy}(x_0,y_0)\triangle y^2]$$$$+r(\triangle x,\triangle y)$$
+\end{theorem}
+\newpage\section{Integrales múltiples}
+\begin{corollary}{Propiedades}
+    \\Sea $D$ compacto en $\mathbb{R}^2$:
+    \begin{enumerate}
+        \item $\int\int_D\alpha f(x,y)+\beta g(x,y)dxdy=\alpha\int\int_Df(x,y)dxdy+\beta\int\int_Dg(x,y)dxdy$.
+        \item $\int\int_{D_1\cup D_2}f(x,y)dxdy=\int\int_{D_1}f(x,y)dxdy+\int\int_{D_2}f(x,y)dxdy$\\Siendo $D_1$ y $D_2$ disjuntos, es decir $D_1\cap D_2=\emptyset$.
+        \item Si $f(x,y)\ge0\ \forall(x,y)\in D$ entonces $\int\int_Df(x,y)dxdy\ge0$.
+        \item Si $f(x,y)\ge g(x,y)\ \forall(x,y)\in D$ entonces $\int\int_Df(x,y)dxdy\ge\int\int_Dg(x,y)dxdy$.
+    \end{enumerate}
+\end{corollary}
+\begin{theorem}{Teorema de Fubini 1}
+    \\Sea $D=[a,b]\times[c,d]$ un rectángulo en $\mathbb{R}^2$. Entonces:$$\int\int_Df(x,y)dxdy=\int_{c}^{d}\left( \int_{a}^{b} f(x,y) dx \right) dy=\int_{a}^{b} \left( \int_{c}^{d} f(x,y) dy \right)  dx$$
+\end{theorem}
+\begin{theorem}{Teorema de Fubini 2}
+    \\Sea $D=\{(x,y)\in\mathbb{R}^2:\ a\le x\le b,\ \alpha(x)\le y\le \beta(x)\}$. Entonces: $$\int\int_Df(x,y)dxdy=\int_{a}^{b} \left( \int_{\alpha(x)}^{\beta(x)} f(x,y) dy \right)  dx=\int_{c}^{d} \left( \int_{\gamma(y)}^{\delta(y)} f(x,y) dx \right)  dy$$
+\end{theorem}
+\subsection{Cambios de variable}
+\begin{definition}
+    Sean $U$ y $V$ dos abiertos de $\mathbb{R}^2$, decimos que $g:U\to V$ es un cambio de variable si y solo si $g$ es biyectiva, diferenciable, y $det(J_g)\neq 0$ en todo el dominio $U$.
+\end{definition}
+\begin{theorem}{Cambio de variable}
+    \\Sea $f:D\to\mathbb{R}$ continua, y $g:U\to V$ un cambio de variable, donde $U$ y $V$ son abiertos, y $D\subset V$, entonces:$$\iint_Df(x,y)dxdy=\iint_{g^{-1}(D)}f(g(u,v))|det(J_g(u,v))|dudv$$
+\end{theorem}
+\subsection{Coordenadas polares}
+Recordemos que podemos representar cada punto del plano mediante su distancia al origen $p$ y el ángulo $\theta$ que forma con el eje horizontal, analíticamente tenemos $x=p\cos(\theta)$ e $y=p\sen(\theta)$
+    \\En términos de la notación que estamos usando cambio de variable, tenemos $g:[0,\infty)\times[0,2\pi)\to\mathbb{R}^2$, con $g(p,\theta)=(p\cos(\theta),p\sen(\theta))$, entonces el determinante de la matriz Jacobiana: $$J_g(p,\theta)=\begin{pmatrix} \cos(\theta) & -p\sen(\theta) \\ \sin(\theta) & p\cos(\theta) \end{pmatrix} $$
+    de donde tenemos $|det(J_g(p,\theta))|=|p\cos^2(\theta)+p\sin^2(\theta)|=p$.
+\end{document}

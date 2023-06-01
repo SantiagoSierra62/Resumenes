@@ -1,0 +1,214 @@
+\documentclass{report}
+
+\input{../preamble.tex}
+\input{../letterfonts.tex}
+
+\title{\Huge{Probabilidad y Estadistica}}
+\author{\huge{Santiago Sierra}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{}
+\section{Cálculo de probabilidades}
+\dfn{}{La probabilidad de un evento A, es un número real en el intervalo $[0,1]$ que denotaremos por $P(A)$.}
+\dfn{Espacio muestral}{Es el conjunto $\Omega$ de todos los resultados posibles de un evento. Los elementos del espacio muestral se denotan usualmente por la letra $\omega$ y se llaman eventos simples o elementales.}
+\dfn{Cardinal}{Es el número de elementos de un evento, lo escribimos como $|A|$.}
+\dfn{Probabilidad Clásica}{Sea $A$ un subconjunto de un espacio muestral $\Omega$ de cardinalidad finita. Definimos la probabilidad de un evento $A$ como:$$P(A)=\frac{|A|}{|\Omega|}$$}
+\dfn{$\sigma$-álgebra}{$\mathcal{M}$ es $\sigma$-álgebra $\Leftrightarrow \begin{cases}\Omega\in\mathcal{M} \\ \text{Si }A\in\mathcal{M}\rightarrow A^c\in\mathcal{M} \\ \text{Si }A_1,A_2,\dots,A_n\in\mathcal{M}\rightarrow\cup_{m=1}^\infty A_m\in\mathcal{M} \end{cases}$}
+\dfn{Espacio de probabilidad}{Diremos que $\left( \Omega, \mathcal{M}, P \right)$ con $\Omega\neq\emptyset$ es un espacio de probabilidad si y solo si $\mathcal{M}$ es una $\sigma$-álgebra de conjuntos de $\Omega$, y si $P:\mathcal{M}\to[0,1]$ es una función tal que:
+	\begin{itemize}
+		\item $P(\Omega)=1$.
+		\item Si $A_1,A_2,\dots,A_n\dots\in\mathcal{M}\ A_i\cap A_j=\emptyset\ \forall i\neq j$.
+	\end{itemize}}\newpage
+\mprop{Propiedades de una probabilidad}{\begin{enumerate}
+		\item $P(\emptyset)=0$.
+		      \begin{myproof}$\Omega=\Omega\uplus\emptyset\to P(\Omega)=P(\Omega\uplus\emptyset)=P(\Omega)+P(\emptyset)$.
+			      \\Por la propiedad 2, tenemos que $P(\Omega)=1$, por lo que nos queda $1=1+P(\emptyset)\to P(\emptyset)=0$.\end{myproof}
+		\item $P(A)\le 1$ para cualquier evento A.
+		      \begin{myproof}$\Omega=A\uplus A^c\to (1=)P(\Omega)=P(A)+P(A^c)$, como $P(A^c)\ge 0$ por la primera propiedad, nos queda que $P(A)\le 1$.\end{myproof}
+		\item $P(A^c)=1-P(A)$.
+		      \begin{myproof}\noindent\begin{align}P(A\cup A^c) &=P(A)+P(A^c)\\ &\to P(\Omega)=1=P(A)+P(A^c)\\&\to P(A^c)=1-P(A)\end{align}\end{myproof}
+		\item Si $A\subseteq B\to\ P(A)\le P(B)$.
+		      \begin{myproof}\begin{align}B=A\uplus(B\backslash A)&\to\ P(B)=P(A)+P(B\backslash  A)\\&\to P(A)\le P(B)\end{align}\end{myproof}
+		\item $P(B\backslash A)=P(B)-P(A\cap B)\ \forall A,B$.
+		      \begin{myproof}\begin{align}B=(B\backslash A)\uplus(A\cap B)&\to P(B)=P(B\backslash A)+P(A\cap B)\\&\to P(B\backslash A)=P(B)-P(A\cap B)\end{align}\end{myproof}
+		\item Si $A\subset B\to P(B\backslash A)=P(B)-P(A)$.
+		      \begin{myproof}Como $A$ esta incluido en $B$, tenemos que $A\cap B=A$.\end{myproof}
+		\item $P(A\cup B)=P(A)+P(B)-P(A\cap B)$
+		      \begin{myproof}\begin{align}P(A\cup B)&=P((A\cap B)\cup(A/B)\cup(B/A)\\&=P(A\cap B)+\textcolor{red}{P(A/B)}+\textcolor{blue}{P(B/A)}\\&=P(A\cap B)+\textcolor{red}{P(A)-P(A\cap B)}+\textcolor{blue}{P(B)-P(A\cap B)}\\&=P(A)+P(B)-P(A\cap B)\end{align}\end{myproof}
+		\item $P(A\cup B\cup C)=P(A)+P(B)+P(C)-P(A\cap B)-P(A\cap C)-P(B\cap C)+P(A\cap B\cap C)$.
+		\item Sea $\{C_n\}_n$ una sucesión de conjuntos tales que:
+		      \begin{itemize}
+			      \item $\cup_{i=1}^\infty C_i=\Omega$
+			      \item $C_i\cap C_j=\emptyset$ si $i\neq j$
+		      \end{itemize}
+		      Entonces $P(A)=\sum_{i=1}^{\infty} P(A\cap C_i)\ \forall A$.
+		      \begin{myproof}$A=\uplus_{i=1}^\infty(A\cap C_i)\to\ P(A)=P(\uplus_{i=1}^\infty(A\cap C_i))=\sum_{i=1}^{\infty} P(A\cap C_i)$.\end{myproof}
+		\item Continuidad de las probabilidades
+		      \begin{itemize}
+			      \item $A_1\subset A_2\subset\dots\subset A_n\subset\dots A_i\in\mathcal{M}\to P(\cup_{m=1}^\infty A_m)=\lim_{m \to \infty} P(A_m)$.
+			      \item $A_1\supset A_2\supset\dots\supset A_n\supset\dots A_i\in\mathcal{M}\to P(\cap_{m=1}^\infty A_m)=\lim_{m \to \infty}P(A_m)$.
+		      \end{itemize}
+	\end{enumerate}}
+\dfn{Leyes de Morgan}{\begin{itemize}
+		\item $\left( \cup_{n=1}^\infty A_n \right)^c=\cap_{n=1}^\infty A_n^c$.
+		\item $\left( \cap_{n=1}^\infty A_n \right)^c=\cup_{n=1}^\infty A_n^c$.
+	\end{itemize}}
+\section{Modelo de equiprobabilidad}
+Cuando $\Omega$ es finito y ademas todos sus elementos tienen igual probabilidad, entonces $A\subset\Omega\ P(A)=\frac{|A|}{|\Omega|}$.
+\section{Probabilidad Condicional}
+\dfn{}{Sean $A$ y $B$ dos eventos de un espacio muestral $\Omega$, y supongamos que $P(B)>0$. Definimos la probabilidad condicional de $A$ dado $B$ como $$P(A|B)=\frac{P(A\cap B)}{P(B)}$$Representa la probabilidad de $A$ cuando se sabe que el evento $B$ ha ocurrido}
+\mprop{}{\begin{itemize}
+		\item $P(A\cap B)=P(A|B)P(B)$ si $P(B)\neq 0$.
+		\item $P(A\cap B)=P(B|A)P(A)$ si $P(A)\neq 0$.
+		\item $P(A|B)=\frac{P(B|A)P(A)}{P(B)}$ si $P(A)\neq0$ y $P(B)\neq0$.
+		\item Si $\cup_{n=1}^\infty B_n=\Omega\ B_i\cap B_j=\emptyset\ \forall i\neq j\ P(B_n)\neq 0\ \forall n$.
+		      \begin{itemize}
+			      \item $P(A)=\sum_{n=1}^{\infty} P(A|B_n)P(B_n)$.
+			      \item $P(B_k|A)=\frac{P(A|B_k)P(B_k)}{\sum_{n=1}^{\infty} P(A|B_m)P(B_m)}$.
+		      \end{itemize}
+		\item $P(A|B)=1-P(A^c|B)$ si $P(B)\neq 0$.
+		\item $P(A\cup B|C)=P(A|C)+P(B|C)-P(A\cap B|C)$ si $P(C)\neq 0$.
+	\end{itemize}}
+\dfn{Diagrama de árbol}{Un árbol de probabilidad es una representación grafica de un conjunto de posibles resultados de un experimento aleatorio, donde cada nodo del árbol representa un evento y cada rama representa la probabilidad de que ocurra un resultado especifico.\\\[
+	\begin{forest} for tree={ % nodes
+		draw, rounded corners=2pt,
+		where level=0{}{minimum width=2em},
+		top color=white, bottom color=blue!20,
+		math content,
+		% tree
+		grow'=east,
+		edge=semithick,
+		child anchor=west,
+		l sep=22mm,
+		s sep=6mm,
+		where level=1{s sep=2mm}{},% insert different `s sep`
+		tier/.option = level,
+		/tikz/ELS/.style = {% Edge Label Style 
+				pos=0.5, sloped, node font=\footnotesize,
+				inner sep=2pt, anchor=#1},
+		EL/.style = {if n=1{% Edge Label, automatic positioned
+edge label={node[ELS=south]{$#1$}}}                     {edge label={node[ELS=north]{$#1$}}}}         }, [     [A,     EL=P(A)         [B,     EL=P(B|A)]         [B^c,   EL=P(B^c|A)]     ]     [A^c,   EL=P(A^c)         [B,     EL=P(B|A^c)]         [B^c,   EL=P(B^c|A^c)]     ] ]     \end{forest}\]
+Para usar el arbol de probabilidad, podemos seguir una ruta especifica desde el nodo raiz hasta un nodo terminal para determinar la probabilidad de que ocurra un resultado particular. Por ejemplo, para encontrar la probabilidad de que ocurra el evento $B$, podemos seguir la ruta de la izquierda desde el nodo raiz hasta el nodo terminal etiquetado con $B$ y sumar las probabilidades a lo largo de esa ruta. En este caso la suma seria $P(B)=P(A)*P(B|A)+P(A^c)*P(B|A^c)$.
+}
+\dfn{Independencia de conjuntos}{Sean $A,B\in\mathcal{M}$ se dicen independientes si y solo si $P(A\cap B)=P(A)P(B)$.}
+\cor{}{Si $A$ y $B$ son independientes, y $P(B)\neq 0$, entonces $P(A|B)=\frac{P(A\cap B)}{P(B)}=\frac{P(A)P(B)}{P(B)}=P(A)$.}
+\cor{}{$\emptyset$ y $\Omega$ son independientes de $A\ \forall A$.}
+\dfn{}{$A,B,C$ son independientes si y solo si:
+	\begin{enumerate}
+		\item Los conjuntos son independientes $2$ a $2$.
+		\item $P(A\cap B\cap C)=P(A)P(B)P(C)$.
+	\end{enumerate}
+}
+\mprop{}{Si $A$ y $B$ son independientes, entonces también lo son:
+\begin{enumerate}
+    \item $A$ y $B^c$.
+    \item $A^c$ y $B$.
+    \item $A^c$ y $B^c$.
+\end{enumerate}
+}
+\chapter{Variables aleatorias}
+\dfn{Variables aleatorias}{Una variable aleatoria es una función $X:\Omega\to\mathbb{R}$ que a cada elemento del espacio muestral $\omega$ asigna un numero real $X(\omega)$.\\La distribución de $X$ queda determinada por los valores posibles que puede tomar y las probabilidades con que efectivamente lo hace.}
+\dfn{Variable aleatoria discreta}{Una variable aleatoria $X$ es discreta si su recorrido es numerable. Es decir, si podemos ordenar en una sucesión $R_X=\{x_1,x_2\dots\}$ los valores posibles que puede tomar. El recorrido de $X$ puede ser tanto finito como infinito.}
+\dfn{Función de probabilidad puntual}{Una función de probabilidad de una v.a. es la función $P:\mathbb{R}\to[0,1]$ definida por $P_X(x)=P(X=x)\ \forall x\in\mathbb{R}$.\\La distribución de $X$ queda entonces determinada por su función de probabilidad puntual.}
+\dfn{Función de distribución de una v.a. $X$}{Dada $X$ v.a. en $(\Omega,\mathcal{M},P)\ F_X:\mathbb{R}\to\mathbb{R}$ tal que $F_X(x)=P(X\le x)$.}
+\cor{Propiedades}{
+\begin{enumerate}
+    \item $0\le F_X(x)\le 1\ \forall x\in\mathbb{R}$.
+    \item $F_X(x)$ es monótona creciente.
+    \item $\lim_{x \to \infty} F_X(x)=1$.
+    \item $\lim_{x \to - \infty} F_X(x)=0$.
+    \item $F_X$ es continua por derecha ($\lim_{x \to a^+} F_X(x)=F_X(a)$).
+\end{enumerate}
+}
+\thm{}{Si $F:\mathbb{R}\to\mathbb{R}$ que cumple las propiedades anteriores entonces $\exists\ (\Omega,\mathcal{M},P)$ y $\exists\ X$ variable aleatoria tal que $F_X=F$.}
+\mprop{}{Si defino $F_X(a^-)=\lim_{x \to a^-}F_X(x)$ entonces:
+\begin{enumerate}
+    \item $P(a<X\le b)=F_X(b)-F_X(a)$.
+    \item $P(a\le X\le b)=F_X(b)-F_X(a^-)$.
+    \item $P(a<X<b)=F_X(b^-)-F_X(a)$.
+    \item $P(a\le X<b)=F_X(b^-)-F_X(a^-)$.
+    \item $P(X>a)=1-F_X(a)$.
+    \item $P(X\ge a)=1-F_X(a^-)$.
+    \item $P(X=a)=F_X(a)-F_X(a^-)$.
+\end{enumerate}
+}
+\mlenma{}{
+\begin{enumerate}
+    \item Conociendo la $F_X$ puedo calcular la probabilidad de cualquier intervalo.
+    \item De $(7)$ deduzco que conociendo $F_X$ puedo obtener $P_X$.
+    \item $P(X=a)=$"salto de $F_X$ en el punto $a$".
+\end{enumerate}
+}
+\dfn{Clasificación de variables aleatorias}{Hay 3 tipos
+\begin{enumerate}
+    \item Discretas: Una variable aleatoria $X$ es discreta si y solo si $Rec(X)$ es finito o infinito numerable.
+    \item Absolutamente continuas.
+    \item Mixtas.
+\end{enumerate}
+}
+\dfn{Modelos de Variables discretas}{
+\begin{enumerate}
+    \item Variable Bernoulli:\\Notación: $X\sim Ber(p)$ con $$X=\begin{cases} 1 & \text{caso de éxito} \\ 0 & \text{caso de fracaso} \end{cases}$$ $P=P(X=1)=P($éxito$)$, toda v.a. con $Rec(X)=\{0,1\}$ es Bernoulli donde éxito$=\{X=1\}$.
+    \item Binomial $X\sim Bin(m,p)$\\Se repiten $m$ veces pruebas independientes de Bernoulli con probabilidad $p$ de éxito en cada prueba.\\$X=$ cantidad de éxitos en las $m$ pruebas.\\$Rec(X)=\{1,2,\dots,n\}$.\\$P(X=x)=C_x^mp^x(1-p)^{m-x}$.
+    \item Geométrica $X\sim Geo(p)$\\Se repiten pruebas independientes de Bernoulli con probabilidad $p$ de éxito en cada prueba hasta que ocurra el primer éxito.\\$X=$ cantidad de pruebas.\\$P(X=x)=p(1-p)^{x-1}$.
+    \item Binomial Negativa $X\sim BinNeg(r,p)$\\Igual a la geométrica pero se realiza hasta el r-esimo éxito.\\$X=$ canitdad de pruebas.\\$Rec(X)=\{r,r+1,r+2,\dots\}$\\$P(X=x)=C_{r-1}^{x-1} p^r(1-p)^{x-r}$.\\Si $r=1$ queda $Geo(p)$.
+\end{enumerate}
+}
+\ex{Bernoulli}{Tiro un dado $X=\begin{cases} 1 & \text{si sale el }5 \\ 0 & \text{si no}\end{cases}\sim Ber(p=\frac{1}{6})$, en este caso el éxito seria que salga el 5.}
+\ex{Binomial}{Tiro un dado 20 veces:
+\begin{enumerate}
+    \item Hallar $P$(exactamente 10 veces sale el 5).\\Defino $X=$cantidad de veces que sale el $5$ en las $20$ tiradas.\\$P(X=10)\to X\sim Bin(m=20,p=\frac{1}{6})$ el éxito es que sale el 5 en una tirada, entonces $$P(X=10)=C_{10}^{20} \left( \frac{1}{6} \right)^{10} \left( \frac{5}{6} \right)^{10}$$
+    \item Hallar $P$(al menos 2 veces sale un numero par).\\Defino $X=$ cantidad de veces que sale un numero par en las 20 tiradas, es decir $X\sim Bin(m=20,p=\frac{1}{2})$ siendo el éxito que salga par en una tirada.$$P(X\ge 2)=1-P(X<2)=1-P(X=0)-P(X=1)=1-C_0^{20} \left( \frac{1}{2} \right)^{20} - C_1^{20} \frac{1}{2} \left( \frac{1}{2} \right)^{19}$$
+\end{enumerate}
+}
+\newpage\ex{Geométrica}{Se sabe que las precipitaciones máximas mensuales en diciembre superan los $200mm$ 1 vez cada 100 años, calcular $P($haya que esperar al menos 5 años para que se vuelvan a superar los $200mm)$\\Definimos $X=$ cantidad de años hasta superar los $200mm$ en diciembre $\sim Geo(p=\frac{1}{100})$, entonces $P(X\ge 5)=1-P(X=1)-P(X=2)-P(X=3)-P(X=4)-P(X=5)$, solo queda remplazar con la formula.}
+\newpage\thm{Primer Teorema de Continuidad}{Sea $A_1\subseteq A_2\subseteq A_3\subseteq\dots\ (\{A_n\}_n)$. Entonces:
+	\begin{itemize}
+		\item Existe $\lim_{n \to \infty}P(A_n)$
+		      \\Demostración: Como $a_n=P(A_n)$ es una sucesión acotada en $\mathbb{R}$ converge.
+		\item Ademas: $\lim_{n \to \infty} P(A_n)=P(A)$
+		      \\Demostración: Como $A_1\cup A_2\cup\dots\cup A_n=A_n$, tenemos que $\lim_{n \to \infty}A_n=\cup_{n=1}^\infty A_n$.\\También $\lim_{n \to \infty} P(A_n)=P(\lim_{n \to \infty}A_n)$
+		      Con $A_1\cup A_2=A_1\uplus(A_2\backslash A_1)$, $A_1\cup A_2\cup A_3=A_1\uplus(A_2\backslash A_1)\uplus(A_3\backslash A_1)$\\Sea $\{B_n\}_n$ tal que $B_n=A_n\backslash A_{n-1}$, entonces $\cup_{n=1}^\infty$
+	\end{itemize}}
+\newpage
+\dfn{}{Sea $X:\Omega\to\mathbb{R}$, definimos $F_X:\mathbb{R}\to\mathbb{R}$ tal que $F_X(z)=P(x\in z)$}
+\mprop{}{Propiedades de la $fda$:
+	\begin{enumerate}
+		\item $0\le F_X(x)\le 1\ \forall x$.
+		\item $F_X$ es creciente si $x\le y\to F_X(x)\le F_X(y)$
+		\item $\lim_{x \to \infty}F_X(x)=1$
+		\item $\lim_{x \to -\infty}F_X(x)=0$
+		\item $\lim_{x \to a^+}F_X(x)=F_X(a)$
+		\item $P(x=a)=F_X(a)-\lim_{x \to a^-}F_X(x)$
+		\item $P(x<a)=F_X(a)-P(x=a)$
+		\item $P(a<X\le b)=P(x\le b)-P(X\le a)=F_X(b)-F_X(a)$, y $(a<X\le b)=\{x\le b\}\backslash\{x\le a\}$.
+	\end{enumerate}}
+\section{Variables aleatorias discretas con nombre}
+\dfn{Variable aleatoria Bernoulli}{Diremos que $X\sim Ber(p)$ ("$X$" distribuye como una Bernoulli de parámetro $p$) con $p\in [0,1]$ si $Rec(X)=\{0,1\}$ y $p_x(1)=p$ y $p_x(0)=1-p$
+	\\Que modela? Modelamos experimentos en donde hay dos resultados posibles: Éxito (E) o Fracaso (F), $X(w)\begin{cases}1 \text{ si } w\in E \\ 0\text{ si } w\in F\end{cases}$.}
+\dfn{Variable aleatoria binomial}{Diremos que $X\sim Bin(n,p)$ (con $n\in\mathbb{N}$ y $p\in(0,1)$) si $Rec(X)=\{0,1,2,\dots,n\}$ y $p_x(k)=C_k^np^k(1-p)^{n-k}\ge0$.\\
+Verificar $\sum_{k\in Rec(X)}p_x(k)=1$\\
+$\sum_{k=0}^{n} C_k^np^k(1-p)^{n-k}=[\cancel{p}+(1-\cancel{p}]^n=1^n=1$\\
+			Que modelamos?\\
+			Hacemos $m$ repeticiones del experimento tipo Bernoulli\\
+		$X=\#$ de Éxitos en esos $m$ experimentos.
+			\\$P(X=k)=C_k^np^k(1-p)^{n-k}$, siendo $C_k^n$ las $\#$ de formas de tener $k$ éxitos ($n-k$ F)}
+\cor{}{Si $X\sim Bin(n,p)\to X=X_1+X_2+\dots+X_n$ siendo $X_i\sim Bin(p)$ "independientes".}
+\dfn{Variable Aleatoria Geométrica}{Diremos que $X\sim  Geo(p)$ con $p\in(0,1)$ si $Rec(X)=\{1,2,3,\dots\}\in\mathbb{N}^+$ y $p_x(k)=(1-p)^{k-1}p$\\
+	$\sum_{k=1}^{\infty} p_X(k)=\sum_{k=1}^{\infty} (1-p)^{k-1}p=p \sum_{k=0}^{\infty} (1-p)^k=\cancel{p}\frac{1}{\cancel{1}-(\cancel{1}-\cancel{p})}=1$\\
+	Que modela?\\
+	Se tienen repeticiones del tipo Bernoulli (con E o F) hasta que ocurre el primer Éxito $X=\#$ de repeticiones del experimento.
+	\\$P(X=k)=P(F,F,\dots,F,E)=(1-p)^kp$}
+\ex{}{Tirar la moneda HASTA que salga cara.}
+\cor{}{Perdida de memoria: Sea $X\sim Geo(p)$\\
+	$P(X>m+n / X>n)=P(x>m)$}
+\end{document}
