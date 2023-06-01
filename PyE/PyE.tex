@@ -156,12 +156,7 @@ Para usar el arbol de probabilidad, podemos seguir una ruta especifica desde el 
 \end{enumerate}
 }
 \dfn{Modelos de Variables discretas}{
-\begin{enumerate}
-    \item Variable Bernoulli:\\Notación: $X\sim Ber(p)$ con $$X=\begin{cases} 1 & \text{caso de éxito} \\ 0 & \text{caso de fracaso} \end{cases}$$ $P=P(X=1)=P($éxito$)$, toda v.a. con $Rec(X)=\{0,1\}$ es Bernoulli donde éxito$=\{X=1\}$.
-    \item Binomial $X\sim Bin(m,p)$\\Se repiten $m$ veces pruebas independientes de Bernoulli con probabilidad $p$ de éxito en cada prueba.\\$X=$ cantidad de éxitos en las $m$ pruebas.\\$Rec(X)=\{1,2,\dots,n\}$.\\$P(X=x)=C_x^mp^x(1-p)^{m-x}$.
-    \item Geométrica $X\sim Geo(p)$\\Se repiten pruebas independientes de Bernoulli con probabilidad $p$ de éxito en cada prueba hasta que ocurra el primer éxito.\\$X=$ cantidad de pruebas.\\$P(X=x)=p(1-p)^{x-1}$.
-    \item Binomial Negativa $X\sim BinNeg(r,p)$\\Igual a la geométrica pero se realiza hasta el r-esimo éxito.\\$X=$ canitdad de pruebas.\\$Rec(X)=\{r,r+1,r+2,\dots\}$\\$P(X=x)=C_{r-1}^{x-1} p^r(1-p)^{x-r}$.\\Si $r=1$ queda $Geo(p)$.
-\end{enumerate}
+\begin{enumerate} \item Variable Bernoulli: \begin{itemize} \item Notación: $X\sim Ber(p)$ \item Definición: $X=\begin{cases} 1 & \text{caso de éxito} \\ 0 & \text{caso de fracaso} \end{cases}$ \item Probabilidad de éxito: $P=P(X=1)=P($éxito$)$ \item Toda variable aleatoria con $Rec(X)=\{0,1\}$ es Bernoulli, donde éxito $=\{X=1\}$. \end{itemize} \item Binomial: \begin{itemize}     \item Notación: $X\sim Bin(m,p)$     \item Descripción: Se realizan $m$ pruebas independientes de Bernoulli con una probabilidad $p$ de éxito en cada prueba.     \item $X=$ cantidad de éxitos en las $m$ pruebas.     \item Rango de $X$: $Rec(X)=\{0,1,2,\dots,m\}$.     \item Función de probabilidad: $P(X=x)=C_x^mp^x(1-p)^{m-x}$. \end{itemize} \item Geométrica: \begin{itemize}     \item Notación: $X\sim Geo(p)$     \item Descripción: Se realizan pruebas independientes de Bernoulli con una probabilidad $p$ de éxito en cada prueba hasta que ocurre el primer éxito.     \item $X=$ cantidad de pruebas realizadas hasta el primer éxito.     \item Función de probabilidad: $P(X=x)=p(1-p)^{x-1}$. \end{itemize} \item Binomial Negativa: \begin{itemize}     \item Notación: $X\sim BinNeg(r,p)$     \item Descripción: Similar a la geométrica, pero se realiza hasta que se obtiene el r-ésimo éxito.     \item $X=$ cantidad de pruebas realizadas.     \item Rango de $X$: $Rec(X)=\{r,r+1,r+2,\dots\}$     \item Función de probabilidad: $P(X=x)=C_{r-1}^{x-1} p^r(1-p)^{x-r}$. Si $r=1$, se reduce a la distribución geométrica. \end{itemize} \end{enumerate}
 }
 \ex{Bernoulli}{Tiro un dado $X=\begin{cases} 1 & \text{si sale el }5 \\ 0 & \text{si no}\end{cases}\sim Ber(p=\frac{1}{6})$, en este caso el éxito seria que salga el 5.}
 \ex{Binomial}{Tiro un dado 20 veces:
@@ -170,7 +165,7 @@ Para usar el arbol de probabilidad, podemos seguir una ruta especifica desde el 
     \item Hallar $P$(al menos 2 veces sale un numero par).\\Defino $X=$ cantidad de veces que sale un numero par en las 20 tiradas, es decir $X\sim Bin(m=20,p=\frac{1}{2})$ siendo el éxito que salga par en una tirada.$$P(X\ge 2)=1-P(X<2)=1-P(X=0)-P(X=1)=1-C_0^{20} \left( \frac{1}{2} \right)^{20} - C_1^{20} \frac{1}{2} \left( \frac{1}{2} \right)^{19}$$
 \end{enumerate}
 }
-\newpage\ex{Geométrica}{Se sabe que las precipitaciones máximas mensuales en diciembre superan los $200mm$ 1 vez cada 100 años, calcular $P($haya que esperar al menos 5 años para que se vuelvan a superar los $200mm)$\\Definimos $X=$ cantidad de años hasta superar los $200mm$ en diciembre $\sim Geo(p=\frac{1}{100})$, entonces $P(X\ge 5)=1-P(X=1)-P(X=2)-P(X=3)-P(X=4)-P(X=5)$, solo queda remplazar con la formula.}
+\ex{Geométrica}{Se sabe que las precipitaciones máximas mensuales en diciembre superan los $200mm$ 1 vez cada 100 años, calcular $P($haya que esperar al menos 5 años para que se vuelvan a superar los $200mm)$\\Definimos $X=$ cantidad de años hasta superar los $200mm$ en diciembre $\sim Geo(p=\frac{1}{100})$, entonces $P(X\ge 5)=1-P(X=1)-P(X=2)-P(X=3)-P(X=4)-P(X=5)$, solo queda remplazar con la formula.}
 \newpage\thm{Primer Teorema de Continuidad}{Sea $A_1\subseteq A_2\subseteq A_3\subseteq\dots\ (\{A_n\}_n)$. Entonces:
 	\begin{itemize}
 		\item Existe $\lim_{n \to \infty}P(A_n)$
