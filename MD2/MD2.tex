@@ -151,7 +151,7 @@ En general, si partimos del dato inicial $B_0=\begin{pmatrix} a \\ b \end{pmatri
 \newpage\ex{}{El dato inicial del algoritmo es el vector $B_0=\begin{pmatrix} 132 \\ 28 \end{pmatrix} $.
 	\begin{itemize}
 		\item En el primer paso, a partir de $132=4\times 28+20$, cambiamos los datos del algoritmo a $B_1=\begin{pmatrix} 28\\20 \end{pmatrix} $, observar que:$$B_1=\begin{pmatrix} 28\\20 \end{pmatrix}=\begin{pmatrix} 0 & 1\\1 & -4 \end{pmatrix} \begin{pmatrix} 132\\28 \end{pmatrix}  $$
-		\item En el segundo paso, a partir de $28=1\times 20+8$, cambiamos los datos del algoritmo a $B_2=\begin{pmatrix} 20\\8 \end{pmatrix} $, queda:$$B_2=\begin{pmatrix} 0&1\\1&-1 \end{pmatrix}\begin{pmatrix} 28\\20 \end{pmatrix}=\begin{pmatrix} 0&1\\1&-1 \end{pmatrix}\begin{pmatrix} 0 & 1\\1&-4 \end{pmatrix}\begin{pmatrix} 132\\28 \end{pmatrix}  $$
+		\item En el segundo paso, a partir de $28=1\times 20+8$, cambiamos los datos del algoritmo a $B_2=\begin{pmatrix} 20\\8 \end{pmatrix} $, queda:$$B_2=\begin{pmatrix} 20\\8 \end{pmatrix}=\begin{pmatrix} 0&1\\1&-1 \end{pmatrix}\begin{pmatrix} 0 & 1\\1&-4 \end{pmatrix}\begin{pmatrix} 132\\28 \end{pmatrix}  $$
 		\item En el segundo paso, a partir de $20=2\times 8+4$, cambiamos los datos del algoritmo a $B_3=\begin{pmatrix} 8\\4 \end{pmatrix} $, observamos que: $$B_3=\begin{pmatrix} 8\\4 \end{pmatrix}=\begin{pmatrix} 0&1\\1&-2 \end{pmatrix} \begin{pmatrix} 20\\8 \end{pmatrix}=\begin{pmatrix} 0&1\\1&-2 \end{pmatrix}\begin{pmatrix} 0&1\\1&-1 \end{pmatrix} \begin{pmatrix} 0&1\\1&-4 \end{pmatrix} \begin{pmatrix} 132\\28 \end{pmatrix}  $$
 		      Ahora, como $8=2\times 4+0$, es decir el resto es 0, ya podemos hacer el producto $$\begin{pmatrix} 0&1\\1&-1 \end{pmatrix}\begin{pmatrix} 0&1\\1&-1 \end{pmatrix} \begin{pmatrix} 0&1\\1&-4 \end{pmatrix}=\begin{pmatrix} -1&5\\3&-14 \end{pmatrix}  $$
 		      Obteniendo $$\begin{pmatrix} 8\\4 \end{pmatrix}=\begin{pmatrix} -1&5\\3&-14 \end{pmatrix} \begin{pmatrix} 132\\28 \end{pmatrix}$$
@@ -226,7 +226,7 @@ En general, si partimos del dato inicial $B_0=\begin{pmatrix} a \\ b \end{pmatri
 		\item Se deduce de la parte anterior y del hecho de que para enteros positivos $a$ y $b$ se tiene que $mcm(a,b)=\frac{ab}{mcd(a,b)}$.
 	\end{enumerate}
 \end{myproof}
-\cor{}{Sea $n=p_1^{e_1}p_2^{e_2}\dots p_k^{e_k}$, con $p_i$ primos distintos y $e_i\in\mathbb{Z}^+$. Entonces:
+\cor{}{\label{cantdivpos}Sea $n=p_1^{e_1}p_2^{e_2}\dots p_k^{e_k}$, con $p_i$ primos distintos y $e_i\in\mathbb{Z}^+$. Entonces:
 \begin{enumerate}
 	\item $Div_+(n)=\{p_1^{c_1}p_2^{c_2}\dots p_k^{c_k}:\ c_i\in\mathbb{N}\text{ y }c_i\le e_i,\ \forall i=1,\dots,k\}$.
 	\item La cantidad de divisores positivos de $n$ es $\#Div(n)=(e_1+1)(e_2+1)\dots(e_k+1)$.
@@ -489,11 +489,11 @@ Escribiremos $H<G$ cuando $H$ es un subgrupo de $G$.\\Claramente un subgrupo es 
     \item Es claro por la parte anterior.
 \end{enumerate}
 \end{myproof}
-\mprop{}{Si $(G,*,e)$ es un grupo y $g\in G$ entonces $$|\langle g\rangle |=o(g)$$}
+\mprop{}{\label{grupoorden}Si $(G,*,e)$ es un grupo y $g\in G$ entonces $$|\langle g\rangle |=o(g)$$}
 \begin{myproof}
     Si $o(g)=\infty$, por la parte $4$ de la proposición, si $m\neq k$ tenemos que $g^m\neq g^k$ y por lo tanto en $\langle g\rangle=\{g^k:k\in\mathbb{Z}\}$ no hay elementos repetidos, y entonces $|\langle g\rangle |=\#\{g^k:k\in\mathbb{Z}\}=\infty=o(g)$.\\Ahora si $o(g)=n$ es finito, por la parte 3 de la proposición anterior tenemos que $g^m=g^k$ si y solo si $k\equiv m$ (mod $n$) y por lo tanto $\langle g\rangle =\{g^k:k\in\mathbb{Z}\}=\{g^0=e,g,g^2,\dots,g^{n-1}\}$ y entonces $|\langle g\rangle |=\#\{g^0=e,g,g^2,\dots,g^{n-1}\}=n=o(g)$.
 \end{myproof}
-\cor{}{sea $G$ un grupo de orden finito, entonces:
+\cor{}{sea $G$ un grupo de orden finito, entonces:\label{ordfinito}
 \begin{enumerate}
     \item $G$ es cíclico si y solo si existe $g\in G$ tal que $o(g)=|G|$.
     \item Si $G=\langle g\rangle$, entonces $G=\langle g^k\rangle$ si y solo si $mcd(k,|G|)=1$.
@@ -519,7 +519,7 @@ Escribiremos $H<G$ cuando $H$ es un subgrupo de $G$.\\Claramente un subgrupo es 
     \end{itemize}
     Resta ver entonces que una clase de equivalencia tiene tantos elementos como $H$. Observar que si $g'\in G$ entonces la clase de equivalencia de $g'$ es $C=\{g\in G:g\sim g'\}=\{g\in G:\exists h\in H: g=hg'\}$. Por lo tanto $C=\{hg':h\in H\}$. Ademas, al multiplicar a todos los elementos de $H$ por $g'$, no hay repeticiones; es decir que si $h_1\neq h_2$ entonces $h_1g'\neq h_2g'$ (por la propiedad cancelativa). Por lo tanto $\#C=|H|$.
 \end{myproof}
-\cor{}{Si $(G,*,e)$ es un grupo de orden finito y $g\in g$ tenemos que
+\cor{}{\label{proplagrange}Si $(G,*,e)$ es un grupo de orden finito y $g\in g$ tenemos que
 \begin{enumerate}
     \item $o(g)\ |\ |G|$.
     \item $g^{|G|}=e$.
@@ -586,4 +586,106 @@ Escribiremos $H<G$ cuando $H$ es un subgrupo de $G$.\\Claramente un subgrupo es 
 \end{enumerate}
 }
 \newpage\chapter{Raíces Primitivas}\section{Raíces Primitivas}
+\dfn{}{Dado un $n\in\mathbb{Z}^+$, un entero $g\in\{1,\dots,n\}$ es raíz primitiva modulo $n$, si $\langle\overline{g}\rangle =U(n)$.}
+\mprop{}{Sean $n\in\mathbb{Z}^+$. Si existe una raíz primitiva modulo $n$, entonces hay $\varphi(\varphi(n))$ raíces primitivas módulo $n$.}
+\begin{myproof}
+    Si existe $g$ raíz primitiva módulo $n$, entonces $\langle\overline{g}\rangle =U(n)$. Como $U(n)$ es finito, por la ultima parte del corolario \ref{ordfinito} tenemos que $U(n)$ tiene $\varphi(|U(n)|)$ generadores; y al ser $|U(n)|=\varphi(n)$ concluimos que $U(n)$ tiene $\varphi(\varphi(n))$ generadores distintos. Es decir, tiene $\varphi(\varphi(n))$ raíces primitivas.
+\end{myproof}
+\nt{Observar que en particular $g$ es raíz primitiva modulo $n$, entonces el conjunto de raíces primitivas modulo $n$ son los restos de dividir entre $n$ los elementos del conjunto$$\{g^k:k\in\{1,\dots,\varphi(n)-1\}\text{ y }mcd(k,\varphi(n))=1\}$$}
+\mprop{}{Sea $n\in\mathbb{Z}^+$ y $g\in\{1,\dots,n\}$, entonces las siguientes afirmaciones son equivalentes
+\begin{enumerate}
+    \item $g$ es raíz primitiva modulo $n$.
+    \item $mcd(g,n)=1$ y el orden de $\overline{g}$ en $U(n)$ es $\varphi(n)$.
+    \item $mcd(g,n)=1$ y $g^d\nequiv 1\ ($mod $n)$ para todo $d$ divisor de $\varphi(n)$ y $d\neq\varphi(n)$.
+    \item $mcd(g,n)=1$ y $g^{\frac{\varphi(n)}{p}}=\nequiv 1\ ($mod $n)$ para todo $p$ primo divisor de $\varphi(n)$.
+\end{enumerate}
+}
+\begin{myproof}
+    \begin{enumerate}
+        \item $\Leftrightarrow 2.$ Tenemos, por definición que $g$ es raíz primitiva modulo $n$ si y solo si $U(n)=\rangle\overline{g}\langle$. Por la proposición \ref{grupoorden} esto pasa si y solo si $\overline{g}\in U(n)$ y $o(\overline{g})=|U(n)|=\varphi(n)$; si y solo si $mcd(g,n)=1$ y el orden de $\overline{g}$ en $U(n)$ es $\varphi(n)$.
+        \item $\Leftrightarrow 3.$ Ahora, si consideramos $G=U(n)$, por la primer parte del Corolario \ref{proplagrange} tenemos que si $\overline{g}\in U(n)$, entonces $o(\overline{g})$ divide a $|U(n)|=\varphi(n)$. Es decir $o(\overline{g})=d$ con $d$ divisor de $\varphi(n)$. Por lo tanto $o(\overline{g})=\varphi(n)$ si y solo si $\overline{g}^d\neq 1$ para todo $d$ divisor de $\varphi(n)$ y $d\neq\varphi(n)$; es decir, si y solo si $g^d\equiv 1\ ($mod $n)$ para todo $d$ divisor de $\varphi(n)$ y $d\neq\varphi(n)$.
+        \item $\Leftrightarrow 4.$ Observar primero que si $m\in\mathbb{Z}$ y $d$ un divisor de $m$ y $d\neq m$, entonces existe un primo $p$ divisor de $m$ tal que $\frac{m}{p}$ es múltiplo de $d$. Esto es porque si consideramos la descomposición factorial de $m=p_1^{a_1}\dots p_k^{a_k}$ si $d$ es un divisor positivo de $m$, por el Corolario \ref{cantdivpos} tenemos que $d=p_1^{b_1}\dots p_k^{b_k}$ con $b_i\le a_i$ para todo $i=1,\dots k$. Y si $d\neq m$ entonces para algún $i,b_i<a_i$ y entonces $\frac{m}{p_i}$ es múltiplo de $d$.\\
+            Ahora bien, volviendo a lo que queremos demostrar. Tenemos entonces que si $d$ es un divisor de $\varphi(n)$, y $d\neq\varphi(n)$, por lo visto recién existe un primo $p$ divisor de $\varphi(n)$ tal que $\frac{\varphi(n)}{p}$ es múltiplo de $d$; es decir, existe $c\in\mathbb{Z}$ tal que $cd=\frac{\varphi(n)}{p}$. Entonces si $g^{\frac{\varphi(n)}{p}}\nequiv 1\ ($mod $n)$ tenemos que $g^d\nequiv 1\ ($mod $n)$ (pues si tuviéramos que $g^d\equiv 1\ ($mod $n)$ elevando ambos lados por $c$ obtendríamos que $g^{\frac{\varphi(n)}{p}}\equiv 1\ ($mod $n)$.) Esto prueba que $4\Rightarrow 3$. Es claro que $3\Rightarrow 4$ pues $d=\frac{\varphi(n)}{p}$ es un divisor de $\varphi(n)$ y $d\neq\varphi(n)$.
+    \end{enumerate}
+\end{myproof}
+\thm{}{Sea $n\in\mathbb{Z}^+$. Si existe una raíz primitiva modulo $n$, entonces
+\begin{itemize}
+    \item $n=1,2,4$ o
+    \item $n=p$ con $p$ primo impar, o
+    \item $n=p^k$ con $p$ primo impar y $k\in\mathbb{Z}^+$ o
+    \item $n=2p^k$ con $p$ primo impar y $k\in\mathbb{Z}^+$.
+\end{itemize}
+}
+\mlenma{}{\label{lemaxy}En un grupo $G$, si $x,y\in G$ son elementos de orden $a,b$ respectivamente tales que $xy=yx$ y $mcd(a,b)=1$ entonces el orden de $xy$ es $ab$.}
+\begin{myproof}
+    Veamos que $n=ab$ cumple las propiedades de la primer parte de la Proposición \ref{propord}. Como $xy=yx$ tenemos que para todo $m,\ (xy)^m=x^my^m$. Entonces:
+    \begin{itemize}
+        \item $(xy)^{ab}=x^{ab}y^{ab}=(x^a)^b(y^b)^a=e^be^a=e$.
+        \item Sea $m\in\mathbb{Z}^+$ tal que $(xy)^m=e$; entonces elevando ambos a la $b$, obtenemos que $(xy^{mb}=e$ y por lo tanto $x^{mb}y^{mb}=e$ y entonces $x^{mb}=e$. Como $a=o(x)$ concluimos entonces que $a|mb$; y como $mcd(a,b)=1$, por el Lema de Euclides concluimos que $a|m$. De forma análoga se prueba $b|m$. Tenemos entonces que $a$ y $b$ dividen a $m$ y como $a$ y $b$ son coprimos concluimos que $ab|m$.
+    \end{itemize}
+\end{myproof}
+\mlenma{}{\label{lema412}Sea $d\in\mathbb{Z}^+,\ f(x)=x^d+a_{d-1}x^{d-1}+\dots+a_1x+a_0$ con los coeficientes $a_i\in\mathbb{Z}$ para todo $i$. Entonces si $p$ es primo, la ecuación$$f(x)\equiv 0\ (\text{mod }p)$$tiene a lo sumo $d$ soluciones en $\mathbb{Z}_p$.}
+\begin{myproof}
+    Lo demostramos por inducción en $d$. El resultado es claro si $d=1$, ya que $x+a_0\equiv 0\ ($mod $p)$ si y solo si $x\equiv -a_0\ ($mod $p)$, y por lo tanto hay una única solución modulo $p$.\\Asumamos ahora que $d>1$ y el resultado es cierto para $d-1$. Si $f(x)\equiv 0\ ($mod $p)$ no tiene soluciones enteras, ya esta. Si tiene una solución entera $x=a$ (es decir que $f(a)\equiv 0\ ($mod $p)$), entonces dividiendo entre $x-a$ obtenemos que $f(x)=(x-a)q(x)+f(a)\equiv 0\ ($mod $p)$ si y solo si $(x-a)q(x)\equiv 0\ ($mod $p)$; si y solo si $p$ divide a $(x-a)q(x)$. Ahora como $p$ es primo, esto ultimo sucede si y solo si $p|(x-a)$ o $p|q(x)$. Es decir, si y solo si $x\equiv a\ ($mod $p)$ o $q(x)\equiv 0\ ($mod $p)$. Ahora, $q(x)$ es un polinomio en las mismas hipótesis que $f$, pero con grado $d-1$, y por lo tanto (hipótesis inductiva) $q(x)\equiv 0\ ($mod $p)$ tiene a lo sumo $d-1$ soluciones en $\mathbb{Z}_p$.
+\end{myproof}
+\mlenma{}{Sea $p$ primo y $d$ un divisor de $p-1$. Entonces la ecuación $x^d\equiv 1\ ($mod $p)$ tiene exactamente $d$ raíces distintas en $U(p)$.}
+\begin{myproof}
+    Si $p-1=de$ con $d,e\in\mathbb{Z}^+$, entonces$$x^{p-1}-1=(x^d)^e-1=(x^d-1)(x^{d(e-1)}+x^{d(e-2)}+\dots+x^d+1)$$Llamemos $n$ a la cantidad de soluciones modulo $p$ de $x^d-1\equiv 0\ ($mod $p)$ y $m$ a la cantidad de soluciones modulo $p$ de $g(x)=x^{d(e-1)}+x^{d(e-2)}+\dots+x^d+1\equiv 0\ ($mod $p)$. Por Fermat tenemos que la cantidad de soluciones modulo $p$ de $x^{p-1}-1\equiv 0\ ($mod $p)$ es exactamente $p-1$. Entonces$$\begin{aligned} p-1 & =\text{cantidad de soluciones modulo } p\text{ de }\left( x^{p-1} -1\equiv 0\ \left(\text{mod} \ p\right)\right)\\  & \le  n+m\\  & \le d+m\\  & \le d+d( e-1)\\  & =de=p-1 \end{aligned}$$donde la primer desigualdad es porque puede haber repeticiones, y la segunda y tercera es por el Lema \ref{lema412}. Por lo tanto, todas las desigualdades son igualdades y en particular $n=d$.
+\end{myproof}
+\thm{Teorema de la raíz primitiva}{Si $p$ es primo, entonces existen raíces primitivas modulo $p$.}
+\begin{myproof}
+    Si $p-1=p_1^{d_1}p_2^{d-2}\dots p_k^{d_k}$ es la factorización en primos de $p-1$, la idea es encontrar elementos $x_1,x_2,\dots,x_k$ en $U(p)$ con ordenes $p_1^{d_1},p_2^{d_2},\dots,p_k^{d_k}$ respectivamente. Luego si$$g=x_1x_2\dots x_k$$por el Lema \ref{lemaxy} tendremos que $o(g)=o(x_1)\dots o(x_k)=p-1$ y por lo tanto $g$ sera una raíz primitiva modulo $p$.\\Veamos entonces, que para $i=1,\dots,k$ existe $x_i$ con orden $p_i^{d_i}$. Por el Lema \ref{lema412} sabemos que $x^{p_i^{d_i}}\equiv 1\ ($mod $p)$ tiene exactamente $p_i^{d_i}$ soluciones en $U(p)$ y que $x^{p_i^{d_i}}\equiv 1\ ($mod $p)$ tiene exactamente $p_i^{d_i-1}$ soluciones.\\Por lo tanto, existe un $x_i$ solución de la primer ecuación y que no es solución de la segunda.\\Es decir $x_i^{p_i^{d_i}}\equiv 1\ ($mod $p)$ y $x_i^{p_i^{d_i-1}}\nequiv 1\ ($mod $p)$; por lo tanto $x_i$ tiene orden $p_i^{d_i}$.
+\end{myproof}
+\mlenma{}{Sea $p$ un primo impar. Si $g$ es raíz primitiva modulo $p$ entonces $g$ o $g+p$ es raíz primitiva modulo $p^2$.}
+\mlenma{}{Sea $p$ un primo impar. Si $g$ es raíz primitiva modulo $p^2$, entonces $g$ es raíz primitiva modulo $p^k$ para todo $k\in\mathbb{Z}^+$.}
+\mlenma{}{Si $p$ es un primo impar, $k\in\mathbb{Z}^+$ y $g$ es raíz primitiva modulo $p^k$ entonces:
+\begin{itemize}
+    \item Si $g$ es impar, $g$ es raíz primitiva módulo $2p^k$.
+    \item Si $g$ es par, $g+p^k$ es raíz primitiva módulo $2p^k$.
+\end{itemize}}
+\thm{}{Sea $n\in\mathbb{Z}^+$. Entonces existe una raíz primitiva módulo $n$ si y solo si cumple alguna de las siguientes:
+\begin{itemize}
+    \item $n=1,2,4$.
+    \item $n=p$ con $p$ primo impar.
+    \item $n=p^k$ con $p$ primo impar y $k\in\mathbb{Z}^k$.
+    \item $n=2p^k$ con $p$ primo impar y $k\in\mathbb{Z}^+$.
+\end{itemize}}
+\chapter{Criptografía}\section{Método de cifrado Vigenere}
+Primero, a cada letra del alfabeto le daremos un numero, $A=0,\ B=1,\dots,\ Z=26$ y el espacio sera el $27$.
+\\Ahora, el método consiste en repetir debajo del texto cifrado la palabra clave, luego sumar cada letra del texto plano con la letra de la palabra clave que esta debajo de ella (codificando cada letra con un natural) y reduciendo modulo la cantidad de símbolos (por ejemplo 28 si utilizamos las letras de A a la Z y el espacio).
+\\\\A modo de ejemplo ciframos el texto plano ``ATACAREMOS POR LA NOCHE'', utilizando el método Vigenere con la palabra clave "PRUEBA":
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+A & T & A & C & A & R & E & M & O & S &   & P & O & R &   & L & A &   & N & O & C & H & E \\ \hline
+P & R & U & E & B & A & P & R & U & E & B & A & P & R & U & E & B & A & P & R & U & E & B \\ \hline
+P & K & U & G & B & R & V & C & I & W & A & P & D & I & T & P & B &   & B & F & W & L & F \\ \hline
+\end{tabular}
+\end{table}
+
+Donde la primer fila consiste en el texto plano, en la segunda hemos repetido la palabra clave varias veces, y en la ultima el texto cifrado que fue calculado usando las dos letras que aparecen en la misma columna, de esta forma obtenemos el texto cifrado.\\Para sumar las letras lo que hemos hecho es sumar sus valores numéricos correspondientes modulo 28 y luego sustituimos este valor por su carácter correspondiente, por ejemplo $A+P=0+16\equiv 16\ ($mod $28)$, letra que corresponda a $16$ es P, luego $A+P=P;\ T+R=20+18=39\equiv 10\ ($mod $28)$, la letra que corresponde a $10$ es K, y así sucesivamente.\\Para descifrar el texto simplemente repetimos la palabra clave debajo del texto plano, pero esta vez en vez de sumar, restamos.
+\newpage\section{Cripotosistemas de clave privada, métodos de intercambio de clave}
+Se llaman criptosistemas de clave privada a aquellos criptosistemas que se pueden obtener fácilmente la clave de descifrado a partir de la de cifrado.
+\\En estos sistemas, la clave de cifrado ha de ser confidencial entre las personas que llevan la comunicación, dado que a partir de ellas un espía puede calcular la clave de descifrado con facilidad. Pero, como hacer para intercambiar claves a distancia sin que alguien pueda interceptar la conversación no sea capaz de encontrar cual es la clave?
+\subsection{Método Diffie-Helmann de intercambio de clave}
+Supongamos que Ana y Bernardo quieren ponerse de acuerdo en una clave común que sea secreto. Pero ellos se encuentran lejos uno del otro y la única forma de comunicarse entre ellos es a través de un canal. El problema es que el canal esta interceptado por espiás que pueden acceder a la conversación de Ana y Bernardo. Diffie-Helmann nos da un posible método para resolver el problema:
+\begin{enumerate}
+    \item Ana y Bernardo se ponen de acuerdo en un primo $p$ y raíz primitiva $g$ con $1<g<p$.
+    \item Ana elige un numero al azar $n$ y Bernardo elige un numero al azar $m$.
+    \item Ana calcula $g^n\ ($mod $p)$ y se lo manda por el canal.
+    \item Bernardo calcula $g^m ($mod $p)$ y se lo manda por el canal.
+    \item La clave común es $c\equiv g^{nm}\ ($mod $p)\equiv (g^m)^n\ ($mod $p)$, que tanto Ana como Bernardo pueden calcular.
+\end{enumerate}
+El espía que accede a la conversación puede conocer $p,g,g^n$ y $g^m$. Si el espía con esos datos fuese capaz de calcular $g^{nm}$ entonces hemos fallado en el intento de acordar la clave común. Pero la única manera de calcular $g^{mn}$ es calculando previamente $n$ o $m$. Esto en general es un problema computacional mente difícil y es conocido como el problema del logaritmo discreto en $U(p)$.\\\\
+\textbf{Problema del logaritmo discreto en $U(p)$:} Dados un primo $p,\ g$ una raíz primitiva módulo $p$ y $a\in U(p)$ hallar un $m$ tal que $g^m\equiv a\ ($mod $p)$. A un tal $m$ se le llama logaritmo discreto de $a$ en base $g$ y se lo denota por $m=dlog_ga$.\\Se puede probar fácilmente que el logaritmo discreto de un numero, si existe, no es único sino que esta determinado modulo $p-1$.\\En la parte 1 se podría pedir que $g$ solo sea coprimo con $p$. La ventaja de tomar $g$ raíz primitiva es que tiene orden $p-1$ que es lo mas grande que puede ser y hay por lo tanto mas posibilidades para potencias de $g$. Esto hace que sea mas difícil de resolver el logaritmo discreto.\\Otra cosa a observar es que tanto Ana en el paso 4 como Bernardo en el 5 necesitan calcular $g^n\ ($mod $p)$ (y $g^m\ ($mod $p)$ respectivamente), esto puede hacerse usando el método de exponenciación rápida.
+\newpage\section{Criptosistemas de clave publica}
+Los criptosistemas de clave publica basan su seguridad en que no haya un método eficiente de calcular la clave de descifrado. Estos sistemas tienen la ventaja de que como la clave de cifrado no nos ayuda a calcular la clave de cifrado, puede almacenarse todas las claves de cifrado de muchos usuarios en una guía publica a la cual todos tengan acceso, evitando así que cada vez que dos usuarios quieran comunicarse tengan que ponerse de acuerdo en una clave común.
+\subsection{Criptosistema RSA}
+Este es uno de los sistemas de clave publica mas famosos. La idea detrás de este criptosistema es la de construir una función que sea fácil de calcular (en este caso multiplicar dos primos), pero que su inversa sea difícil de calcular (en este caso dado un numero que es producto de 2 primos, hallar esos primos). Veamos en que consiste:
+\begin{enumerate}
+    \item Ana elige dos primos (distintos) grandes $p$ y $q$ y calcula $n=pq$.
+    \item Luego calcula: $\varphi(n)=\varphi(n)\varphi(m)=(p-1)(q-1)$.
+    \item Luego elige un número aleatorio $e$ con $1<e<\varphi(n)$ y $mcd(e,\varphi(n))=1$.
+    \item Finalmente Ana tiene definida una función (función de cifrado) definida por:$$E:\mathbb{Z}_n\to\mathbb{Z}_n:E(x)=x^e\ (\text{mod }n)$$
+\end{enumerate}
 \end{document}
